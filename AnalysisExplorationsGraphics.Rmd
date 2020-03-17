@@ -1,14 +1,18 @@
 ---
 title: "Minhas Análises e Explorações COVID-19"
-output:
-  html_document:
-    df_print: paged
+author: "Mario O. de Menezes"
+date: "17/03/2020"
+output: html_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
 
-```{r warning=FALSE, message=FALSE, echo=FALSE}
+```{r warning=FALSE, message=FALSE}
 library(tidyverse)
 library(ggpubr)
+library(readxl)
 ```
 
 # EU Open Data Portal
@@ -16,55 +20,57 @@ library(ggpubr)
 Os dados desta seção vieram do [Europe Open Data Portal](https://data.europa.eu/euodp/en/) -- `https://data.europa.eu/euodp/en/`
 
 ```{r}
-library(readxl)
 covid19URLbase <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-"
 hoje <- format(Sys.time(), "%Y-%m-%d")
 arqdest <- paste("COVID-19-geographic-distribution-worldwide-",hoje,".xlsx",sep="")
-
-if (!file.exists(paste("~/datasets/ECDC_Europe",arqdest,sep="/"))) {
-  curl::curl_download(paste(covid19URLbase,hoje,".xlsx",sep=""), paste("~/datasets/ECDC_Europe",arqdest,sep="/"))
-  print(paste("Fazendo download do arquivo", arqdest,sep=":"))
-}
-covid19 <- read_excel(paste("~/datasets/ECDC_Europe/",arqdest,sep=""))
 ```
 
-```{r}
+
+```{r eval=FALSE}
+# para fazer o download da base; acerte os caminhos e execute este chunk
+
+if (!file.exists(paste("~/datasets/ECDC_Europe",arqdest,sep="/")) || !file.exists(paste("./data",arqdest,sep="/"))) {
+  curl::curl_download(paste(covid19URLbase,hoje,".xlsx",sep=""), paste("~/datasets/ECDC_Europe",arqdest,sep="/"))
+  print(paste("Fazendo download do arquivo", arqdest,sep=":"))
+  file.copy(paste("~/datasets/ECDC_Europe",arqdest,sep="/"), paste("./data",arqdest, sep="/"))
+}
+```
+
+```{r leituradados}
+covid19 <- read_excel(paste("./data",arqdest,sep="/"))
+```
+
+
+```{r str}
 str(covid19)
 ```
 
-```{r}
+```{r country}
 covid19 <- rename(covid19, Country = `Countries and territories`)
 ```
  
 
-```{r}
-Italy_daily <- covid19 %>% filter(Country == "Italy", DateRep > "2020-02-01") %>% group_by(DateRep) %>% count(Cases)
+```{r italiagg}
+covid19 %>% 
+  filter(Country == "Italy", DateRep > "2020-02-01") %>% 
+  group_by(DateRep) %>% count(Cases) %>% 
+  ggplot() + geom_bar(aes(x = DateRep, y = Cases), stat = "identity") + 
+  labs(y = "Núm de Casos Reportados", x = "Data", title = "Evolução dos Casos na Italia, a partir de 01/02/2020") + 
+  labs_pubr() + theme_pubclean()
 ```
 
-```{r}
-ggplot(data = Italy_daily) + geom_bar(aes(x = DateRep, y = Cases), stat = "identity") + labs(y = "Núm de Casos Reportados", x = "Data") + labs_pubr() + theme_pubclean()
-```
-
-
-```{r}
-CountriesandRegions <- read_excel("~/docs/Projetos/ArtigoLongevidade/Scripts/Countries_&_Regions.xlsx")
-```
-```{r}
+```{r countriesreg}
+CountriesandRegions <- read_excel("./data/Countries_&_Regions.xlsx")
 CountriesandRegions <- CountriesandRegions %>% rename(`Country`=`Country Name`,`Code`=`Country Code`)
 ```
 
-```{r}
-ccc <- read_csv("~/datasets/data.uis.unesco.org/country-capital-continent.csv")
+```{r ccc}
+ccc <- read_csv("./data/country-capital-continent.csv")
 ```
 
 ```{r}
 CountriesandRegions <- CountriesandRegions %>% filter(Country %in% ccc$Country)
 ```
-
-
-
-
-
 
 Os nomes compostos dos países na base de dados do COVID19 utilizam o "_" (_underline_) como separador, por exemplo, `Costa_Rica`. Nas bases de países, regiões e continentes, o separador é o espaço " ". Precisamos ajustar para não termos problemas.
 
@@ -282,13 +288,25 @@ Removendo países sem continente.
 covid19 <- filter(covid19, !is.na(Continent))
 ```
 
-```{r}
-filter(covid19, DateRep > "2020-02-01") %>% group_by(Continent, DateRep) %>% summarise(numCasos = sum(Cases)) %>% ggplot(aes(x = DateRep, y = numCasos)) + geom_bar(aes(fill=Continent),stat="identity", position = "dodge") + labs(x = "Data", title = "Evolução dos Casos nos Continentes, a partir de 01/02/2020",fill="") + labs_pubr() + theme_pubclean()
+```{r continentsgg}
+filter(covid19, DateRep > "2020-02-01") %>% 
+  group_by(Continent, DateRep) %>% 
+  summarise(numCasos = sum(Cases)) %>% 
+  ggplot(aes(x = DateRep, y = numCasos)) + 
+  geom_bar(aes(fill=Continent),stat="identity", position = "dodge") + 
+  labs(x = "Data", title = "Evolução dos Casos nos Continentes, a partir de 01/02/2020",fill="") + 
+  labs_pubr() + theme_pubclean()
 ```
 
 
-```{r}
-filter(covid19, DateRep > "2020-02-01", Country == "Brazil") %>% group_by(DateRep) %>% summarise(numCasos = sum(Cases)) %>% ggplot(aes(x = DateRep, y = numCasos)) + geom_bar(stat="identity", position = "dodge") + labs(x = "Data", title="Evolução dos Casos no Brasil a partir de 01/02/2020") + labs_pubr() + theme_pubclean()
+```{r brasil}
+filter(covid19, DateRep > "2020-02-01", Country == "Brazil") %>% 
+  group_by(DateRep) %>% 
+  summarise(numCasos = sum(Cases)) %>% 
+  ggplot(aes(x = DateRep, y = numCasos)) + 
+  geom_bar(stat="identity", position = "dodge") + 
+  labs(x = "Data", title="Evolução dos Casos no Brasil a partir de 01/02/2020") + 
+  labs_pubr() + theme_pubclean()
 ```
 
 
