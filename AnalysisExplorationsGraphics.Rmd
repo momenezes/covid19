@@ -1,0 +1,301 @@
+---
+title: "Minhas Análises e Explorações COVID-19"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(ggpubr)
+```
+
+# EU Open Data Portal
+
+Os dados desta seção vieram do [Europe Open Data Portal](https://data.europa.eu/euodp/en/) -- `https://data.europa.eu/euodp/en/`
+
+```{r}
+library(readxl)
+covid19URLbase <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-"
+hoje <- format(Sys.time(), "%Y-%m-%d")
+arqdest <- paste("COVID-19-geographic-distribution-worldwide-",hoje,".xlsx",sep="")
+
+if (!file.exists(paste("~/datasets/ECDC_Europe",arqdest,sep="/"))) {
+  curl::curl_download(paste(covid19URLbase,hoje,".xlsx",sep=""), paste("~/datasets/ECDC_Europe",arqdest,sep="/"))
+  print(paste("Fazendo download do arquivo", arqdest,sep=":"))
+}
+covid19 <- read_excel(paste("~/datasets/ECDC_Europe/",arqdest,sep=""))
+```
+
+```{r}
+str(covid19)
+```
+
+```{r}
+covid19 <- rename(covid19, Country = `Countries and territories`)
+```
+ 
+
+```{r}
+Italy_daily <- covid19 %>% filter(Country == "Italy", DateRep > "2020-02-01") %>% group_by(DateRep) %>% count(Cases)
+```
+
+```{r}
+ggplot(data = Italy_daily) + geom_bar(aes(x = DateRep, y = Cases), stat = "identity") + labs(y = "Núm de Casos Reportados", x = "Data") + labs_pubr() + theme_pubclean()
+```
+
+
+```{r}
+CountriesandRegions <- read_excel("~/docs/Projetos/ArtigoLongevidade/Scripts/Countries_&_Regions.xlsx")
+```
+```{r}
+CountriesandRegions <- CountriesandRegions %>% rename(`Country`=`Country Name`,`Code`=`Country Code`)
+```
+
+```{r}
+ccc <- read_csv("~/datasets/data.uis.unesco.org/country-capital-continent.csv")
+```
+
+```{r}
+CountriesandRegions <- CountriesandRegions %>% filter(Country %in% ccc$Country)
+```
+
+
+
+
+
+
+Os nomes compostos dos países na base de dados do COVID19 utilizam o "_" (_underline_) como separador, por exemplo, `Costa_Rica`. Nas bases de países, regiões e continentes, o separador é o espaço " ". Precisamos ajustar para não termos problemas.
+
+```{r eval=FALSE}
+filter(covid19,  grepl("_",covid19$Country))
+```
+
+Substituindo o "_" por " " nos nomes dos países
+
+```{r}
+covid19 <- mutate(covid19, Country = str_replace_all(covid19$Country,"_"," "), Country = ifelse(Country == "Eswatini", "Swaziland", Country))
+```
+
+Acertando os nomes dos países nas duas bases para poder juntar de modo apropriado.
+
+```{r}
+library(stringi)
+# Bahamas
+covid19$Country <- stri_replace_all_fixed(covid19$Country,"Bahamas, The","Bahamas", vertorized=TRUE)
+ccc$Country <- stri_replace_all_fixed(ccc$Country,"Bahamas, The","Bahamas", vertorized=TRUE)
+# [26] "Bolivia"                                             
+# [27] "Bolivia (Plurinational State of)"
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Bolivia.*", "Bolivia", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Bolivia.*", "Bolivia", vectorize_all = TRUE)
+# [27] "Bosnia and Herzegovina"                              
+# [28] "Bosnia-Herzegovina"
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Bosnia.*", "Bosnia-Herzegovina", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Bosnia.*", "Bosnia-Herzegovina", vectorize_all = TRUE)
+# [32] "Brunei"                                              
+# [33] "Brunei Darussalam"                                   
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Brunei.*", "Brunei", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Brunei.*", "Brunei", vectorize_all = TRUE)
+# [38] "Cabo Verde"                                          
+# [38] "Cabo Verde"                                          
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Ca(pe|bo) Verde", "Cape Verde", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Ca(pe|bo) Verde", "Cape Verde", vectorize_all = TRUE)
+# [53] "Congo"                                               
+# [54] "Congo (Brazzaville)"                                 
+# [55] "Congo (Democratic Republic of the)"                  
+# [56] "Congo, Dem. Rep."                                    
+# [57] "Congo (Kinshasa)"                                    
+# [58] "Congo, Rep."  
+
+#covid19$Country <- stri_replace_all_regex(covid19$Country, "Congo, Rep.*", "Congo (Brazzaville)", vectorize_all = TRUE)
+#covid19$Country <- stri_replace_all_regex(covid19$Country, "Congo, Dem.*", "Congo (Kinshasa)", vectorize_all = TRUE)
+covid19$Country <- stri_replace_all_regex(covid19$Country, "^Congo$", "Republic of the Congo", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "^Democratic Republic of Congo$", "Democratic Republic of the Congo", vectorize_all = TRUE)
+# [60] "Cote d'Ivoire"                                       
+# [62] "C\xf4te d'Ivoire"                                 
+covid19$Country <- stri_replace_all_regex(covid19$Country, "C(.+)te d(.+)voire", "Ivory Coast", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "C(.+)te d'Ivoire", "Ivory Coast", vectorize_all = TRUE)
+# [73] "Egypt"                                               
+# [74] "Egypt, Arab Rep."                                    
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Egypt.*", "Egypt", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Egypt.*", "Egypt", vectorize_all = TRUE)
+
+# [71] "East Timor"                                          
+#[257] "Timor-Leste"
+covid19$Country <- stri_replace_all_fixed(covid19$Country, "Timor-Leste", "East Timor", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_fixed(ccc$Country, "Timor-Leste", "East Timor", vectorize_all = TRUE)
+
+# [96] "Gambia"                                              
+# [97] "Gambia, The"                                         
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Gambia.*", "Gambia", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Gambia.*", "Gambia", vectorize_all = TRUE)
+
+#[114] "Hong Kong, China (SAR)"                              
+#[115] "Hong Kong SAR, China"                                
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Hong Kong.*", "Hong Kong", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Hong Kong.*", "Hong Kong", vectorize_all = TRUE)
+
+#[125] "Iran"                                                
+#[126] "Iran, Islamic Rep."                                  
+#[127] "Iran (Islamic Republic of)"                          
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Iran.*", "Iran", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Iran.*", "Iran", vectorize_all = TRUE)
+
+#[139] "Korea, Dem. People’s Rep."                           
+#[140] "Korea, Rep."                                         
+#[141] "Korea (Republic of)"                                 
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Korea, Dem.*", "North Korea", vectorize_all = TRUE)
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Korea, Rep\\.$", "South Korea", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Korea, South", "South Korea", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Korea, North", "North Korea", vectorize_all = TRUE)
+
+#[136] "Kyrgyz Republic"                                     
+#[137] "Kyrgyzstan"                                          
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Kyrgyz.*", "Kyrgyzstan", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Kyrgyz.*", "Kyrgyzstan", vectorize_all = TRUE)
+
+#[146] "Lao PDR"                                             
+#[147] "Lao People's Democratic Republic"                    
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Lao P.*", "Laos", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Lao P.*", "Laos", vectorize_all = TRUE)
+
+#[157] "Macedonia"                                           
+#[158] "Macedonia, FYR"                                      
+covid19$Country <- stri_replace_all_regex(covid19$Country, "^Macedonia.*", "North Macedonia", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, ".*Macedonia.*", "North Macedonia", vectorize_all = TRUE)
+
+#[178] "Micronesia"                                          
+#[179] "Micronesia (Federated States of)"                    
+#[180] "Micronesia, Fed. Sts."                               
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Micronesia.*", "Micronesia", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Micronesia.*", "Micronesia", vectorize_all = TRUE)
+
+#[185] "Moldova"                                             
+#[186] "Moldova (Republic of)"                               
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Moldova.*", "Moldova", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Moldova.*", "Moldova", vectorize_all = TRUE)
+
+#[214] "Russia"                                              
+#[215] "Russian Federation"                                  
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Russia.*", "Russia", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Russia.*", "Russia", vectorize_all = TRUE)
+
+# estes paises nao aparecem no Freedom House; vou desprezar
+#[229] "Saint Kitts and Nevis"                                
+#[255] "St. Kitts and Nevis"                                  
+#[230] "Saint Lucia"                                         
+#[256] "St. Lucia"                                           
+#[231] "Saint Vincent and the Grenadines"                     
+#[257] "St. Vincent and the Grenadines"                      
+
+
+#[227] "Slovakia"                                            
+#[228] "Slovak Republic"                                     
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Slovak.*", "Slovakia", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Slovak.*", "Slovakia", vectorize_all = TRUE)
+
+#[252] "Syria"                                               
+#[253] "Syrian Arab Republic"                                
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Syria.*", "Syria", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Syria.*", "Syria", vectorize_all = TRUE)
+
+#[270] "Tanzania"                                            
+#[271] "Tanzania (United Republic of)"                       
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Tanzania.*", "Tanzania", vectorize_all = TRUE)
+covid19$Country <- stri_replace_all_regex(covid19$Country, "^United Republic of Tanzania$", "Tanzania", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Tanzania.*", "Tanzania", vectorize_all = TRUE)
+
+#[270] "United States"                                       
+#[271] "United States of America"                            
+covid19$Country <- stri_replace_all_regex(covid19$Country, "United States.*", "United States of America", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "United States.*", "United States of America", vectorize_all = TRUE)
+
+#[276] "Venezuela"                                           
+#[294] "Venezuela (Bolivarian Republic of)"                  
+#[277] "Venezuela, RB"                                       
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Venezuela.*", "Venezuela", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Venezuela.*", "Venezuela", vectorize_all = TRUE)
+
+
+#"Vatican City"
+#[55] "Holy See"
+ccc$Country <- stri_replace_all_regex(ccc$Country, "^Vatican City.*", "Holy See", vectorize_all = TRUE)
+
+
+#[296] "Vietnam"                                             
+#[297] "Viet Nam"                                            
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Viet(\\s|)[nN]am","Vietnam", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country,  "Viet(\\s|)[nN]am","Vietnam", vectorize_all = TRUE)
+
+#[282] "Yemen"                                               
+#[283] "Yemen, Rep."
+covid19$Country <- stri_replace_all_regex(covid19$Country, "Yemen.*", "Yemen", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Yemen.*", "Yemen", vectorize_all = TRUE)
+```
+
+Agora vou criar a listagem de países que está em todas as bases, isto é, a intersecção dos conjuntos.
+
+```{r}
+# coincidentes
+nomes_iguais <- intersect(covid19$Country,ccc$Country)
+length(nomes_iguais)
+# nao coincidentes
+nomes_dif <- setdiff(covid19$Country, ccc$Country)
+length(nomes_dif)
+
+# menor subconjunto presente em todos os conjuntos
+paises_intersect <- intersect(nomes_iguais, covid19$Country)
+
+# sem Niger e Nigeria
+paises_intersect <- paises_intersect[which(!paises_intersect %in% c("Niger","Nigeria"))]
+```
+
+Listagem de todos países na base do COVID-19
+
+```{r}
+unique(covid19$Country) %>% sort()
+```
+
+```{r eval=FALSE}
+intersect(ccc$Country, covid19$Country) %>% sort()
+```
+
+```{r}
+setdiff(ccc$Country, covid19$Country)
+```
+```{r}
+setdiff(covid19$Country,ccc$Country)
+```
+
+Agora parece que conseguimos eliminar as diferenças de grafia entre os países, pelo até hoje (`r format(Sys.time, "%Y-%m-%d")`)
+
+
+```{r}
+#covid19 <- left_join(left_join(covid19,CountriesandRegions, by="Country"),ccc, by="Country")
+covid19 <- left_join(covid19,ccc, by="Country")
+```
+
+Removendo países sem continente.
+
+```{r}
+covid19 <- filter(covid19, !is.na(Continent))
+```
+
+```{r}
+filter(covid19, DateRep > "2020-02-01") %>% group_by(Continent, DateRep) %>% summarise(numCasos = sum(Cases)) %>% ggplot(aes(x = DateRep, y = numCasos)) + geom_bar(aes(fill=Continent),stat="identity", position = "dodge") + labs(x = "Data", title = "Evolução dos Casos nos Continentes, a partir de 01/02/2020",fill="") + labs_pubr() + theme_pubclean()
+```
+
+
+```{r}
+filter(covid19, DateRep > "2020-02-01", Country == "Brazil") %>% group_by(DateRep) %>% summarise(numCasos = sum(Cases)) %>% ggplot(aes(x = DateRep, y = numCasos)) + geom_bar(stat="identity", position = "dodge") + labs(x = "Data", title="Evolução dos Casos no Brasil a partir de 01/02/2020") + labs_pubr() + theme_pubclean()
+```
+
+
+Base de dados da John Hopkins University
+
+O JHU tem um site de monitoramento em tempo real (talvez o mais atualizado) no endereço `https://coronavirus.jhu.edu/map.html`. Os dados utilizados para o mapa estão em um GitHub  `https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv`, mas não são tão atualizados como os do mapa. Além disso, estão em formato _não tidy_. 
+
+
+
+
