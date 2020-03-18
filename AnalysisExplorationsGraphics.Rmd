@@ -22,11 +22,12 @@ Os dados desta seção vieram do [Europe Open Data Portal](https://data.europa.e
 ```{r}
 covid19URLbase <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-"
 hoje <- format(Sys.time(), "%Y-%m-%d")
+hoje <- "2020-03-17"
 arqdest <- paste("COVID-19-geographic-distribution-worldwide-",hoje,".xlsx",sep="")
 ```
 
 
-```{r eval=FALSE}
+```{r }
 # para fazer o download da base; acerte os caminhos e execute este chunk
 
 if (!file.exists(paste("~/datasets/ECDC_Europe",arqdest,sep="/")) || !file.exists(paste("./data",arqdest,sep="/"))) {
@@ -315,5 +316,112 @@ Base de dados da John Hopkins University
 O JHU tem um site de monitoramento em tempo real (talvez o mais atualizado) no endereço `https://coronavirus.jhu.edu/map.html`. Os dados utilizados para o mapa estão em um GitHub  `https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv`, mas não são tão atualizados como os do mapa. Além disso, estão em formato _não tidy_. 
 
 
+Este é o link onde aparece o mapa também: `https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases`
 
+Outro link onde há um log das atualizações da base; parece ser atualizada constantemente: `https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases`
+
+
+```{r}
+jhucovid <- read_csv("https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_19-covid-Confirmed.csv&filename=time_series_2019-ncov-Confirmed.csv")
+```
+
+```{r}
+jhucovid19_confirmed <- gather(jhucovid, key = "DateRep", value = "ConfirmedCases", 5:60)
+```
+
+```{r}
+filter(jhucovid19_confirmed, `Country/Region` == "Brazil")
+```
+
+```{r}
+jhucovid_D <- read_csv("https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_19-covid-Deaths.csv&filename=time_series_2019-ncov-Deaths.csv")
+```
+
+```{r}
+jhucovid19_deaths <- gather(jhucovid_D, key = "DateRep", value = "Deaths", 5:60)
+```
+
+```{r}
+jhucovid_R <- read_csv("https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_19-covid-Recovered.csv&filename=time_series_2019-ncov-Recovered.csv")
+```
+
+```{r}
+jhucovid_recov <- gather(jhucovid_R, key = "DateRep", value = "Recovered", 5:60)
+```
+
+Anexando a coluna de `Deaths` e `Recovered` para formar um único data.frame
+
+```{r eval = FALSE}
+all_equal(jhucovid19_confirmed[,2], jhucovid19_deaths[,2])
+all_equal(jhucovid19_confirmed[,2], jhucovid_recov[,2])
+all_equal(jhucovid19_deaths[,2], jhucovid_recov[,2])
+```
+
+```{r}
+jhucovid19 <- bind_cols(jhucovid19_confirmed,jhucovid19_deaths[,6], jhucovid_recov[,6])
+```
+
+```{r}
+filter(jhucovid19, `Country/Region` == "China")
+```
+
+```{r}
+length(unique(jhucovid19$`Country/Region`))
+```
+
+Alguns acertos e transformações
+
+```{r}
+jhucovid19 <- rename(jhucovid19, Country = `Country/Region`)
+```
+
+```{r}
+filter(jhucovid19, Country == "China")
+```
+
+Adicionando uma coluna com o número de casos de um dia para o outro.
+
+```{r}
+jhucovid19 <- mutate(jhucovid19, DateRep = as.Date(DateRep, "%m/%d/%y"), Month = months(DateRep))
+jhucovid19 <- arrange(jhucovid19, Country) %>% arrange(DateRep)
+jhucovid19 <- group_by(jhucovid19, Country) %>% 
+  mutate(NewDeaths = Deaths - lag(Deaths), 
+         #NewDeaths = if_else(is.na(NewDeaths), if_else(Deaths > 0, Deaths, 0), NewDeaths),
+         NewCases = ConfirmedCases - lag(ConfirmedCases) + lag(NewDeaths), 
+         NewCases = if_else(is.na(NewCases), 0, NewCases))
+```
+
+```{r}
+jhucovid19_semChina <- jhucovid19 %>% filter(Country != "China")
+```
+```{r}
+China <- jhucovid19 %>% filter(Country == "China")
+China <- group_by(China, `Province/State`) %>% 
+  mutate(NewDeaths = Deaths - lag(Deaths), 
+         #NewDeaths = if_else(is.na(NewDeaths), if_else(Deaths > 0, Deaths, 0), NewDeaths),
+         NewCases = ConfirmedCases - lag(ConfirmedCases) + lag(NewDeaths), 
+         NewCases = if_else(is.na(NewCases), if_else(ConfirmedCases > 0, ConfirmedCases, 0), NewCases))
+```
+
+```{r}
+jhucovid19 <- bind_rows(jhucovid19_semChina, China) %>% arrange(Country, `Province/State`)
+```
+
+
+```{r}
+filter(jhucovid19, Country == "China")
+```
+
+```{r}
+jhucovid19 <- ungroup(jhucovid19)
+```
+
+```{r}
+filter(jhucovid19, Country == "China") #%>% summarise(sum(ConfirmedCases))
+```
+
+
+```{r}
+jhucovid19 %>% group_by(Country) %>% summarise(Confirmed = sum(NewCases) - sum(NewDeaths, na.rm=T)) %>% arrange(desc(Confirmed))
+```
 
