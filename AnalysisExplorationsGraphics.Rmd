@@ -73,10 +73,10 @@ Brasil
 
 ```{r}
 Italia14 <- Italia %>% 
-  filter(CumCases >= 14 & CumCases <= 700) %>% 
+  filter(CumCases >= 14 & CumCases <= 1000) %>% 
   select(Country,DateRep, Cases,Deaths,CumCases)
 Brasil13 <- Brasil %>% 
-  filter(CumCases >= 13 & CumCases <= 700) %>% 
+  filter(CumCases >= 13 & CumCases <= 1000) %>% 
   select(Country,DateRep,Cases,Deaths,CumCases)
 ```
 ```{r}
@@ -92,7 +92,7 @@ Brasil13
 
 
 ```{r}
-bind_rows(Italia14,Brasil13) %>% ggplot() + geom_point(aes(x = Dia, y = CumCases, color=Country), stat = "identity", position = "dodge")  
+bind_rows(Italia14,Brasil13) %>% ggplot() + geom_point(aes(x = Dia, y = CumCases, color=Country), stat = "identity", position = "dodge") + labs(title = "Curva de crescimentos de casos (cumulativo) em número de dias,\n CumCases>=14 & CumCases<=1000 -- Brasil e Itália", color = "") + labs_pubr() + theme_pubclean()
 ```
 
 
@@ -578,8 +578,10 @@ group_by(jhucovid19, Country) %>%
 
 
 ```{r}
-filter(jhucovid19, Country == "China" || Country == "Italy" || Country == "Iran" || Country == "Germany" || Country == "France", DateRep >= "2020-02-01") %>% 
-  ggplot(aes(x = DateRep, y = NewCases)) + geom_bar(aes(fill=Country),stat="identity", position="dodge")
+filter(jhucovid19, Country %in% c("China","Italy","Iran","Germany","Japan"), DateRep >= "2020-02-01") %>% 
+  ggplot(aes(x = DateRep, y = NewCases)) + geom_bar(aes(fill=Country),stat="identity", position="dodge") +
+  labs(x = "Data Reportado", y = "Novos Casos", title = "Novos Casos a partir de 01 de Fev 2020", fill="") + 
+  labs_pubr() + theme_pubclean()
 ```
 
 ```{r}
@@ -646,9 +648,23 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
 ```
 
 ```{r}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany")) %>% 
-  filter(ConfirmedCases >= 1 ) %>% 
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan")) %>% 
+  filter(ConfirmedCases >= 14 ) %>% 
   select(Country,DateRep,ConfirmedCases,Deaths) %>% 
-  pivot_wider(names_from = Country, values_from = ConfirmedCases)
+  group_by(Country) %>% 
+  mutate(Dia = row_number()) %>%
+  top_n(-25, Dia) %>% 
+  ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
+  labs(y = "Número de Casos", x = "Núm Dias após o 14º caso", shape = "", color= "", title = "Evolução dos 25 primeiros dias após o 14º caso")  + scale_color_brewer(palette = "Set1") +
+  labs_pubr() + theme_pubr()
+```
+
+
+```{r}
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan")) %>% 
+  filter(ConfirmedCases >= 14 ) %>% 
+  group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
+  #select(DateRep,Country,ConfirmedCases) #%>% 
+  pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% kable()
 ```
 
