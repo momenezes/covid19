@@ -66,10 +66,10 @@ Brasil <- covid19 %>%
   mutate(CumCases = cumsum(Cases))
 ```
 ```{r}
-Italia %>% kable()
+Italia %>% top_n(20, DateRep) %>% kable()
 ```
 ```{r}
-Brasil %>% kable()
+Brasil %>% top_n(20, DateRep) %>% kable()
 ```
 
 ```{r}
@@ -88,10 +88,10 @@ Brasil13 <- Brasil %>%
 Italia14 <- mutate(Italia14, Dia = as.numeric(rownames(Italia14)))
 Brasil13 <- mutate(Brasil13, Dia = as.numeric(rownames(Brasil13)))
 ```
-```{r}
+```{r eval = FALSE}
 Italia14 %>% kable()
 ```
-```{r}
+```{r eval = FALSE}
 Brasil13 %>% kable()
 ```
 
@@ -184,8 +184,8 @@ ccc$Country <- stri_replace_all_regex(ccc$Country, "Egypt.*", "Egypt", vectorize
 
 # [71] "East Timor"                                          
 #[257] "Timor-Leste"
-covid19$Country <- stri_replace_all_fixed(covid19$Country, "Timor-Leste", "East Timor", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_fixed(ccc$Country, "Timor-Leste", "East Timor", vectorize_all = TRUE)
+covid19$Country <- stri_replace_all_fixed(covid19$Country, "Timor(.+)Leste", "East Timor", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_fixed(ccc$Country, "Timor(.+)Leste", "East Timor", vectorize_all = TRUE)
 
 # [96] "Gambia"                                              
 # [97] "Gambia, The"                                         
@@ -269,8 +269,9 @@ ccc$Country <- stri_replace_all_regex(ccc$Country, "Tanzania.*", "Tanzania", vec
 
 #[270] "United States"                                       
 #[271] "United States of America"                            
-covid19$Country <- stri_replace_all_regex(covid19$Country, "United States.*", "United States of America", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "United States.*", "United States of America", vectorize_all = TRUE)
+covid19$Country <- stri_replace_all_regex(covid19$Country, "United States.*", "USA", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "United States.*", "USA", vectorize_all = TRUE)
+
 
 #[276] "Venezuela"                                           
 #[294] "Venezuela (Bolivarian Republic of)"                  
@@ -343,6 +344,7 @@ Agora parece que conseguimos eliminar as diferenças de grafia entre os países,
 #covid19 <- left_join(left_join(covid19,CountriesandRegions, by="Country"),ccc, by="Country")
 covid19 <- left_join(covid19,ccc, by="Country")
 ```
+
 
 Removendo países sem continente.
 
@@ -494,23 +496,23 @@ rm(X)
 ```{r echo = FALSE}
 # Bahamas
 jhucovid19$Country <- stri_replace_all_fixed(jhucovid19$Country,"Bahamas, The","Bahamas", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_fixed(ccc$Country,"Bahamas, The","Bahamas", vectorize_all = TRUE)
+
 # [26] "Bolivia"                                             
 # [27] "Bolivia (Plurinational State of)"
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Bolivia.*", "Bolivia", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Bolivia.*", "Bolivia", vectorize_all = TRUE)
+
 # [27] "Bosnia and Herzegovina"                              
 # [28] "Bosnia-Herzegovina"
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Bosnia.*", "Bosnia-Herzegovina", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Bosnia.*", "Bosnia-Herzegovina", vectorize_all = TRUE)
+
 # [32] "Brunei"                                              
 # [33] "Brunei Darussalam"                                   
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Brunei.*", "Brunei", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Brunei.*", "Brunei", vectorize_all = TRUE)
+
 # [38] "Cabo Verde"                                          
 # [38] "Cabo Verde"                                          
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Ca(pe|bo) Verde", "Cape Verde", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Ca(pe|bo) Verde", "Cape Verde", vectorize_all = TRUE)
+
 # [53] "Congo"                                               
 # [54] "Congo (Brazzaville)"                                 
 # [55] "Congo (Democratic Republic of the)"                  
@@ -521,75 +523,63 @@ ccc$Country <- stri_replace_all_regex(ccc$Country, "Ca(pe|bo) Verde", "Cape Verd
 #jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Congo, Rep.*", "Congo (Brazzaville)", vectorize_all = TRUE)
 #jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Congo, Dem.*", "Congo (Kinshasa)", vectorize_all = TRUE)
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "^Congo$", "Republic of the Congo", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "^Democratic Republic of Congo$", "Democratic Republic of the Congo", vectorize_all = TRUE)
+
 # [60] "Cote d'Ivoire"                                       
 # [62] "C\xf4te d'Ivoire"                                 
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "C(.+)te d(.+)voire", "Ivory Coast", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "C(.+)te d'Ivoire", "Ivory Coast", vectorize_all = TRUE)
+
 # [73] "Egypt"                                               
 # [74] "Egypt, Arab Rep."                                    
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Egypt.*", "Egypt", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Egypt.*", "Egypt", vectorize_all = TRUE)
 
 # [71] "East Timor"                                          
 #[257] "Timor-Leste"
-jhucovid19$Country <- stri_replace_all_fixed(jhucovid19$Country, "Timor-Leste", "East Timor", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_fixed(ccc$Country, "Timor-Leste", "East Timor", vectorize_all = TRUE)
+jhucovid19$Country <- stri_replace_all_fixed(jhucovid19$Country, "Timor(.+)Leste", "East Timor", vectorize_all = TRUE)
+
 
 # [96] "Gambia"                                              
 # [97] "Gambia, The"                                         
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Gambia.*", "Gambia", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Gambia.*", "Gambia", vectorize_all = TRUE)
 
 #[114] "Hong Kong, China (SAR)"                              
 #[115] "Hong Kong SAR, China"                                
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Hong Kong.*", "Hong Kong", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Hong Kong.*", "Hong Kong", vectorize_all = TRUE)
 
 #[125] "Iran"                                                
 #[126] "Iran, Islamic Rep."                                  
 #[127] "Iran (Islamic Republic of)"                          
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Iran.*", "Iran", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Iran.*", "Iran", vectorize_all = TRUE)
 
 #[139] "Korea, Dem. People’s Rep."                           
 #[140] "Korea, Rep."                                         
 #[141] "Korea (Republic of)"                                 
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Korea, Dem.*", "North Korea", vectorize_all = TRUE)
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Korea, Rep\\.$", "South Korea", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Korea, South", "South Korea", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Korea, North", "North Korea", vectorize_all = TRUE)
 
 #[136] "Kyrgyz Republic"                                     
 #[137] "Kyrgyzstan"                                          
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Kyrgyz.*", "Kyrgyzstan", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Kyrgyz.*", "Kyrgyzstan", vectorize_all = TRUE)
 
 #[146] "Lao PDR"                                             
 #[147] "Lao People's Democratic Republic"                    
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Lao P.*", "Laos", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Lao P.*", "Laos", vectorize_all = TRUE)
 
 #[157] "Macedonia"                                           
 #[158] "Macedonia, FYR"                                      
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "^Macedonia.*", "North Macedonia", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, ".*Macedonia.*", "North Macedonia", vectorize_all = TRUE)
 
 #[178] "Micronesia"                                          
 #[179] "Micronesia (Federated States of)"                    
 #[180] "Micronesia, Fed. Sts."                               
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Micronesia.*", "Micronesia", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Micronesia.*", "Micronesia", vectorize_all = TRUE)
 
 #[185] "Moldova"                                             
 #[186] "Moldova (Republic of)"                               
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Moldova.*", "Moldova", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Moldova.*", "Moldova", vectorize_all = TRUE)
 
 #[214] "Russia"                                              
 #[215] "Russian Federation"                                  
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Russia.*", "Russia", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Russia.*", "Russia", vectorize_all = TRUE)
 
 # estes paises nao aparecem no Freedom House; vou desprezar
 #[229] "Saint Kitts and Nevis"                                
@@ -603,45 +593,37 @@ ccc$Country <- stri_replace_all_regex(ccc$Country, "Russia.*", "Russia", vectori
 #[227] "Slovakia"                                            
 #[228] "Slovak Republic"                                     
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Slovak.*", "Slovakia", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Slovak.*", "Slovakia", vectorize_all = TRUE)
 
 #[252] "Syria"                                               
 #[253] "Syrian Arab Republic"                                
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Syria.*", "Syria", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Syria.*", "Syria", vectorize_all = TRUE)
 
 #[270] "Tanzania"                                            
 #[271] "Tanzania (United Republic of)"                       
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Tanzania.*", "Tanzania", vectorize_all = TRUE)
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "^United Republic of Tanzania$", "Tanzania", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Tanzania.*", "Tanzania", vectorize_all = TRUE)
 
 #[270] "United States"                                       
 #[271] "United States of America"                            
-jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "United States.*", "United States of America", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "United States.*", "United States of America", vectorize_all = TRUE)
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "United States.*", "USA", vectorize_all = TRUE)
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "US", "USA", vectorize_all = TRUE)
 
 #[276] "Venezuela"                                           
 #[294] "Venezuela (Bolivarian Republic of)"                  
 #[277] "Venezuela, RB"                                       
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Venezuela.*", "Venezuela", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Venezuela.*", "Venezuela", vectorize_all = TRUE)
-
 
 #"Vatican City"
 #[55] "Holy See"
-ccc$Country <- stri_replace_all_regex(ccc$Country, "^Vatican City.*", "Holy See", vectorize_all = TRUE)
-
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "^Vatican City.*", "Holy See", vectorize_all = TRUE)
 
 #[296] "Vietnam"                                             
 #[297] "Viet Nam"                                            
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Viet(\\s|)[nN]am","Vietnam", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country,  "Viet(\\s|)[nN]am","Vietnam", vectorize_all = TRUE)
 
 #[282] "Yemen"                                               
 #[283] "Yemen, Rep."
 jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Yemen.*", "Yemen", vectorize_all = TRUE)
-ccc$Country <- stri_replace_all_regex(ccc$Country, "Yemen.*", "Yemen", vectorize_all = TRUE)
 ```
 
 
@@ -661,7 +643,7 @@ jhucovid19 <- left_join(jhucovid19,ccc, by="Country")
 Removendo países sem continente.
 
 ```{r}
-jhucovid19 <- filter(jhucovid19, !is.na(Continent))
+jhucovid19 <- filter(jhucovid19, !is.na(Continent)) %>% select(-Capital)
 ```
 
 ```{r}
@@ -702,7 +684,7 @@ filter(jhucovid19, Country %in% c("China","Italy","Iran","Germany","Japan"), Dat
 
 
 
-```{r}
+```{r eval = FALSE}
 filter(jhucovid19,  grepl("China",Country)) %>% kable() #%>% summarise(sum(ConfirmedCases))
 ```
 
@@ -714,10 +696,13 @@ jhucovid19 %>% group_by(Country) %>% summarise(Confirmed1 = sum(NewCases) - sum(
 ```
 
 ```{r}
-group_by(jhucovid19, Country) %>% summarise(ConfirmedCases = last(ConfirmedCases)) %>% arrange(desc(ConfirmedCases)) %>% kable()
+group_by(jhucovid19, Country) %>% 
+  summarise(ConfirmedCases = last(ConfirmedCases)) %>% 
+  arrange(desc(ConfirmedCases)) %>% 
+  kable(caption = "Países ordenados por número de casos confirmados")
 ```
 
-```{r}
+```{r eval = FALSE}
 jhucovid19 %>% filter(Country == "Italy") %>% top_n(10, DateRep)
 ```
 
@@ -737,11 +722,11 @@ Brasil13 <- mutate(Brasil13, Dia = as.numeric(rownames(Brasil13))) %>%
   top_n(-25, Dia)
 ```
 
-```{r}
-Italia14
+```{r  eval = FALSE}
+Italia14 %>% kable()
 ```
-```{r}
-Brasil13
+```{r eval = FALSE}
+Brasil13 %>% kable()
 ```
 
 ```{r}
@@ -776,7 +761,7 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
 ```
 
 ```{r}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "US", "Japan")) %>% 
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "USA", "Japan")) %>% 
   filter(ConfirmedCases >= 30 ) %>% 
   select(Country,DateRep,ConfirmedCases,Deaths) %>% 
   group_by(Country) %>% 
@@ -786,8 +771,8 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "US", "Japan")) %
   labs_pubr() + theme_pubr()
 ```
 
-```{r}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","US", "Argentina","Chile")) %>% 
+```{r tidy.opts=list(options(knitr.kable.NA = ''))}
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","USA", "Argentina","Chile")) %>% 
   filter(ConfirmedCases >= 30 ) %>% 
   group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
   pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% 
