@@ -1,8 +1,9 @@
 ---
 title: "Minhas Análises e Explorações COVID-19"
 author: "Mario O. de Menezes"
-date: "17/03/2020"
-output: html_document
+output: 
+  html_document: 
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -20,7 +21,7 @@ library(RColorBrewer)
 library(ggthemes)
 ```
 
-# EU Open Data Portal
+# Base de dados do EU Open Data Portal
 
 Os dados desta seção vieram do [Europe Open Data Portal](https://data.europa.eu/euodp/en/) -- `https://data.europa.eu/euodp/en/`
 
@@ -650,12 +651,22 @@ jhucovid19 <- filter(jhucovid19, !is.na(Continent)) %>% select(-Capital)
 write_csv(jhucovid19,paste("./data/","jhucovid19-",ontem,".csv",sep=""))
 ```
 
-### França
+### Últimos 10 dias 
+
 
 ```{r}
-filter(jhucovid19, Country == "France") %>% top_n(10,DateRep) %>% kable()
+filter(jhucovid19, Country == "France") %>% top_n(10,DateRep) %>% kable(caption = "França")
 ```
 
+
+```{r}
+filter(jhucovid19, Country == "Italy") %>% top_n(10,DateRep) %>% kable(caption = "Itália")
+```
+
+
+```{r}
+filter(jhucovid19, Country == "Spain") %>% top_n(10,DateRep) %>% kable(caption = "Espanha")
+```
 
 
 Adicionando uma coluna com o número de casos de um dia para o outro.
@@ -704,6 +715,18 @@ group_by(jhucovid19, Country) %>%
 
 ```{r eval = FALSE}
 jhucovid19 %>% filter(Country == "Italy") %>% top_n(10, DateRep)
+```
+
+
+```{r}
+filter(jhucovid19, DateRep > "2020-02-01") %>% 
+  group_by(Continent, DateRep) %>% 
+  summarise(numCasos = sum(ConfirmedCases)) %>% 
+  ggplot(aes(x = DateRep, y = numCasos)) + 
+  geom_bar(aes(fill=Continent),stat="identity", position = "dodge") + 
+  labs(x = "Data", title = "Evolução dos Casos nos Continentes (dados JHU),\n a partir de 01/02/2020",fill="") + 
+  scale_fill_brewer(palette = "Set1") +
+  labs_pubr() + theme_pubclean()
 ```
 
 
@@ -781,4 +804,23 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
 
 
 
+#### Calculando a taxa de progressão dia-a-dia: Brasil, Itália, USA, França, Alemanha, Espanha
+
+```{r tidy.opts=list(options(knitr.kable.NA = ''))}
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","USA")) %>% 
+  group_by(Country) %>% 
+  filter(ConfirmedCases >= 30) %>% 
+  arrange(DateRep) %>%
+  mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
+         ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
+         ProgRateDeaths = ProgRateDeaths + 1,
+         ProgRateCases = ProgRateCases + 1
+         ) %>%
+  ungroup() %>%
+  select(Country,DateRep,ConfirmedCases,ProgRateCases,Deaths,ProgRateDeaths) %>%
+  arrange(Country, DateRep) %>%
+  pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ProgRateCases) %>%
+  arrange(DateRep) %>%
+  kable(caption="Taxa de Progressão de Casos Confirmados (após 30º caso)")
+```
 
