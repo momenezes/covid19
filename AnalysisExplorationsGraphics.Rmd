@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, knitr.kable.NA = '')
 ```
 
 ```{r warning=FALSE, message=FALSE}
@@ -15,6 +15,7 @@ library(lubridate)
 library(ggpubr)
 library(readxl)
 library(knitr)
+library(stringi)
 library(RColorBrewer)
 library(ggthemes)
 ```
@@ -26,7 +27,7 @@ Os dados desta seção vieram do [Europe Open Data Portal](https://data.europa.e
 ```{r}
 covid19URLbase <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-"
 hoje <- format(Sys.time(), "%Y-%m-%d")
-#hoje <- "2020-03-20"
+hoje <- "2020-03-24"
 arqdest <- paste("COVID-19-geographic-distribution-worldwide-",hoje,".xlsx",sep="")
 ```
 https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-03-18.xls
@@ -56,27 +57,31 @@ covid19 <- rename(covid19, Country = `Countries and territories`)
  
 ```{r}
 Italia <- covid19 %>% 
-  filter(Country == "Italy", DateRep > "2020-02-10")%>% 
+  filter(Country == "Italy")%>% 
   arrange(DateRep) %>%
   mutate(CumCases = cumsum(Cases))
 Brasil <- covid19 %>% 
-  filter(Country == "Brazil", DateRep > "2020-02-22") %>%
+  filter(Country == "Brazil") %>%
   arrange(DateRep) %>%
   mutate(CumCases = cumsum(Cases))
 ```
 ```{r}
-Italia
+Italia %>% kable()
 ```
 ```{r}
-Brasil
+Brasil %>% kable()
+```
+
+```{r}
+LimiteCorte <- max(Brasil$CumCases)
 ```
 
 ```{r}
 Italia14 <- Italia %>% 
-  filter(CumCases >= 14 & CumCases <= 1000) %>% 
+  filter(CumCases >= 14 & CumCases <= LimiteCorte) %>% 
   select(Country,DateRep, Cases,Deaths,CumCases)
 Brasil13 <- Brasil %>% 
-  filter(CumCases >= 13 & CumCases <= 1000) %>% 
+  filter(CumCases >= 13 & CumCases <= LimiteCorte) %>% 
   select(Country,DateRep,Cases,Deaths,CumCases)
 ```
 ```{r}
@@ -84,20 +89,20 @@ Italia14 <- mutate(Italia14, Dia = as.numeric(rownames(Italia14)))
 Brasil13 <- mutate(Brasil13, Dia = as.numeric(rownames(Brasil13)))
 ```
 ```{r}
-Italia14
+Italia14 %>% kable()
 ```
 ```{r}
-Brasil13
-```
-
-
-```{r}
-bind_rows(Italia14,Brasil13) %>% ggplot() + geom_point(aes(x = Dia, y = CumCases, color=Country), stat = "identity", position = "dodge") + labs(title = "Curva de crescimentos de casos (cumulativo) em número de dias,\n CumCases>=14 & CumCases<=1000 -- Brasil e Itália", color = "") + labs_pubr() + theme_pubclean()
+Brasil13 %>% kable()
 ```
 
 
 ```{r}
-bind_rows(select(Italia,Country, DateRep, CumCases, Cases, Deaths), select(Brasil, Country, DateRep, CumCases, Cases, Deaths)) %>%
+bind_rows(Italia14,Brasil13) %>% ggplot() + geom_point(aes(x = Dia, y = CumCases, color=Country), stat = "identity", position = "dodge") + labs(title = paste("Curva de crescimentos de casos (cumulativo) em número de dias,\n CumCases>=14 & CumCases<=", LimiteCorte," -- Brasil e Itália",sep=""), color = "") + labs_pubr() + theme_pubclean()
+```
+
+
+```{r}
+bind_rows(select(Italia,Country, DateRep, CumCases, Cases, Deaths), select(Brasil, Country, DateRep, CumCases, Cases, Deaths)) %>% filter(DateRep >= "2020-02-22") %>%
    ggplot() + geom_bar(aes(x = DateRep, y = CumCases, fill = Country), stat = "identity", position = "dodge") + 
   labs(y = "Núm de Casos Reportados", x = "Data", title = "Evolução dos Casos na Italia e Brasil, a partir de 22/02/2020", fill = "") + scale_fill_brewer(palette = "Set1") +
   labs_pubr() + theme_pubclean()
@@ -108,9 +113,8 @@ bind_rows(select(Italia,Country, DateRep, CumCases, Cases, Deaths), select(Brasi
 covid19 %>% 
   filter(Country %in% c("Italy", "Brazil"), DateRep > "2020-02-22") %>% 
   arrange(DateRep) %>%
-  group_by(DateRep, Country) %>% summarise(Cases = sum(Cases)) %>% 
   ggplot() + geom_bar(aes(x = DateRep, y = Cases, fill = Country),  stat = "identity", position = "dodge") + 
-  labs(y = "Núm de Casos Reportados", x = "Data", title = "Evolução dos Casos na Italia e Brasil, a partir de 22/02/2020", fill = "") + scale_fill_brewer(palette = "Set1") +
+  labs(y = "Núm de Casos Reportados", x = "Data", title = "Número de Casos Reportados diariamente na Italia e Brasil,\n a partir de 22/02/2020", fill = "") + scale_fill_brewer(palette = "Set1") +
   labs_pubr() + theme_pubclean()
 ```
 
@@ -123,7 +127,7 @@ ccc <- read_csv("./data/country-capital-continent.csv")
 Os nomes compostos dos países na base de dados do COVID19 utilizam o "_" (_underline_) como separador, por exemplo, `Costa_Rica`. Nas bases de países, regiões e continentes, o separador é o espaço " ". Precisamos ajustar para não termos problemas.
 
 ```{r eval=FALSE}
-filter(covid19,  grepl("_",covid19$Country))
+filter(covid19,  grepl("_",covid19$Country)) %>% head()
 ```
 
 Substituindo o "_" por " " nos nomes dos países
@@ -138,8 +142,7 @@ covid19 <- mutate(covid19, Country = ifelse(Country == "CANADA", "Canada", Count
 
 Acertando os nomes dos países nas duas bases para poder juntar de modo apropriado.
 
-```{r}
-library(stringi)
+```{r echo = FALSE}
 # Bahamas
 covid19$Country <- stri_replace_all_fixed(covid19$Country,"Bahamas, The","Bahamas", vertorized=TRUE)
 ccc$Country <- stri_replace_all_fixed(ccc$Country,"Bahamas, The","Bahamas", vertorized=TRUE)
@@ -309,7 +312,7 @@ paises_intersect <- intersect(nomes_iguais, covid19$Country)
 paises_intersect <- paises_intersect[which(!paises_intersect %in% c("Niger","Nigeria"))]
 ```
 
-Listagem de todos países na base do COVID-19
+Listagem de todos países na base do COVID-19. Os códigos abaixo são para identificar países que não estão na base `ccc` e acertar os nomes ou incluí-los. Não vou fazer isso agora.
 
 ```{r eval = FALSE}
 unique(covid19$Country) %>% sort() 
@@ -319,10 +322,10 @@ unique(covid19$Country) %>% sort()
 intersect(ccc$Country, covid19$Country) %>% sort()
 ```
 
-```{r}
+```{r eval = FALSE}
 setdiff(ccc$Country, covid19$Country)
 ```
-```{r}
+```{r eval = FALSE}
 setdiff(covid19$Country,ccc$Country)
 ```
 
@@ -360,7 +363,7 @@ filter(covid19, DateRep > "2020-02-01") %>%
 
 
 
-```{r}
+```{r eval = FALSE}
 filter(covid19, Country != "China") %>% tail(20) %>% kable()
 ```
 
@@ -373,7 +376,7 @@ filter(covid19, DateRep > "2020-02-01") %>%
   ggplot(aes(x = DateRep, y = numCasos)) + 
   geom_bar(aes(fill=Continent),stat="identity", position = "stack") + 
   scale_fill_discrete(breaks = c("Oceania","Europe","Asia","America","Africa")) +
-  labs(x = "Data", title = "Evolução dos Casos nos Continentes (sem China), a partir de 01/02/2020",fill="") +
+  labs(x = "Data", title = "Evolução dos Casos nos Continentes (sem China), \na partir de 01/02/2020",fill="") +
   scale_fill_brewer(palette = "Set1") +
   labs_pubr() + theme_classic2()
 ```
@@ -400,11 +403,9 @@ bind_rows(sochina,restomundo) %>% filter(DateRep >= "2020-02-01") %>%
 
 ```{r brasil}
 filter(covid19, DateRep > "2020-02-01", Country == "Brazil") %>% 
-  group_by(DateRep) %>% 
-  summarise(numCasos = sum(Cases)) %>% 
-  ggplot(aes(x = DateRep, y = numCasos)) + 
+  ggplot(aes(x = DateRep, y = Cases)) + 
   geom_bar(stat="identity", position = "dodge") + 
-  labs(x = "Data", title="Evolução dos Casos no Brasil a partir de 01/02/2020") + 
+  labs(x = "Data", title="Número de Casos Reportados diariamente no Brasil\n a partir de 01/02/2020") + 
   scale_fill_brewer(palette = "Set1") +
   labs_pubr() + theme_classic2()
 ```
@@ -415,143 +416,262 @@ covid19 %>%
   group_by(Country) %>% 
   summarise(Casos = sum(Cases)) %>% 
   arrange(desc(Casos)) %>% 
-  filter(Casos > 150) %>% kable()
+  filter(Casos > 500) %>% kable(caption="Países com mais de 500 casos reportados")
 ```
 
 
 # Base de dados da John Hopkins University
 
-*Tem alguns dificuldades para se conseguir reproduzir os valores apresentados no site abaixo da JHU*, especificamente com relação a países que tem províncias/estados. Ainda não está bem feita a parte abaixo, mas já dá para ter um bom começo.
-
-O JHU tem um site de monitoramento em tempo real (talvez o mais atualizado) no endereço `https://coronavirus.jhu.edu/map.html`. Os dados utilizados para o mapa estão em um GitHub  `https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv`, mas não são tão atualizados como os do mapa. Além disso, estão em formato _não tidy_. 
+O JHU tem um site de monitoramento em tempo real (talvez o mais atualizado) no endereço `https://coronavirus.jhu.edu/map.html`. Os dados utilizados para o mapa estão em um GitHub  `https://github.com/CSSEGISandData/COVID-19`. Tem dados com atualização diária (parece que no mapa as atualizações são mais constantes; no final do dia são atualizados no GitHub).
 
 
 Este é o link onde aparece o mapa também: `https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases`
 
-Outro link onde há um log das atualizações da base; parece ser atualizada constantemente: `https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases`
+
+## Fazendo o download dos arquivos diários ao invés destes consolidados (não tem o Recovered na última atualização)
+
+https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/01-22-2020.csv
+
+O nome dos arquivos é MM-DD-YYYY.csv, começando a partir de 22 de Janeiro de 2020.
+
+```{r}
+hj <- today()
+ontem <- hj - 1
+diainicio <- as.Date("01-22-2020", format = "%m-%d-%Y")
+```
+
+```{r}
+dia <- diainicio
+while(dia <= ontem) {
+  ultarq <- paste(format(dia,"%m-%d-%Y"),".csv",sep="")
+  CSSEbasepath <- "~/datasets/CSSEGISandData/COVID-19/csse_covid_19_daily_reports/"
+  ultarq_fullname <- paste(CSSEbasepath,ultarq,sep="") 
+  CSSEURLbase <- "https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/"
+  if (!file.exists(ultarq_fullname)) {
+    curl::curl_download(paste(CSSEURLbase,ultarq,sep=""),ultarq_fullname)
+    print(paste("Fazendo dowload do arquivo",ultarq_fullname,sep=":"))
+  }
+  dia <- dia + 1
+}
+```
+
+Depois de feito o download de todos os arquivos, é preciso juntá-los em um único `data.frame`.
+
+```{r}
+dia <- diainicio
+dias <- list()
+# mudança de formato a partir de 22 de março de 2020
+datamudanca <- as.Date("2020-03-22")
+while (dia < datamudanca) {
+  d1 <- read_csv(paste(CSSEbasepath,format(dia,"%m-%d-%Y"),".csv",sep=""))
+  d1 <- rename(d1, Country = `Country/Region`)
+  d1 <- group_by(d1,Country) %>% summarise(ConfCases = sum(Confirmed, na.rm = T),TotDeaths = sum(Deaths, na.rm = T), TotRecov = sum(Recovered, na.rm = T)) %>% mutate(DateRep = dia)
+  dias <- append(dias,list(d1))
+  dia <- dia + 1
+}
+# novo formato
+while(dia <= ontem) {
+  d1 <- read_csv(paste(CSSEbasepath,format(dia,"%m-%d-%Y"),".csv",sep=""))
+  d1 <- rename(d1, Country = Country_Region)
+  d1 <- group_by(d1,Country) %>% summarise(ConfCases = sum(Confirmed, na.rm = T), TotDeaths = sum(Deaths, na.rm = T), TotRecov = sum(Recovered, na.rm = T)) %>% mutate(DateRep = dia)
+  dias <- append(dias, list(d1))
+  dia <- dia + 1
+  }
+```
+
+Criando um único `data.frame` e algumas correções.
+
+```{r}
+X <- bind_rows(dias) %>% arrange(DateRep,Country)
+assign("jhucovid19",X)
+jhucovid19 <- select(jhucovid19, Country, DateRep, ConfirmedCases = ConfCases, Deaths = TotDeaths, Recovered = TotRecov)
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country,"Mainland China", "China", vectorize_all = TRUE)
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "UK", "United Kingdom", vectorize_all = TRUE)
+rm(X)
+```
 
 
-Leitura e gravação dos arquivos para posterior utilização. Execute manualmente uma vez ou sempre que quiser atualizar os dados.
+```{r echo = FALSE}
+# Bahamas
+jhucovid19$Country <- stri_replace_all_fixed(jhucovid19$Country,"Bahamas, The","Bahamas", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_fixed(ccc$Country,"Bahamas, The","Bahamas", vectorize_all = TRUE)
+# [26] "Bolivia"                                             
+# [27] "Bolivia (Plurinational State of)"
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Bolivia.*", "Bolivia", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Bolivia.*", "Bolivia", vectorize_all = TRUE)
+# [27] "Bosnia and Herzegovina"                              
+# [28] "Bosnia-Herzegovina"
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Bosnia.*", "Bosnia-Herzegovina", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Bosnia.*", "Bosnia-Herzegovina", vectorize_all = TRUE)
+# [32] "Brunei"                                              
+# [33] "Brunei Darussalam"                                   
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Brunei.*", "Brunei", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Brunei.*", "Brunei", vectorize_all = TRUE)
+# [38] "Cabo Verde"                                          
+# [38] "Cabo Verde"                                          
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Ca(pe|bo) Verde", "Cape Verde", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Ca(pe|bo) Verde", "Cape Verde", vectorize_all = TRUE)
+# [53] "Congo"                                               
+# [54] "Congo (Brazzaville)"                                 
+# [55] "Congo (Democratic Republic of the)"                  
+# [56] "Congo, Dem. Rep."                                    
+# [57] "Congo (Kinshasa)"                                    
+# [58] "Congo, Rep."  
 
-```{r dadosJHU, eval=FALSE}
-jhutscovid19_confirmed <- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv")
-agora <- format(Sys.time(), "%Y-%m-%d-%H:%M")
-write_csv(jhutscovid19_confirmed, paste("./data/","time_series_2019-ncov-Confirmed.csv", sep=""))
+#jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Congo, Rep.*", "Congo (Brazzaville)", vectorize_all = TRUE)
+#jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Congo, Dem.*", "Congo (Kinshasa)", vectorize_all = TRUE)
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "^Congo$", "Republic of the Congo", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "^Democratic Republic of Congo$", "Democratic Republic of the Congo", vectorize_all = TRUE)
+# [60] "Cote d'Ivoire"                                       
+# [62] "C\xf4te d'Ivoire"                                 
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "C(.+)te d(.+)voire", "Ivory Coast", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "C(.+)te d'Ivoire", "Ivory Coast", vectorize_all = TRUE)
+# [73] "Egypt"                                               
+# [74] "Egypt, Arab Rep."                                    
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Egypt.*", "Egypt", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Egypt.*", "Egypt", vectorize_all = TRUE)
 
-jhutscovid19_deaths <- read_csv("https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_19-covid-Deaths.csv&filename=time_series_2019-ncov-Deaths.csv")
-jhutscovid19_deaths <- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv")
-write_csv(jhutscovid19_deaths, paste("./data/","time_series_2019-ncov-Deaths.csv",sep=""))
+# [71] "East Timor"                                          
+#[257] "Timor-Leste"
+jhucovid19$Country <- stri_replace_all_fixed(jhucovid19$Country, "Timor-Leste", "East Timor", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_fixed(ccc$Country, "Timor-Leste", "East Timor", vectorize_all = TRUE)
 
-jhutscovid19_recovered <- read_csv("https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_19-covid-Recovered.csv&filename=time_series_2019-ncov-Recovered.csv")
-write_csv(jhutscovid19_recovered, paste("./data/","time_series_2019-ncov-Recovered.csv",sep=""))
+# [96] "Gambia"                                              
+# [97] "Gambia, The"                                         
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Gambia.*", "Gambia", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Gambia.*", "Gambia", vectorize_all = TRUE)
 
+#[114] "Hong Kong, China (SAR)"                              
+#[115] "Hong Kong SAR, China"                                
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Hong Kong.*", "Hong Kong", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Hong Kong.*", "Hong Kong", vectorize_all = TRUE)
+
+#[125] "Iran"                                                
+#[126] "Iran, Islamic Rep."                                  
+#[127] "Iran (Islamic Republic of)"                          
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Iran.*", "Iran", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Iran.*", "Iran", vectorize_all = TRUE)
+
+#[139] "Korea, Dem. People’s Rep."                           
+#[140] "Korea, Rep."                                         
+#[141] "Korea (Republic of)"                                 
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Korea, Dem.*", "North Korea", vectorize_all = TRUE)
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Korea, Rep\\.$", "South Korea", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Korea, South", "South Korea", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Korea, North", "North Korea", vectorize_all = TRUE)
+
+#[136] "Kyrgyz Republic"                                     
+#[137] "Kyrgyzstan"                                          
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Kyrgyz.*", "Kyrgyzstan", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Kyrgyz.*", "Kyrgyzstan", vectorize_all = TRUE)
+
+#[146] "Lao PDR"                                             
+#[147] "Lao People's Democratic Republic"                    
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Lao P.*", "Laos", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Lao P.*", "Laos", vectorize_all = TRUE)
+
+#[157] "Macedonia"                                           
+#[158] "Macedonia, FYR"                                      
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "^Macedonia.*", "North Macedonia", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, ".*Macedonia.*", "North Macedonia", vectorize_all = TRUE)
+
+#[178] "Micronesia"                                          
+#[179] "Micronesia (Federated States of)"                    
+#[180] "Micronesia, Fed. Sts."                               
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Micronesia.*", "Micronesia", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Micronesia.*", "Micronesia", vectorize_all = TRUE)
+
+#[185] "Moldova"                                             
+#[186] "Moldova (Republic of)"                               
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Moldova.*", "Moldova", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Moldova.*", "Moldova", vectorize_all = TRUE)
+
+#[214] "Russia"                                              
+#[215] "Russian Federation"                                  
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Russia.*", "Russia", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Russia.*", "Russia", vectorize_all = TRUE)
+
+# estes paises nao aparecem no Freedom House; vou desprezar
+#[229] "Saint Kitts and Nevis"                                
+#[255] "St. Kitts and Nevis"                                  
+#[230] "Saint Lucia"                                         
+#[256] "St. Lucia"                                           
+#[231] "Saint Vincent and the Grenadines"                     
+#[257] "St. Vincent and the Grenadines"                      
+
+
+#[227] "Slovakia"                                            
+#[228] "Slovak Republic"                                     
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Slovak.*", "Slovakia", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Slovak.*", "Slovakia", vectorize_all = TRUE)
+
+#[252] "Syria"                                               
+#[253] "Syrian Arab Republic"                                
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Syria.*", "Syria", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Syria.*", "Syria", vectorize_all = TRUE)
+
+#[270] "Tanzania"                                            
+#[271] "Tanzania (United Republic of)"                       
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Tanzania.*", "Tanzania", vectorize_all = TRUE)
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "^United Republic of Tanzania$", "Tanzania", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Tanzania.*", "Tanzania", vectorize_all = TRUE)
+
+#[270] "United States"                                       
+#[271] "United States of America"                            
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "United States.*", "United States of America", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "United States.*", "United States of America", vectorize_all = TRUE)
+
+#[276] "Venezuela"                                           
+#[294] "Venezuela (Bolivarian Republic of)"                  
+#[277] "Venezuela, RB"                                       
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Venezuela.*", "Venezuela", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Venezuela.*", "Venezuela", vectorize_all = TRUE)
+
+
+#"Vatican City"
+#[55] "Holy See"
+ccc$Country <- stri_replace_all_regex(ccc$Country, "^Vatican City.*", "Holy See", vectorize_all = TRUE)
+
+
+#[296] "Vietnam"                                             
+#[297] "Viet Nam"                                            
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Viet(\\s|)[nN]am","Vietnam", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country,  "Viet(\\s|)[nN]am","Vietnam", vectorize_all = TRUE)
+
+#[282] "Yemen"                                               
+#[283] "Yemen, Rep."
+jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "Yemen.*", "Yemen", vectorize_all = TRUE)
+ccc$Country <- stri_replace_all_regex(ccc$Country, "Yemen.*", "Yemen", vectorize_all = TRUE)
 ```
 
 
 ```{r}
-jhucovid <- read_csv("./data/time_series_2019-ncov-Confirmed.csv")
+jhucovid19 <- jhucovid19 %>%  group_by(DateRep, Country) %>% 
+  mutate(ConfirmedCases = sum(ConfirmedCases), Deaths = sum(Deaths), Recovered = sum(Recovered)) %>% 
+  ungroup() %>% ungroup()
+```
+
+Adicionando coluna "Continent"
+
+```{r}
+#covid19 <- left_join(left_join(covid19,CountriesandRegions, by="Country"),ccc, by="Country")
+jhucovid19 <- left_join(jhucovid19,ccc, by="Country")
+```
+
+Removendo países sem continente.
+
+```{r}
+jhucovid19 <- filter(jhucovid19, !is.na(Continent))
 ```
 
 ```{r}
-jhucovid19_confirmed <- gather(jhucovid, key = "DateRep", value = "ConfirmedCases", 5:ncol(jhucovid))
-jhucovid19_confirmed <- mutate(jhucovid19_confirmed, DateRep = as.Date(DateRep, "%m/%d/%y"))
+write_csv(jhucovid19,paste("./data/","jhucovid19-",ontem,".csv",sep=""))
 ```
-
-```{r}
-filter(jhucovid19_confirmed, `Country/Region` == "Italy") %>% tail()
-```
-
-```{r}
-jhucovid_D <- read_csv("./data/time_series_2019-ncov-Deaths.csv")
-```
-
-```{r}
-jhucovid19_deaths <- gather(jhucovid_D, key = "DateRep", value = "Deaths", 5:ncol(jhucovid_D))
-jhucovid19_deaths <- mutate(jhucovid19_deaths, DateRep = as.Date(DateRep, "%m/%d/%y"))
-```
-
-```{r}
-jhucovid_R <- read_csv("./data/time_series_2019-ncov-Recovered.csv")
-```
-
-```{r}
-jhucovid_recov <- gather(jhucovid_R, key = "DateRep", value = "Recovered", 5:ncol(jhucovid_R))
-jhucovid_recov <- mutate(jhucovid_recov, DateRep = as.Date(DateRep, "%m/%d/%y"))
-```
-
-Anexando a coluna de `Deaths` e `Recovered` para formar um único data.frame
-
-```{r eval = FALSE}
-all_equal(jhucovid19_confirmed[,2], jhucovid19_deaths[,2])
-all_equal(jhucovid19_confirmed[,2], jhucovid_recov[,2])
-all_equal(jhucovid19_deaths[,2], jhucovid_recov[,2])
-```
-
-```{r}
-jhucovid19 <- bind_cols(jhucovid19_confirmed,jhucovid19_deaths[,6], jhucovid_recov[,6])
-jhucovid19 <- mutate(jhucovid19, DateRep = as.Date(DateRep, "%m/%d/%y"), Month = months(DateRep)) %>% 
-  rename(Country = `Country/Region`)
-```
-
-Alguns países tem informações de `Province/State` que bagunça a sumarização simples; para estes é preciso uma estratégia diferente; o `group_by` por `Country` não produz resultados corretos. 
 
 ### França
 
-No caso da França, parece ser um pouco pior, já que há uma linha com `Province/State` igual a "France" e que parece ser o total do país, enquanto as outras linhas com `Country` igual a "France" parecem ser das outras províncias da França espalhadas pelo mundo.
-
 ```{r}
-filter(jhucovid19, Country == "France") %>% 
-  top_n(-10, desc(DateRep)) %>% kable()
-```
-
-### US
-
-Para os Estados Unidos, também é complicado porque tem dados de cidades junto. Para computar os valores exatos dos Estados Unidos tem fazer uma boa manipulação. Não vou fazer isso agora.
-
-```{r}
-filter(jhucovid19, DateRep >= "2020-03-01", Country == "US", `Province/State` %in% c("Washington","California","Texas","Michigan")) %>% tail(20) %>% kable()
-```
-
-Cidades
-
-```{r}
-filter(jhucovid19, DateRep >= "2020-03-01", Country == "US", `Province/State` %in% c("Monmouth, NJ", "Union, NJ", "Philadelphia, PA")) %>% kable()
-```
-
-O procedimento para os países que tem os dados separados por `Province/State` é semelhante ao realizado abaixo para a China.
-
-### China
-
-Como os dados da China estão separados pelos Estados/Províncias, a tabulação está ficando confusa. Vou criar uma totalização para a China, dia a dia, como a maioria dos países. Não vou considerar a coluna `Province/State`.
-
-```{r}
-China <- jhucovid19 %>% filter(Country == "China") %>% group_by(DateRep) %>% summarise(ConfirmedCases = sum(ConfirmedCases), Deaths = sum(Deaths), Recovered = sum(Recovered)) %>% arrange(DateRep)
-China <- mutate(China, Country = "China", Lat = 40.1824, Long = 116.4142, Month = months(DateRep))
-```
-
-```{r}
-China
-```
-
-
-Algumas linhas da China para exemplificar.
-```{r}
-filter(jhucovid19, !is.na(`Province/State`) & Country == "China") %>% arrange(`Province/State`, DateRep) %>% group_by(`Province/State`) %>% top_n(-3, desc(DateRep)) %>% kable()
-```
-
-
-### Alguns acertos e transformações
-
-```{r}
-jhucovid19_semChina <- jhucovid19 %>% filter(Country != "China") #v%>% select(-`Province/State`)
-```
-
-```{r}
-jhucovid19 <- bind_rows(jhucovid19_semChina, China) %>% arrange(Country, DateRep)
-```
-
-```{r}
-jhucovid19 %>% filter(Country == "France") %>% tail(10) %>% kable()
+filter(jhucovid19, Country == "France") %>% top_n(10,DateRep) %>% kable()
 ```
 
 
@@ -560,21 +680,17 @@ Adicionando uma coluna com o número de casos de um dia para o outro.
 
 ```{r}
 jhucovid19 <- group_by(jhucovid19, Country) %>% 
+  arrange(DateRep) %>%
   mutate(NewDeaths = Deaths - lag(Deaths), 
-         #NewDeaths = if_else(is.na(NewDeaths), if_else(Deaths > 0, Deaths, 0), NewDeaths),
-         NewCases = ConfirmedCases - lag(ConfirmedCases) + lag(NewDeaths), 
-         NewCases = if_else(is.na(NewCases), 0, NewCases))
+         NewCases = ConfirmedCases - lag(ConfirmedCases),
+         NewCases = if_else(is.na(NewCases), 0, if_else(NewCases < 0, 0, NewCases)),
+         NewDeaths = if_else(is.na(NewDeaths), 0, if_else(NewDeaths < 0, 0, NewDeaths))
+         ) %>%
+  ungroup()
 ```
 
 
-### Casos Confirmados na França a partir de 01 de Fevereiro 2020
-```{r}
-group_by(jhucovid19, Country) %>% 
-  filter(Country == "France", DateRep >= "2020-02-01") %>% 
-  mutate(Day = day(DateRep)) %>%
-  select(-Lat,-Long,-Month, -Day) %>% 
-  select(Data=DateRep,Casos=ConfirmedCases,Mortes=Deaths,Recuperados=Recovered,NovasMortes=NewDeaths,NovosCasos=NewCases) %>% kable()
-```
+
 
 
 ```{r}
@@ -584,16 +700,16 @@ filter(jhucovid19, Country %in% c("China","Italy","Iran","Germany","Japan"), Dat
   labs_pubr() + theme_pubclean()
 ```
 
+
+
 ```{r}
-jhucovid19 <- ungroup(jhucovid19)
+filter(jhucovid19,  grepl("China",Country)) %>% kable() #%>% summarise(sum(ConfirmedCases))
 ```
 
-```{r}
-filter(jhucovid19, Country == "China") %>% kable() #%>% summarise(sum(ConfirmedCases))
-```
 
+Este trecho calcula a diferença que obtenho ao somar os "NewCases" em relação ao total de casos confirmados ("ConfirmedCases"). Não consegui identificar a origem da diferença; uma possibilidade é que a base não começa com o primeiro caso da China, mas em 22 de Janeiro, já com 547 casos confirmados. Ou seja, precisaria fazer mais alguns ajustes nesta variával `NewCases` para, quando acumulada, chegasse ao valor dos `ConfirmedCases` do último dia da base.
 
-```{r}
+```{r eval = FALSE}
 jhucovid19 %>% group_by(Country) %>% summarise(Confirmed1 = sum(NewCases) - sum(NewDeaths, na.rm=T), Confirmed2 = last(ConfirmedCases), Diferenca = Confirmed2 - Confirmed1) %>% arrange(desc(Confirmed1)) %>% kable()
 ```
 
@@ -602,7 +718,7 @@ group_by(jhucovid19, Country) %>% summarise(ConfirmedCases = last(ConfirmedCases
 ```
 
 ```{r}
-jhucovid19 %>% filter(Country == "Italy")
+jhucovid19 %>% filter(Country == "Italy") %>% top_n(10, DateRep)
 ```
 
 
@@ -636,7 +752,7 @@ bind_rows(Italia14,Brasil13) %>%
 ```
 
 ```{r}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany")) %>% 
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan")) %>% 
   filter(ConfirmedCases >= 1 ) %>% 
   select(Country,DateRep,ConfirmedCases,Deaths) %>% 
   group_by(Country) %>% 
@@ -659,12 +775,25 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
   labs_pubr() + theme_pubr()
 ```
 
+```{r}
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "US", "Japan")) %>% 
+  filter(ConfirmedCases >= 30 ) %>% 
+  select(Country,DateRep,ConfirmedCases,Deaths) %>% 
+  group_by(Country) %>% 
+  mutate(Dia = row_number()) %>%
+  ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
+  labs(y = "Número de Casos", x = "Núm Dias após o 30º caso", shape = "", color= "", title = "Evolução após o 30º caso")  + scale_color_brewer(palette = "Set1") +
+  labs_pubr() + theme_pubr()
+```
 
 ```{r}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan")) %>% 
-  filter(ConfirmedCases >= 14 ) %>% 
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","US", "Argentina","Chile")) %>% 
+  filter(ConfirmedCases >= 30 ) %>% 
   group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
-  #select(DateRep,Country,ConfirmedCases) #%>% 
-  pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% kable()
+  pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% 
+  kable(caption = "Evolução dos casos após o 30º caso confirmado")
 ```
+
+
+
 

@@ -1,0 +1,155 @@
+---
+title: "Trechos não mais executados"
+author: "Mário Olímpio de Menezes"
+date: "25/03/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Os trechos abaixo não são mais executados
+
+
+*Tem alguns dificuldades para se conseguir reproduzir os valores apresentados no site abaixo da JHU*, especificamente com relação a países que tem províncias/estados. Ainda não está bem feita a parte abaixo, mas já dá para ter um bom começo.
+
+O JHU tem um site de monitoramento em tempo real (talvez o mais atualizado) no endereço `https://coronavirus.jhu.edu/map.html`. Os dados utilizados para o mapa estão em um GitHub  `https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv`, mas não são tão atualizados como os do mapa. Além disso, estão em formato _não tidy_. 
+
+
+Este é o link onde aparece o mapa também: `https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases`
+
+Outro link onde há um log das atualizações da base; parece ser atualizada constantemente: `https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases`
+
+
+Leitura e gravação dos arquivos para posterior utilização. Execute manualmente uma vez ou sempre que quiser atualizar os dados.
+
+```{r dadosJHU, eval=FALSE}
+jhutscovid19_confirmed <- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
+agora <- format(Sys.time(), "%Y-%m-%d-%H:%M")
+write_csv(jhutscovid19_confirmed, paste("./data/","time_series_2019-ncov-Confirmed.csv", sep=""))
+
+jhutscovid19_deaths <- read_csv("https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_19-covid-Deaths.csv&filename=time_series_2019-ncov-Deaths.csv")
+jhutscovid19_deaths <- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv")
+write_csv(jhutscovid19_deaths, paste("./data/","time_series_2019-ncov-Deaths.csv",sep=""))
+
+jhutscovid19_recovered <- read_csv("https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_19-covid-Recovered.csv&filename=time_series_2019-ncov-Recovered.csv")
+write_csv(jhutscovid19_recovered, paste("./data/","time_series_2019-ncov-Recovered.csv",sep=""))
+
+```
+
+```{r eval = FALSE}
+jhucovid <- read_csv("./data/time_series_2019-ncov-Confirmed.csv")
+```
+
+```{r eval = FALSE}
+jhucovid19_confirmed <- gather(jhucovid, key = "DateRep", value = "ConfirmedCases", 5:ncol(jhucovid))
+jhucovid19_confirmed <- mutate(jhucovid19_confirmed, DateRep = as.Date(DateRep, "%m/%d/%y"))
+```
+
+```{r}
+filter(jhucovid19_confirmed, `Country/Region` == "Italy") %>% tail()
+```
+
+```{r eval = FALSE}
+jhucovid_D <- read_csv("./data/time_series_2019-ncov-Deaths.csv")
+```
+
+```{r eval = FALSE}
+jhucovid19_deaths <- gather(jhucovid_D, key = "DateRep", value = "Deaths", 5:ncol(jhucovid_D))
+jhucovid19_deaths <- mutate(jhucovid19_deaths, DateRep = as.Date(DateRep, "%m/%d/%y"))
+```
+
+```{r eval = FALSE}
+jhucovid_R <- read_csv("./data/time_series_2019-ncov-Recovered.csv")
+```
+
+```{r eval = FALSE}
+jhucovid_recov <- gather(jhucovid_R, key = "DateRep", value = "Recovered", 5:ncol(jhucovid_R))
+jhucovid_recov <- mutate(jhucovid_recov, DateRep = as.Date(DateRep, "%m/%d/%y"))
+```
+
+Anexando a coluna de `Deaths` e `Recovered` para formar um único data.frame
+
+```{r eval = FALSE}
+all_equal(jhucovid19_confirmed[,2], jhucovid19_deaths[,2])
+all_equal(jhucovid19_confirmed[,2], jhucovid_recov[,2])
+all_equal(jhucovid19_deaths[,2], jhucovid_recov[,2])
+```
+
+```{r eval = FALSE}
+jhucovid19 <- bind_cols(jhucovid19_confirmed,jhucovid19_deaths[,6], jhucovid_recov[,6])
+jhucovid19 <- mutate(jhucovid19, DateRep = as.Date(DateRep, "%m/%d/%y"), Month = months(DateRep)) %>% 
+  rename(Country = `Country/Region`)
+```
+
+Alguns países tem informações de `Province/State` que bagunça a sumarização simples; para estes é preciso uma estratégia diferente; o `group_by` por `Country` não produz resultados corretos. 
+
+### França
+
+No caso da França, parece ser um pouco pior, já que há uma linha com `Province/State` igual a "France" e que parece ser o total do país, enquanto as outras linhas com `Country` igual a "France" parecem ser das outras províncias da França espalhadas pelo mundo.
+
+```{r  eval = FALSE}
+filter(jhucovid19, Country == "France") %>% 
+  top_n(-10, desc(DateRep)) %>% kable()
+```
+
+```{r}
+France <- filter(jhucovid19, Country == "France" & `Province/State` == "France") %>%
+  group_by(DateRep) %>% 
+  summarise(ConfirmedCases = sum(ConfirmedCases), Deaths = sum(Deaths), Recovered = sum(Recovered)) %>% 
+  arrange(DateRep)
+```
+
+
+### US
+
+Para os Estados Unidos, também é complicado porque tem dados de cidades junto. Para computar os valores exatos dos Estados Unidos tem fazer uma boa manipulação. Não vou fazer isso agora.
+
+```{r}
+filter(jhucovid19, DateRep >= "2020-03-01", Country == "US", `Province/State` %in% c("Washington","California","Texas","Michigan")) %>% tail(20) %>% kable()
+```
+
+Cidades
+
+```{r}
+filter(jhucovid19, DateRep >= "2020-03-01", Country == "US", `Province/State` %in% c("Monmouth, NJ", "Union, NJ", "Philadelphia, PA")) %>% kable()
+```
+
+O procedimento para os países que tem os dados separados por `Province/State` é semelhante ao realizado abaixo para a China.
+
+### China
+
+Como os dados da China estão separados pelos Estados/Províncias, a tabulação está ficando confusa. Vou criar uma totalização para a China, dia a dia, como a maioria dos países. Não vou considerar a coluna `Province/State`.
+
+```{r}
+China <- jhucovid19 %>% filter(Country == "China") %>% group_by(DateRep) %>% summarise(ConfirmedCases = sum(ConfirmedCases), Deaths = sum(Deaths), Recovered = sum(Recovered)) %>% arrange(DateRep)
+China <- mutate(China, Country = "China", Lat = 40.1824, Long = 116.4142, Month = months(DateRep))
+```
+
+```{r}
+China
+```
+
+
+Algumas linhas da China para exemplificar.
+```{r}
+filter(jhucovid19, !is.na(`Province/State`) & Country == "China") %>% arrange(`Province/State`, DateRep) %>% group_by(`Province/State`) %>% top_n(-3, desc(DateRep)) %>% kable()
+```
+
+
+### Alguns acertos e transformações
+
+```{r}
+jhucovid19_semChina <- jhucovid19 %>% filter(Country != "China") #v%>% select(-`Province/State`)
+```
+
+```{r}
+jhucovid19 <- bind_rows(jhucovid19_semChina, China) %>% arrange(Country, DateRep)
+```
+
+```{r}
+jhucovid19 %>% filter(Country == "France") %>% tail(10) %>% kable()
+```
+
