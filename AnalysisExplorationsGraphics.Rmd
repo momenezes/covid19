@@ -3,8 +3,13 @@ title: "Algumas Análises e Explorações COVID-19"
 author: "Mario O. de Menezes"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
-  html_document:
-  toc: yes
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    fig_height: 6
+    fig_width: 8
+    toc: yes
+    toc_depth: 2
 ---
 
 ```{r setup, include=FALSE}
@@ -37,6 +42,7 @@ Com abundância de dados, me propus a realizar algumas explorações e tabulaç�
 
 _Este é um trabalho em andamento; não tem cunho científico e nem pretende que sirva de embasamento para qualquer tomada de decisão. É uma abordagem estritamente pessoal._
 
+[HOME](https://momenezes.github.io/covid19/)
 
 # Base de dados do EU Open Data Portal
 
@@ -1032,3 +1038,4 @@ ggplot(data = dg, aes(x = DateRep, y = ProgRateCases)) +
   labs(color="") + guides(shape = "none", linetype="none") + theme_pubclean()
 ```
 
+[HOME](https://momenezes.github.io/covid19/)
