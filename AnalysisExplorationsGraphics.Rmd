@@ -1,13 +1,14 @@
 ---
-title: "Minhas Análises e Explorações COVID-19"
+title: "Algumas Análises e Explorações COVID-19"
 author: "Mario O. de Menezes"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
-  html_document: 
-    toc: yes
+  html_document:
+  toc: yes
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE, knitr.kable.NA = '')
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, knitr.kable.NA = '', out.width = "90%")
 ```
 
 ```{r warning=FALSE, message=FALSE}
@@ -22,23 +23,49 @@ library(ggthemes)
 library(plotly)
 ```
 
+# Introdução
+
+A pandemia do novo coronavirus tomou o mundo de assalto. Notícias em todo o lugar dão conta do rápido alastramento do vírus em todo o mundo, e os seus números são alarmantes. 
+
+Para permitir que mais e mais pessoas possam ajudar no combate ao vírus, das mais diversas formas, organizações ao redor do mundo tem disponibilizado dados sobre a evolução da COVID-19 em todo o globo.
+
+Dentre as organizações que disponibilizam dados estão a [European Union Open Data Portal](https://data.europa.eu/euodp/en/home), a [John Hopkins University](https://github.com/CSSEGISandData/2019-nCoV) através de um repositório no GitHub.
+
+Com abundância de dados, me propus a realizar algumas explorações e tabulações destes dados visando entender melhor o cenário mundial.
+
+#### Disclaimer
+
+_Este é um trabalho em andamento; não tem cunho científico e nem pretende que sirva de embasamento para qualquer tomada de decisão. É uma abordagem estritamente pessoal._
+
+
 # Base de dados do EU Open Data Portal
 
 Os dados desta seção vieram do [Europe Open Data Portal](https://data.europa.eu/euodp/en/) -- `https://data.europa.eu/euodp/en/`
 
+
+*2020-03-26:* Houve uma mudança na nomenclatura dos arquivos; a partir da atualização de *25 de Março de 2020* o arquivo não mais tem o sufixo no formato da data, por exemplo, "...`2020-03-24`.xlsx". Assim, algumas partes do código estão sendo mudadas para refletir esta mudança. Não sei se é uma mudança permanente ou alguém esqueceu de colocar o nome correto do arquivo.
+
+
 ```{r}
-covid19URLbase <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-"
-hoje <- format(Sys.time(), "%Y-%m-%d")
-hoje <- "2020-03-24"
+# alteracoes na nomenclatura dos arquivos e adicao de mais uma coluna (populacao do pais - base 2018 Banco Mundial)
+#covid19URLbase <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-"
+covid19URLbase <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide"
+hoje <- format(Sys.time(), "%Y-%m-%d")   # vou manter para anexar no nome e saber cada atualização feita.
+#hoje <- "2020-03-24"
 arqdest <- paste("COVID-19-geographic-distribution-worldwide-",hoje,".xlsx",sep="")
 ```
+
+<!--
 https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-03-18.xls
+https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide.xlsx
+-->
+
 
 ```{r eval=FALSE}
 # para fazer o download da base; acerte os caminhos e execute este chunk
 
 if (!file.exists(paste("~/datasets/ECDC_Europe",arqdest,sep="/")) || !file.exists(paste("./data",arqdest,sep="/"))) {
-  curl::curl_download(paste(covid19URLbase,hoje,".xlsx",sep=""), paste("~/datasets/ECDC_Europe",arqdest,sep="/"))
+  curl::curl_download(paste(covid19URLbase,".xlsx",sep=""), paste("~/datasets/ECDC_Europe",arqdest,sep="/"))
   print(paste("Fazendo download do arquivo", arqdest,sep=":"))
   file.copy(paste("~/datasets/ECDC_Europe",arqdest,sep="/"), paste("./data",arqdest, sep="/"))
 }
@@ -48,6 +75,7 @@ if (!file.exists(paste("~/datasets/ECDC_Europe",arqdest,sep="/")) || !file.exist
 covid19 <- read_excel(paste("./data",arqdest,sep="/"))
 ```
 
+A estrutura dos dados é:
 
 ```{r str}
 str(covid19)
@@ -57,6 +85,15 @@ str(covid19)
 covid19 <- rename(covid19, Country = `Countries and territories`)
 ```
  
+#### Total de Casos pelos dados da EU Open Data Portal
+
+```{r}
+ covid19 %>% 
+  summarise(`Casos no Mundo (EU Open Data Portal)` = sum(Cases)) %>% kable()
+```
+
+## Brasil vs Itália
+
 ```{r}
 Italia <- covid19 %>% 
   filter(Country == "Italy")%>% 
@@ -67,9 +104,13 @@ Brasil <- covid19 %>%
   arrange(DateRep) %>%
   mutate(CumCases = cumsum(Cases))
 ```
+
+Uma mostra dos últimos 20 dias da Itália.
 ```{r}
 Italia %>% top_n(20, DateRep) %>% kable()
 ```
+
+O mesmo para o Brasil, últimos 20 dias.
 ```{r}
 Brasil %>% top_n(20, DateRep) %>% kable()
 ```
@@ -83,19 +124,23 @@ Italia14 <- Italia %>%
   filter(CumCases >= 14 & CumCases <= LimiteCorte) %>% 
   select(Country,DateRep, Cases,Deaths,CumCases)
 Brasil13 <- Brasil %>% 
-  filter(CumCases >= 13 & CumCases <= LimiteCorte) %>% 
+  filter(CumCases >= 14 & CumCases <= LimiteCorte) %>% 
   select(Country,DateRep,Cases,Deaths,CumCases)
 ```
 ```{r}
 Italia14 <- mutate(Italia14, Dia = as.numeric(rownames(Italia14)))
 Brasil13 <- mutate(Brasil13, Dia = as.numeric(rownames(Brasil13)))
 ```
+
 ```{r eval = FALSE}
 Italia14 %>% kable()
 ```
+
+
 ```{r eval = FALSE}
 Brasil13 %>% kable()
 ```
+
 
 
 ```{r}
@@ -108,7 +153,7 @@ fig
 ```{r}
 bind_rows(select(Italia,Country, DateRep, CumCases, Cases, Deaths), select(Brasil, Country, DateRep, CumCases, Cases, Deaths)) %>% filter(DateRep >= "2020-02-22") %>%
    ggplot() + geom_bar(aes(x = DateRep, y = CumCases, fill = Country), stat = "identity", position = "dodge") + 
-  labs(y = "Núm de Casos Reportados", x = "Data", title = "Evolução dos Casos na Italia e Brasil, a partir de 22/02/2020", fill = "") + scale_fill_brewer(palette = "Set1") -> g
+  labs(y = "Núm de Casos (acum)", x = "Data", title = "Evolução dos Casos na Italia e Brasil, a partir de 22/02/2020", fill = "") + scale_fill_brewer(palette = "Set1") -> g
 fig <- ggplotly(g)
 fig
 ```
@@ -119,7 +164,7 @@ covid19 %>%
   filter(Country %in% c("Italy", "Brazil"), DateRep > "2020-02-22") %>% 
   arrange(DateRep) %>%
   ggplot() + geom_bar(aes(x = DateRep, y = Cases, fill = Country),  stat = "identity", position = "dodge") + 
-  labs(y = "Núm de Casos Reportados", x = "Data", title = "Número de Casos Reportados diariamente na Italia e Brasil,\n a partir de 22/02/2020", fill = "") + scale_fill_brewer(palette = "Set1") -> g
+  labs(y = "Núm de Casos Reportados (dia)", x = "Data", title = "Número de Casos Reportados diariamente na Italia e Brasil,\n a partir de 22/02/2020", fill = "") + scale_fill_brewer(palette = "Set1") -> g
 fig <- ggplotly(g)
 fig
 ```
@@ -130,15 +175,18 @@ fig
 ccc <- read_csv("./data/country-capital-continent.csv")
 ```
 
+<!--
 Os nomes compostos dos países na base de dados do COVID19 utilizam o "_" (_underline_) como separador, por exemplo, `Costa_Rica`. Nas bases de países, regiões e continentes, o separador é o espaço " ". Precisamos ajustar para não termos problemas.
+-->
 
 ```{r eval=FALSE}
 filter(covid19,  grepl("_",covid19$Country)) %>% head()
 ```
 
-Substituindo o "_" por " " nos nomes dos países
+
 
 ```{r}
+# Substituindo o "_" por " " nos nomes dos países
 covid19 <- mutate(covid19, Country = str_replace_all(covid19$Country,"_"," "), Country = ifelse(Country == "Eswatini", "Swaziland", Country))
 ```
 ```{r}
@@ -146,9 +194,10 @@ covid19 <- mutate(covid19, Country = ifelse(Country == "CANADA", "Canada", Count
 ```
 
 
-Acertando os nomes dos países nas duas bases para poder juntar de modo apropriado.
+
 
 ```{r echo = FALSE}
+# Acertando os nomes dos países nas duas bases para poder juntar de modo apropriado.
 # Bahamas
 covid19$Country <- stri_replace_all_fixed(covid19$Country,"Bahamas, The","Bahamas", vertorized=TRUE)
 ccc$Country <- stri_replace_all_fixed(ccc$Country,"Bahamas, The","Bahamas", vertorized=TRUE)
@@ -302,9 +351,10 @@ covid19$Country <- stri_replace_all_regex(covid19$Country, "Yemen.*", "Yemen", v
 ccc$Country <- stri_replace_all_regex(ccc$Country, "Yemen.*", "Yemen", vectorize_all = TRUE)
 ```
 
-Agora vou criar a listagem de países que está em todas as bases, isto é, a intersecção dos conjuntos.
+
 
 ```{r eval=FALSE}
+# Agora vou criar a listagem de países que está em todas as bases, isto é, a intersecção dos conjuntos.
 # coincidentes
 nomes_iguais <- intersect(covid19$Country,ccc$Country)
 length(nomes_iguais)
@@ -319,7 +369,14 @@ paises_intersect <- intersect(nomes_iguais, covid19$Country)
 paises_intersect <- paises_intersect[which(!paises_intersect %in% c("Niger","Nigeria"))]
 ```
 
+
+> As bases de dados não contém informação do Continente, ou seja, a qual continente pertence cada país. Assim, foi feito um _merge_ com uma base que contém os nomes dos países, continente e a capital de cada país.
+
+> Os nomes dos países foram normalizados entre as bases, acertando grafia e outras inconsistências nos nomes. Países cujo continente não pode ser identificado foi marcado.
+
+<!--
 Listagem de todos países na base do COVID-19. Os códigos abaixo são para identificar países que não estão na base `ccc` e acertar os nomes ou incluí-los. Não vou fazer isso agora.
+-->
 
 ```{r eval = FALSE}
 unique(covid19$Country) %>% sort() 
@@ -342,21 +399,22 @@ setdiff(covid19$Country,ccc$Country)
 filter(covid19, Country == "Canada") %>% arrange(DateRep) %>% kable()
 ```
 
-
+<!--
 Agora parece que conseguimos eliminar as diferenças de grafia entre os países, pelo até hoje (`r format(Sys.time, "%Y-%m-%d")`)
-
+-->
 
 ```{r}
-#covid19 <- left_join(left_join(covid19,CountriesandRegions, by="Country"),ccc, by="Country")
 covid19 <- left_join(covid19,ccc, by="Country")
 ```
 
 
-Removendo países sem continente.
 
 ```{r}
+covid19_all <- filter(covid19, is.na(Continent))
 covid19 <- filter(covid19, !is.na(Continent))
 ```
+
+### Alguns gráficos exploratórios com a base EU Open Data Portal
 
 ```{r continentsgg}
 filter(covid19, DateRep > "2020-02-01") %>% 
@@ -422,13 +480,15 @@ fig <- ggplotly(g)
 fig
 ```
 
+#### Países com mais de 500 casos confirmados
 
 ```{r}
 covid19 %>% 
   group_by(Country) %>% 
-  summarise(Casos = sum(Cases)) %>% 
+  summarise(Casos = sum(Cases), Mortes = sum(Deaths)) %>% 
   arrange(desc(Casos)) %>% 
-  filter(Casos > 500) %>% kable(caption="Países com mais de 500 casos reportados")
+  filter(Casos > 500) %>% 
+   kable(caption = "Países (com mais de 500 casos) ordenados por número de casos confirmados",col.names = c("País", "Casos","Mortes"))
 ```
 
 
@@ -442,14 +502,18 @@ Este é o link onde aparece o mapa também: `https://data.humdata.org/dataset/no
 
 ## Fazendo o download dos arquivos diários ao invés destes consolidados (não tem o Recovered na última atualização)
 
-https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/01-22-2020.csv
+O JHU mantém pelo menos 2 formatos dos dados: diários e consolidados (_time series_). Eu tentei utilizar o formato _time series_ inicialmente, mas mudei para o formato diário, de modo que eu mesmo faço a consolidação. Isso permitiu um pouco mais de controle sobre os dados baixados.
+
+Os dados são mantidos neste repositório GitHub:
+
+`https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/`
 
 O nome dos arquivos é MM-DD-YYYY.csv, começando a partir de 22 de Janeiro de 2020.
 
 ```{r}
 hj <- today()
 ontem <- hj - 1
-diainicio <- as.Date("01-22-2020", format = "%m-%d-%Y")
+diainicio <- mdy("01-22-2020")
 ```
 
 ```{r}
@@ -467,13 +531,13 @@ while(dia <= ontem) {
 }
 ```
 
-Depois de feito o download de todos os arquivos, é preciso juntá-los em um único `data.frame`.
+Depois de feito o download de todos os arquivos, é preciso juntá-los em um único `data.frame`. O processo começa com a leitura de todos os `csv`, colocando-os todos em uma `list`.
 
 ```{r}
 dia <- diainicio
 dias <- list()
 # mudança de formato a partir de 22 de março de 2020
-datamudanca <- as.Date("2020-03-22")
+datamudanca <- ymd("2020-03-22")
 while (dia < datamudanca) {
   d1 <- read_csv(paste(CSSEbasepath,format(dia,"%m-%d-%Y"),".csv",sep=""))
   d1 <- rename(d1, Country = `Country/Region`)
@@ -491,7 +555,7 @@ while(dia <= ontem) {
   }
 ```
 
-Criando um único `data.frame` e algumas correções.
+Com a lista de todos os arquivos (`data.frame`s) diários, a função `bind_rows` do `dplyr` faz a concatenação. Algumas correções de nomes de países são também realizadas, visando normalizar e acertar grafias.
 
 ```{r}
 X <- bind_rows(dias) %>% arrange(DateRep,Country)
@@ -643,16 +707,17 @@ jhucovid19 <- jhucovid19 %>%  group_by(DateRep, Country) %>%
   ungroup() %>% ungroup()
 ```
 
-Adicionando coluna "Continent"
 
 ```{r}
-#covid19 <- left_join(left_join(covid19,CountriesandRegions, by="Country"),ccc, by="Country")
+# Adicionando coluna "Continent"
 jhucovid19 <- left_join(jhucovid19,ccc, by="Country")
 ```
 
-Removendo países sem continente.
+
 
 ```{r}
+# Removendo países sem continente.
+jhucovid19_all <- jhucovid19
 jhucovid19 <- filter(jhucovid19, !is.na(Continent)) %>% select(-Capital)
 ```
 
@@ -660,7 +725,17 @@ jhucovid19 <- filter(jhucovid19, !is.na(Continent)) %>% select(-Capital)
 write_csv(jhucovid19,paste("./data/","jhucovid19-",ontem,".csv",sep=""))
 ```
 
-### Últimos 10 dias 
+### Total de Casos pelos dados da John Hopkins University (JHU)
+
+
+```{r}
+ jhucovid19 %>% 
+  group_by(Country) %>% 
+  summarise(CasosPais = last(ConfirmedCases), MortosPais = last(Deaths), RecuperadosPais = last(Recovered)) %>% 
+  summarise(`Casos Confirmados` = sum(CasosPais), Mortos = sum(MortosPais), Recuperados = sum(RecuperadosPais)) %>% kable()
+```
+
+### Últimos 10 dias para alguns países
 
 
 ```{r}
@@ -672,13 +747,16 @@ filter(jhucovid19, Country == "France") %>% top_n(10,DateRep) %>% kable(caption 
 filter(jhucovid19, Country == "Italy") %>% top_n(10,DateRep) %>% kable(caption = "Itália")
 ```
 
-
 ```{r}
 filter(jhucovid19, Country == "Spain") %>% top_n(10,DateRep) %>% kable(caption = "Espanha")
 ```
 
+```{r}
+filter(jhucovid19, Country == "Brazil") %>% top_n(10,DateRep) %>% kable(caption = "Brasil")
+```
 
-Adicionando uma coluna com o número de casos de um dia para o outro.
+
+Para poder estudar o crescimento do número de casos e de mortes, foi adicionada uma coluna com o número de casos de um dia para o outro, já que a base de dados reporta o total de casos em cada dia e não quantos casos foram registrados naquele dia.
 
 ```{r}
 jhucovid19 <- group_by(jhucovid19, Country) %>% 
@@ -691,8 +769,17 @@ jhucovid19 <- group_by(jhucovid19, Country) %>%
   ungroup()
 ```
 
+### Lista de países ordenados por número de casos confirmados
+
+```{r}
+group_by(jhucovid19, Country) %>% 
+  summarise(ConfirmedCases = last(ConfirmedCases), Deaths = last(Deaths), Recuperados = last(Recovered)) %>% 
+  arrange(desc(ConfirmedCases)) %>% 
+  kable(col.names = c("País", "Casos","Mortes","Recuperados"))
+```
 
 
+### Alguns gráficos exploratórios com a base do JHU
 
 
 ```{r}
@@ -709,19 +796,14 @@ fig
 filter(jhucovid19,  grepl("China",Country)) %>% kable() #%>% summarise(sum(ConfirmedCases))
 ```
 
-
+<!--
 Este trecho calcula a diferença que obtenho ao somar os "NewCases" em relação ao total de casos confirmados ("ConfirmedCases"). Não consegui identificar a origem da diferença; uma possibilidade é que a base não começa com o primeiro caso da China, mas em 22 de Janeiro, já com 547 casos confirmados. Ou seja, precisaria fazer mais alguns ajustes nesta variával `NewCases` para, quando acumulada, chegasse ao valor dos `ConfirmedCases` do último dia da base.
+-->
 
 ```{r eval = FALSE}
 jhucovid19 %>% group_by(Country) %>% summarise(Confirmed1 = sum(NewCases) - sum(NewDeaths, na.rm=T), Confirmed2 = last(ConfirmedCases), Diferenca = Confirmed2 - Confirmed1) %>% arrange(desc(Confirmed1)) %>% kable()
 ```
 
-```{r}
-group_by(jhucovid19, Country) %>% 
-  summarise(ConfirmedCases = last(ConfirmedCases)) %>% 
-  arrange(desc(ConfirmedCases)) %>% 
-  kable(caption = "Países ordenados por número de casos confirmados")
-```
 
 ```{r eval = FALSE}
 jhucovid19 %>% filter(Country == "Italy") %>% top_n(10, DateRep)
@@ -819,12 +901,28 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
 
 
 
-#### Calculando a taxa de progressão dia-a-dia: Brasil, Itália, USA, França, Alemanha, Espanha
+### Calculando a taxa de progressão dia-a-dia: Brasil, Itália, USA, França, Alemanha, Espanha
 
 ```{r tidy.opts=list(options(knitr.kable.NA = ''))}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","USA")) %>% 
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","USA","China")) %>% 
   group_by(Country) %>% 
-  filter(ConfirmedCases >= 30) %>% 
+  filter(ConfirmedCases >= 1) %>% 
+  arrange(DateRep) %>%
+  mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
+         ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
+         ProgRateDeaths = ProgRateDeaths + 1,
+         ProgRateCases = ProgRateCases + 1
+         ) %>%
+  filter(DateRep >= ymd("2020-03-01")) %>% mutate(DateRep = format(DateRep,"%Y-%m-%d"), ProgRateCases = format(ProgRateCases, digits = 3)) %>%
+  select(Country,DateRep,ProgRateCases) %>%
+  pivot_wider(names_from = Country, values_from = ProgRateCases) %>% kable()
+```
+
+
+
+```{r}
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","USA", "China")) %>% 
+  group_by(Country) %>% 
   arrange(DateRep) %>%
   mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
          ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
@@ -832,12 +930,105 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
          ProgRateCases = ProgRateCases + 1
          ) %>%
   ungroup() %>%
-  select(Country,DateRep,ConfirmedCases,ProgRateCases,Deaths,ProgRateDeaths) %>%
-  arrange(Country, DateRep) %>%
-  pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ProgRateCases) %>%
-  arrange(DateRep) %>%
-  kable(caption="Taxa de Progressão de Casos Confirmados (após 30º caso)")
+  filter(DateRep >= ymd("2020-03-01")) %>%
+  select(Country,DateRep,ConfirmedCases, ProgRateCases) -> dg
+ggplot(data = dg, aes(x = DateRep, y = ProgRateCases)) +  
+  geom_point(aes(color = Country, linetype = Country)) + 
+  geom_smooth(aes(color = Country), se = FALSE, span = 0.15) +
+  labs(color="") + guides(shape = "none", linetype="none") + theme_pubclean()
+```
+
+## Países com números de casos semelhantes ao Brasil
+
+Olhando os dados de:
+ - Portugal
+ - Suécia (Sweden)
+ - Turquia (Turkey)
+ - Israel
+ - Austrália (Australia)
+
+
+```{r}
+filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Israel", "Australia")) %>% 
+  select(Country,DateRep,ConfirmedCases,Deaths) %>% 
+  group_by(Country) %>% 
+  filter(ConfirmedCases >= 1 ) %>% 
+  mutate(Dia = row_number()) %>%
+  top_n(-55, Dia) %>% 
+  ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
+  labs(y = "Número de Casos", x = "Núm Dias após o 1º caso", shape = "", color= "", title = "Evolução dos 55 primeiros dias após o 1º caso")  + scale_color_brewer(palette = "Set1") -> g
+fig <- ggplotly(g)
+fig
+```
+
+```{r}
+filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Israel", "Australia")) %>% 
+  select(Country,DateRep,ConfirmedCases,Deaths) %>% 
+  group_by(Country) %>% 
+  filter(ConfirmedCases >= 14 ) %>% 
+  mutate(Dia = row_number()) %>%
+  top_n(-35, Dia) %>% 
+  ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
+  labs(y = "Número de Casos", x = "Núm Dias após o 14º caso", shape = "", color= "", title = "Evolução dos 35 primeiros dias após o 14º caso")  + scale_color_brewer(palette = "Set1") -> g
+fig <- ggplotly(g)
+fig
+```
+
+```{r}
+filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Israel", "Australia")) %>% 
+  filter(ConfirmedCases >= 30 ) %>% 
+  select(Country,DateRep,ConfirmedCases,Deaths) %>% 
+  group_by(Country) %>% 
+  mutate(Dia = row_number()) %>%
+  ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
+  labs(y = "Número de Casos", x = "Núm Dias após o 30º caso", shape = "", color= "", title = "Evolução após o 30º caso")  + scale_color_brewer(palette = "Set1") -> g
+fig <- ggplotly(g)
+fig
+```
+
+```{r tidy.opts=list(options(knitr.kable.NA = ''))}
+filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Israel", "Australia")) %>% 
+  filter(ConfirmedCases >= 30 ) %>% 
+  group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
+  pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% 
+  kable(caption = "Evolução dos casos após o 30º caso confirmado")
 ```
 
 
+#### Calculando a taxa de progressão dia-a-dia: Brazil, Portugal, Sweden, Turkey, Israel, Australia
+
+```{r tidy.opts=list(options(knitr.kable.NA = ''))}
+filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Israel", "Australia")) %>% 
+  group_by(Country) %>% 
+  filter(ConfirmedCases >= 1) %>% 
+  arrange(DateRep) %>%
+  mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
+         ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
+         ProgRateDeaths = ProgRateDeaths + 1,
+         ProgRateCases = ProgRateCases + 1
+         ) %>%
+  filter(DateRep >= ymd("2020-03-01")) %>% mutate(DateRep = format(DateRep,"%Y-%m-%d"), ProgRateCases = format(ProgRateCases, digits = 3)) %>%
+  select(Country,DateRep,ProgRateCases) %>%
+  pivot_wider(names_from = Country, values_from = ProgRateCases) %>% kable()
+```
+
+
+
+```{r}
+filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Israel", "Australia")) %>% 
+  group_by(Country) %>% 
+  arrange(DateRep) %>%
+  mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
+         ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
+         ProgRateDeaths = ProgRateDeaths + 1,
+         ProgRateCases = ProgRateCases + 1
+         ) %>%
+  ungroup() %>%
+  filter(DateRep >= ymd("2020-03-01")) %>%
+  select(Country,DateRep,ConfirmedCases, ProgRateCases) -> dg
+ggplot(data = dg, aes(x = DateRep, y = ProgRateCases)) +  
+  geom_point(aes(color = Country, linetype = Country)) + 
+  geom_smooth(aes(color = Country), se = FALSE, span = 0.15) +
+  labs(color="") + guides(shape = "none", linetype="none") + theme_pubclean()
+```
 
