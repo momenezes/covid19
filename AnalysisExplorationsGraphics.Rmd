@@ -760,26 +760,26 @@ bind_rows(Italia14,Brasil13) %>%
 ```
 
 ```{r}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan")) %>% 
-  filter(ConfirmedCases >= 1 ) %>% 
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "USA")) %>% 
   select(Country,DateRep,ConfirmedCases,Deaths) %>% 
   group_by(Country) %>% 
+  filter(ConfirmedCases >= 1 ) %>% 
   mutate(Dia = row_number()) %>%
-  top_n(-25, Dia) %>% 
+  top_n(-55, Dia) %>% 
   ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
-  labs(y = "Número de Casos", x = "Núm Dias após o 1º caso", shape = "", color= "", title = "Evolução dos 25 primeiros dias após o 1º caso")  + scale_color_brewer(palette = "Set1") +
+  labs(y = "Número de Casos", x = "Núm Dias após o 1º caso", shape = "", color= "", title = "Evolução dos 55 primeiros dias após o 1º caso")  + scale_color_brewer(palette = "Set1") +
   labs_pubr() + theme_pubr()
 ```
 
 ```{r}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan")) %>% 
-  filter(ConfirmedCases >= 14 ) %>% 
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "USA")) %>% 
   select(Country,DateRep,ConfirmedCases,Deaths) %>% 
   group_by(Country) %>% 
+  filter(ConfirmedCases >= 14 ) %>% 
   mutate(Dia = row_number()) %>%
-  top_n(-25, Dia) %>% 
+  top_n(-35, Dia) %>% 
   ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
-  labs(y = "Número de Casos", x = "Núm Dias após o 14º caso", shape = "", color= "", title = "Evolução dos 25 primeiros dias após o 14º caso")  + scale_color_brewer(palette = "Set1") +
+  labs(y = "Número de Casos", x = "Núm Dias após o 14º caso", shape = "", color= "", title = "Evolução dos 35 primeiros dias após o 14º caso")  + scale_color_brewer(palette = "Set1") +
   labs_pubr() + theme_pubr()
 ```
 
