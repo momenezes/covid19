@@ -26,6 +26,7 @@ library(stringi)
 library(RColorBrewer)
 library(ggthemes)
 library(plotly)
+library("rvest")
 ```
 
 # Introdução
@@ -1044,6 +1045,69 @@ ggplot(data = dg, aes(x = DateRep, y = ProgRateCases)) +
   geom_smooth(aes(color = Country), se = FALSE, span = 0.15) +
   labs(color="") + guides(shape = "none", linetype="none") + theme_pubclean()
 ```
+
+# Base de dados do Worldometer
+
+Esta base de dados tem uma atualização bem interessante, com algumas variáveis também interessantes.
+
+Ela está disponível em `https://www.worldometers.info/coronavirus/`
+
+O problema é que não achei nenhum `csv` ou `xlsx` para baixar; então vou tentar fazer um _web scraping_ e pegar os dados. Utilizando o pacote `rvest` e seguindo a dica [deste post](https://www.r-bloggers.com/using-rvest-to-scrape-an-html-table/) foi razoavelmente fácil. 
+
+```{r}
+url <- "https://www.worldometers.info/coronavirus/"
+coronaworldometer <- url %>%
+  html() %>%
+  html_nodes(xpath='//*[@id="main_table_countries_today"]') %>% 
+  html_table()
+```
+```{r}
+womcovid19 <- coronaworldometer[[1]]
+```
+
+Olhando a estrutura destes dados:
+
+```{r}
+str(womcovid19)
+```
+
+Depois de pegar a tabela em html e colocar em um `data.frame`, algumas limpezas e transformações são necessárias: algumas colunas, como a `NewCases`, tem o símbolo `+`; os números vieram formatados como _strings_ com separador de milhar (`,`), e algumas outras coisas. Então, algumas manipulações serão feitas para acertar isso.
+
+```{r}
+head(womcovid19) %>% kable()
+```
+
+```{r}
+womcovid19 <- womcovid19 %>% 
+  rename(Country = `Country,Other`, SeriousCritical = `Serious,Critical`) %>% 
+  rename(Cases1M = contains("Cases/1M pop"), Deaths1M = contains("Deaths/1M pop")) %>% 
+  mutate_at(vars(TotalCases,NewCases,TotalDeaths,NewDeaths,TotalRecovered,ActiveCases,SeriousCritical,Cases1M, Deaths1M), str_remove ,"," )  %>%
+  mutate_at(vars(NewCases,NewDeaths), str_remove , "\\+" ) %>%
+  mutate_at(vars(TotalCases,NewCases,TotalDeaths,NewDeaths,TotalRecovered,ActiveCases,SeriousCritical,Cases1M, Deaths1M), as.numeric, na.rm=TRUE) %>% 
+  filter(Country != "Total:")
+```
+
+### Total de Casos pelos dados do Worldometer: `r format(ymd(hoje), '%d-%m-%Y')`
+
+```{r}
+womcovid19 %>%
+  select(TotalCases, TotalDeaths, TotalRecovered) %>% 
+  dplyr::summarise(TotalCasos = sum(TotalCases,na.rm = T), TotalMortes=sum(TotalDeaths,na.rm = T), TotalRecuperados = sum(TotalRecovered,na.rm = T)) %>%
+  kable()
+```
+
+
+### Lista de países ordenados por número de casos confirmados: `r format(ymd(hoje), '%d-%m-%Y')`
+
+```{r}
+womcovid19 %>% 
+  select(Country, TotalCases, TotalDeaths, TotalRecovered) %>% 
+  arrange(desc(TotalCases)) %>%
+  kable()
+```
+
+
+
 
 ------------
 
