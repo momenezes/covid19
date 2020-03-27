@@ -42,7 +42,10 @@ Com abundância de dados, me propus a realizar algumas explorações e tabulaç�
 
 _Este é um trabalho em andamento; não tem cunho científico e nem pretende que sirva de embasamento para qualquer tomada de decisão. É uma abordagem estritamente pessoal._
 
-[HOME](https://momenezes.github.io/covid19/)
+<span><a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a></span>
+
+
+------------
 
 # Base de dados do EU Open Data Portal
 
@@ -91,7 +94,11 @@ str(covid19)
 covid19 <- rename(covid19, Country = `Countries and territories`)
 ```
  
-#### Total de Casos pelos dados da EU Open Data Portal
+
+
+#### Total de Casos pelos dados da EU Open Data Portal: `r format(ymd(hoje) - 1, '%d-%m-%Y')`
+
+
 
 ```{r}
  covid19 %>% 
@@ -486,7 +493,7 @@ fig <- ggplotly(g)
 fig
 ```
 
-#### Países com mais de 500 casos confirmados
+#### Países com mais de 500 casos confirmados: `r format(ymd(hoje) - 1, '%d-%m-%Y')`
 
 ```{r}
 covid19 %>% 
@@ -731,7 +738,7 @@ jhucovid19 <- filter(jhucovid19, !is.na(Continent)) %>% select(-Capital)
 write_csv(jhucovid19,paste("./data/","jhucovid19-",ontem,".csv",sep=""))
 ```
 
-### Total de Casos pelos dados da John Hopkins University (JHU)
+### Total de Casos pelos dados da John Hopkins University (JHU): `r format(ymd(hoje) - 1, '%d-%m-%Y')`
 
 
 ```{r}
@@ -741,7 +748,7 @@ write_csv(jhucovid19,paste("./data/","jhucovid19-",ontem,".csv",sep=""))
   summarise(`Casos Confirmados` = sum(CasosPais), Mortos = sum(MortosPais), Recuperados = sum(RecuperadosPais)) %>% kable()
 ```
 
-### Últimos 10 dias para alguns países
+### Últimos 10 dias para alguns países: `r format(ymd(hoje) - 1, '%d-%m-%Y')`
 
 
 ```{r}
@@ -775,7 +782,7 @@ jhucovid19 <- group_by(jhucovid19, Country) %>%
   ungroup()
 ```
 
-### Lista de países ordenados por número de casos confirmados
+### Lista de países ordenados por número de casos confirmados: `r format(ymd(hoje) - 1, '%d-%m-%Y')`
 
 ```{r}
 group_by(jhucovid19, Country) %>% 
@@ -944,7 +951,7 @@ ggplot(data = dg, aes(x = DateRep, y = ProgRateCases)) +
   labs(color="") + guides(shape = "none", linetype="none") + theme_pubclean()
 ```
 
-## Países com números de casos semelhantes ao Brasil
+## Países com números de casos semelhantes ao Brasil: `r format(ymd(hoje) - 1, '%d-%m-%Y')`
 
 Olhando os dados de:
  - Portugal
@@ -1038,4 +1045,6 @@ ggplot(data = dg, aes(x = DateRep, y = ProgRateCases)) +
   labs(color="") + guides(shape = "none", linetype="none") + theme_pubclean()
 ```
 
-[HOME](https://momenezes.github.io/covid19/)
+------------
+
+<span><a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a></span>
