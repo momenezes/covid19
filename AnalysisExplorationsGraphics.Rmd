@@ -92,7 +92,7 @@ str(covid19)
 ```
 
 ```{r country}
-covid19 <- rename(covid19, Country = `Countries and territories`)
+covid19 <- rename(covid19, Country = `countriesAndTerritories`, DateRep = dateRep, Cases = cases, Deaths = deaths, Day = day, Month = month)
 ```
  
 
