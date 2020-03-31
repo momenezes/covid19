@@ -78,8 +78,12 @@ if (!file.exists(paste("~/datasets/ECDC_Europe",arqdest,sep="/")) || !file.exist
   curl::curl_download(paste(covid19URLbase,".xlsx",sep=""), paste("~/datasets/ECDC_Europe",arqdest,sep="/"))
   print(paste("Fazendo download do arquivo", arqdest,sep=":"))
   file.copy(paste("~/datasets/ECDC_Europe",arqdest,sep="/"), paste("./data",arqdest, sep="/"))
+} else {
+  hoje <- hoje - 1   # vou manter para anexar no nome e saber cada atualização feita.
+  arqdest <- paste("COVID-19-geographic-distribution-worldwide-",hoje,".xlsx",sep="")
 }
 ```
+
 
 ```{r leituradados}
 covid19 <- read_excel(paste("./data",arqdest,sep="/"))
