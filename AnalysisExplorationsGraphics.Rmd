@@ -1114,7 +1114,43 @@ womcovid19 %>%
 ```
 
 
+# Dados do Kaggle - Coronavirus - Brazil
 
+Estes dados são mantidos pelo Raphael Fontes, com uma atualização constante.
+
+Link: `https://www.kaggle.com/unanimad/corona-virus-brazil`
+
+O link direto para os dados é: `https://www.kaggle.com/unanimad/corona-virus-brazil/download` que fornece um arquivo zip com o CSV.
+
+O download da base de dados é feita com a API do Kaggle; é um pacote do Python. A base vem compactada, então depois de fazer o download, utilizo o pacote `zip` para extraí-la.
+
+```{r}
+system("cd data;/home/mario/.local/bin/kaggle datasets download unanimad/corona-virus-brazil")
+zip::unzip("./data/corona-virus-brazil.zip", exdir = "./data")
+```
+
+```{r}
+brcovid19 <- read_csv("./data/brazil_covid19.csv", col_types = cols(date = col_date(format = "%Y-%m-%d")))
+```
+
+```{r}
+str(brcovid19)
+```
+
+```{r}
+brcovid19 <- brcovid19 %>% mutate(Data = date, Casos = cases, Mortes = deaths, Regiao = region, Estado = state)
+```
+
+```{r brcovid}
+brcovid19 %>% group_by(Data) %>% summarise(CasosTot = sum(Casos), MortesTot = sum(Mortes)) %>%
+filter(CasosTot > 0) %>% 
+  gather(key = "Ocorrencia", value = "Valor", CasosTot:MortesTot) %>% 
+  ggplot(aes(x = Data, y = Valor, fill = Ocorrencia)) + 
+  geom_bar(stat="identity", position = "dodge") +
+  labs(x = "Data", title="Número de Casos Reportados diariamente no Brasil", fill ="", y = "") + 
+  scale_fill_brewer(palette = "Set1") +
+  labs_pubr() + theme_economist_white()
+```
 
 ------------
 
