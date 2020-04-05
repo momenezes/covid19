@@ -1673,3 +1673,111 @@ date,region,state,cases,deaths
 2020-03-31,Sul,Paraná,179,3
 2020-03-31,Sul,Rio Grande do Sul,274,4
 2020-03-31,Sul,Santa Catarina,219,2
+2020-04-01,Centro-Oeste,Distrito Federal,355,3
+2020-04-01,Centro-Oeste,Goiás,71,1
+2020-04-01,Centro-Oeste,Mato Grosso,27,0
+2020-04-01,Centro-Oeste,Mato Grosso do Sul,51,1
+2020-04-01,Nordeste,Alagoas,18,1
+2020-04-01,Nordeste,Bahia,246,2
+2020-04-01,Nordeste,Ceará,444,8
+2020-04-01,Nordeste,Maranhão,54,1
+2020-04-01,Nordeste,Paraíba,20,1
+2020-04-01,Nordeste,Pernambuco,95,8
+2020-04-01,Nordeste,Piauí,18,4
+2020-04-01,Nordeste,Rio Grande do Norte,92,2
+2020-04-01,Nordeste,Sergipe,20,0
+2020-04-01,Norte,Acre,43,0
+2020-04-01,Norte,Amapá,11,0
+2020-04-01,Norte,Amazonas,200,3
+2020-04-01,Norte,Pará,40,0
+2020-04-01,Norte,Rondônia,9,1
+2020-04-01,Norte,Roraima,22,0
+2020-04-01,Norte,Tocantins,12,0
+2020-04-01,Sudeste,Espírito Santo,96,0
+2020-04-01,Sudeste,Minas Gerais,314,3
+2020-04-01,Sudeste,Rio de Janeiro,832,28
+2020-04-01,Sudeste,São Paulo,2981,164
+2020-04-01,Sul,Paraná,224,3
+2020-04-01,Sul,Rio Grande do Sul,306,4
+2020-04-01,Sul,Santa Catarina,235,2
+2020-04-02,Centro-Oeste,Distrito Federal,370,4
+2020-04-02,Centro-Oeste,Goiás,73,1
+2020-04-02,Centro-Oeste,Mato Grosso,36,0
+2020-04-02,Centro-Oeste,Mato Grosso do Sul,53,1
+2020-04-02,Nordeste,Alagoas,18,1
+2020-04-02,Nordeste,Bahia,267,3
+2020-04-02,Nordeste,Ceará,550,20
+2020-04-02,Nordeste,Maranhão,71,1
+2020-04-02,Nordeste,Paraíba,21,1
+2020-04-02,Nordeste,Pernambuco,106,9
+2020-04-02,Nordeste,Piauí,19,4
+2020-04-02,Nordeste,Rio Grande do Norte,105,2
+2020-04-02,Nordeste,Sergipe,23,2
+2020-04-02,Norte,Acre,43,0
+2020-04-02,Norte,Amapá,11,0
+2020-04-02,Norte,Amazonas,229,3
+2020-04-02,Norte,Pará,46,1
+2020-04-02,Norte,Rondônia,10,1
+2020-04-02,Norte,Roraima,26,0
+2020-04-02,Norte,Tocantins,12,0
+2020-04-02,Sudeste,Espírito Santo,120,1
+2020-04-02,Sudeste,Minas Gerais,370,4
+2020-04-02,Sudeste,Rio de Janeiro,992,41
+2020-04-02,Sudeste,São Paulo,3506,188
+2020-04-02,Sul,Paraná,252,4
+2020-04-02,Sul,Rio Grande do Sul,334,5
+2020-04-02,Sul,Santa Catarina,247,2
+2020-04-03,Centro-Oeste,Distrito Federal,402,5
+2020-04-03,Centro-Oeste,Goiás,88,2
+2020-04-03,Centro-Oeste,Mato Grosso,44,1
+2020-04-03,Centro-Oeste,Mato Grosso do Sul,60,1
+2020-04-03,Nordeste,Alagoas,22,2
+2020-04-03,Nordeste,Bahia,282,5
+2020-04-03,Nordeste,Ceará,627,22
+2020-04-03,Nordeste,Maranhão,81,1
+2020-04-03,Nordeste,Paraíba,29,1
+2020-04-03,Nordeste,Pernambuco,136,10
+2020-04-03,Nordeste,Piauí,21,4
+2020-04-03,Nordeste,Rio Grande do Norte,176,4
+2020-04-03,Nordeste,Sergipe,25,2
+2020-04-03,Norte,Acre,46,0
+2020-04-03,Norte,Amapá,19,0
+2020-04-03,Norte,Amazonas,260,7
+2020-04-03,Norte,Pará,50,1
+2020-04-03,Norte,Rondônia,10,1
+2020-04-03,Norte,Roraima,30,0
+2020-04-03,Norte,Tocantins,12,0
+2020-04-03,Sudeste,Espírito Santo,139,4
+2020-04-03,Sudeste,Minas Gerais,397,6
+2020-04-03,Sudeste,Rio de Janeiro,1074,47
+2020-04-03,Sudeste,São Paulo,4048,219
+2020-04-03,Sul,Paraná,301,4
+2020-04-03,Sul,Rio Grande do Sul,396,5
+2020-04-03,Sul,Santa Catarina,281,5
+2020-04-04,Centro-Oeste,Distrito Federal,454,7
+2020-04-04,Centro-Oeste,Goiás,103,2
+2020-04-04,Centro-Oeste,Mato Grosso,56,1
+2020-04-04,Centro-Oeste,Mato Grosso do Sul,62,1
+2020-04-04,Nordeste,Alagoas,23,2
+2020-04-04,Nordeste,Bahia,332,7
+2020-04-04,Nordeste,Ceará,730,22
+2020-04-04,Nordeste,Maranhão,88,1
+2020-04-04,Nordeste,Paraíba,32,2
+2020-04-04,Nordeste,Pernambuco,176,14
+2020-04-04,Nordeste,Piauí,22,4
+2020-04-04,Nordeste,Rio Grande do Norte,212,5
+2020-04-04,Nordeste,Sergipe,27,2
+2020-04-04,Norte,Acre,46,0
+2020-04-04,Norte,Amapá,28,1
+2020-04-04,Norte,Amazonas,311,12
+2020-04-04,Norte,Pará,80,1
+2020-04-04,Norte,Rondônia,11,1
+2020-04-04,Norte,Roraima,37,1
+2020-04-04,Norte,Tocantins,14,0
+2020-04-04,Sudeste,Espírito Santo,153,5
+2020-04-04,Sudeste,Minas Gerais,430,6
+2020-04-04,Sudeste,Rio de Janeiro,1246,58
+2020-04-04,Sudeste,São Paulo,4466,260
+2020-04-04,Sul,Paraná,395,6
+2020-04-04,Sul,Rio Grande do Sul,410,6
+2020-04-04,Sul,Santa Catarina,334,5

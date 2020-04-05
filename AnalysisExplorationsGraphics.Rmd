@@ -26,7 +26,12 @@ library(stringi)
 library(RColorBrewer)
 library(ggthemes)
 library(plotly)
-library("rvest")
+library(rvest)
+```
+
+
+```{r}
+theme_set(theme_clean())
 ```
 
 # Introdução
@@ -71,6 +76,8 @@ https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-dis
 -->
 
 
+
+
 ```{r eval=FALSE}
 # para fazer o download da base; acerte os caminhos e execute este chunk
 
@@ -79,7 +86,7 @@ if (!file.exists(paste("~/datasets/ECDC_Europe",arqdest,sep="/")) || !file.exist
   print(paste("Fazendo download do arquivo", arqdest,sep=":"))
   file.copy(paste("~/datasets/ECDC_Europe",arqdest,sep="/"), paste("./data",arqdest, sep="/"))
 } else {
-  hoje <- hoje - 1   # vou manter para anexar no nome e saber cada atualização feita.
+  hoje <- format(Sys.time() - 1, "%Y-%m-%d")   # vou manter para anexar no nome e saber cada atualização feita.
   arqdest <- paste("COVID-19-geographic-distribution-worldwide-",hoje,".xlsx",sep="")
 }
 ```
@@ -96,12 +103,18 @@ str(covid19)
 ```
 
 ```{r country}
-covid19 <- rename(covid19, Country = `countriesAndTerritories`, DateRep = dateRep, Cases = cases, Deaths = deaths, Day = day, Month = month)
+covid19 <- rename(covid19, Country = `countriesAndTerritories`, DateRep = dateRep, Cases = cases, Deaths = deaths, Day = day, Month = month) %>% select(Country, DateRep, Cases, Deaths, popData2018)
 ```
  
+```{r}
+Fonte = "Fonte: EU Open Data Portal"
+```
+ 
+```{r}
+ultimadata <- max(covid19$DateRep)
+```
 
-
-#### Total de Casos pelos dados da EU Open Data Portal: `r format(ymd(hoje) - 1, '%d-%m-%Y')`
+#### Total de Casos pelos dados da EU Open Data Portal: `r format(ultimadata - 1, '%d-%m-%Y')`
 
 
 
@@ -125,12 +138,12 @@ Brasil <- covid19 %>%
 
 Uma mostra dos últimos 20 dias da Itália.
 ```{r}
-Italia %>% top_n(20, DateRep) %>% kable()
+Italia %>% select(-Country, -popData2018) %>% top_n(20, DateRep) %>% kable()
 ```
 
 O mesmo para o Brasil, últimos 20 dias.
 ```{r}
-Brasil %>% top_n(20, DateRep) %>% kable()
+Brasil %>% select(-Country, -popData2018) %>% top_n(20, DateRep) %>% kable()
 ```
 
 ```{r}
@@ -162,7 +175,7 @@ Brasil13 %>% kable()
 
 
 ```{r}
-bind_rows(Italia14,Brasil13) %>% ggplot() + geom_point(aes(x = Dia, y = CumCases, color=Country), stat = "identity", position = "dodge") + labs(title = paste("Curva de crescimentos de casos (cumulativo) em número de dias,\n CumCases>=14 & CumCases<=", LimiteCorte," -- Brasil e Itália",sep=""), color = "") + labs_pubr() + theme_economist_white() #-> g
+bind_rows(Italia14,Brasil13) %>% ggplot() + geom_point(aes(x = Dia, y = CumCases, color=Country), stat = "identity", position = "dodge") + labs(title = "Número cumulativo de casos", subtitle = paste("CumCases>=14 & CumCases<=", LimiteCorte), caption = Fonte, color = "") + scale_color_brewer(palette = "Set1")  #-> g
 #fig <- ggplotly(g)
 #fig
 ```
@@ -171,7 +184,8 @@ bind_rows(Italia14,Brasil13) %>% ggplot() + geom_point(aes(x = Dia, y = CumCases
 ```{r}
 bind_rows(select(Italia,Country, DateRep, CumCases, Cases, Deaths), select(Brasil, Country, DateRep, CumCases, Cases, Deaths)) %>% filter(DateRep >= "2020-02-22") %>%
    ggplot() + geom_bar(aes(x = DateRep, y = CumCases, fill = Country), stat = "identity", position = "dodge") + 
-  labs(y = "Núm de Casos (acum)", x = "Data", title = "Evolução dos Casos na Italia e Brasil, a partir de 22/02/2020", fill = "") + scale_fill_brewer(palette = "Set1") + labs_pubr() + theme_economist_white() # -> g
+  labs(y = "Núm de Casos (acum)", x = "Data", title = "Evolução dos Casos na Italia e Brasil, a partir de 22/02/2020",
+  caption = Fonte, fill = "") + scale_fill_brewer(palette = "Set1") # -> g
 #fig <- ggplotly(g)
 #fig
 ```
@@ -182,8 +196,7 @@ covid19 %>%
   filter(Country %in% c("Italy", "Brazil"), DateRep > "2020-02-22") %>% 
   arrange(DateRep) %>%
   ggplot() + geom_bar(aes(x = DateRep, y = Cases, fill = Country),  stat = "identity", position = "dodge") + 
-  labs(y = "Núm de Casos Reportados (dia)", x = "Data", title = "Número de Casos Reportados diariamente na Italia e Brasil,\n a partir de 22/02/2020", fill = "") + scale_fill_brewer(palette = "Set1") +
-  labs_pubr() + theme_economist_white() #-> g
+  labs(y = "Núm de Casos Reportados (dia)", x = "Data", title = "Número de Casos Reportados diariamente na Italia e Brasil,\n a partir de 22/02/2020", caption = Fonte, fill = "")  + scale_fill_brewer(palette = "Set1")   #-> g
 #fig <- ggplotly(g)
 #fig
 ```
@@ -441,8 +454,9 @@ filter(covid19, DateRep > "2020-02-01") %>%
   summarise(numCasos = sum(Cases)) %>% 
   ggplot(aes(x = DateRep, y = numCasos)) + 
   geom_bar(aes(fill=Continent),stat="identity", position = "stack") + 
-  labs(x = "Data", title = "Evolução dos Casos nos Continentes, a partir de 01/02/2020",fill="") + 
-  scale_fill_brewer(palette = "Set1") + labs_pubr() + theme_economist_white() #-> g
+  labs(x = "Data", title = "Evolução dos Casos nos Continentes, a partir de 01/02/2020",
+       caption = Fonte, fill="") + 
+  scale_fill_brewer(palette = "Set1")  #-> g
 #fig <- ggplotly(g)
 #fig
 ```
@@ -462,8 +476,9 @@ filter(covid19, DateRep > "2020-02-01") %>%
   ggplot(aes(x = DateRep, y = numCasos)) + 
   geom_bar(aes(fill=Continent),stat="identity", position = "stack") + 
   scale_fill_discrete(breaks = c("Oceania","Europe","Asia","America","Africa")) +
-  labs(x = "Data", title = "Evolução dos Casos nos Continentes (sem China), \na partir de 01/02/2020",fill="") +
-  scale_fill_brewer(palette = "Set1") + labs_pubr() + theme_economist_white() #-> g
+  labs(x = "Data", title = "Evolução dos Casos nos Continentes (sem China), \na partir de 01/02/2020",
+       caption = Fonte,fill="") +
+  scale_fill_brewer(palette = "Set1")  #-> g
 #fig <- ggplotly(g)
 #fig
 ```
@@ -482,8 +497,9 @@ restomundo <- group_by(restomundo, DateRep) %>% mutate(Cases = sum(Cases)) %>% u
 bind_rows(sochina,restomundo) %>% filter(DateRep >= "2020-02-01") %>%
   ggplot(aes(x = DateRep, y = Cases)) +
   geom_bar(aes(fill=Country), stat = "identity", position = "dodge") +
-  labs(x = "Data", title = "Número de Novos Casos China x Resto do Mundo, \na partir de 01/02/2020",fill="") + 
-  scale_fill_brewer(palette = "Set1") + labs_pubr() + theme_economist_white() #-> g
+  labs(x = "Data", title = "Número de Novos Casos China x Resto do Mundo, \na partir de 01/02/2020",
+       caption = Fonte, fill="") + 
+  scale_fill_brewer(palette = "Set1")  #-> g
 #fig <- ggplotly(g)
 #fig
 ```
@@ -492,10 +508,10 @@ bind_rows(sochina,restomundo) %>% filter(DateRep >= "2020-02-01") %>%
 ```{r brasil}
 filter(covid19, DateRep > "2020-02-01", Country == "Brazil") %>% 
   ggplot(aes(x = DateRep, y = Cases)) + 
-  geom_bar(stat="identity", position = "dodge") + 
-  labs(x = "Data", title="Número de Casos Reportados diariamente no Brasil\n a partir de 01/02/2020") + 
-  scale_fill_brewer(palette = "Set1") +
-  labs_pubr() + theme_economist_white()#-> g
+  geom_bar(stat="identity", position = "dodge", fill = "red") + 
+  labs(x = "Data", title="Número de Casos Reportados diariamente no Brasil\n a partir de 01/02/2020", 
+       caption = Fonte) + 
+  scale_fill_brewer(palette = "Set1") #-> g
 #fig <- ggplotly(g)
 #fig
 ```
@@ -586,6 +602,9 @@ jhucovid19$Country <- stri_replace_all_regex(jhucovid19$Country, "UK", "United K
 rm(X)
 ```
 
+```{r}
+Fonte = "Fonte: CSSE at Johns Hopkins University"
+```
 
 ```{r echo = FALSE}
 # Bahamas
@@ -745,7 +764,10 @@ jhucovid19 <- filter(jhucovid19, !is.na(Continent)) %>% select(-Capital)
 write_csv(jhucovid19,paste("./data/","jhucovid19-",ontem,".csv",sep=""))
 ```
 
-### Total de Casos pelos dados da John Hopkins University (JHU): `r format(ymd(hoje) - 1, '%d-%m-%Y')`
+```{r}
+ultimadata <- max(jhucovid19$DateRep)
+```
+### Total de Casos pelos dados da John Hopkins University (JHU): `r format(ultimadata - 1, '%d-%m-%Y')`
 
 
 ```{r}
@@ -759,20 +781,20 @@ write_csv(jhucovid19,paste("./data/","jhucovid19-",ontem,".csv",sep=""))
 
 
 ```{r}
-filter(jhucovid19, Country == "France") %>% top_n(10,DateRep) %>% kable(caption = "França")
+filter(jhucovid19, Country == "France") %>% select(-Country) %>% top_n(10,DateRep) %>% kable(caption = "França")
 ```
 
 
 ```{r}
-filter(jhucovid19, Country == "Italy") %>% top_n(10,DateRep) %>% kable(caption = "Itália")
+filter(jhucovid19, Country == "Italy") %>% select(-Country) %>% top_n(10,DateRep) %>% kable(caption = "Itália")
 ```
 
 ```{r}
-filter(jhucovid19, Country == "Spain") %>% top_n(10,DateRep) %>% kable(caption = "Espanha")
+filter(jhucovid19, Country == "Spain") %>% select(-Country) %>% top_n(10,DateRep) %>% kable(caption = "Espanha")
 ```
 
 ```{r}
-filter(jhucovid19, Country == "Brazil") %>% top_n(10,DateRep) %>% kable(caption = "Brasil")
+filter(jhucovid19, Country == "Brazil") %>% select(-Country) %>% top_n(10,DateRep) %>% kable(caption = "Brasil")
 ```
 
 
@@ -789,13 +811,13 @@ jhucovid19 <- group_by(jhucovid19, Country) %>%
   ungroup()
 ```
 
-### Lista de países ordenados por número de casos confirmados: `r format(ymd(hoje) - 1, '%d-%m-%Y')`
+### Lista de países com mais de 500 casos, ordenados por número de casos confirmados: `r format(ymd(hoje) - 1, '%d-%m-%Y')`
 
 ```{r}
 group_by(jhucovid19, Country) %>% 
   summarise(ConfirmedCases = last(ConfirmedCases), Deaths = last(Deaths), Recuperados = last(Recovered)) %>% 
-  arrange(desc(ConfirmedCases)) %>% 
-  kable(col.names = c("País", "Casos","Mortes","Recuperados"))
+  arrange(desc(ConfirmedCases)) -> listaNumCasos
+  kable(filter(listaNumCasos,ConfirmedCases >= 500),col.names = c("País", "Casos","Mortes","Recuperados"))
 ```
 
 
@@ -805,8 +827,9 @@ group_by(jhucovid19, Country) %>%
 ```{r}
 filter(jhucovid19, Country %in% c("China","Italy","Iran","Germany","Japan"), DateRep >= ymd("2020-02-01")) %>% 
   ggplot(aes(x = DateRep, y = NewCases)) + geom_bar(aes(fill=Country),stat="identity", position="dodge") +
-  labs(x = "Data Reportado", y = "Novos Casos", title = "Novos Casos a partir de 01 de Fev 2020", fill="") +
-  labs_pubr() + theme_economist_white() #-> g
+  labs(x = "Data Reportado", y = "Novos Casos", title = "Novos Casos a partir de 01 de Fev 2020", 
+       caption = Fonte, fill="") + scale_fill_brewer(palette =  "Set1")
+ #-> g
 #fig <- ggplotly(g)
 #fig
 ```
@@ -837,8 +860,9 @@ filter(jhucovid19, DateRep > "2020-02-01") %>%
   summarise(numCasos = sum(ConfirmedCases)) %>% 
   ggplot(aes(x = DateRep, y = numCasos)) + 
   geom_bar(aes(fill=Continent),stat="identity", position = "dodge") + 
-  labs(x = "Data", title = "Total de Casos nos Continentes (dados JHU),\n a partir de 01/02/2020",fill="") + 
-  scale_fill_brewer(palette = "Set1") + labs_pubr() + theme_economist_white() #-> g
+  labs(x = "Data", title = "Total de Casos nos Continentes", subtitle = "a partir de 01/02/2020",
+       caption = Fonte, fill="") + 
+  scale_fill_brewer(palette = "Set1")  #-> g
 #fig <- ggplotly(g)
 #fig
 ```
@@ -869,7 +893,9 @@ Brasil13 %>% kable()
 ```{r}
 bind_rows(Italia14,Brasil13) %>% 
   ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(color = Country, shape = Country)) + 
-  labs(y = "Número de Casos", x = "Núm Dias após o 1º caso", color = "", title = "Evolução dos 25 primeiros dias após o 1º caso") + guides(shape = FALSE) + labs_pubr() + theme_economist_white() # -> g
+  labs(y = "Número de Casos", x = "Núm Dias após o 1º caso", color = "", 
+       title = "Evolução dos 25 primeiros dias após o 1º caso", caption = Fonte) + 
+  guides(shape = FALSE) + scale_color_brewer(palette = "Set1") # -> g
 #fig <- ggplotly(g)
 #fig
 ```
@@ -882,7 +908,9 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
   mutate(Dia = row_number()) %>%
   top_n(-55, Dia) %>% 
   ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
-  labs(y = "Número de Casos", x = "Núm Dias após o 1º caso", shape = "", color= "", title = "Evolução dos 55 primeiros dias após o 1º caso")  + scale_color_brewer(palette = "Set1") + labs_pubr() + theme_economist_white() #-> g
+  labs(y = "Número de Casos", x = "Núm Dias após o 1º caso", shape = "", color= "", 
+       title = "Evolução dos 55 primeiros dias após o 1º caso", caption = Fonte)  + 
+  scale_color_brewer(palette = "Set1")  #-> g
 #fig <- ggplotly(g)
 #fig
 ```
@@ -895,7 +923,7 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
   mutate(Dia = row_number()) %>%
   top_n(-35, Dia) %>% 
   ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
-  labs(y = "Número de Casos", x = "Núm Dias após o 14º caso", shape = "", color= "", title = "Evolução dos 35 primeiros dias após o 14º caso")  + scale_color_brewer(palette = "Set1") + labs_pubr() + theme_economist_white() # -> g
+  labs(y = "Número de Casos", x = "Núm Dias após o 14º caso", shape = "", color= "", title = "Evolução dos 35 primeiros dias após o 14º caso", caption = Fonte)  + scale_color_brewer(palette = "Set1")  # -> g
 #fig <- ggplotly(g)
 #fig
 ```
@@ -907,13 +935,14 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "USA", "Japan")) 
   group_by(Country) %>% 
   mutate(Dia = row_number()) %>%
   ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
-  labs(y = "Número de Casos", x = "Núm Dias após o 30º caso", shape = "", color= "", title = "Evolução após o 30º caso")  + scale_color_brewer(palette = "Set1") + labs_pubr() + theme_economist_white() # -> g
+  labs(y = "Número de Casos", x = "Núm Dias após o 30º caso", shape = "", color= "", 
+       title = "Evolução após o 30º caso", caption = Fonte)  + scale_color_brewer(palette = "Set1")  # -> g
 #fig <- ggplotly(g)
 #fig
 ```
 
 ```{r tidy.opts=list(options(knitr.kable.NA = ''))}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","USA", "Argentina","Chile")) %>% 
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "USA", "Chile")) %>% 
   filter(ConfirmedCases >= 30 ) %>% 
   group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
   pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% 
@@ -922,7 +951,12 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
 
 
 
-### Calculando a taxa de progressão dia-a-dia: Brasil, Itália, USA, França, Alemanha, Espanha
+### Calculando a taxa de progressão dia-a-dia: Brasil, Itália, China, USA, França, Alemanha, Espanha
+
+Seguindo a ideia apresentada neste vídeo [Te Explico POR QUÉ estoy PREOCUPADO](https://youtu.be/-PUT0hZiZEw), calculei a taxa de evolução (*chamado de 'factor' no vídeo*)
+A taxa de evolução representada aqui é dada por $$TxEv = \frac{NumCasos_i - NumCasos_{i-1}}{NumCasos_{i-1}} + 1$$ É uma maneira simples de representar o acréscimo proporcional de um dia para outro.
+
+
 
 ```{r tidy.opts=list(options(knitr.kable.NA = ''))}
 filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","USA","China")) %>% 
@@ -933,82 +967,151 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
          ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
          ProgRateDeaths = ProgRateDeaths + 1,
          ProgRateCases = ProgRateCases + 1
-         ) %>%
-  filter(DateRep >= ymd("2020-03-01")) %>% mutate(DateRep = format(DateRep,"%Y-%m-%d"), ProgRateCases = format(ProgRateCases, digits = 3)) %>%
-  select(Country,DateRep,ProgRateCases) %>%
+         ) -> txprogtops
+txprogtops %>% filter(DateRep >= ymd("2020-03-01")) %>% mutate(DateRep = format(DateRep,"%Y-%m-%d"), ProgRateCases = format(ProgRateCases, digits = 3)) %>% 
+select(Country,DateRep,ProgRateCases) %>%
   pivot_wider(names_from = Country, values_from = ProgRateCases) %>% kable()
 ```
 
-
-
-```{r}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","USA", "China")) %>% 
-  group_by(Country) %>% 
-  arrange(DateRep) %>%
-  mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
-         ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
-         ProgRateDeaths = ProgRateDeaths + 1,
-         ProgRateCases = ProgRateCases + 1
-         ) %>%
-  ungroup() %>%
-  filter(DateRep >= ymd("2020-03-01")) %>%
-  select(Country,DateRep,ConfirmedCases, ProgRateCases) -> dg
-ggplot(data = dg, aes(x = DateRep, y = ProgRateCases)) +  
-  geom_point(aes(color = Country, linetype = Country)) + 
-  geom_smooth(aes(color = Country), se = FALSE, span = 0.15) +
-  labs(color="") + guides(shape = "none", linetype="none") +  labs_pubr() + theme_economist_white() 
+```{r plota2gr}
+plt2gr <- function(df, pais) {
+  df %>%
+  select(Country,DateRep,NewCases,ConfirmedCases, ProgRateCases) %>%
+  filter(Country == pais) %>%
+  ggplot(aes(x = DateRep)) +
+  geom_bar(aes(y = NewCases),stat = "identity", fill = "red") +
+  labs(x = "Data",y = "Novos Casos",caption = Fonte) -> g1
+  df  %>% 
+  select(Country,DateRep,NewCases,ConfirmedCases, ProgRateCases) %>%
+  filter(Country == pais) %>%
+  ggplot(aes(x = DateRep)) +
+  geom_point(aes(y = ProgRateCases), color  = "blue") +
+  geom_smooth(aes(y = ProgRateCases), se = FALSE, span = 0.12) +
+  labs(x = "Data",y = "Taxa Evolução",caption = Fonte) -> g2
+figura <- ggarrange(g1,g2,ncol = 1,nrow = 2,align = "v")
+annotate_figure(figura, text_grob(paste0("Número de Novos Casos e Taxa de Evolução - ", pais)))
+}
 ```
 
-## Países com números de casos semelhantes ao Brasil: `r format(ymd(hoje) - 1, '%d-%m-%Y')`
 
-Olhando os dados de:
- - Portugal
- - Suécia (Sweden)
- - Turquia (Turkey)
- - Israel
- - Austrália (Australia)
+```{r}
+txprogtops %>%
+  filter(DateRep >= ymd("2020-03-01")) %>%
+  select(Country,DateRep,ConfirmedCases, ProgRateCases) %>%
+  ggplot(aes(x = DateRep, y = ProgRateCases)) +  
+  geom_point(aes(color = Country, linetype = Country)) + 
+  geom_smooth(aes(color = Country), se = FALSE, span = 0.15) +
+  labs(color="", title = "Taxa de Evolução", caption = Fonte) + 
+  guides(shape = "none", linetype="none") + 
+  scale_color_brewer(palette = "Set1")
+```
+
+### Gráficos individuais por países: Taxa de evolução e número de novos casos
+
+```{r}
+plt2gr(txprogtops, "Brazil")
+```
 
 
 ```{r}
-filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Israel", "Australia")) %>% 
+plt2gr(txprogtops, "USA")
+```
+
+
+```{r}
+plt2gr(txprogtops, "Italy")
+```
+
+```{r}
+plt2gr(txprogtops, "Germany")
+```
+
+```{r}
+plt2gr(txprogtops, "France")
+```
+
+```{r}
+plt2gr(txprogtops, "Spain")
+```
+
+
+```{r}
+paisestop <- listaNumCasos %>% filter(Country != "China") %>% 
+  top_n(5,ConfirmedCases) %>%
+  select(Country) %>% unlist()
+```
+
+
+
+
+
+## Países com números de casos semelhantes ao Brasil em 25/03/2020
+
+```{r}
+dadosBR <- filter(jhucovid19, Country == "Brazil", DateRep == ymd("2020-03-25")) %>% select(ConfirmedCases) %>% as.numeric()
+```
+
+Em 25 de Março de 2020, os países abaixo tinham número de casos próximos entre si; estabeleci uma faixa, variando de `r dadosBR - 250` a `r dadosBR + 250` e filtrei os países. Adicionei à lista, que estava fora desta faixa, Portugal.
+
+
+```{r}
+dadosparecidos <- filter(jhucovid19, DateRep == ymd("2020-03-25"), ConfirmedCases >= (dadosBR - 250) & ConfirmedCases <= dadosBR + 250) %>% select(Country,ConfirmedCases)
+dadosparecidos <- bind_rows(dadosparecidos, filter(jhucovid19, DateRep == ymd("2020-03-25"), Country == "Portugal") %>% select(Country, ConfirmedCases))
+kable(dadosparecidos)
+```
+
+Os gráficos a seguir mostram a evolução dos casos nestes países a partir de pontos diferentes:
+
+* a partir do 1º caso, 55 dias
+* a partir do 14º caso, 35 dias
+* a partir do 30º caso, até último dado.
+
+```{r}
+filter(jhucovid19, Country %in% unlist(dadosparecidos$Country)) %>% 
   select(Country,DateRep,ConfirmedCases,Deaths) %>% 
   group_by(Country) %>% 
   filter(ConfirmedCases >= 1 ) %>% 
   mutate(Dia = row_number()) %>%
   top_n(-55, Dia) %>% 
   ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
-  labs(y = "Número de Casos", x = "Núm Dias após o 1º caso", shape = "", color= "", title = "Evolução dos 55 primeiros dias após o 1º caso")  + scale_color_brewer(palette = "Set1") + labs_pubr() + theme_economist_white() #-> g
+  labs(y = "Número de Casos", x = "Núm Dias após o 1º caso", shape = "", color= "", 
+       title = "Evolução dos 55 primeiros dias após o 1º caso", caption = Fonte) +
+  scale_color_brewer(palette = "Set1") 
 #fig <- ggplotly(g)
 #fig
 ```
 
 ```{r}
-filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Israel", "Australia")) %>% 
+filter(jhucovid19, Country %in% unlist(dadosparecidos$Country)) %>% 
   select(Country,DateRep,ConfirmedCases,Deaths) %>% 
   group_by(Country) %>% 
   filter(ConfirmedCases >= 14 ) %>% 
   mutate(Dia = row_number()) %>%
   top_n(-35, Dia) %>% 
   ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
-  labs(y = "Número de Casos", x = "Núm Dias após o 14º caso", shape = "", color= "", title = "Evolução dos 35 primeiros dias após o 14º caso")  + scale_color_brewer(palette = "Set1") + labs_pubr() + theme_economist_white() # -> g
+  labs(y = "Número de Casos", x = "Núm Dias após o 14º caso", shape = "", color= "", 
+       title = "Evolução dos 35 primeiros dias após o 14º caso", caption = Fonte)  + 
+  scale_color_brewer(palette = "Set1") 
 #fig <- ggplotly(g)
 #fig
 ```
 
 ```{r}
-filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Israel", "Australia")) %>% 
+filter(jhucovid19, Country %in% unlist(dadosparecidos$Country)) %>% 
   filter(ConfirmedCases >= 30 ) %>% 
   select(Country,DateRep,ConfirmedCases,Deaths) %>% 
   group_by(Country) %>% 
   mutate(Dia = row_number()) %>%
   ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country)) + 
-  labs(y = "Número de Casos", x = "Núm Dias após o 30º caso", shape = "", color= "", title = "Evolução após o 30º caso")  + scale_color_brewer(palette = "Set1") + labs_pubr() + theme_economist_white() #-> g
+  labs(y = "Número de Casos", x = "Núm Dias após o 30º caso", shape = "", color= "", 
+       title = "Evolução após o 30º caso", caption = Fonte)  + 
+  scale_color_brewer(palette = "Set1")
 #fig <- ggplotly(g)
 #fig
 ```
 
 ```{r tidy.opts=list(options(knitr.kable.NA = ''))}
-filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Israel", "Australia")) %>% 
+filter(jhucovid19, Country %in% unlist(dadosparecidos$Country)) %>% 
   filter(ConfirmedCases >= 30 ) %>% 
   group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
   pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% 
@@ -1019,7 +1122,7 @@ filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Isr
 #### Calculando a taxa de progressão dia-a-dia: Brazil, Portugal, Sweden, Turkey, Israel, Australia
 
 ```{r tidy.opts=list(options(knitr.kable.NA = ''))}
-filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Israel", "Australia")) %>% 
+filter(jhucovid19, Country %in% unlist(dadosparecidos$Country)) %>% 
   group_by(Country) %>% 
   filter(ConfirmedCases >= 1) %>% 
   arrange(DateRep) %>%
@@ -1027,8 +1130,10 @@ filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Isr
          ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
          ProgRateDeaths = ProgRateDeaths + 1,
          ProgRateCases = ProgRateCases + 1
-         ) %>%
-  filter(DateRep >= ymd("2020-03-01")) %>% mutate(DateRep = format(DateRep,"%Y-%m-%d"), ProgRateCases = format(ProgRateCases, digits = 3)) %>%
+         ) -> txprogpar
+txprogpar %>%  
+  filter(DateRep >= ymd("2020-03-01")) %>% 
+  mutate(DateRep = format(DateRep,"%Y-%m-%d"), ProgRateCases = format(ProgRateCases, digits = 3)) %>%
   select(Country,DateRep,ProgRateCases) %>%
   pivot_wider(names_from = Country, values_from = ProgRateCases) %>% kable()
 ```
@@ -1036,21 +1141,41 @@ filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Isr
 
 
 ```{r}
-filter(jhucovid19, Country %in% c("Brazil", "Portugal", "Sweden", "Turkey", "Israel", "Australia")) %>% 
-  group_by(Country) %>% 
-  arrange(DateRep) %>%
-  mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
-         ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
-         ProgRateDeaths = ProgRateDeaths + 1,
-         ProgRateCases = ProgRateCases + 1
-         ) %>%
-  ungroup() %>%
+txprogpar %>%
   filter(DateRep >= ymd("2020-03-01")) %>%
   select(Country,DateRep,ConfirmedCases, ProgRateCases) -> dg
 ggplot(data = dg, aes(x = DateRep, y = ProgRateCases)) +  
   geom_point(aes(color = Country, linetype = Country)) + 
   geom_smooth(aes(color = Country), se = FALSE, span = 0.15) +
-  labs(color="") + guides(shape = "none", linetype="none") + labs_pubr() + theme_economist_white() 
+  labs(color="", caption = Fonte) + guides(shape = "none", linetype="none") + 
+  scale_color_brewer(palette = "Set1")
+```
+
+
+### Gráficos individuais dos países semelhantes ao Brasil: Taxa de evolução e número de novos casos
+
+```{r}
+plt2gr(txprogpar, "Brazil")
+```
+
+```{r}
+plt2gr(txprogpar, "Australia")
+```
+
+```{r}
+plt2gr(txprogpar, "Portugal")
+```
+
+```{r}
+plt2gr(txprogpar, "Turkey")
+```
+
+```{r}
+plt2gr(txprogpar, "Sweden")
+```
+
+```{r}
+plt2gr(txprogpar, "Israel")
 ```
 
 # Base de dados do Worldometer
@@ -1081,7 +1206,7 @@ str(womcovid19)
 Depois de pegar a tabela em html e colocar em um `data.frame`, algumas limpezas e transformações são necessárias: algumas colunas, como a `NewCases`, tem o símbolo `+`; os números vieram formatados como _strings_ com separador de milhar (`,`), e algumas outras coisas. Então, algumas manipulações serão feitas para acertar isso.
 
 ```{r}
-head(womcovid19) %>% kable()
+head(womcovid19) %>% select(`Country,Other`,TotalCases,NewCases,TotalDeaths,NewDeaths) %>% kable()
 ```
 
 ```{r}
@@ -1104,12 +1229,12 @@ womcovid19 %>%
 ```
 
 
-### Lista de países ordenados por número de casos confirmados: `r format(ymd(hoje), '%d-%m-%Y')`
+### Lista de países com mais de 500 casos, ordenados por número de casos confirmados: `r format(ymd(hoje), '%d-%m-%Y')`
 
 ```{r}
 womcovid19 %>% 
   select(Country, TotalCases, TotalDeaths, TotalRecovered) %>% 
-  arrange(desc(TotalCases)) %>%
+  arrange(desc(TotalCases)) %>% filter(TotalCases >= 500) %>%
   kable()
 ```
 
@@ -1126,12 +1251,16 @@ O download da base de dados é feita com a API do Kaggle; é um pacote do Python
 
 ```{r}
 hoje <- today()
-system("cd data;/home/mario/.local/bin/kaggle datasets download unanimad/corona-virus-brazil")
+system("cd data;/home/mario/.local/bin/kaggle datasets download --force unanimad/corona-virus-brazil")
 zip::unzip("./data/corona-virus-brazil.zip", exdir = "./data")
 ```
 
 ```{r}
 brcovid19 <- read_csv("./data/brazil_covid19.csv", col_types = cols(date = col_date(format = "%Y-%m-%d")))
+```
+
+```{r}
+Fonte = "Raphael Fontes (Kaggle)"
 ```
 
 ```{r}
@@ -1142,7 +1271,12 @@ str(brcovid19)
 brcovid19 <- brcovid19 %>% rename(Data = date, Casos = cases, Mortes = deaths, Regiao = region, Estado = state)
 ```
 
-### Total de Casos pelos dados do Kaggle Brazil: `r format(ymd(hoje), '%d-%m-%Y')`
+```{r}
+ultimadata <- max(brcovid19$Data)
+```
+
+
+### Total de Casos pelos dados do Kaggle Brazil: `r format(ultimadata, '%d-%m-%Y')`
  
 ```{r}
 brcovid19 %>% 
@@ -1160,9 +1294,9 @@ filter(CasosTot > 0) %>%
   gather(key = "Ocorrencia", value = "Valor", CasosTot:MortesTot) %>% 
   ggplot(aes(x = Data, y = Valor, fill = Ocorrencia)) + 
   geom_bar(stat="identity", position = "dodge") +
-  labs(x = "Data", title="Número de Casos Reportados diariamente no Brasil", fill ="", y = "") + 
-  scale_fill_brewer(palette = "Set1") +
-  labs_pubr() + theme_economist_white()
+  labs(x = "Data", title="Número de Casos Reportados diariamente no Brasil", 
+       caption = Fonte, fill ="", y = "") + 
+  scale_fill_brewer(palette = "Set1")
 ```
 
 ------------
