@@ -1781,3 +1781,30 @@ date,region,state,cases,deaths
 2020-04-04,Sul,Paraná,395,6
 2020-04-04,Sul,Rio Grande do Sul,410,6
 2020-04-04,Sul,Santa Catarina,334,5
+2020-04-05,Centro-Oeste,Distrito Federal,468,7
+2020-04-05,Centro-Oeste,Goiás,115,3
+2020-04-05,Centro-Oeste,Mato Grosso,60,1
+2020-04-05,Centro-Oeste,Mato Grosso do Sul,65,1
+2020-04-05,Nordeste,Alagoas,28,2
+2020-04-05,Nordeste,Bahia,401,9
+2020-04-05,Nordeste,Ceará,823,26
+2020-04-05,Nordeste,Maranhão,96,2
+2020-04-05,Nordeste,Paraíba,34,4
+2020-04-05,Nordeste,Pernambuco,201,21
+2020-04-05,Nordeste,Piauí,23,4
+2020-04-05,Nordeste,Rio Grande do Norte,242,7
+2020-04-05,Nordeste,Sergipe,32,3
+2020-04-05,Norte,Acre,48,0
+2020-04-05,Norte,Amapá,29,2
+2020-04-05,Norte,Amazonas,417,14
+2020-04-05,Norte,Pará,86,1
+2020-04-05,Norte,Rondônia,12,1
+2020-04-05,Norte,Roraima,42,1
+2020-04-05,Norte,Tocantins,17,0
+2020-04-05,Sudeste,Espírito Santo,166,6
+2020-04-05,Sudeste,Minas Gerais,498,6
+2020-04-05,Sudeste,Rio de Janeiro,1394,64
+2020-04-05,Sudeste,São Paulo,4620,275
+2020-04-05,Sul,Paraná,438,9
+2020-04-05,Sul,Rio Grande do Sul,418,7
+2020-04-05,Sul,Santa Catarina,357,10
