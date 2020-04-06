@@ -1,0 +1,252 @@
+---
+title: "Download e Preparação dos Dados"
+author: "Mário Olímpio de Menezes"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    fig_height: 6
+    fig_width: 8
+    toc: yes
+    toc_depth: 2
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(ggpubr)
+library(readxl)
+library(knitr)
+library(stringi)
+library(rvest)
+library(countrycode)
+```
+
+
+
+
+# Download das bases
+
+As bases de dados utilizadas são:
+
+* EU Open Data Portal
+* John Hopkins University - CCSSE
+* Worldometer
+* Kaggle - Raphael Fontes
+
+## EU Open Data Portal
+
+Os dados desta seção vieram do [Europe Open Data Portal](https://data.europa.eu/euodp/en/) -- `https://data.europa.eu/euodp/en/`
+
+
+*2020-03-26:* Houve uma mudança na nomenclatura dos arquivos; a partir da atualização de *25 de Março de 2020* o arquivo não mais tem o sufixo no formato da data, por exemplo, "...`2020-03-24`.xlsx". Assim, algumas partes do código estão sendo mudadas para refletir esta mudança. Não sei se é uma mudança permanente ou alguém esqueceu de colocar o nome correto do arquivo.
+
+
+```{r}
+# alteracoes na nomenclatura dos arquivos e adicao de mais uma coluna (populacao do pais - base 2018 Banco Mundial)
+#covid19URLbase <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-"
+covid19URLbase <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide"
+hoje <- format(Sys.time(), "%Y-%m-%d")   # vou manter para anexar no nome e saber cada atualização feita.
+#hoje <- "2020-03-24"
+arqdest <- paste("COVID-19-geographic-distribution-worldwide-",hoje,".xlsx",sep="")
+```
+
+<!--
+https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-03-18.xls
+https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide.xlsx
+-->
+
+
+
+
+```{r }
+# para fazer o download da base; acerte os caminhos e execute este chunk
+
+if (!file.exists(paste("~/datasets/ECDC_Europe",arqdest,sep="/")) || !file.exists(paste("./data",arqdest,sep="/"))) {
+  curl::curl_download(paste(covid19URLbase,".xlsx",sep=""), paste("~/datasets/ECDC_Europe",arqdest,sep="/"))
+  print(paste("Fazendo download do arquivo", arqdest,sep=":"))
+  file.copy(paste("~/datasets/ECDC_Europe",arqdest,sep="/"), paste("./data",arqdest, sep="/"))
+} else {
+  hoje <- format(Sys.time() - 1, "%Y-%m-%d")   # vou manter para anexar no nome e saber cada atualização feita.
+  arqdest <- paste("COVID-19-geographic-distribution-worldwide-",hoje,".xlsx",sep="")
+}
+```
+
+
+```{r leituradados}
+covid19prep <- read_excel(paste("./data",arqdest,sep="/"))
+```
+
+A estrutura dos dados é:
+
+```{r str}
+str(covid19prep)
+```
+
+```{r country}
+covid19prep <- rename(covid19prep, Country = `countriesAndTerritories`, DateRep = dateRep, 
+                      Cases = cases, Deaths = deaths, Day = day, Month = month) %>% 
+  select(Country, DateRep, Cases, Deaths, countryterritoryCode, popData2018)
+```
+
+```{r}
+str(covid19prep)
+```
+
+Como a base do EU Open Data Portal contém o código ISO3C dos países, vou utilizar o pacote `countrycode` para uniformizar os nomes dos países e adicionar os continentes. Vou retirar aqueles que não estiverem nesta base.
+
+```{r}
+covid19prep <- covid19prep %>% 
+  mutate(Country = if_else(!is.na(countrycode(sourcevar = countryterritoryCode, origin = "iso3c", 
+                                              destination = "country.name")), 
+                           countrycode(sourcevar = countryterritoryCode, origin = "iso3c", 
+                                       destination = "country.name"), Country), 
+         Continent = countrycode(sourcevar = countryterritoryCode, origin = "iso3c", 
+                                 destination = "continent"))
+```
+
+Existem alguns problemas na base de dados, que não vou tratar aqui; simplesmente vou gravar deste modo. Na análise decide-se o que será feito com estes dados.
+
+```{r}
+covid19prep %>% filter(is.na(Continent))
+```
+
+
+
+Agora vou salvar este `data.frame` para ser utilizado nas análises. Vou utilizar um nome que indique sempre o último conjunto de dados disponível para esta fonte: `eeuucovid19_last.csv`
+
+```{r}
+write_csv(covid19prep, "./data/eeuucovid19_last.csv")
+```
+
+## Base de dados da John Hopkins University
+
+O JHU tem um site de monitoramento em tempo real (talvez o mais atualizado) no endereço `https://coronavirus.jhu.edu/map.html`. Os dados utilizados para o mapa estão em um GitHub  `https://github.com/CSSEGISandData/COVID-19`. Tem dados com atualização diária (parece que no mapa as atualizações são mais constantes; no final do dia são atualizados no GitHub).
+
+
+Este é o link onde aparece o mapa também: `https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases`
+
+
+### Fazendo o download dos arquivos diários ao invés destes consolidados (não tem o Recovered na última atualização)
+
+O JHU mantém pelo menos 2 formatos dos dados: diários e consolidados (_time series_). Eu tentei utilizar o formato _time series_ inicialmente, mas mudei para o formato diário, de modo que eu mesmo faço a consolidação. Isso permitiu um pouco mais de controle sobre os dados baixados.
+
+Os dados são mantidos neste repositório GitHub:
+
+`https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/`
+
+O nome dos arquivos é MM-DD-YYYY.csv, começando a partir de 22 de Janeiro de 2020.
+
+```{r}
+hj <- today()
+ontem <- hj - 1
+diainicio <- mdy("01-22-2020")
+```
+
+```{r}
+dia <- diainicio
+while(dia <= ontem) {
+  ultarq <- paste(format(dia,"%m-%d-%Y"),".csv",sep="")
+  CSSEbasepath <- "~/datasets/CSSEGISandData/COVID-19/csse_covid_19_daily_reports/"
+  ultarq_fullname <- paste(CSSEbasepath,ultarq,sep="") 
+  CSSEURLbase <- "https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/"
+  if (!file.exists(ultarq_fullname)) {
+    curl::curl_download(paste(CSSEURLbase,ultarq,sep=""),ultarq_fullname)
+    print(paste("Fazendo dowload do arquivo",ultarq_fullname,sep=":"))
+  }
+  dia <- dia + 1
+}
+```
+
+Depois de feito o download de todos os arquivos, é preciso juntá-los em um único `data.frame`. O processo começa com a leitura de todos os `csv`, colocando-os todos em uma `list`.
+
+```{r}
+dia <- diainicio
+dias <- list()
+# mudança de formato a partir de 22 de março de 2020
+datamudanca <- ymd("2020-03-22")
+while (dia < datamudanca) {
+  d1 <- read_csv(paste(CSSEbasepath,format(dia,"%m-%d-%Y"),".csv",sep=""))
+  d1 <- rename(d1, Country = `Country/Region`)
+  d1 <- group_by(d1,Country) %>% summarise(ConfCases = sum(Confirmed, na.rm = T),
+                                           TotDeaths = sum(Deaths, na.rm = T), 
+                                           TotRecov = sum(Recovered, na.rm = T)) %>% 
+    mutate(DateRep = dia)
+  dias <- append(dias,list(d1))
+  dia <- dia + 1
+}
+# novo formato
+while(dia <= ontem) {
+  d1 <- read_csv(paste(CSSEbasepath,format(dia,"%m-%d-%Y"),".csv",sep=""))
+  d1 <- rename(d1, Country = Country_Region)
+  d1 <- group_by(d1,Country) %>% summarise(ConfCases = sum(Confirmed, na.rm = T), 
+                                           TotDeaths = sum(Deaths, na.rm = T), 
+                                           TotRecov = sum(Recovered, na.rm = T)) %>% 
+    mutate(DateRep = dia)
+  dias <- append(dias, list(d1))
+  dia <- dia + 1
+  }
+```
+
+Com a lista de todos os arquivos (`data.frame`s) diários, a função `bind_rows` do `dplyr` faz a concatenação. Algumas correções de nomes de países são também realizadas, visando normalizar e acertar grafias.
+
+```{r}
+X <- bind_rows(dias) %>% arrange(DateRep,Country)
+assign("jhucovid19prep",X)
+jhucovid19prep <- select(jhucovid19prep, Country, DateRep, ConfirmedCases = ConfCases, Deaths = TotDeaths, Recovered = TotRecov)
+jhucovid19prep$Country <- stri_replace_all_regex(jhucovid19prep$Country,"Mainland China", "China", vectorize_all = TRUE)
+jhucovid19prep$Country <- stri_replace_all_regex(jhucovid19prep$Country, "UK", "United Kingdom", vectorize_all = TRUE)
+rm(X)
+```
+
+Vou atribuir um continente fictício para os países não encontrados pela função `countrycode`: *Outro*
+
+```{r}
+jhucovid19prep <- jhucovid19prep %>% mutate(Continent = if_else(is.na(countrycode(sourcevar = Country, origin = "country.name", destination = "continent")), "Outro", countrycode(sourcevar = Country, origin = "country.name", destination = "continent")))
+```
+
+ 
+
+
+```{r}
+jhucovid19prep <- jhucovid19prep %>%  group_by(DateRep, Country) %>% 
+  mutate(ConfirmedCases = sum(ConfirmedCases), Deaths = sum(Deaths), Recovered = sum(Recovered)) %>% 
+  ungroup() %>% ungroup()
+```
+
+Salvando o arquivo do dia
+
+```{r}
+write_csv(jhucovid19prep,paste("./data/","jhucovid19-",ontem,".csv",sep=""))
+```
+
+Salvando como último arquivo para ser lido nos outros notebooks.
+
+```{r}
+write_csv(jhucovid19prep, glue::glue("./data/","jhucovid19_last.csv"))
+```
+
+## Base de Dados do Kaggle - Coronavirus - Brazil
+
+Estes dados são mantidos pelo Raphael Fontes, com uma atualização constante.
+
+Link: `https://www.kaggle.com/unanimad/corona-virus-brazil`
+
+O link direto para os dados é: `https://www.kaggle.com/unanimad/corona-virus-brazil/download` que fornece um arquivo zip com o CSV.
+
+O download da base de dados é feita com a API do Kaggle; é um pacote do Python. A base vem compactada, então depois de fazer o download, utilizo o pacote `zip` para extraí-la.
+
+```{r}
+hoje <- today()
+system("cd data;/home/mario/.local/bin/kaggle datasets download --force unanimad/corona-virus-brazil")
+zip::unzip("./data/corona-virus-brazil.zip", exdir = "./data")
+```
+
+
