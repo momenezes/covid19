@@ -1835,3 +1835,30 @@ date,region,state,cases,deaths
 2020-04-06,Sul,Paraná,458,11
 2020-04-06,Sul,Rio Grande do Sul,481,7
 2020-04-06,Sul,Santa Catarina,379,10
+2020-04-07,Centro-Oeste,Distrito Federal,492,12
+2020-04-07,Centro-Oeste,Goiás,133,5
+2020-04-07,Centro-Oeste,Mato Grosso,78,1
+2020-04-07,Centro-Oeste,Mato Grosso do Sul,80,2
+2020-04-07,Nordeste,Alagoas,32,2
+2020-04-07,Nordeste,Bahia,456,12
+2020-04-07,Nordeste,Ceará,1051,31
+2020-04-07,Nordeste,Maranhão,172,4
+2020-04-07,Nordeste,Paraíba,36,4
+2020-04-07,Nordeste,Pernambuco,352,34
+2020-04-07,Nordeste,Piauí,28,4
+2020-04-07,Nordeste,Rio Grande do Norte,254,8
+2020-04-07,Nordeste,Sergipe,36,4
+2020-04-07,Norte,Acre,50,1
+2020-04-07,Norte,Amapá,48,2
+2020-04-07,Norte,Amazonas,636,23
+2020-04-07,Norte,Pará,138,5
+2020-04-07,Norte,Rondônia,18,1
+2020-04-07,Norte,Roraima,42,1
+2020-04-07,Norte,Tocantins,19,0
+2020-04-07,Sudeste,Espírito Santo,209,6
+2020-04-07,Sudeste,Minas Gerais,559,11
+2020-04-07,Sudeste,Rio de Janeiro,1688,89
+2020-04-07,Sudeste,São Paulo,5682,371
+2020-04-07,Sul,Paraná,503,15
+2020-04-07,Sul,Rio Grande do Sul,508,8
+2020-04-07,Sul,Santa Catarina,417,11
