@@ -249,4 +249,6 @@ system("cd data;/home/mario/.local/bin/kaggle datasets download --force unanimad
 zip::unzip("./data/corona-virus-brazil.zip", exdir = "./data")
 ```
 
+------------
 
+<span><a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a></span>
