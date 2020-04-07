@@ -1,7 +1,7 @@
 ---
 title: "Algumas Análises e Explorações COVID-19"
 author: "Mario O. de Menezes"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "Brazil"
 output: 
   prettydoc::html_pretty:
     theme: cayman
@@ -13,7 +13,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, knitr.kable.NA = '')
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, knitr.kable.NA = '', cache = TRUE)
 ```
 
 ```{r warning=FALSE, message=FALSE}
@@ -86,7 +86,7 @@ Fonte = "Fonte: EU Open Data Portal"
 ultimadata <- max(covid19$DateRep)
 ```
 
-#### Total de Casos pelos dados da EU Open Data Portal: `r format(ultimadata - 1, '%d-%m-%Y')`
+#### Total de Casos pelos dados da EU Open Data Portal: `r format(ultimadata, '%d-%m-%Y')`
 
 
 
@@ -850,4 +850,5 @@ brcovid19 %>%
 
 ------------
 
-<span><a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a></span>
+
+<div><span><a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a></span><span style="color:blue;font-size:8px; padding: 20%;">Página gerada em: "`r format(Sys.time(), '%c')`"</span></div>
