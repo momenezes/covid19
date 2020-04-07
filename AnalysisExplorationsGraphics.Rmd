@@ -28,6 +28,7 @@ library(RColorBrewer)
 library(ggthemes)
 library(plotly)
 library(rvest)
+library(data.table)
 ```
 
 
@@ -508,6 +509,10 @@ select(Country,DateRep,ProgRateCases) %>%
   pivot_wider(names_from = Country, values_from = ProgRateCases) %>% kable()
 ```
 
+```{r}
+theme_set(theme_clean())
+```
+
 ```{r plota2gr}
 plt2gr <- function(df, pais) {
   df %>%
@@ -522,7 +527,7 @@ plt2gr <- function(df, pais) {
   ggplot(aes(x = DateRep)) +
   geom_point(aes(y = ProgRateCases), color  = "blue") +
   geom_smooth(aes(y = ProgRateCases), se = FALSE, span = 0.12) +
-  labs(x = "Data",y = "Taxa Evolução",caption = Fonte) -> g2
+  labs(x = "Data",y = "Taxa Evolução",caption = Fonte) + theme_clean() -> g2
 figura <- ggarrange(g1,g2,ncol = 1,nrow = 2,align = "v")
 annotate_figure(figura, text_grob(paste0("Número de Novos Casos e Taxa de Evolução - ", pais)))
 }
@@ -570,11 +575,28 @@ plt2gr(txprogtops, "Spain")
 ```
 
 
+### Casos confirmados _vs_  Novos Casos
 
-```{r eval = FALSE}
-txprogtops %>% select(Country,NewCases,ConfirmedCases) %>%
-    ggplot(aes(x = ConfirmedCases, y = NewCases)) +
-    geom_line(aes(color = Country), size = 1.5)
+O gráfico abaixo é interessante para ver que os comportamentos são muito parecidos. Usei uma média móvel de 3 observações.
+
+```{r mediamovel}
+setDT(txprogtops)     # converts test to a data.table in place
+setkey(txprogtops,DateRep,Country)
+txprogtops[,NewCasesMA:=as.numeric(frollmean(NewCases,n=3, align='right',hasNA=TRUE)), by=Country]
+txprogtops <- as_tibble(txprogtops)
+```
+
+
+```{r grmediamovel}
+txprogtops %>% 
+  filter(ConfirmedCases >= 1 ) %>% 
+  mutate(Dia = row_number()) %>%
+  filter(Country %in% c("US", "Spain","Italy","Germany")) %>%
+  select(Country,NewCasesMA,ConfirmedCases,Dia) %>%
+    ggplot(aes(x = ConfirmedCases, y = NewCasesMA)) +
+    geom_line(aes(color = Country), size = 1.5) + 
+    labs(x = "Casos Confirmados", y = "Novos Casos", title = "Média Móvel (n=3)", color ="")  + 
+    scale_color_discrete(l = 40,c = 150) + theme_clean()
 ```
 
 
@@ -619,7 +641,7 @@ filter(jhucovid19, Country %in% unlist(dadosparecidos$Country)) %>%
   ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country), size = 1.5) + 
   labs(y = "Número de Casos", x = "Núm Dias após o 1º caso", shape = "", color= "", 
        title = "Evolução dos 55 primeiros dias após o 1º caso", caption = Fonte) +
-  scale_color_discrete(l = 40,c = 150) 
+  scale_color_discrete(l = 40,c = 150) + theme_clean()
 #fig <- ggplotly(g)
 #fig
 ```
@@ -634,7 +656,7 @@ filter(jhucovid19, Country %in% unlist(dadosparecidos$Country)) %>%
   ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country), size = 1.5) + 
   labs(y = "Número de Casos", x = "Núm Dias após o 14º caso", shape = "", color= "", 
        title = "Evolução dos 35 primeiros dias após o 14º caso", caption = Fonte)  + 
-  scale_color_discrete(l = 40,c = 150) 
+  scale_color_discrete(l = 40,c = 150) + theme_clean()
 #fig <- ggplotly(g)
 #fig
 ```
@@ -648,7 +670,7 @@ filter(jhucovid19, Country %in% unlist(dadosparecidos$Country)) %>%
   ggplot(aes(x = Dia, y = ConfirmedCases)) + geom_point(aes(shape = Country, color = Country),size = 1.5) + 
   labs(y = "Número de Casos", x = "Núm Dias após o 30º caso", shape = "", color= "", 
        title = "Evolução após o 30º caso", caption = Fonte)  + 
-  scale_color_discrete(l = 40,c = 150)
+  scale_color_discrete(l = 40,c = 150) + theme_clean()
 #fig <- ggplotly(g)
 #fig
 ```
@@ -658,7 +680,7 @@ filter(jhucovid19, Country %in% unlist(dadosparecidos$Country)) %>%
   filter(ConfirmedCases >= 30 ) %>% 
   group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
   pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% 
-  kable(caption = "Evolução dos casos após o 30º caso confirmado")
+  kable(caption = "Evolução dos casos após o 30º caso confirmado") + theme_clean()
 ```
 
 
@@ -691,9 +713,12 @@ ggplot(data = dg, aes(x = DateRep, y = ProgRateCases)) +
   geom_point(aes(color = Country, linetype = Country)) + 
   geom_smooth(aes(color = Country), se = FALSE, span = 0.15) +
   labs(color="", caption = Fonte) + guides(shape = "none", linetype="none") + 
-  scale_color_brewer(palette = "Set1")
+  scale_color_brewer(palette = "Set1") + theme_clean()
 ```
 
+```{r}
+theme_set(theme_clean())
+```
 
 ### Gráficos individuais dos países semelhantes ao Brasil: Taxa de evolução e número de novos casos
 
@@ -767,7 +792,7 @@ hoje <- today()
 ```
 
 
-### Total de Casos pelos dados do Worldometer: `r format(ymd(hoje), '%d-%m-%Y')`
+### Total de Casos pelos dados do Worldometer: `r format(hoje, '%d-%m-%Y')`
 
 ```{r}
 womcovid19 %>%
@@ -777,7 +802,7 @@ womcovid19 %>%
 ```
 
 
-### Lista de países com mais de 500 casos, ordenados por número de casos confirmados: `r format(ymd(hoje), '%d-%m-%Y')`
+### Lista de países com mais de 500 casos, ordenados por número de casos confirmados: `r format(hoje, '%d-%m-%Y')`
 
 ```{r}
 womcovid19 %>% 
@@ -831,7 +856,7 @@ filter(CasosTot > 0) %>%
   geom_bar(stat="identity", position = "dodge") +
   labs(x = "Data", title="Número de Casos Reportados diariamente no Brasil", 
        caption = Fonte, fill ="", y = "") + 
-  scale_fill_brewer(palette = "Set1")
+  scale_fill_brewer(palette = "Set1") + theme_clean()
 ```
 
 
@@ -844,7 +869,7 @@ brcovid19 %>%
   geom_bar(stat="identity", position = "dodge") +
   labs(x = "", title="Número de Casos por Estado", 
        caption = Fonte, fill ="", y = "") + 
-  scale_fill_brewer(palette = "Set1") +
+  scale_fill_brewer(palette = "Set1") + theme_clean() +
   theme(axis.text.x = element_text(angle = 90))
 ```
 
