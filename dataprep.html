@@ -138,7 +138,7 @@ code span.ot { color: #007020; }
 <section class="page-header">
 <h1 class="title toc-ignore project-name">Download e Preparação dos Dados</h1>
 <h4 class="author project-author">Mário Olímpio de Menezes</h4>
-<h4 class="date project-date">07 April, 2020</h4>
+<h4 class="date project-date">08 April, 2020</h4>
 </section>
 
 
@@ -197,13 +197,13 @@ https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-dis
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">covid19prep &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="kw">paste</span>(<span class="st">&quot;./data&quot;</span>,arqdest,<span class="dt">sep=</span><span class="st">&quot;/&quot;</span>))</a></code></pre></div>
 <p>A estrutura dos dados é:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">str</span>(covid19prep)</a></code></pre></div>
-<pre><code>## Classes 'tbl_df', 'tbl' and 'data.frame':    9107 obs. of  10 variables:
-##  $ dateRep                : POSIXct, format: &quot;2020-04-06&quot; &quot;2020-04-05&quot; ...
-##  $ day                    : num  6 5 4 3 2 1 31 30 29 28 ...
-##  $ month                  : num  4 4 4 4 4 4 3 3 3 3 ...
+<pre><code>## Classes 'tbl_df', 'tbl' and 'data.frame':    9310 obs. of  10 variables:
+##  $ dateRep                : POSIXct, format: &quot;2020-04-07&quot; &quot;2020-04-06&quot; ...
+##  $ day                    : num  7 6 5 4 3 2 1 31 30 29 ...
+##  $ month                  : num  4 4 4 4 4 4 4 3 3 3 ...
 ##  $ year                   : num  2020 2020 2020 2020 2020 2020 2020 2020 2020 2020 ...
-##  $ cases                  : num  29 35 0 43 26 25 27 8 15 16 ...
-##  $ deaths                 : num  2 1 0 0 0 0 0 1 1 1 ...
+##  $ cases                  : num  38 29 35 0 43 26 25 27 8 15 ...
+##  $ deaths                 : num  0 2 1 0 0 0 0 0 1 1 ...
 ##  $ countriesAndTerritories: chr  &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; ...
 ##  $ geoId                  : chr  &quot;AF&quot; &quot;AF&quot; &quot;AF&quot; &quot;AF&quot; ...
 ##  $ countryterritoryCode   : chr  &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; ...
@@ -212,11 +212,11 @@ https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-dis
 <a class="sourceLine" id="cb7-2" data-line-number="2">                      <span class="dt">Cases =</span> cases, <span class="dt">Deaths =</span> deaths, <span class="dt">Day =</span> day, <span class="dt">Month =</span> month) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(Country, DateRep, Cases, Deaths, countryterritoryCode, popData2018)</a></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">str</span>(covid19prep)</a></code></pre></div>
-<pre><code>## Classes 'tbl_df', 'tbl' and 'data.frame':    9107 obs. of  6 variables:
+<pre><code>## Classes 'tbl_df', 'tbl' and 'data.frame':    9310 obs. of  6 variables:
 ##  $ Country             : chr  &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; ...
-##  $ DateRep             : POSIXct, format: &quot;2020-04-06&quot; &quot;2020-04-05&quot; ...
-##  $ Cases               : num  29 35 0 43 26 25 27 8 15 16 ...
-##  $ Deaths              : num  2 1 0 0 0 0 0 1 1 1 ...
+##  $ DateRep             : POSIXct, format: &quot;2020-04-07&quot; &quot;2020-04-06&quot; ...
+##  $ Cases               : num  38 29 35 0 43 26 25 27 8 15 ...
+##  $ Deaths              : num  0 2 1 0 0 0 0 0 1 1 ...
 ##  $ countryterritoryCode: chr  &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; ...
 ##  $ popData2018         : num  37172386 37172386 37172386 37172386 37172386 ...</code></pre>
 <p>Como a base do EU Open Data Portal contém o código ISO3C dos países, vou utilizar o pacote <code>countrycode</code> para uniformizar os nomes dos países e adicionar os continentes. Vou retirar aqueles que não estiverem nesta base.</p>
@@ -229,20 +229,20 @@ https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-dis
 <a class="sourceLine" id="cb10-7" data-line-number="7">                                 <span class="dt">destination =</span> <span class="st">&quot;continent&quot;</span>))</a></code></pre></div>
 <p>Existem alguns problemas na base de dados, que não vou tratar aqui; simplesmente vou gravar deste modo. Na análise decide-se o que será feito com estes dados.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">covid19prep <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">is.na</span>(Continent))</a></code></pre></div>
-<pre><code>## # A tibble: 106 x 7
+<pre><code>## # A tibble: 208 x 7
 ##    Country DateRep             Cases Deaths countryterritor… popData2018
 ##    &lt;chr&gt;   &lt;dttm&gt;              &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt;
-##  1 Anguil… 2020-04-06 00:00:00     0      0 &lt;NA&gt;                      NA
-##  2 Anguil… 2020-04-05 00:00:00     0      0 &lt;NA&gt;                      NA
-##  3 Anguil… 2020-04-04 00:00:00     0      0 &lt;NA&gt;                      NA
-##  4 Anguil… 2020-04-03 00:00:00     1      0 &lt;NA&gt;                      NA
-##  5 Anguil… 2020-04-02 00:00:00     0      0 &lt;NA&gt;                      NA
-##  6 Anguil… 2020-04-01 00:00:00     0      0 &lt;NA&gt;                      NA
-##  7 Anguil… 2020-03-31 00:00:00     0      0 &lt;NA&gt;                      NA
-##  8 Anguil… 2020-03-30 00:00:00     0      0 &lt;NA&gt;                      NA
-##  9 Anguil… 2020-03-29 00:00:00     0      0 &lt;NA&gt;                      NA
-## 10 Anguil… 2020-03-28 00:00:00     0      0 &lt;NA&gt;                      NA
-## # … with 96 more rows, and 1 more variable: Continent &lt;chr&gt;</code></pre>
+##  1 Anguil… 2020-04-07 00:00:00     0      0 &lt;NA&gt;                      NA
+##  2 Anguil… 2020-04-06 00:00:00     0      0 &lt;NA&gt;                      NA
+##  3 Anguil… 2020-04-05 00:00:00     0      0 &lt;NA&gt;                      NA
+##  4 Anguil… 2020-04-04 00:00:00     0      0 &lt;NA&gt;                      NA
+##  5 Anguil… 2020-04-03 00:00:00     1      0 &lt;NA&gt;                      NA
+##  6 Anguil… 2020-04-02 00:00:00     0      0 &lt;NA&gt;                      NA
+##  7 Anguil… 2020-04-01 00:00:00     0      0 &lt;NA&gt;                      NA
+##  8 Anguil… 2020-03-31 00:00:00     0      0 &lt;NA&gt;                      NA
+##  9 Anguil… 2020-03-30 00:00:00     0      0 &lt;NA&gt;                      NA
+## 10 Anguil… 2020-03-29 00:00:00     0      0 &lt;NA&gt;                      NA
+## # … with 198 more rows, and 1 more variable: Continent &lt;chr&gt;</code></pre>
 <p>Agora vou salvar este <code>data.frame</code> para ser utilizado nas análises. Vou utilizar um nome que indique sempre o último conjunto de dados disponível para esta fonte: <code>eeuucovid19_last.csv</code></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">write_csv</span>(covid19prep, <span class="st">&quot;./data/eeuucovid19_last.csv&quot;</span>)</a></code></pre></div>
 </div>
