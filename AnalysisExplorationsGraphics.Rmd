@@ -29,6 +29,7 @@ library(ggthemes)
 library(plotly)
 library(rvest)
 library(data.table)
+library(scales)
 ```
 
 
@@ -577,12 +578,18 @@ plt2gr(txprogtops, "Spain")
 
 ### Casos confirmados _vs_  Novos Casos
 
-O gráfico abaixo é interessante para ver que os comportamentos são muito parecidos. Usei uma média móvel de 3 observações.
+```{r}
+nma = 5
+```
+
+
+O gráfico abaixo é interessante para ver que os comportamentos são muito parecidos. Usei uma média móvel de `r nma` observações.
 
 ```{r mediamovel}
-setDT(txprogtops)     # converts test to a data.table in place
+setDT(txprogtops)
 setkey(txprogtops,DateRep,Country)
-txprogtops[,NewCasesMA:=as.numeric(frollmean(NewCases,n=3, align='right',hasNA=TRUE)), by=Country]
+txprogtops[,NewCasesMA:=as.numeric(frollmean(NewCases,n=nma, align='right',hasNA=TRUE)), by=Country]
+txprogtops[,ProgRateCasesMA:=as.numeric(frollmean(ProgRateCases,n=nma, align='right',hasNA=TRUE)), by=Country]
 txprogtops <- as_tibble(txprogtops)
 ```
 
@@ -595,8 +602,83 @@ txprogtops %>%
   select(Country,NewCasesMA,ConfirmedCases,Dia) %>%
     ggplot(aes(x = ConfirmedCases, y = NewCasesMA)) +
     geom_line(aes(color = Country), size = 1.5) + 
-    labs(x = "Casos Confirmados", y = "Novos Casos", title = "Média Móvel (n=3)", color ="")  + 
+    labs(x = "Casos Confirmados", y = "Novos Casos", title = "Casos Novos x Confirmados", subtitle = glue::glue("Média Móvel (n=",nma,")"), color ="", caption = Fonte)  + 
     scale_color_discrete(l = 40,c = 150) + theme_clean()
+```
+
+Agora apenas com os países com comportamentos mais parecidos: Itália, Espanha, Alemanha
+
+```{r}
+txprogtops %>% 
+  filter(ConfirmedCases >= 1 ) %>% 
+  mutate(Dia = row_number()) %>%
+  filter(Country %in% c("Spain","Italy","Germany")) %>%
+  select(Country,NewCasesMA,ConfirmedCases,Dia) %>%
+    ggplot(aes(x = ConfirmedCases, y = NewCasesMA)) +
+    geom_line(aes(color = Country), size = 1.5) + 
+    labs(x = "Casos Confirmados", y = "Novos Casos", title = "Casos Novos x Confirmados", subtitle = glue::glue("Média Móvel (n=",nma,")"), color ="", caption = Fonte)  +
+    scale_color_discrete(l = 40,c = 150) + theme_clean()  + theme(legend.position = "top") -> g1
+g1
+```
+
+
+```{r}
+txprogtops %>%
+  filter(ConfirmedCases >= 1 ) %>% 
+  mutate(Dia = row_number()) %>%
+  filter(Country %in% c("Spain","Italy","Germany")) %>%
+  select(Country,DateRep,ConfirmedCases, ProgRateCasesMA) %>%
+  ggplot(aes(x = DateRep, y = ProgRateCasesMA)) +  
+  geom_point(aes(color = Country, linetype = Country)) + 
+  geom_smooth(aes(color = Country), se = FALSE, span = 0.15) +
+  labs(color="", title = "Taxa de Evolução", subtitle = glue::glue("Média Móvel (n=",nma,")"), caption = Fonte) + 
+  guides(shape = "none", linetype="none") + 
+  scale_color_brewer(palette = "Set1") + theme_clean() + theme(legend.position = "top") -> g2
+g2
+```
+
+```{r}
+g12 <- ggarrange(g1,g2,ncol = 2, nrow = 1)
+g12
+```
+
+
+### Casos Confirmados _vs_  Número de dias decorridos após 100º caso
+
+Para colocar todos os países no mesmo gráfico, é necessário utilizar uma escala *log*, que comprime a amplitude dos dados, permitindo melhor visualização do comportamento geral.
+
+```{r}
+n <- filter(jhucovid19,ConfirmedCases >= 100) %>% dim()
+DobroG <- c()
+DobroG[1] <- 100
+QuintG <- c()
+QuintG[1] <- 100
+n <- n[1]
+for (d in 2:n) {
+    DobroG[d] <- DobroG[d-1]*sqrt(2)
+    QuintG[d] <- QuintG[d-1]*2**(1/5)
+}
+yD = 0.7*max(DobroG)
+yQ = 0.7*max(QuintG)
+```
+
+
+```{r grconfdias}
+jhucovid19 %>% 
+  filter(ConfirmedCases >= 100 ) %>% 
+  group_by(Country) %>%
+  mutate(Dia = row_number(), Dobro = DobroG[row_number()], Dobra5d = QuintG[row_number()]) %>%
+  filter(Country %in% c("US", "Spain","Italy","Germany","France","Turkey")) %>%
+  select(Country,ConfirmedCases,Dia, Dobro, Dobra5d) %>%
+    ggplot(aes(x = Dia, y = ConfirmedCases)) +
+    geom_line(aes(color = Country), size = 1) + 
+    geom_line(aes(y = Dobro), linetype = 2, size = 0.2) +
+    geom_line(aes(y = Dobra5d), linetype = 2, size = 0.2) +
+    labs(x = "Dias decorridos", y = "Casos Confirmados", title = "Casos Confirmados após 100º caso",  color ="", caption = Fonte)  + scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+              labels = trans_format("log10", math_format(10^.x))) +  expand_limits(y = 10) +
+  theme(legend.position =  "none") + annotate("text", x = 34, y = 10**8, label = "Dobra 2 dias") +
+  annotate("text", x = 40, y = 10**3.7, label = "Quintuplica 2 dias") +
+    scale_color_discrete(l = 40,c = 150) + theme_clean() + theme(legend.position = "right") 
 ```
 
 
