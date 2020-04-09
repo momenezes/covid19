@@ -686,7 +686,7 @@ jhucovid19 %>%
     labs(x = "Dias decorridos", y = "Casos Confirmados", title = "Casos Confirmados após 100º caso",  color ="", caption = Fonte)  + scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
               labels = trans_format("log10", math_format(10^.x))) +  expand_limits(y = 10) +
   theme(legend.position =  "none") + annotate("text", x = 34, y = 10**8, label = "Dobra 2 dias") +
-  annotate("text", x = 40, y = 10**3.7, label = "Dobro 5 dias") +
+  annotate("text", x = 40, y = 10**3.7, label = "Dobra 5 dias") +
     scale_color_discrete(l = 40,c = 150) + theme_clean() + theme(legend.position = "right") 
 ```
 
@@ -824,7 +824,7 @@ jhucovid19 %>%
     labs(x = "Dias decorridos", y = "Casos Confirmados", title = "Casos Confirmados após 100º caso",  color ="", caption = Fonte)  + scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
               labels = trans_format("log10", math_format(10^.x))) +  expand_limits(x = c(0,35), y = 10) +
   theme(legend.position =  "none") + annotate("text", x = 24, y = 10**6.3, label = "Dobra 2 dias") +
-  annotate("text", x = 30, y = 10**3, label = "Dobro 5 dias") +
+  annotate("text", x = 30, y = 10**3, label = "Dobra 5 dias") +
     scale_color_discrete(l = 40,c = 150) + theme_clean() + theme(legend.position = "right") 
 ```
 
@@ -843,7 +843,7 @@ jhucovid19 %>%
     labs(x = "Dias decorridos", y = "Casos Confirmados", title = "Casos Confirmados após 100º caso",  color ="", caption = Fonte)  + scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
               labels = trans_format("log10", math_format(10^.x))) +  expand_limits(x = c(0,35), y = 10) +
   theme(legend.position =  "none") + annotate("text", x = 24, y = 10**6.3, label = "Dobra 2 dias") +
-  annotate("text", x = 30, y = 10**3, label = "Dobro 5 dias") +
+  annotate("text", x = 30, y = 10**3, label = "Dobra 5 dias") +
     scale_color_discrete(l = 40,c = 150) + theme_clean() + theme(legend.position = "right") 
 ```
 
