@@ -13,7 +13,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, knitr.kable.NA = '', cache = TRUE)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, knitr.kable.NA = '')
 ```
 
 ```{r warning=FALSE, message=FALSE}
@@ -762,7 +762,7 @@ filter(jhucovid19, Country %in% unlist(dadosparecidos$Country)) %>%
   filter(ConfirmedCases >= 30 ) %>% 
   group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
   pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% 
-  kable(caption = "Evolução dos casos após o 30º caso confirmado") + theme_clean()
+  kable(caption = "Evolução dos casos após o 30º caso confirmado") 
 ```
 
 
