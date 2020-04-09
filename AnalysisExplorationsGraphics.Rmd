@@ -30,6 +30,8 @@ library(plotly)
 library(rvest)
 library(data.table)
 library(scales)
+library(kableExtra)
+library(DT)
 ```
 
 
@@ -94,7 +96,8 @@ ultimadata <- max(covid19$DateRep)
 
 ```{r}
 covid19 %>% 
-  summarise(`Casos no Mundo (EU Open Data Portal)` = sum(Cases)) %>% kable()
+  summarise(`Casos no Mundo (EU Open Data Portal)` = sum(Cases)) %>% 
+  kable()
 ```
 
 ## Brasil vs Itália {#BRvsIT}
@@ -112,12 +115,16 @@ Brasil <- covid19 %>%
 
 Uma mostra dos últimos 20 dias da Itália.
 ```{r}
-Italia %>% select(-Country, -Continent, -popData2018) %>% top_n(20, DateRep) %>% kable()
+Italia %>% select(-Country, -Continent, -popData2018) %>% top_n(20, DateRep) %>% 
+  mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>% datatable(rownames = F, autoHideNavigation = T )
+  
 ```
 
 O mesmo para o Brasil, últimos 20 dias.
 ```{r}
-Brasil %>% select(-Country, -Continent, -popData2018) %>% top_n(20, DateRep) %>% kable()
+Brasil %>% select(-Country, -Continent, -popData2018) %>% top_n(20, DateRep) %>% 
+   mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
+  datatable(rownames = F, autoHideNavigation = T )
 ```
 
 ```{r}
@@ -266,8 +273,9 @@ covid19 %>%
   group_by(Country) %>% 
   summarise(Casos = sum(Cases), Mortes = sum(Deaths)) %>% 
   arrange(desc(Casos)) %>% 
-  filter(Casos > 500) %>% 
-   kable(caption = "Países (com mais de 500 casos) ordenados por número de casos confirmados",col.names = c("País", "Casos","Mortes"))
+  filter(Casos > 500) %>% datatable(rownames = F, autoHideNavigation = T )
+#  kable(caption = "Países (com mais de 500 casos) ordenados por número de casos confirmados",col.names = c("País", "Casos","Mortes"), escape = F, align = "c") %>%
+#  kable_styling(c("striped", "condensed"), full_width = F)
 ```
 
 
@@ -318,20 +326,29 @@ ultimadata <- max(jhucovid19$DateRep)
 
 
 ```{r}
-filter(jhucovid19, Country == "France") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% kable(caption = "França")
+filter(jhucovid19, Country == "France") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% 
+   mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>% 
+  datatable(rownames = F, autoHideNavigation = T, caption = "França" )
+#  kable(caption = "França")
 ```
 
 
 ```{r}
-filter(jhucovid19, Country == "Italy") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% kable(caption = "Itália")
+filter(jhucovid19, Country == "Italy") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% 
+   mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
+  datatable(rownames = F, autoHideNavigation = T ,caption = "Itália")
 ```
 
 ```{r}
-filter(jhucovid19, Country == "Spain") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% kable(caption = "Espanha")
+filter(jhucovid19, Country == "Spain") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% 
+   mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
+  datatable(rownames = F, autoHideNavigation = T , caption = "Espanha")
 ```
 
 ```{r}
-filter(jhucovid19, Country == "Brazil") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% kable(caption = "Brasil")
+filter(jhucovid19, Country == "Brazil") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% 
+   mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
+  datatable(rownames = F, autoHideNavigation = T , caption = "Brasil")
 ```
 
 
@@ -354,7 +371,8 @@ jhucovid19 <- group_by(jhucovid19, Country) %>%
 group_by(jhucovid19, Country) %>% 
   summarise(ConfirmedCases = last(ConfirmedCases), Deaths = last(Deaths), Recuperados = last(Recovered)) %>% 
   arrange(desc(ConfirmedCases)) -> listaNumCasos
-  kable(filter(listaNumCasos,ConfirmedCases >= 500),col.names = c("País", "Casos","Mortes","Recuperados"))
+  datatable(filter(listaNumCasos,ConfirmedCases >= 500), rownames = F, autoHideNavigation = T, colnames = c("País", "Casos","Mortes","Recuperados") )
+#  kable(filter(listaNumCasos,ConfirmedCases >= 500),col.names = c("País", "Casos","Mortes","Recuperados"))
 ```
 
 
@@ -483,7 +501,9 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
   filter(ConfirmedCases >= 30 ) %>% 
   group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
   pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% 
-  kable(caption = "Evolução dos casos após o 30º caso confirmado")
+   mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
+  datatable(rownames = F, autoHideNavigation = T, caption = "Evolução dos casos após o 30º caso confirmado" )
+#  kable(caption = "Evolução dos casos após o 30º caso confirmado")
 ```
 
 
@@ -518,7 +538,8 @@ jhucovid19 <- as_tibble(jhucovid19)
 txprogtops <- filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","US","China"))
 txprogtops %>% filter(DateRep >= ymd("2020-03-01")) %>% mutate(DateRep = format(DateRep,"%Y-%m-%d"), ProgRateCases = format(ProgRateCases, digits = 3)) %>% 
 select(Country,DateRep,ProgRateCases) %>%
-  pivot_wider(names_from = Country, values_from = ProgRateCases) %>% kable()
+  pivot_wider(names_from = Country, values_from = ProgRateCases) %>% 
+  datatable(rownames = F, autoHideNavigation = T, caption = "Evolução dos casos após o 30º caso confirmado")
 ```
 
 
@@ -710,7 +731,7 @@ Em 25 de Março de 2020, os países abaixo tinham número de casos próximos ent
 ```{r}
 dadosparecidos <- filter(jhucovid19, DateRep == ymd("2020-03-25"), ConfirmedCases >= (dadosBR - 250) & ConfirmedCases <= dadosBR + 250) %>% select(Country,ConfirmedCases)
 dadosparecidos <- bind_rows(dadosparecidos, filter(jhucovid19, DateRep == ymd("2020-03-25"), Country == "Portugal") %>% select(Country, ConfirmedCases))
-kable(dadosparecidos)
+kable(dadosparecidos) %>% kable_styling(c("striped", "condensed"), full_width = F)
 ```
 
 Os gráficos a seguir mostram a evolução dos casos nestes países a partir de pontos diferentes:
@@ -768,7 +789,8 @@ filter(jhucovid19, Country %in% unlist(dadosparecidos$Country)) %>%
   filter(ConfirmedCases >= 30 ) %>% 
   group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
   pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% 
-  kable(caption = "Evolução dos casos após o 30º caso confirmado") 
+   mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
+  datatable(rownames = F, autoHideNavigation = T, caption = "Evolução dos casos após o 30º caso confirmado") 
 ```
 
 
@@ -788,7 +810,8 @@ txprogpar %>%
   filter(DateRep >= ymd("2020-03-01")) %>% 
   mutate(DateRep = format(DateRep,"%Y-%m-%d"), ProgRateCases = format(ProgRateCases, digits = 3)) %>%
   select(Country,DateRep,ProgRateCases) %>%
-  pivot_wider(names_from = Country, values_from = ProgRateCases) %>% kable()
+  pivot_wider(names_from = Country, values_from = ProgRateCases) %>% 
+  datatable(rownames = F, autoHideNavigation = T, caption = "Taxa de Progressão") 
 ```
 
 
@@ -879,6 +902,8 @@ Ela está disponível em `https://www.worldometers.info/coronavirus/`
 
 O problema é que não achei nenhum `csv` ou `xlsx` para baixar; então vou a solução é fazer um _web scraping_ e pegar os dados. Utilizando o pacote `rvest` e seguindo a dica [deste post](https://www.r-bloggers.com/using-rvest-to-scrape-an-html-table/) foi razoavelmente fácil. 
 
+
+
 ```{r}
 url <- "https://www.worldometers.info/coronavirus/"
 coronaworldometer <- url %>%
@@ -892,14 +917,14 @@ womcovid19 <- coronaworldometer[[1]]
 
 Olhando a estrutura destes dados:
 
-```{r}
+```{r eval = FALSE}
 str(womcovid19)
 ```
 
 Depois de pegar a tabela em html e colocar em um `data.frame`, algumas limpezas e transformações são necessárias: algumas colunas, como a `NewCases`, tem o símbolo `+`; os números vieram formatados como _strings_ com separador de milhar (`,`), e algumas outras coisas. Então, algumas manipulações serão feitas para acertar isso.
 
 ```{r}
-head(womcovid19) %>% select(`Country,Other`,TotalCases,NewCases,TotalDeaths,NewDeaths) %>% kable()
+head(womcovid19) %>% select(`Country,Other`,TotalCases,NewCases,TotalDeaths,NewDeaths) %>% kable() %>% kable_styling(c("striped"), full_width = F)
 ```
 
 ```{r}
@@ -919,21 +944,30 @@ hoje <- today()
 
 ### Total de Casos pelos dados do Worldometer: `r format(hoje, '%d-%m-%Y')` {#WorldometerTot}
 
+<!-- Europe North America Asia South America Africa Oceania  -->
+
+O Worldometer não contabiliza os casos do _Diamond Princess_ ou contabiliza juntamente com algum país, ou países (da nacionalidade de cada pessoa). Então, estou retirando também para refletir o valor mostrado no site do Worldometer.
+
+O Worldometer também passou a apresentar totais de alguns continentes ou regiões; como não está padronizado, ou seja, não estão agrupando por continentes, que seria fácil remover na filtragem; ao invés disso, colocaram por exemplo, _North America_ e _South America_, mas não tem _Americas_. Assim, estou removendo de acordo com o que eles mudam no site.
+
 ```{r}
 womcovid19 %>%
+  filter(!Country %in% c("Europe", "Asia", "North America", "South America", "Africa", "Oceania", "Diamond Princess")) %>%
   select(TotalCases, TotalDeaths, TotalRecovered) %>% 
   dplyr::summarise(TotalCasos = sum(TotalCases,na.rm = T), TotalMortes=sum(TotalDeaths,na.rm = T), TotalRecuperados = sum(TotalRecovered,na.rm = T)) %>%
-  kable()
+  kable() 
 ```
 
 
 ### Lista de países com mais de 500 casos, ordenados por número de casos confirmados: `r format(hoje, '%d-%m-%Y')` {#WorldometerPaises}
 
+Conforme explicado acima, o Worldometer passou a incluir totalizações por continentes e regiões. Vou manter na listagem para facilitar a comparação dos valores.
+
 ```{r}
 womcovid19 %>% 
   select(Country, TotalCases, TotalDeaths, TotalRecovered) %>% 
   arrange(desc(TotalCases)) %>% filter(TotalCases >= 500) %>%
-  kable()
+  datatable(rownames = F, autoHideNavigation = T) 
 ```
 
 
@@ -948,7 +982,7 @@ brcovid19 <- read_csv("./data/brazil_covid19.csv", col_types = cols(date = col_d
 Fonte = "Raphael Fontes (Kaggle)"
 ```
 
-```{r}
+```{r eval = FALSE}
 str(brcovid19)
 ```
 
@@ -969,7 +1003,7 @@ brcovid19 %>%
   group_by(Estado) %>% 
   summarise(TotEstado = last(Casos), MortesEstado = last(Mortes)) %>%
   summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado)) %>% 
-  kable()
+  kable() 
 ```
 
 
