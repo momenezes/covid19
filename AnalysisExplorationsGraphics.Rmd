@@ -493,10 +493,14 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
 Seguindo a ideia apresentada neste vídeo [Te Explico POR QUÉ estoy PREOCUPADO](https://youtu.be/-PUT0hZiZEw), calculei a taxa de evolução (*chamado de 'factor' no vídeo*)
 A taxa de evolução representada aqui é dada por $$TxEv = \frac{NumCasos_i - NumCasos_{i-1}}{NumCasos_{i-1}} + 1$$ É uma maneira simples de representar o acréscimo proporcional de um dia para outro.
 
+```{r}
+nma = 5
+```
+
 
 
 ```{r tidy.opts=list(options(knitr.kable.NA = ''))}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","US","China")) %>% 
+jhucovid19 %<>% 
   group_by(Country) %>% 
   filter(ConfirmedCases >= 1) %>% 
   arrange(DateRep) %>%
@@ -504,7 +508,14 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
          ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
          ProgRateDeaths = ProgRateDeaths + 1,
          ProgRateCases = ProgRateCases + 1
-         ) -> txprogtops
+         ) 
+setDT(jhucovid19)
+setkey(jhucovid19,DateRep,Country)
+jhucovid19[,NewCasesMA:=as.numeric(frollmean(NewCases,n=nma, align='right',hasNA=TRUE)), by=Country]
+jhucovid19[,ProgRateCasesMA:=as.numeric(frollmean(ProgRateCases,n=nma, align='right',hasNA=TRUE)), by=Country]
+jhucovid19 <- as_tibble(jhucovid19)
+
+txprogtops <- filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","US","China"))
 txprogtops %>% filter(DateRep >= ymd("2020-03-01")) %>% mutate(DateRep = format(DateRep,"%Y-%m-%d"), ProgRateCases = format(ProgRateCases, digits = 3)) %>% 
 select(Country,DateRep,ProgRateCases) %>%
   pivot_wider(names_from = Country, values_from = ProgRateCases) %>% kable()
@@ -578,10 +589,6 @@ plt2gr(txprogtops, "Spain")
 
 ### Casos confirmados _vs_  Novos Casos
 
-```{r}
-nma = 5
-```
-
 
 O gráfico abaixo é interessante para ver que os comportamentos são muito parecidos. Usei uma média móvel de `r nma` observações.
 
@@ -620,6 +627,8 @@ txprogtops %>%
     scale_color_discrete(l = 40,c = 150) + theme_clean()  + theme(legend.position = "top") -> g1
 g1
 ```
+
+
 
 
 ```{r}
@@ -677,7 +686,7 @@ jhucovid19 %>%
     labs(x = "Dias decorridos", y = "Casos Confirmados", title = "Casos Confirmados após 100º caso",  color ="", caption = Fonte)  + scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
               labels = trans_format("log10", math_format(10^.x))) +  expand_limits(y = 10) +
   theme(legend.position =  "none") + annotate("text", x = 34, y = 10**8, label = "Dobra 2 dias") +
-  annotate("text", x = 40, y = 10**3.7, label = "Quintuplica 2 dias") +
+  annotate("text", x = 40, y = 10**3.7, label = "Dobro 5 dias") +
     scale_color_discrete(l = 40,c = 150) + theme_clean() + theme(legend.position = "right") 
 ```
 
@@ -798,9 +807,46 @@ ggplot(data = dg, aes(x = DateRep, y = ProgRateCases)) +
   scale_color_brewer(palette = "Set1") + theme_clean()
 ```
 
+
+
+
 ```{r}
-theme_set(theme_clean())
+jhucovid19 %>% 
+  filter(ConfirmedCases >= 100 ) %>% 
+  group_by(Country) %>%
+  mutate(Dia = row_number(), Dobro = DobroG[row_number()], Dobra5d = QuintG[row_number()]) %>%
+  filter(Country %in% c("Australia", "Brazil","Israel","Portugal","Sweden","Turkey")) %>%
+  select(Country,ConfirmedCases,Dia, Dobro, Dobra5d) %>%
+    ggplot(aes(x = Dia, y = ConfirmedCases)) +
+    geom_line(aes(color = Country), size = 1) + 
+    geom_line(aes(y = Dobro), linetype = 2, size = 0.2) +
+    geom_line(aes(y = Dobra5d), linetype = 2, size = 0.2) +
+    labs(x = "Dias decorridos", y = "Casos Confirmados", title = "Casos Confirmados após 100º caso",  color ="", caption = Fonte)  + scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+              labels = trans_format("log10", math_format(10^.x))) +  expand_limits(x = c(0,35), y = 10) +
+  theme(legend.position =  "none") + annotate("text", x = 24, y = 10**6.3, label = "Dobra 2 dias") +
+  annotate("text", x = 30, y = 10**3, label = "Dobro 5 dias") +
+    scale_color_discrete(l = 40,c = 150) + theme_clean() + theme(legend.position = "right") 
 ```
+
+
+```{r}
+jhucovid19 %>% 
+  filter(ConfirmedCases >= 100 ) %>% 
+  group_by(Country) %>%
+  mutate(Dia = row_number(), Dobro = DobroG[row_number()], Dobra5d = QuintG[row_number()]) %>%
+  filter(Country %in% c( "Brazil","Israel","Portugal")) %>%
+  select(Country,ConfirmedCases,Dia, Dobro, Dobra5d) %>%
+    ggplot(aes(x = Dia, y = ConfirmedCases)) +
+    geom_line(aes(color = Country), size = 1) + 
+    geom_line(aes(y = Dobro), linetype = 2, size = 0.2) +
+    geom_line(aes(y = Dobra5d), linetype = 2, size = 0.2) +
+    labs(x = "Dias decorridos", y = "Casos Confirmados", title = "Casos Confirmados após 100º caso",  color ="", caption = Fonte)  + scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+              labels = trans_format("log10", math_format(10^.x))) +  expand_limits(x = c(0,35), y = 10) +
+  theme(legend.position =  "none") + annotate("text", x = 24, y = 10**6.3, label = "Dobra 2 dias") +
+  annotate("text", x = 30, y = 10**3, label = "Dobro 5 dias") +
+    scale_color_discrete(l = 40,c = 150) + theme_clean() + theme(legend.position = "right") 
+```
+
 
 ### Gráficos individuais dos países semelhantes ao Brasil: Taxa de evolução e número de novos casos
 
