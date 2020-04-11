@@ -153,3 +153,85 @@ jhucovid19 <- bind_rows(jhucovid19_semChina, China) %>% arrange(Country, DateRep
 jhucovid19 %>% filter(Country == "France") %>% tail(10) %>% kable()
 ```
 
+## Tentativas de fazer gráficos interativos com o plotly ainda não deram certo
+
+```{r}
+ggplotly(gtx, dynamicTicks = TRUE) %>%
+  layout(hovermode = "closest")
+```
+
+```{r}
+library(crosstalk)
+library(leaflet)
+```
+
+```{r}
+g <- highlight_key(dtxtops, ~Country) %>% plot_ly(showlegend = FALSE)
+gg <- ggplot(g, aes(x = DateRep, y = ProgRateCases)) +  
+  geom_point(aes(color = Country, linetype = Country)) +
+  geom_smooth(aes(color = Country), se = FALSE, spam = 0.15) +
+  guides(linetype="none")
+highlight(layout(ggplotly(gg), showlegend = FALSE), "plotly_hover")
+```
+
+
+```{r}
+# generally speaking, use a "unique" key for filter, 
+# especially when you have multiple filters!
+tx <- highlight_key(txhousing)
+gg <- ggplot(tx) + geom_line(aes(date, median, group = city))
+filter <- bscols(
+  filter_select("id", "Select a city", tx, ~city),
+  ggplotly(gg, dynamicTicks = TRUE),
+  widths = c(12, 12)
+)
+
+tx2 <- highlight_key(txhousing, ~city, "Select a city")
+gg <- ggplot(tx2) + geom_line(aes(date, median, group = city))
+select <- highlight(
+  ggplotly(gg, tooltip = "city"), 
+  selectize = TRUE, persistent = TRUE
+)
+
+bscols(filter, select)
+```
+
+```{r}
+library(gapminder)
+```
+
+```{r}
+g <- highlight_key(gapminder, ~continent)
+gg <- ggplot(g, aes(gdpPercap, lifeExp, 
+  color = continent)) +
+  geom_point(aes(size = pop, ids = country)) +
+  geom_smooth(se = FALSE, method = "lm") +
+  scale_x_log10()
+highlight(ggplotly(gg), "plotly_hover")
+```
+
+```{r}
+# Add a smooth to the previous figure and convert to plotly
+w <- ggplotly(p + geom_smooth(se = FALSE))
+
+# This plotly object has two traces: one for
+# the raw time series and one for the smooth. 
+# Try using `plotly_json(w)` to confirm the 2nd
+# trace is the smooth line.
+length(w$x$data)
+
+# use the `y` attribute of the smooth line 
+# to generate a custom string (to appear in tooltip)
+text_y <- label_number_si(
+  w$x$data[[2]]$y, 
+  prefix = "Typical median house price: $"
+)
+
+# suppress the tooltip on the raw time series 
+# and supply custom text to the smooth line
+w %>%
+  style(hoverinfo = "skip", traces = 1) %>%
+  style(text = text_y, traces = 2)
+```
+
+
