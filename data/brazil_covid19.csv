@@ -1970,3 +1970,30 @@ date,region,state,cases,deaths
 2020-04-11,Sul,Paraná,676,26
 2020-04-11,Sul,Rio Grande do Sul,640,15
 2020-04-11,Sul,Santa Catarina,732,21
+2020-04-12,Centro-Oeste,Distrito Federal,614,14
+2020-04-12,Centro-Oeste,Goiás,229,14
+2020-04-12,Centro-Oeste,Mato Grosso,123,3
+2020-04-12,Centro-Oeste,Mato Grosso do Sul,101,2
+2020-04-12,Nordeste,Alagoas,48,3
+2020-04-12,Nordeste,Bahia,673,21
+2020-04-12,Nordeste,Ceará,1676,74
+2020-04-12,Nordeste,Maranhão,398,24
+2020-04-12,Nordeste,Paraíba,101,13
+2020-04-12,Nordeste,Pernambuco,960,85
+2020-04-12,Nordeste,Piauí,44,7
+2020-04-12,Nordeste,Rio Grande do Norte,302,15
+2020-04-12,Nordeste,Sergipe,44,4
+2020-04-12,Norte,Acre,77,2
+2020-04-12,Norte,Amapá,230,5
+2020-04-12,Norte,Amazonas,1206,62
+2020-04-12,Norte,Pará,246,13
+2020-04-12,Norte,Rondônia,35,2
+2020-04-12,Norte,Roraima,79,3
+2020-04-12,Norte,Tocantins,25,0
+2020-04-12,Sudeste,Espírito Santo,383,9
+2020-04-12,Sudeste,Minas Gerais,806,20
+2020-04-12,Sudeste,Rio de Janeiro,2855,170
+2020-04-12,Sudeste,São Paulo,8755,588
+2020-04-12,Sul,Paraná,738,30
+2020-04-12,Sul,Rio Grande do Sul,653,16
+2020-04-12,Sul,Santa Catarina,768,24

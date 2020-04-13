@@ -34,6 +34,7 @@ library(kableExtra)
 library(DT)
 library(plotly)
 library(formattable)
+library(gganimate)
 ```
 
 
@@ -316,6 +317,9 @@ ultimadata <- max(jhucovid19$DateRep)
 ```
 
 
+
+
+
 ### Total de Casos pelos dados da John Hopkins University (JHU): `r format(ultimadata, '%d-%m-%Y')` {#JHUtotal}
 
 
@@ -392,7 +396,10 @@ jhucovid19 <- group_by(jhucovid19, Country) %>%
 group_by(jhucovid19, Country) %>% 
   summarise(ConfirmedCases = last(ConfirmedCases), Deaths = last(Deaths), Recuperados = last(Recovered)) %>% 
   arrange(desc(ConfirmedCases)) -> listaNumCasos
-  datatable(filter(listaNumCasos,ConfirmedCases >= 500), rownames = F, autoHideNavigation = T, colnames = c("País", "Casos","Mortes","Recuperados") )
+top5 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(5, ConfirmedCases) %>% select(Country) %>% unlist()
+top15 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(15, ConfirmedCases) %>% select(Country) %>% unlist()
+datatable(filter(listaNumCasos,ConfirmedCases >= 500), rownames = F, autoHideNavigation = T, colnames = c("País", "Casos","Mortes","Recuperados") )
+
 #  kable(filter(listaNumCasos,ConfirmedCases >= 500),col.names = c("País", "Casos","Mortes","Recuperados"))
 ```
 
@@ -401,7 +408,7 @@ group_by(jhucovid19, Country) %>%
 
 
 ```{r}
-filter(jhucovid19, Country %in% c("China","Italy","Iran","Germany","Japan"), DateRep >= ymd("2020-02-01")) %>% 
+filter(jhucovid19, Country %in% top5, DateRep >= ymd("2020-02-01")) %>% 
   ggplot(aes(x = DateRep, y = NewCases)) + geom_bar(aes(fill=Country),stat="identity", position="dodge") +
   labs(x = "", y = "Novos Casos/dia", title = "Novos Casos a partir de 01 de Fev 2020", 
        caption = Fonte, fill="") + scale_fill_brewer(palette =  "Set1") + labs_pubr() +
@@ -434,6 +441,7 @@ jhucovid19 %>% filter(Country == "Italy") %>% top_n(10, DateRep)
 
 ```{r}
 filter(jhucovid19, DateRep > "2020-02-01") %>% 
+  filter(Continent != "Outro") %>%
   group_by(Continent, DateRep) %>% 
   summarise(numCasos = sum(ConfirmedCases)) %>% 
   ggplot(aes(x = DateRep, y = numCasos)) + 
@@ -480,7 +488,7 @@ bind_rows(Italia14,Brasil13) %>%
 ```
 
 ```{r}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "US")) %>% 
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "United States")) %>% 
   select(Country,DateRep,ConfirmedCases,Deaths) %>% 
   group_by(Country) %>% 
   filter(ConfirmedCases >= 1 ) %>% 
@@ -493,7 +501,7 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
 ```
 
 ```{r}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "US")) %>% 
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "United States")) %>% 
   select(Country,DateRep,ConfirmedCases,Deaths) %>% 
   group_by(Country) %>% 
   filter(ConfirmedCases >= 14 ) %>% 
@@ -507,7 +515,7 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
 ```
 
 ```{r}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "US", "Japan")) %>% 
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "United States", "Japan")) %>% 
   filter(ConfirmedCases >= 30 ) %>% 
   select(Country,DateRep,ConfirmedCases,Deaths) %>% 
   group_by(Country) %>% 
@@ -519,7 +527,7 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "US", "Japan")) %
 ```
 
 ```{r tidy.opts=list(options(knitr.kable.NA = ''))}
-filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "US", "Chile")) %>% 
+filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "United States", "Chile")) %>% 
   filter(ConfirmedCases >= 30 ) %>% 
   group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
   pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% 
@@ -557,7 +565,7 @@ jhucovid19[,NewCasesMA:=as.numeric(frollmean(NewCases,n=nma, align='right',hasNA
 jhucovid19[,ProgRateCasesMA:=as.numeric(frollmean(ProgRateCases,n=nma, align='right',hasNA=TRUE)), by=Country]
 jhucovid19 <- as_tibble(jhucovid19)
 
-txprogtops <- filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","US","China"))
+txprogtops <- filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany", "Japan","United States","China"))
 txprogtops %>% filter(DateRep >= ymd("2020-03-01")) %>% mutate(DateRep = format(DateRep,"%Y-%m-%d"), ProgRateCases = format(ProgRateCases, digits = 3)) %>% 
 select(Country,DateRep,ProgRateCases) %>%
   pivot_wider(names_from = Country, values_from = ProgRateCases) %>% 
@@ -621,7 +629,7 @@ plt2gr(txprogtops, "Brazil")
 
 
 ```{r}
-plt2gr(txprogtops, "US")
+plt2gr(txprogtops, "United States")
 ```
 
 
@@ -639,6 +647,65 @@ plt2gr(txprogtops, "France")
 
 ```{r}
 plt2gr(txprogtops, "Spain")
+```
+
+
+
+
+```{r}
+jhucovid19 %>% 
+  filter(Continent != "Outro",  DateRep >= "2020-01-15") %>%
+  group_by(Country) %>%
+ filter(Country %in% top15) %>% 
+  arrange(desc(ConfirmedCases)) %>% 
+  select(Country,DateRep,ConfirmedCases, Continent) %>%
+ arrange(DateRep) %>% mutate(DateRep = format(DateRep, "%Y-%m-%d")) -> dfjhu
+
+#dfjhu_w <- dfjhu %>% arrange(DateRep) %>% mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
+#  pivot_wider(id_cols = DateRep, names_from = Country, values_from = ConfirmedCases)
+p <- dfjhu %>% group_by(Country) %>% arrange(desc(ConfirmedCases)) %>% summarise(ConfirmedCases = max(ConfirmedCases)) %>%
+  ggplot(aes(x = reorder(Country,ConfirmedCases))) +
+  geom_bar(aes(y = ConfirmedCases/1000),fill = "orange", stat = "identity", position = "dodge") + 
+  labs(x = "", y = "Casos Confirmados", title = paste0("15 países com mais casos em ", format(today(), "%d-%m-%Y"))) +
+  scale_y_continuous(label = label_number(suffix = "K")) +
+    coord_flip() 
+
+p
+```
+
+```{r eval = FALSE}
+# não vou processar esta animação porque demora muito.
+p <- dfjhu %>% 
+  ggplot(aes(x = reorder(Country,ConfirmedCases))) +
+  geom_bar(aes(y = ConfirmedCases/1000,  frame=DateRep),fill = "orange", stat = "identity", position = "dodge") + 
+  scale_y_continuous(label = label_number(suffix = "K")) + 
+  geom_text(aes(label= DateRep, x = 2, y = 450), color="black", size=3) +
+    coord_flip() 
+
+p <- p + transition_states(DateRep) + labs_pubr() + labs(x = "Países", y = "Casos Confirmados") + theme_pubr() +  
+ggtitle('Evolução Casos Confirmados', subtitle = 'Países com mais de 5000 casos') +  ease_aes('linear') 
+animate(p, fps = 25,nframes = 400, rewind = FALSE)
+
+```
+
+Um gráfico experimental com o `plotly`. Aperte o _play_ para ver a animação com os 15 países com mais casos.
+
+```{r}
+
+fig <- dfjhu %>%
+  plot_ly(
+    y = ~Country, 
+    x = ~ConfirmedCases, 
+    color = "red", 
+    frame = ~DateRep, 
+    text = ~ConfirmedCases, 
+    hoverinfo = "text",
+    type = 'bar',
+    mode = 'markers'
+  ) %>% hide_legend() %>% animation_opts(frame = 1000) %>%
+  layout(xaxis = list(title = "Confirmed Cases"), yaxis = list(title = ""))
+
+fig
 ```
 
 
@@ -660,7 +727,7 @@ txprogtops <- as_tibble(txprogtops)
 txprogtops %>% 
   filter(ConfirmedCases >= 1 ) %>% 
   mutate(Dia = row_number()) %>%
-  filter(Country %in% c("US", "Spain","Italy","Germany")) %>%
+  filter(Country %in% c("United States", "Spain","Italy","Germany")) %>%
   select(Country,NewCasesMA,ConfirmedCases,Dia) %>%
     ggplot(aes(x = ConfirmedCases/1000, y = NewCasesMA/1000)) +
     geom_line(aes(color = Country), size = 1.5) + 
@@ -738,7 +805,7 @@ jhucovid19 %>%
   filter(ConfirmedCases >= 100 ) %>% 
   group_by(Country) %>%
   mutate(Dia = row_number(), Dobro = DobroG[row_number()], Dobra5d = QuintG[row_number()]) %>%
-  filter(Country %in% c("US", "Spain","Italy","Germany","France","Turkey")) %>%
+  filter(Country %in% c("United States", "Spain","Italy","Germany","France","Turkey")) %>%
   select(Country,ConfirmedCases,Dia, Dobro, Dobra5d) %>%
     ggplot(aes(x = Dia, y = ConfirmedCases)) +
     geom_line(aes(color = Country), size = 1) + 
