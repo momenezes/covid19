@@ -24,6 +24,7 @@ library(lubridate)
 library(ggpubr)
 library(readxl)
 library(knitr)
+library(kableExtra)
 library(stringi)
 library(rvest)
 library(countrycode)
@@ -218,6 +219,52 @@ Vou atribuir um continente fictício para os países não encontrados pela funç
 jhucovid19prep <- jhucovid19prep %>% mutate(Continent = if_else(is.na(countrycode(sourcevar = Country, origin = "country.name", destination = "continent")), "Outro", countrycode(sourcevar = Country, origin = "country.name", destination = "continent")))
 ```
 
+Alguns países estão com nomes com grafia diferente na base da JHU. Preciso uniformizar isso. Como exemplo, a Korea do Sul.
+
+```{r}
+jhucovid19prep %>% select(Country) %>% filter(grepl("Korea",Country)) %>% unique()
+```
+
+O Iran também parece que está com nomes grafados de forma diferentes:
+
+```{r}
+jhucovid19prep %>% select(Country) %>% filter(grepl("Iran",Country)) %>% unique()
+```
+
+
+Ou seja, estes nomes diferentes geram buracos nos tratamentos quando fazemos um `group_by` **Country**. Então precisamos uniformizar. Para isso, vou utilizar a função `countrycode` do pacote de mesmo nome. A estratégia é gerar os códigos dos países e depois gerar os nomes dos países de volta. Esta estratégia funciona porque a função é *esperta* e conhece muitas grafias diferentes para os nomes dos países de modo a gerar o código correto. E quando faço a conversão de volta, ela gera o nome padronizado. Fantástico este pacote `countrycode` para trabalhar com bases de dados com nomes de países. Como já detectamos acima, alguns *países* não são países de verdade; para estes vou deixar o nome original, já que o continente respectivo está identificado como **Outro** de modo a manter a base completa, mas identificando estes casos estranhos.
+
+```{r}
+jhucovid19prep %<>% mutate(Code = countrycode(sourcevar = Country, origin = "country.name", destination = "iso3c"), Country = countrycode(sourcevar = Code, origin = "iso3c", destination = "country.name", nomatch = Country))
+```
+
+Verificando quais países ficaram _sem nome_ nesta uniformização, ou seja, mantive os nomes originais.
+```{r}
+jhucovid19prep %>% select(Country, Code, Continent) %>% filter(Continent == "Outro") %>% unique() %>%
+  kable() %>% kable_styling(full_width = F)
+```
+
+Estes casos correspondem a este número de observações e casos confirmados:
+
+```{r}
+jhucovid19prep %>% select(Country, ConfirmedCases, Continent) %>% 
+  filter(Continent == "Outro") %>%
+  group_by(Country) %>%
+  summarise(TotCasos = last(ConfirmedCases), N = n()) %>% 
+  kable() %>% kable_styling(full_width = F)
+```
+
+Total de Casos
+
+```{r}
+jhucovid19prep %>% select(Country, ConfirmedCases, Continent) %>% 
+  filter(Continent == "Outro") %>%
+  group_by(Country) %>%
+  summarise(TotCasos = last(ConfirmedCases), N = n()) %>% 
+  summarise(Total = sum(TotCasos)) %>% 
+  kable() %>% kable_styling(full_width = F)
+```
+
  
 
 
@@ -226,6 +273,7 @@ jhucovid19prep <- jhucovid19prep %>%  group_by(DateRep, Country) %>%
   mutate(ConfirmedCases = sum(ConfirmedCases), Deaths = sum(Deaths), Recovered = sum(Recovered)) %>% 
   ungroup() %>% ungroup()
 ```
+
 
 Salvando o arquivo do dia
 
