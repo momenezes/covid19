@@ -1217,6 +1217,31 @@ frmtbl
 ```
 
 
+# Dados do Brasil a partir do Projeto Brasil.io
+
+Descobri em 15/04/2020 este projeto fantástico:  [Brasil.io](https://brasil.io/home)
+
+> **O Brasil em dados libertos**
+
+> Repositório de dados públicos disponibilizados em formato acessível
+
+Dentre as diversas bases de dados que eles disponibilizam, tem uma sobre a COVID-19 em território brasileiro.
+
+Esta é uma primeira utilização, simples, para entender a base. Como esta base contém informações dos municípios brasileiros, penso que será possível explorá-la bastante. 
+
+```{r}
+casosfull_brio <- read_csv("./data/caso_full.csv")
+```
+
+```{r}
+casosfull_brio %>% 
+  filter(place_type == "city") %>% 
+  group_by(state) %>% 
+  filter(is_last == "TRUE") %>% 
+  summarise(Confirmados = sum(last_available_confirmed),Mortes = sum(last_available_deaths)) %>% 
+  rename(Estado = state) %>%
+  datatable(rownames = F, autoHideNavigation = T, caption = "Detalhamento Brasil por Estados (Brasil.io)") 
+```
 
 ------------
 
