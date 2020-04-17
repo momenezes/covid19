@@ -1326,7 +1326,7 @@ q <- casosfull_brio %>%
   group_by(state,date) %>% 
   filter(is_last == "TRUE") %>%
   summarise(Casos = sum(last_available_confirmed), População = last(estimated_population_2019), Mortes = sum(last_available_deaths)) %>%
-  ggplot(aes(x = reorder(state,Mortes), y = Mortes)) + geom_col() + 
+  ggplot(aes(x = reorder(state,Casos), y = Mortes)) + geom_col() + 
   geom_bar(fill = "#666666", stat = "identity", position = "dodge") + 
   #geom_bar_text(position = "dodge", min.size = 2 ) +
   geom_text(aes(x = state, y = Mortes, label = Mortes), hjust = -0.5, size = 3, color = "darkblue") +
