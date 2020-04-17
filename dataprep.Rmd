@@ -4,7 +4,7 @@ author: "Mário Olímpio de Menezes"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   prettydoc::html_pretty:
-    theme: cayman
+    theme: architect
     highlight: github
     fig_height: 6
     fig_width: 8
