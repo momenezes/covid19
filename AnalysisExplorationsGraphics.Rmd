@@ -1316,7 +1316,7 @@ p <- casosfull_brio %>%
         ) + 
   coord_flip() 
 
-
+#p
 
 ```
 
