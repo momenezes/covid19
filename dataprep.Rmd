@@ -303,6 +303,16 @@ system("cd data;/home/mario/.local/bin/kaggle datasets download --force unanimad
 zip::unzip("./data/corona-virus-brazil.zip", exdir = "./data")
 ```
 
+## Base de Dados do Brasil a partir do Projeto Brasil.io
+
+
+```{r}
+setwd("/datahome/mario/docs/analytics/covid19")
+curl::curl_download("https://data.brasil.io/dataset/covid19/caso_full.csv.gz", destfile = "./data/caso_full.csv.gz") 
+system("cd data;gunzip -f caso_full.csv.gz;cd ..")
+```
+
+
 ------------
 
 <span><a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a></span>
