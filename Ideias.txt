@@ -1,0 +1,23 @@
+20200417 - registro das seguintes ideias
+- Implementar um quadro resumo:
+  * diário - algumas informações sobre os 10 países com mais casos + Brasil:
+    
+    Casos, Mortes, %NovosCasos, %NovasMortes, Casos1M, Mortes1M, Letalidade 
+    
+    Mostrar dia atual e anterior.
+  * semanal (domingo), resumir informações sobre os 10 países que mais estiveram no topo durante a semana:
+    
+    Casos, Mortes, %NovosCasosSemana, %NovasMortesSemana, TendênciaCasos
+    
+Fazer este mesmo quadro resumo para o Brasil por Estados:
+  * diário - informações sobre os 10 estados com mais casos:
+  
+    Casos, Mortes, %NovosCasos, %NovasMortes, Casos100k, Mortes 100K, Letalidade
+    
+    Mostrar dia atual e anterior.
+  * semanal (domingo), resumir informações sobre os 10 estados que mais estiveram no topo durante a semana:
+  
+    Casos, Mortes, %NovosCasosSemana, %NovasMortesSemana, TendênciaCasos
+    
+
+  
