@@ -337,7 +337,7 @@ pop1920 <- pop1920 %>% mutate(Continent = if_else(is.na(countrycode(sourcevar = 
 ```
 
 
-```{r}
+```{r eval = FALSE}
 pop1920 <- pop1920 %>% mutate(Code = countrycode(sourcevar = Location, origin = "country.name", destination = "iso3c"), Country = countrycode(sourcevar = Code, origin = "iso3c", destination = "country.name", nomatch = Location)) %>% select(Country, Code, Year, PopMale, PopFemale, PopTotal, PopDensity, Continent)
 ```
 
