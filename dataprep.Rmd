@@ -14,7 +14,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,  tidy.opts = list(width.cutoff = 80))
 ```
 
 
@@ -312,6 +312,40 @@ curl::curl_download("https://data.brasil.io/dataset/covid19/caso_full.csv.gz", d
 system("cd data;gunzip -f caso_full.csv.gz;cd ..")
 ```
 
+## Base de Dados População Mundial
+
+
+```{r eval = FALSE}
+# populacao mundial - https://population.un.org/wpp/Download/Standard/CSV/
+# filtrei apenas 2019 e 2020, peguei os últimos valores de cada ano por pais (Location)
+# mantive valores por sexo e também densidade populacional
+# baixei este arquivo em 20200419
+populacao <- read_csv("./data/WPP2019_TotalPopulationBySex.csv")
+```
+
+Filtrei apenas os anos de 2019 e 2020 (previsão).
+
+```{r eval = FALSE}
+pop1920 <- populacao %>% select(-LocID, -VarID, -Variant, -MidPeriod) %>% filter(Time == 2019 | Time == 2020) %>%
+  group_by(Location, Time) %>% summarise(Year = max(Time), PopMale = last(PopMale), PopFemale = last(PopFemale), PopTotal = last(PopTotal), PopDensity = last(PopDensity)) %>% select(-Time) %>% dplyr::ungroup()
+```
+
+Adicionei uma coluna "Continent" e removi a observações sem continentes (agrupamentos de países ou regiões).
+
+```{r eval = FALSE}
+pop1920 <- pop1920 %>% mutate(Continent = if_else(is.na(countrycode(sourcevar = Location, origin = "country.name", destination = "continent")), "Outro", countrycode(sourcevar = Location, origin = "country.name", destination = "continent"))) %>% mutate(Continent = case_when(Location == "Africa" ~ "Africa", Location == "Asia" ~ "Asia", Location == "Europe" ~"Europe", Location == "Central America" ~ "Central America", Location == "North America" ~ "North America", Location == "South America" ~ "South America", Location == "Oceania"  ~ "Oceania", TRUE ~ Continent)) %>% filter(Continent %in% c("Africa","Asia","Europe","Americas","Oceania","North America","South America","Central America"))
+```
+
+
+```{r}
+pop1920 <- pop1920 %>% mutate(Code = countrycode(sourcevar = Location, origin = "country.name", destination = "iso3c"), Country = countrycode(sourcevar = Code, origin = "iso3c", destination = "country.name", nomatch = Location)) %>% select(Country, Code, Year, PopMale, PopFemale, PopTotal, PopDensity, Continent)
+```
+
+Gravei este arquivo limpo e preparado para poder utilizar nas análises.
+
+```{r eval = FALSE}
+write_csv(pop1920, "./data/populacao20192020.csv")
+```
 
 ------------
 
