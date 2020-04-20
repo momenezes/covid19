@@ -13,7 +13,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, knitr.kable.NA = '')
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, knitr.kable.NA = '', tidy.opts = list(width.cutoff = 80))
 ```
 
 ```{r warning=FALSE, message=FALSE}
@@ -1389,21 +1389,6 @@ labs_pubr() +
 ```
 
 
-```{r eval = FALSE}
-# Plot
-ggplot(cty_mpg, aes(x=make, y=mileage)) + 
-  geom_point(col="tomato2", size=3) +   # Draw points
-  geom_segment(aes(x=make, 
-                   xend=make, 
-                   y=min(mileage), 
-                   yend=max(mileage)), 
-               linetype="dashed", 
-               size=0.1) +   # Draw dashed lines
-  labs(title="Dot Plot", 
-       subtitle="Make Vs Avg. Mileage", 
-       caption="source: mpg") +  
-  coord_flip()
-```
 
 
 ```{r}
