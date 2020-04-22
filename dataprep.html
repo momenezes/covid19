@@ -148,7 +148,7 @@ code span.ot { color: #007020; }
 <div class="inner">
 <h1 class="title toc-ignore">Download e Preparação dos Dados</h1>
 <h3 class="author">Mário Olímpio de Menezes</h3>
-<h3 class="date">21 April, 2020</h3>
+<h3 class="date">22 April, 2020</h3>
 </div>
 </header>
 
@@ -213,29 +213,29 @@ https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-dis
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">covid19prep &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="kw">paste</span>(<span class="st">&quot;./data&quot;</span>,arqdest,<span class="dt">sep=</span><span class="st">&quot;/&quot;</span>))</a></code></pre></div>
 <p>A estrutura dos dados é:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">str</span>(covid19prep)</a></code></pre></div>
-<pre><code>## tibble [11,981 × 11] (S3: tbl_df/tbl/data.frame)
-##  $ dateRep                : POSIXct[1:11981], format: &quot;2020-04-20&quot; &quot;2020-04-19&quot; ...
-##  $ day                    : num [1:11981] 20 19 18 17 16 15 14 13 12 11 ...
-##  $ month                  : num [1:11981] 4 4 4 4 4 4 4 4 4 4 ...
-##  $ year                   : num [1:11981] 2020 2020 2020 2020 2020 2020 2020 2020 2020 2020 ...
-##  $ cases                  : num [1:11981] 88 63 51 10 70 49 58 52 34 37 ...
-##  $ deaths                 : num [1:11981] 3 0 1 4 2 2 3 0 3 0 ...
-##  $ geoId                  : chr [1:11981] &quot;AF&quot; &quot;AF&quot; &quot;AF&quot; &quot;AF&quot; ...
-##  $ continentExp           : chr [1:11981] &quot;Asia&quot; &quot;Asia&quot; &quot;Asia&quot; &quot;Asia&quot; ...
-##  $ countryterritoryCode   : chr [1:11981] &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; ...
-##  $ popData2018            : num [1:11981] 37172386 37172386 37172386 37172386 37172386 ...
-##  $ countriesAndTerritories: chr [1:11981] &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; ...</code></pre>
+<pre><code>## tibble [12,186 × 11] (S3: tbl_df/tbl/data.frame)
+##  $ dateRep                : POSIXct[1:12186], format: &quot;2020-04-21&quot; &quot;2020-04-20&quot; ...
+##  $ day                    : num [1:12186] 21 20 19 18 17 16 15 14 13 12 ...
+##  $ month                  : num [1:12186] 4 4 4 4 4 4 4 4 4 4 ...
+##  $ year                   : num [1:12186] 2020 2020 2020 2020 2020 2020 2020 2020 2020 2020 ...
+##  $ cases                  : num [1:12186] 35 88 63 51 10 70 49 58 52 34 ...
+##  $ deaths                 : num [1:12186] 2 3 0 1 4 2 2 3 0 3 ...
+##  $ countriesAndTerritories: chr [1:12186] &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; ...
+##  $ geoId                  : chr [1:12186] &quot;AF&quot; &quot;AF&quot; &quot;AF&quot; &quot;AF&quot; ...
+##  $ countryterritoryCode   : chr [1:12186] &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; ...
+##  $ popData2018            : num [1:12186] 37172386 37172386 37172386 37172386 37172386 ...
+##  $ continentExp           : chr [1:12186] &quot;Asia&quot; &quot;Asia&quot; &quot;Asia&quot; &quot;Asia&quot; ...</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">covid19prep &lt;-<span class="st"> </span><span class="kw">rename</span>(covid19prep, <span class="dt">Country =</span> <span class="st">`</span><span class="dt">countriesAndTerritories</span><span class="st">`</span>, <span class="dt">DateRep =</span> dateRep, </a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">                      <span class="dt">Cases =</span> cases, <span class="dt">Deaths =</span> deaths, <span class="dt">Day =</span> day, <span class="dt">Month =</span> month) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(Country, DateRep, Cases, Deaths, countryterritoryCode, popData2018)</a></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">str</span>(covid19prep)</a></code></pre></div>
-<pre><code>## tibble [11,981 × 6] (S3: tbl_df/tbl/data.frame)
-##  $ Country             : chr [1:11981] &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; ...
-##  $ DateRep             : POSIXct[1:11981], format: &quot;2020-04-20&quot; &quot;2020-04-19&quot; ...
-##  $ Cases               : num [1:11981] 88 63 51 10 70 49 58 52 34 37 ...
-##  $ Deaths              : num [1:11981] 3 0 1 4 2 2 3 0 3 0 ...
-##  $ countryterritoryCode: chr [1:11981] &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; ...
-##  $ popData2018         : num [1:11981] 37172386 37172386 37172386 37172386 37172386 ...</code></pre>
+<pre><code>## tibble [12,186 × 6] (S3: tbl_df/tbl/data.frame)
+##  $ Country             : chr [1:12186] &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; ...
+##  $ DateRep             : POSIXct[1:12186], format: &quot;2020-04-21&quot; &quot;2020-04-20&quot; ...
+##  $ Cases               : num [1:12186] 35 88 63 51 10 70 49 58 52 34 ...
+##  $ Deaths              : num [1:12186] 2 3 0 1 4 2 2 3 0 3 ...
+##  $ countryterritoryCode: chr [1:12186] &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; ...
+##  $ popData2018         : num [1:12186] 37172386 37172386 37172386 37172386 37172386 ...</code></pre>
 <p>Como a base do EU Open Data Portal contém o código ISO3C dos países, vou utilizar o pacote <code>countrycode</code> para uniformizar os nomes dos países e adicionar os continentes. Vou retirar aqueles que não estiverem nesta base.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">covid19prep &lt;-<span class="st"> </span>covid19prep <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Country =</span> <span class="kw">if_else</span>(<span class="op">!</span><span class="kw">is.na</span>(<span class="kw">countrycode</span>(<span class="dt">sourcevar =</span> countryterritoryCode, <span class="dt">origin =</span> <span class="st">&quot;iso3c&quot;</span>, </a>
@@ -246,20 +246,20 @@ https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-dis
 <a class="sourceLine" id="cb10-7" data-line-number="7">                                 <span class="dt">destination =</span> <span class="st">&quot;continent&quot;</span>))</a></code></pre></div>
 <p>Existem alguns problemas na base de dados, que não vou tratar aqui; simplesmente vou gravar deste modo. Na análise decide-se o que será feito com estes dados.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">covid19prep <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">is.na</span>(Continent))</a></code></pre></div>
-<pre><code>## # A tibble: 161 x 7
+<pre><code>## # A tibble: 165 x 7
 ##    Country DateRep             Cases Deaths countryterritor… popData2018
 ##    &lt;chr&gt;   &lt;dttm&gt;              &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt;
-##  1 Anguil… 2020-04-20 00:00:00     0      0 &lt;NA&gt;                      NA
-##  2 Anguil… 2020-04-19 00:00:00     0      0 &lt;NA&gt;                      NA
-##  3 Anguil… 2020-04-18 00:00:00     0      0 &lt;NA&gt;                      NA
-##  4 Anguil… 2020-04-17 00:00:00     0      0 &lt;NA&gt;                      NA
-##  5 Anguil… 2020-04-16 00:00:00     0      0 &lt;NA&gt;                      NA
-##  6 Anguil… 2020-04-15 00:00:00     0      0 &lt;NA&gt;                      NA
-##  7 Anguil… 2020-04-14 00:00:00     0      0 &lt;NA&gt;                      NA
-##  8 Anguil… 2020-04-13 00:00:00     0      0 &lt;NA&gt;                      NA
-##  9 Anguil… 2020-04-12 00:00:00     0      0 &lt;NA&gt;                      NA
-## 10 Anguil… 2020-04-11 00:00:00     0      0 &lt;NA&gt;                      NA
-## # … with 151 more rows, and 1 more variable: Continent &lt;chr&gt;</code></pre>
+##  1 Anguil… 2020-04-21 00:00:00     0      0 &lt;NA&gt;                      NA
+##  2 Anguil… 2020-04-20 00:00:00     0      0 &lt;NA&gt;                      NA
+##  3 Anguil… 2020-04-19 00:00:00     0      0 &lt;NA&gt;                      NA
+##  4 Anguil… 2020-04-18 00:00:00     0      0 &lt;NA&gt;                      NA
+##  5 Anguil… 2020-04-17 00:00:00     0      0 &lt;NA&gt;                      NA
+##  6 Anguil… 2020-04-16 00:00:00     0      0 &lt;NA&gt;                      NA
+##  7 Anguil… 2020-04-15 00:00:00     0      0 &lt;NA&gt;                      NA
+##  8 Anguil… 2020-04-14 00:00:00     0      0 &lt;NA&gt;                      NA
+##  9 Anguil… 2020-04-13 00:00:00     0      0 &lt;NA&gt;                      NA
+## 10 Anguil… 2020-04-12 00:00:00     0      0 &lt;NA&gt;                      NA
+## # … with 155 more rows, and 1 more variable: Continent &lt;chr&gt;</code></pre>
 <p>Agora vou salvar este <code>data.frame</code> para ser utilizado nas análises. Vou utilizar um nome que indique sempre o último conjunto de dados disponível para esta fonte: <code>eeuucovid19_last.csv</code></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">write_csv</span>(covid19prep, <span class="st">&quot;./data/eeuucovid19_last.csv&quot;</span>)</a></code></pre></div>
 </div>
@@ -517,7 +517,7 @@ Diamond Princess
 712
 </td>
 <td style="text-align:right;">
-27
+28
 </td>
 </tr>
 <tr>
@@ -528,7 +528,7 @@ Kosovo
 510
 </td>
 <td style="text-align:right;">
-33
+34
 </td>
 </tr>
 <tr>
@@ -539,7 +539,7 @@ MS Zaandam
 9
 </td>
 <td style="text-align:right;">
-24
+25
 </td>
 </tr>
 <tr>
