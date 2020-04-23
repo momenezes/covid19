@@ -99,9 +99,24 @@ ultimadata <- max(covid19$DateRep)
 
 ```{r}
 covid19 %>% 
-  summarise(`Casos no Mundo (EU Open Data Portal)` = sum(Cases)) %>% 
-  kable()
+  summarise(Casos = sum(Cases), Mortes = sum(Deaths), Letalidade = sprintf("%s%%", round(Mortes/Casos*100,2))) %>% 
+  kable(align = "r")
 ```
+
+
+```{r eval=FALSE}
+covid19 %>% 
+  group_by(Continent) %>% 
+  summarise(Casos = as.integer(sum(Cases)), Mortes = as.integer(sum(Deaths)), Letalidade = round(Mortes/Casos*100,2)) %>% 
+  filter(!is.na(Continent)) %>%
+  gather( key = "Tipo", value = "Valor", 2:3) %>%
+  ggplot(aes(x = reorder(Continent,Valor), y = Valor, fill = Tipo)) + 
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(x = Continent, y = Valor, label = Valor), hjust = -0.7, size = 3, color = "black") +
+  labs(fill = "", x = "", y = "") + scale_y_continuous(labels = label_number_auto()) + labs_pubr() +  coord_flip()
+  
+```
+
 
 ## Brasil vs Itália {#BRvsIT}
 
