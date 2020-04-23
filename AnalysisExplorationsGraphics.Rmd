@@ -1127,8 +1127,8 @@ brcovid19 %>%
   arrange(Data) %>%
   group_by(Estado) %>% 
   summarise(TotEstado = last(Casos), MortesEstado = last(Mortes)) %>%
-  summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado)) -> brtotais
-  kable(brtotais) 
+  summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado), `Letalidade`= sprintf("%s%%",round(sum(MortesEstado)/sum(TotEstado)*100,1))) -> brtotais
+  kable(brtotais, align = "r") 
 ```
 
 Incorporando a estimativa da população brasileira com os dados do IBGE, publicados em Janeiro de 2020, conforme esta página: [IBGE - Estimativas População, enviada ao TCU](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados)
@@ -1264,8 +1264,8 @@ casosfull_brio %>%
   group_by(state) %>% 
   filter(is_last == "TRUE") %>%
   summarise(TotEstado = last(last_available_confirmed), MortesEstado = last(last_available_deaths)) %>%
-  summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado)) -> briototais
-  kable(briototais) 
+  summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado), `Letalidade`= sprintf("%s%%",round(sum(MortesEstado)/sum(TotEstado)*100,1))) -> briototais
+  kable(briototais, align = "r") 
 ```
 
 ```{r eval = FALSE}
