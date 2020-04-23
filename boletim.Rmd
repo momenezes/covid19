@@ -45,8 +45,6 @@ theme_set(theme_clean())
 
 # Resumo dos Dados Mundiais da COVID-19 {#ResumoMundo}
 
-## Dados obtidos da John Hopkins University
-
 ```{r}
 jhucovid19 <- read_csv("./data/jhucovid19_last.csv")
 ```
@@ -61,8 +59,9 @@ ultimadata <- max(jhucovid19$DateRep)
 ```
 
 
-### Total de Casos pelos dados da John Hopkins University (JHU): `r format(ultimadata, '%d-%m-%Y')` {#JHUtotal}
+## Total de Casos em `r format(ultimadata, '%d-%m-%Y')` {#JHUtotal}
 
+Utilizando dados da John Hopkins University (JHU).
 
 ```{r}
  jhucovid19 %>% 
@@ -130,11 +129,11 @@ worldpop <- read_csv("./data/populacao20192020.csv")
 worldpop <- worldpop %>% filter(Year == 2020)
 ```
 
-```{r}
+```{r eval = FALSE}
 str(jhucovid19, give.attr = FALSE)
 ```
 
-```{r}
+```{r eval = FALSE}
 str(worldpop, give.attr = FALSE)
 ```
 
@@ -143,4 +142,215 @@ str(worldpop, give.attr = FALSE)
 jhucovid19 <- left_join(jhucovid19,select(worldpop,-Country,-Continent), by = "Code")
 ```
 
+## Países com mais casos em `r format(ultimadata, '%d-%m-%Y')` {#Toppaises}
 
+Mais o Brasil.
+
+```{r}
+rm(top10)
+```
+
+
+```{r}
+group_by(jhucovid19, Country) %>% 
+  summarise(ConfirmedCases = last(ConfirmedCases), Deaths = last(Deaths), Recuperados = last(Recovered)) %>% 
+  arrange(desc(ConfirmedCases)) -> listaNumCasos
+top5 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(5, ConfirmedCases) %>% select(Country) %>% unlist()
+top10 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(10, ConfirmedCases) %>% select(Country) 
+```
+
+```{r}
+top10 <- bind_rows(top10, data.frame(Country = "Brazil")) %>% unique() %>% unlist()
+```
+
+
+
+```{r}
+filter(jhucovid19, Country %in% top10) %>% 
+  group_by(Country) %>% 
+  summarise(Casos = last(ConfirmedCases), 
+            Mortes = last(Deaths), 
+            Letal = sprintf("%s%%",round(Mortes/Casos*100,2)), 
+            Recup = last(Recovered), 
+            `%NovosCa` = sprintf("%s%%", round((last(ProgRateCases) -1)*100,2)), 
+            `%NovasMo` = sprintf("%s%%", round((last(ProgRateDeaths) -1)*100,2)), 
+            Casos1M = round(Casos/last(PopTotal)*1e3,0),
+            Mortes1M = round(Mortes/last(PopTotal)*1e3,0),
+            NDias1Ca = sprintf("%s", ultimadata - min(DateRep))) %>% 
+  mutate(NDias1Ca = case_when(Country == "United States" ~ sprintf("%s", ultimadata - ymd("2020-01-20")),
+                                Country == "China" ~ sprintf("%s", ultimadata - ymd("2019-11-17")),
+                                TRUE ~ NDias1Ca)) %>% 
+  arrange(desc(Casos)) %>%
+  datatable(rownames = F, autoHideNavigation = T, options = list(pageLength = 11, paging = FALSE, searching = FALSE)) 
+```
+
+<!--
+# Dados Brasil {#DadosBrasil}
+
+```{r  eval = FALSE}
+brcovid19 <- read_csv("./data/brazil_covid19.csv", col_types = cols(date = col_date(format = "%Y-%m-%d")))
+```
+
+
+```{r  eval = FALSE}
+Fonte = "Raphael Fontes (Kaggle)"
+```
+
+```{r eval = FALSE}
+str(brcovid19)
+```
+
+```{r  eval = FALSE}
+brcovid19 <- brcovid19 %>% rename(Data = date, Casos = cases, Mortes = deaths, Regiao = region, Estado = state)
+```
+
+```{r  eval = FALSE}
+ultimadata <- max(brcovid19$Data)
+```
+
+
+## Total de Casos Brazil: `r format(ultimadata, '%d-%m-%Y')` {#BRtotKagg}
+ 
+```{r  eval = FALSE}
+brcovid19 %>% 
+  arrange(Data) %>%
+  group_by(Estado) %>% 
+  summarise(TotEstado = last(Casos), MortesEstado = last(Mortes)) %>%
+  summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado)) -> brtotais
+  kable(brtotais) 
+```
+-->
+
+<!-- Incorporando a estimativa da população brasileira com os dados do IBGE, publicados em Janeiro de 2020, conforme esta página: [IBGE - Estimativas População, enviada ao TCU](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados)
+-->
+
+
+```{r}
+brpopestados <- read_csv("./data/estimativa_populacao_Estados_TCU_2019_20200116.csv")
+```
+
+
+```{r eval = FALSE}
+brcovid19 <- left_join(brcovid19, brpopestados[,c(1,2)], by = "Estado")
+```
+
+
+```{r  eval = FALSE}
+brcovid19 %>% 
+  arrange(Data) %>% 
+  group_by(Estado) %>% summarise(CasosTot = last(Casos), MortesTot = last(Mortes), Casos1M = CasosTot/last(População)*1e6, Mortes1M = MortesTot/last(População)*1e6) %>% 
+  mutate(Casos1M = round(Casos1M,1), Mortes1M = round(Mortes1M,2), Letal = MortesTot/CasosTot) %>%
+  rename(Casos = CasosTot, Mortes = MortesTot) -> brestados
+```
+
+
+```{r  eval = FALSE, tabelaestados}
+brestados %>% mutate(Letal = paste0(round(Letal*100,1),"%")) %>%
+  datatable(rownames = F, autoHideNavigation = T, caption = "Detalhamento Brasil por Estados", options = list( searching = FALSE)) 
+```
+
+
+
+```{r}
+siglasestados <- c("AC","AL", "AP", "AM", "BA","CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA","PB", "PR", "PE","PI","RJ","RN", "RS", "RO", "RR", "SC",  "SP", "SE", "TO")
+```
+```{r}
+nomesestados <- c("Acre", "Alagoas", "Amapá", "Amazonas", "Bahia","Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul",   "Rondônia",  "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins"  )
+```
+
+```{r}
+estadoscode <- data.frame(Estado = nomesestados, Code = siglasestados)
+```
+
+
+# Dados do Brasil a partir do Projeto Brasil.io
+
+
+```{r}
+casosfull_brio <- read_csv("./data/caso_full.csv")
+```
+
+```{r}
+casosfull_brio <- left_join(casosfull_brio, estadoscode, by = c("state"="Code"))
+```
+
+```{r}
+brpopestados <- read_csv("./data/estimativa_populacao_Estados_TCU_2019_20200116.csv")
+```
+
+
+```{r}
+casosfull_brio <- left_join(casosfull_brio, brpopestados[,c(1,2)], by = "Estado")
+```
+
+```{r}
+casosfull_brio <- casosfull_brio %>% select(-is_repeated, -city_ibge_code, -estimated_population_2019)
+```
+
+
+```{r}
+ultimadata <- max(casosfull_brio$date)
+```
+
+## Total de Casos pelos dados do Brasil.io: `r format(ultimadata, '%d-%m-%Y')` {#BRtotBRio}
+ 
+```{r}
+casosfull_brio %>% 
+  arrange(date) %>%
+  filter(place_type == "state") %>%
+  group_by(Estado) %>% 
+  filter(is_last == "TRUE") %>%
+  summarise(TotEstado = last(last_available_confirmed), MortesEstado = last(last_available_deaths)) %>%
+  summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado)) -> briototais
+  kable(briototais) 
+```
+
+
+## Dados por Estado 
+
+
+```{r}
+casosfull_brio <- casosfull_brio %>%
+  filter(place_type == "city") %>%
+  group_by(Estado, date) %>%
+  mutate(ConfirmedCases = sum(last_available_confirmed), Deaths = sum(last_available_deaths)) %>% ungroup() %>% ungroup()
+```
+
+
+```{r}
+casosfull_brio <- casosfull_brio %>%
+  filter(place_type == "city") %>%
+  group_by(Estado, city) %>%
+  mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
+         ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
+         NovCasos = if_else(ConfirmedCases - lag(ConfirmedCases)> 0, ConfirmedCases - lag(ConfirmedCases), 0)
+        ) %>% ungroup() %>% ungroup()
+```
+
+```{r eval = FALSE}
+casosfull_brio %>% 
+  filter(place_type == "city") %>% 
+   filter(city == "São Paulo") %>%
+  arrange(last_available_date) %>% select(city, date, ConfirmedCases, ProgRateCases, ProgRateDeaths, NovCasos)
+```
+
+
+```{r }
+casosfull_brio %>% 
+  filter(place_type == "city") %>% 
+  group_by(Estado) %>% 
+  filter(is_last == "TRUE") %>% 
+  arrange(desc(last_available_date)) %>%
+  summarise(Casos = sum(last_available_confirmed),
+            Mortes = sum(last_available_deaths), 
+            Letal = sprintf("%s%%",round(Mortes/Casos*100,1)),
+            Casos1M = round(Casos/last(População)*1e6,0), 
+            Mortes1M = round(Mortes/last(População)*1e6,0),
+            NovCasos = last(NovCasos),
+            `%NovosCa` = sprintf("%s%%", round(last(ProgRateCases)*100,2)), 
+            `%NovasMo` = sprintf("%s%%", round(last(ProgRateDeaths)*100,2)), 
+            #NDias1Ca = sprintf("%s", ultimadata - min(date))
+            ) %>% 
+  #rename(Estado = state) %>%
+  datatable(rownames = F, autoHideNavigation = T, caption = "Detalhamento Brasil por Estados (Brasil.io)", options = list( searching = FALSE)) 
+```

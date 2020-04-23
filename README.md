@@ -8,6 +8,8 @@ Utilizando algumas destas bases (este é um trabalho em andamento), fiz algumas 
 
 Conforme mais bases públicas são descobertas, vou tentar adicionar análises e gráficos.
 
-### [Aqui está o que fiz até agora:](AnalysisExplorationsGraphics.html)
+### [Boletim diário - Mundo e Brasil](boletim.html)
+
+### [Análise Exploratória - Tabelas e Gráficos](AnalysisExplorationsGraphics.html)
 
 ### [Preparação dos Dados](dataprep.html) - mostrando os códigos

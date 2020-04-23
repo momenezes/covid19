@@ -119,7 +119,7 @@ Brasil <- covid19 %>%
 Uma mostra dos últimos 20 dias da Itália.
 ```{r}
 Italia %>% select(-Country, -Continent, -popData2018) %>% top_n(20, DateRep) %>% 
-  mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>% datatable(rownames = F, autoHideNavigation = T )
+  mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>% datatable(rownames = F, autoHideNavigation = T , options = list(searching = FALSE))
   
 ```
 
@@ -127,7 +127,7 @@ O mesmo para o Brasil, últimos 20 dias.
 ```{r}
 Brasil %>% select(-Country, -Continent, -popData2018) %>% top_n(20, DateRep) %>% 
    mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
-  datatable(rownames = F, autoHideNavigation = T )
+  datatable(rownames = F, autoHideNavigation = T, options = list(searching = FALSE) )
 ```
 
 ```{r}
@@ -353,7 +353,7 @@ ultimadata <- max(jhucovid19$DateRep)
 ```{r}
 filter(jhucovid19, Country == "France") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% 
    mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>% 
-  datatable(rownames = F, autoHideNavigation = T, caption = "França" )
+  datatable(rownames = F, autoHideNavigation = T, caption = "França", options = list(paging = FALSE, searching = FALSE))
 #  kable(caption = "França")
 ```
 
@@ -361,19 +361,19 @@ filter(jhucovid19, Country == "France") %>% select(-Country, -Continent) %>% top
 ```{r}
 filter(jhucovid19, Country == "Italy") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% 
    mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
-  datatable(rownames = F, autoHideNavigation = T ,caption = "Itália")
+  datatable(rownames = F, autoHideNavigation = T ,caption = "Itália", options = list(paging = FALSE, searching = FALSE))
 ```
 
 ```{r}
 filter(jhucovid19, Country == "Spain") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% 
    mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
-  datatable(rownames = F, autoHideNavigation = T , caption = "Espanha")
+  datatable(rownames = F, autoHideNavigation = T , caption = "Espanha", options = list(paging = FALSE, searching = FALSE))
 ```
 
 ```{r}
 filter(jhucovid19, Country == "Brazil") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% 
    mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
-  datatable(rownames = F, autoHideNavigation = T , caption = "Brasil")
+  datatable(rownames = F, autoHideNavigation = T , caption = "Brasil", options = list(paging = FALSE, searching = FALSE))
 ```
 
 
@@ -532,7 +532,7 @@ filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Spain", "Germany
   group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
   pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% 
    mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
-  datatable(rownames = F, autoHideNavigation = T, caption = "Evolução dos casos após o 30º caso confirmado" )
+  datatable(rownames = F, autoHideNavigation = T, caption = "Evolução dos casos após o 30º caso confirmado" , options = list( searching = FALSE) )
 #  kable(caption = "Evolução dos casos após o 30º caso confirmado")
 ```
 
@@ -569,7 +569,7 @@ txprogtops <- filter(jhucovid19, Country %in% c("Italy", "Brazil", "France", "Sp
 txprogtops %>% filter(DateRep >= ymd("2020-03-01")) %>% mutate(DateRep = format(DateRep,"%Y-%m-%d"), ProgRateCases = format(ProgRateCases, digits = 3)) %>% 
 select(Country,DateRep,ProgRateCases) %>%
   pivot_wider(names_from = Country, values_from = ProgRateCases) %>% 
-  datatable(rownames = F, autoHideNavigation = T, caption = "Evolução dos casos após o 30º caso confirmado")
+  datatable(rownames = F, autoHideNavigation = T, caption = "Evolução dos casos após o 30º caso confirmado", options = list( searching = FALSE))
 ```
 
 
@@ -688,10 +688,10 @@ animate(p, fps = 25,nframes = 400, rewind = FALSE)
 
 ```
 
-Um gráfico experimental com o `plotly`. Aperte o _play_ para ver a animação com os 15 países com mais casos.
 
-```{r}
 
+```{r eval = FALSE}
+# Um gráfico experimental com o `plotly`. Aperte o _play_ para ver a animação com os 15 países com mais casos.
 fig <- dfjhu %>%
   plot_ly(
     y = ~Country, 
@@ -903,7 +903,7 @@ filter(jhucovid19, Country %in% unlist(dadosparecidos$Country)) %>%
   group_by(DateRep,Country) %>% summarise(ConfCases = sum(ConfirmedCases)) %>% ungroup() %>%
   pivot_wider(id_cols =  DateRep, names_from = Country, values_from = ConfCases) %>% 
    mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
-  datatable(rownames = F, autoHideNavigation = T, caption = "Evolução dos casos após o 30º caso confirmado") 
+  datatable(rownames = F, autoHideNavigation = T, caption = "Evolução dos casos após o 30º caso confirmado", options = list( searching = FALSE)) 
 ```
 
 
@@ -924,10 +924,12 @@ txprogpar %>%
   mutate(DateRep = format(DateRep,"%Y-%m-%d"), ProgRateCases = format(ProgRateCases, digits = 3)) %>%
   select(Country,DateRep,ProgRateCases) %>%
   pivot_wider(names_from = Country, values_from = ProgRateCases) %>% 
-  datatable(rownames = F, autoHideNavigation = T, caption = "Taxa de Progressão") 
+  datatable(rownames = F, autoHideNavigation = T, caption = "Taxa de Progressão", options = list( searching = FALSE)) 
 ```
 
+<pre>
 
+</pre>
 
 ```{r}
 txprogpar %>%
@@ -1198,7 +1200,7 @@ brcovid19 %>%
 
 ```{r tabelaestados}
 brestados %>% mutate(Letalidade = paste0(round(Letalidade*100,1),"%")) %>%
-  datatable(rownames = F, autoHideNavigation = T, caption = "Detalhamento Brasil por Estados") 
+  datatable(rownames = F, autoHideNavigation = T, caption = "Detalhamento Brasil por Estados", options = list( searching = FALSE)) 
 ```
 
   
@@ -1273,7 +1275,7 @@ casosfull_brio %>%
   filter(is_last == "TRUE") %>% 
   summarise(Confirmados = sum(last_available_confirmed),Mortes = sum(last_available_deaths)) %>% 
   rename(Estado = state) %>%
-  datatable(rownames = F, autoHideNavigation = T, caption = "Detalhamento Brasil por Estados (Brasil.io)") 
+  datatable(rownames = F, autoHideNavigation = T, caption = "Detalhamento Brasil por Estados (Brasil.io)", options = list( searching = FALSE)) 
 ```
 
 
