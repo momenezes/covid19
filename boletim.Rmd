@@ -354,3 +354,9 @@ casosfull_brio %>%
   #rename(Estado = state) %>%
   datatable(rownames = F, autoHideNavigation = T, caption = "Detalhamento Brasil por Estados (Brasil.io)", options = list( searching = FALSE)) 
 ```
+
+
+
+------------
+
+<span><a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a></span>
