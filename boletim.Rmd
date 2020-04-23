@@ -1,15 +1,14 @@
 ---
 title: "Boletim Diário - COVID19"
 author: "Mário Olímpio de Menezes"
-date: "19/04/2020"
+date: "Mundo e Brasil"
 output:
   prettydoc::html_pretty:
     theme: architect
     highlight: github
     fig_height: 6
     fig_width: 8
-    toc: yes
-    toc_depth: 2
+    
 ---
 
 ```{r setup, include=FALSE}
@@ -59,7 +58,7 @@ ultimadata <- max(jhucovid19$DateRep)
 ```
 
 
-## Total de Casos em `r format(ultimadata, '%d-%m-%Y')` {#JHUtotal}
+## Total de Casos em `r format(ultimadata, '%d-%m-%Y')` 
 
 Utilizando dados da John Hopkins University (JHU).
 
@@ -142,9 +141,8 @@ str(worldpop, give.attr = FALSE)
 jhucovid19 <- left_join(jhucovid19,select(worldpop,-Country,-Continent), by = "Code")
 ```
 
-## Países com mais casos em `r format(ultimadata, '%d-%m-%Y')` {#Toppaises}
+## Países com mais casos (top 10 e Brasil) em `r format(ultimadata, '%d-%m-%Y')`  {#Top10BR}
 
-Mais o Brasil.
 
 ```{r}
 rm(top10)
@@ -263,7 +261,7 @@ estadoscode <- data.frame(Estado = nomesestados, Code = siglasestados)
 ```
 
 
-# Dados do Brasil a partir do Projeto Brasil.io
+# Dados do Brasil a partir do Projeto Brasil.io {#Brasil}
 
 
 ```{r}
@@ -280,7 +278,7 @@ brpopestados <- read_csv("./data/estimativa_populacao_Estados_TCU_2019_20200116.
 
 
 ```{r}
-casosfull_brio <- left_join(casosfull_brio, brpopestados[,c(1,2)], by = "Estado")
+casosfull_brio <- left_join(casosfull_brio, brpopestados, by = "Estado")
 ```
 
 ```{r}
@@ -292,7 +290,7 @@ casosfull_brio <- casosfull_brio %>% select(-is_repeated, -city_ibge_code, -esti
 ultimadata <- max(casosfull_brio$date)
 ```
 
-## Total de Casos pelos dados do Brasil.io: `r format(ultimadata, '%d-%m-%Y')` {#BRtotBRio}
+## Total de Casos do Brasil: `r format(ultimadata, '%d-%m-%Y')` 
  
 ```{r}
 casosfull_brio %>% 
@@ -301,12 +299,12 @@ casosfull_brio %>%
   group_by(Estado) %>% 
   filter(is_last == "TRUE") %>%
   summarise(TotEstado = last(last_available_confirmed), MortesEstado = last(last_available_deaths)) %>%
-  summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado)) -> briototais
-  kable(briototais) 
+  summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado), `Letalidade`= sprintf("%s%%",round(sum(MortesEstado)/sum(TotEstado)*100,1))) -> briototais
+  kable(briototais, align = "r") 
 ```
 
 
-## Dados por Estado 
+## Dados por Estado: `r format(ultimadata, '%d-%m-%Y')`  {#BRestados}
 
 
 ```{r}
@@ -323,7 +321,8 @@ casosfull_brio <- casosfull_brio %>%
   group_by(Estado, city) %>%
   mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
          ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
-         NovCasos = if_else(ConfirmedCases - lag(ConfirmedCases)> 0, ConfirmedCases - lag(ConfirmedCases), 0)
+         NovCasos = if_else((ConfirmedCases - lag(ConfirmedCases)) > 0, ConfirmedCases - lag(ConfirmedCases), 0),
+         NovMortes = if_else((Deaths - lag(Deaths)) > 0, Deaths - lag(Deaths), 0) 
         ) %>% ungroup() %>% ungroup()
 ```
 
@@ -331,7 +330,7 @@ casosfull_brio <- casosfull_brio %>%
 casosfull_brio %>% 
   filter(place_type == "city") %>% 
    filter(city == "São Paulo") %>%
-  arrange(last_available_date) %>% select(city, date, ConfirmedCases, ProgRateCases, ProgRateDeaths, NovCasos)
+  arrange(last_available_date) %>% select(city, date, ConfirmedCases, ProgRateCases, ProgRateDeaths, NovCasos, NovMortes)
 ```
 
 
@@ -346,13 +345,37 @@ casosfull_brio %>%
             Letal = sprintf("%s%%",round(Mortes/Casos*100,1)),
             Casos1M = round(Casos/last(População)*1e6,0), 
             Mortes1M = round(Mortes/last(População)*1e6,0),
-            NovCasos = last(NovCasos),
+            CasosDia = last(NovCasos),
             `%NovosCa` = sprintf("%s%%", round(last(ProgRateCases)*100,2)), 
+            MortesDia = last(NovMortes),
             `%NovasMo` = sprintf("%s%%", round(last(ProgRateDeaths)*100,2)), 
-            #NDias1Ca = sprintf("%s", ultimadata - min(date))
             ) %>% 
-  #rename(Estado = state) %>%
-  datatable(rownames = F, autoHideNavigation = T, caption = "Detalhamento Brasil por Estados (Brasil.io)", options = list( searching = FALSE)) 
+  datatable(rownames = F, autoHideNavigation = T,  options = list( searching = FALSE, className = 'compact', columnDefs = list(list(className = 'dt-right compact', targets = 1:8)))) 
+
+```
+
+
+<!--
+## Dados por Estados, Região e Municípios: `r format(ultimadata, '%d-%m-%Y')` 
+-->
+
+```{r}
+casosfull_brio %>% 
+  group_by(Estado, city) %>% 
+  filter(is_last == "TRUE") %>% 
+  arrange(desc(last_available_date)) %>%
+  summarise(Casos = sum(last_available_confirmed),
+            Mortes = sum(last_available_deaths), 
+            Letal = sprintf("%s%%",round(Mortes/Casos*100,1)),
+            Casos1M = round(Casos/last(População)*1e6,0), 
+            Mortes1M = round(Mortes/last(População)*1e6,0),
+            CasosDia = last(NovCasos),
+            `%NovosCa` = sprintf("%s%%", round(last(ProgRateCases)*100,2)), 
+            MortesDia = last(NovMortes),
+            `%NovasMo` = sprintf("%s%%", round(last(ProgRateDeaths)*100,2)),
+            Regiao = Região,
+            ) %>% rename(Cidade = city) %>% arrange(Estado,Cidade) -> dynDT
+
 ```
 
 
