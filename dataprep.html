@@ -294,8 +294,7 @@ https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-dis
 <a class="sourceLine" id="cb15-16" data-line-number="16">  }</a>
 <a class="sourceLine" id="cb15-17" data-line-number="17">  dia &lt;-<span class="st"> </span>dia <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb15-18" data-line-number="18">}</a></code></pre></div>
-<pre><code>## [1] &quot;Fazendo dowload do arquivo:~/datasets/CSSEGISandData/COVID-19/csse_covid_19_daily_reports/04-24-2020.csv&quot;
-## &lt;simpleError in curl::curl_download(paste(CSSEURLbase, ultarq, sep = &quot;&quot;), ultarq_fullname): HTTP error 404.&gt;</code></pre>
+<pre><code>## &lt;simpleError in curl::curl_download(paste(CSSEURLbase, ultarq, sep = &quot;&quot;), ultarq_fullname): HTTP error 404.&gt;</code></pre>
 <p>Depois de feito o download de todos os arquivos, é preciso juntá-los em um único <code>data.frame</code>. O processo começa com a leitura de todos os <code>csv</code>, colocando-os todos em uma <code>list</code>.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">dia &lt;-<span class="st"> </span>diainicio</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2">dias &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
