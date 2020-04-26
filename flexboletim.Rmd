@@ -446,7 +446,7 @@ top20 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(20, Confirmed
 ```
 
 
-```{r out.height="390"}
+```{r out.height="380"}
 jhucovid19 %>%
   group_by(Continent, Country) %>% 
   filter(Continent != "Outro") %>%
@@ -494,13 +494,13 @@ gtxly
 ### {data-width=300}
 
 
-```{r grmediamovel,  out.height="390"}
+```{r grmediamovel,  out.height="380"}
 key <- highlight_key(jhucovid19)
 jhucovid19 %>% 
   filter(ConfirmedCases >= 100 ) %>% 
  # mutate(Dia = row_number()) %>%
   filter(Country %in% top20) %>%
-  select(Country,ConfirmedCases,NewCasesMA,Continent) -> selecionados
+  select(Country,ConfirmedCases,NewCasesMA,Continent, DateRep) -> selecionados
 selshd <- SharedData$new(selecionados, ~Country, group = "Selecionados")
 #bscols(widths = c(1,NA,NA),
 #  list(
@@ -510,22 +510,24 @@ selshd <- SharedData$new(selecionados, ~Country, group = "Selecionados")
 #  ))
   ggplot(selshd, aes(x = ConfirmedCases, y = NewCasesMA)) +
     geom_line(aes(color = Country, text = paste0(Country,"\n",
+                                                 DateRep,"\n",
                                                  "Casos: ", ConfirmedCases,"\n",
                                                  "Novos Casos: ", round(NewCasesMA,0)), group = Country), size = 1) + 
     labs(x = "Casos Confirmados (log10)", y = "Novos Casos (log10)", title = "Casos Confirmados > 100",  color ="")  + 
     scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
-              labels = trans_format("log10", math_format(10^.x))) +  expand_limits(y = 10) +
+              labels = trans_format("log10", math_format(10^.x))) +  #expand_limits(y = 5) +
 scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-              labels = trans_format("log10", math_format(10^.x))) +  expand_limits(x = 10) +
+              labels = trans_format("log10", math_format(10^.x))) +  #expand_limits(x = 5) +
   theme(legend.position =  "none", axis.text.y = element_blank()) + labs_pubr() +
     scale_color_discrete(l = 40,c = 150) -> gth
 ggplotly(gth, tooltip = "text") %>%
-plotly::layout(dragmode = "zoom", xaxis = list(showticklabels = FALSE), yaxis = list(showticklabels = FALSE)) %>%
+plotly::layout(dragmode = "zoom", height = 340, width = 550, xaxis = list(showticklabels = FALSE), yaxis = list(showticklabels = FALSE)) %>%
   highlight(on = "plotly_click", 
             persistent = TRUE,  
             opacityDim = getOption("opacityDim", 0.05), 
             off="plotly_doubleclick",
-            selectize = TRUE
+            selectize = TRUE, 
+            margin = 100
             )
   
   #, off = "plotly_doubleclick", color = "black"
