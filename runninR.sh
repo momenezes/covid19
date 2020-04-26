@@ -33,11 +33,12 @@ R -e "rmarkdown::render('dataprep.Rmd',output_file='dataprep.html')" && R -e "rm
 
 if [ $? -eq 0 ] 
 then
-  R -e "rmarkdown::render('AnalysisExplorationsGraphics.Rmd', output_file='AnalysisExplorationsGraphics.html')"
+  R -e "rmarkdown::render('AnalysisExplorationsGraphics.Rmd', output_file='AnalysisExplorationsGraphics.html')" && R -e "rmarkdown::render('flexboletim.Rmd', output_file='flexboletim.html')"
   if [ $? -eq 0 ]
     then
       printf "Deu tudo certo com os markdowns\n"
-      git add ${COVID}/dataprep.html ${COVID}/AnalysisExplorationsGraphics.html ${COVID}/boletim.html ${COVID}/data/eeuucovid19_last.csv ${COVID}/data/jhucovid19_last.csv ${COVID}/data/brazil_covid19.csv ${COVID}/data/caso_full.csv
+      git add ${COVID}/dataprep.html ${COVID}/AnalysisExplorationsGraphics.html ${COVID}/boletim.html ${COVID}/flexboletim.html \
+      ${COVID}/data/eeuucovid19_last.csv ${COVID}/data/jhucovid19_last.csv ${COVID}/data/brazil_covid19.csv ${COVID}/data/caso_full.csv
       git commit -m "Cron script execution"
       git push 
       exit 0
