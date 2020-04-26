@@ -323,11 +323,15 @@ system("cd data;gunzip -f caso_full.csv.gz;cd ..")
 populacao <- read_csv("./data/WPP2019_TotalPopulationBySex.csv")
 ```
 
-Filtrei apenas os anos de 2019 e 2020 (previsão).
+Filtrei apenas os anos de 2019 e 2020 (previsão).  Removi regiões estranhas que contém a palavra "dependencies". 
 
 ```{r eval = FALSE}
-pop1920 <- populacao %>% select(-LocID, -VarID, -Variant, -MidPeriod) %>% filter(Time == 2019 | Time == 2020) %>%
-  group_by(Location, Time) %>% summarise(Year = max(Time), PopMale = last(PopMale), PopFemale = last(PopFemale), PopTotal = last(PopTotal), PopDensity = last(PopDensity)) %>% select(-Time) %>% dplyr::ungroup()
+pop1920 <- populacao %>% 
+  filter(!grepl("dependencies", Location, ignore.case = T), !grepl("develop",Location, ignore.case = T), !grepl("SIDS", Location, ignore.case = T)) %>% 
+  filter(Time == 2019 | Time == 2020, Variant == "Medium") %>%
+  group_by(Location, Time) %>% 
+  summarise(Year = max(Time), PopMale = last(PopMale), PopFemale = last(PopFemale), PopTotal = last(PopTotal), PopDensity = last(PopDensity), VarID = last(VarID), LocID = last(LocID)) %>% 
+  select(-Time) %>% dplyr::ungroup()
 ```
 
 Adicionei uma coluna "Continent" e removi a observações sem continentes (agrupamentos de países ou regiões).
@@ -335,6 +339,7 @@ Adicionei uma coluna "Continent" e removi a observações sem continentes (agrup
 ```{r eval = FALSE}
 pop1920 <- pop1920 %>% mutate(Continent = if_else(is.na(countrycode(sourcevar = Location, origin = "country.name", destination = "continent")), "Outro", countrycode(sourcevar = Location, origin = "country.name", destination = "continent"))) %>% mutate(Continent = case_when(Location == "Africa" ~ "Africa", Location == "Asia" ~ "Asia", Location == "Europe" ~"Europe", Location == "Central America" ~ "Central America", Location == "North America" ~ "North America", Location == "South America" ~ "South America", Location == "Oceania"  ~ "Oceania", TRUE ~ Continent)) %>% filter(Continent %in% c("Africa","Asia","Europe","Americas","Oceania","North America","South America","Central America"))
 ```
+
 
 
 ```{r eval = FALSE}
@@ -349,4 +354,4 @@ write_csv(pop1920, "./data/populacao20192020.csv")
 
 ------------
 
-<span><a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a></span>
+<div><span><a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a></span><span style="color:blue;font-size:8px; padding: 20%;">Página gerada em: "`r format(Sys.time(), '%c')`"</span></div>
