@@ -99,7 +99,7 @@ casosfull_brio %>%
 Resumo Brasil `r format(ultimadata, '%d-%m-%Y')`  {data-orientation=rows data-icon="fa-bar-chart"}
 =====================================
 
-###  Dados do Brasil a partir do Projeto Brasil.io
+###  Dados do Brasil a partir do Projeto Brasil.io {data-height=10}
 
 ## Row 1 {data-height=110}
 
@@ -307,10 +307,22 @@ reactable(tabelaBR, defaultPageSize = 27, bordered = TRUE, striped = TRUE,
 ```
 
 
+## Row 4 {data-height=60}
+
+
+<a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a>
 
 
 
 
+
+
+Resumo Mundo `r format(ultimadata, '%d-%m-%Y')`  {data-orientation=rows data-icon="fa-bar-chart"}
+=====================================
+
+###  Dados da John Hopkins University  {data-height=10}
+
+## Row 1 {data-height=110}
 
 ```{r}
 jhucovid19 <- read_csv("./data/jhucovid19_last.csv")
@@ -325,12 +337,6 @@ Fonte = "Fonte: CSSE at Johns Hopkins University"
 ultimadata <- max(jhucovid19$DateRep)
 ```
 
-Resumo Mundo `r format(ultimadata, '%d-%m-%Y')`  {data-orientation=rows data-icon="fa-bar-chart"}
-=====================================
-
-###  Dados da John Hopkins University
-
-## Row 1 {data-height=110}
 
 ```{r}
  jhucovid19 %>% 
@@ -581,9 +587,9 @@ filter(jhucovid19, Country %in% top20) %>%
 
 
 
-------------
+## Row 4 {data-height=60}
 
-<div><span><a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a></span><span style="color:blue;font-size:8px; padding: 20%;">Página gerada em: "`r format(Sys.time(), '%c')`"</span></div>
+<a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a>
 
 
 
