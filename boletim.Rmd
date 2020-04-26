@@ -382,4 +382,4 @@ casosfull_brio %>%
 
 ------------
 
-<span><a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a></span>
+<div><span><a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a></span><span style="color:blue;font-size:8px; padding: 20%;">Página gerada em: "`r format(Sys.time(), '%c')`"</span></div>

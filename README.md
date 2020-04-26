@@ -10,6 +10,8 @@ Conforme mais bases públicas são descobertas, vou tentar adicionar análises e
 
 ### [Boletim diário - Mundo e Brasil](boletim.html)
 
+### [Dashboard Experimental - Brasil e Mundo](flexboletim.html)
+
 ### [Análise Exploratória - Tabelas e Gráficos](AnalysisExplorationsGraphics.html)
 
 ### [Preparação dos Dados](dataprep.html) - mostrando os códigos
