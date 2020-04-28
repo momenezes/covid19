@@ -1057,6 +1057,7 @@ str(womcovid19)
 
 Depois de pegar a tabela em html e colocar em um `data.frame`, algumas limpezas e transformações são necessárias: algumas colunas, como a `NewCases`, tem o símbolo `+`; os números vieram formatados como _strings_ com separador de milhar (`,`), e algumas outras coisas. Então, algumas manipulações serão feitas para acertar isso.
 
+
 ```{r}
 head(womcovid19) %>% select(`Country,Other`,TotalCases,NewCases,TotalDeaths,NewDeaths) %>% kable() %>% kable_styling(c("striped"), full_width = F)
 ```
@@ -1071,7 +1072,7 @@ womcovid19 %>% top_n(20, `Country,Other`)
 womcovid19 <- womcovid19 %>% 
   rename(Country = `Country,Other`, SeriousCritical = `Serious,Critical`) %>% 
   rename(Cases1M = contains("Cases/1M pop"), Deaths1M = contains("Deaths/1M pop")) %>% 
-  mutate_at(vars(TotalCases,NewCases,TotalDeaths,NewDeaths,TotalRecovered,ActiveCases,SeriousCritical,Cases1M, Deaths1M), str_remove ,"," )  %>%
+  mutate_at(vars(TotalCases,NewCases,TotalDeaths,NewDeaths,TotalRecovered,ActiveCases,SeriousCritical,Cases1M, Deaths1M), str_remove_all ,"," )  %>%
   mutate_at(vars(NewCases,NewDeaths), str_remove , "\\+" ) %>%
   mutate_at(vars(TotalCases,NewCases,TotalDeaths,NewDeaths,TotalRecovered,ActiveCases,SeriousCritical,Cases1M, Deaths1M), as.numeric, na.rm=TRUE) %>% 
   filter(Country != "Total:")
@@ -1088,11 +1089,12 @@ hoje <- today()
 
 O Worldometer não contabiliza os casos do _Diamond Princess_ ou contabiliza juntamente com algum país, ou países (da nacionalidade de cada pessoa). Então, estou retirando também para refletir o valor mostrado no site do Worldometer.
 
-O Worldometer também passou a apresentar totais de alguns continentes ou regiões; como não está padronizado, ou seja, não estão agrupando por continentes, que seria fácil remover na filtragem; ao invés disso, colocaram por exemplo, _North America_ e _South America_, mas não tem _Americas_. Depois do dia 09 ou 10 de abril, o Worldometer passou a incluir uma linha *World* na tabela.Assim, estou removendo de acordo com o que eles mudam no site.
+O Worldometer também passou a apresentar totais de alguns continentes ou regiões; como não está padronizado, ou seja, não estão agrupando por continentes, que seria fácil remover na filtragem; ao invés disso, colocaram por exemplo, _North America_ e _South America_, mas não tem _Americas_. Depois do dia 09 ou 10 de abril, o Worldometer passou a incluir uma linha *World* na tabela. Assim, estou removendo de acordo com o que eles mudam no site.
 
 ```{r}
 womcovid19 %>%
-  filter(!Country %in% c("Europe", "Asia", "North America", "South America", "Africa", "Oceania", "Diamond Princess", "World")) %>%
+  filter(Country == "World") %>%
+  #filter(!Country %in% c("Europe", "Asia", "North America", "South America", "Africa", "Oceania", "Diamond Princess", "World")) %>%
   select(TotalCases, TotalDeaths, TotalRecovered) %>% 
   dplyr::summarise(TotalCasos = sum(TotalCases,na.rm = T), TotalMortes=sum(TotalDeaths,na.rm = T), TotalRecuperados = sum(TotalRecovered,na.rm = T)) %>%
   kable() 
