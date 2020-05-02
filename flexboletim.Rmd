@@ -371,7 +371,7 @@ valueBox(jhutotal$Recuperados, icon = "fa-heart", color = "rgb(26,210,204)")
 valueBox(sprintf("%s%%", round(jhutotal$Mortos/jhutotal$Casos*100,2)), icon = "fa-percentage",color="rgb(26,110,204)")
 ```
 
-## Row 2 {data-height=410}
+## Row 2 {data-height=550}
 
 ### {data-width=200}
 
@@ -497,10 +497,10 @@ gtxly <- ggplotly(gtx, tooltip = "text")
 gtxly
 ```
 
-### {data-width=300}
+### {data-width=400}
 
 
-```{r grmediamovel,  out.height="380"}
+```{r grmediamovel, eval = FALSE,  out.height="380"}
 key <- highlight_key(jhucovid19)
 jhucovid19 %>% 
   filter(ConfirmedCases >= 100 ) %>% 
@@ -541,11 +541,108 @@ plotly::layout(dragmode = "zoom", height = 340, width = 550, xaxis = list(showti
 ```
 
 
+```{r  out.height="450"}
+library(plotly)
+key <- highlight_key(jhucovid19)
+jhucovid19 %>% 
+  filter(ConfirmedCases >= 50 ) %>% 
+  group_by(Country) %>% 
+  mutate(Dia = row_number()) %>%
+  filter(Country %in% top20) %>%
+  select(Country,ConfirmedCases,NewCasesMA,Continent, DateRep, Dia) %>% ungroup() -> selecionados
+xrange <- c(log10(30), 1.1*max(log10(selecionados$ConfirmedCases)))
+yrange <- c(log10(30), 1.05*max(log10(selecionados$NewCasesMA)))
+selshd <- SharedData$new(selecionados, ~Country, group = "Selecionados")
+yax <- list(type = "log", 
+           range = yrange,
+           zeroline = FALSE,
+           showline = FALSE, 
+           title = "Novos Casos (média móvel 5)"
+           )
+xax <- list(type = "log",
+            range = xrange,
+            zeroline = FALSE,
+            showline = FALSE,
+            title = "Total Casos Confirmados após 50º caso"
+            )
+fig <- plot_ly(data = selshd,  mode = 'lines', x = ~ConfirmedCases, y = ~NewCasesMA, 
+               color = ~Country, 
+               width = 4,
+               hoverinfo = 'text', 
+               text  = ~paste(Country, 
+                             '<br>Data:', DateRep,
+                             '<br>CasosConfirmados:', ConfirmedCases,
+                             '<br>NovosCasosMA:', NewCasesMA),  
+               showlegend = FALSE, colorscale = "Jet"
+              )
+fig <- layout(fig, dragmode = "zoom", height = 450, width = 600, yaxis = yax, xaxis = xax)  %>%
+ highlight(on = "plotly_click", 
+            persistent = TRUE,  
+            opacityDim = getOption("opacityDim", 0.05), 
+            off="plotly_doubleclick",
+            selectize = TRUE 
+          
+            )
+fig
+
+```
+
 ### {data-width=100}
 
 O gráfico ao lado mostra um comportamento muito parecido de todos os países. Olhando o caso do Brasil, nossa curva parece indicar que ainda temos mais um pouco de _ladeira_ pra subir antes de começarmos a curva.
 
+
 ## Row 3 {data-height=600}
+
+### {data-width=500}
+
+
+```{r  out.height="550"}
+library(plotly)
+key <- highlight_key(jhucovid19)
+jhucovid19 %>% 
+  filter(ConfirmedCases >= 50 ) %>% 
+  group_by(Country) %>% 
+  mutate(Dia = row_number()) %>%
+  filter(Country %in% top20) %>%
+  select(Country,ConfirmedCases,NewCasesMA,Continent, DateRep, Dia) %>% ungroup() -> selecionados
+xrange <- c(-2, 1.1*max(selecionados$Dia))
+yrange <- c(log10(30), 1.05*max(log10(selecionados$ConfirmedCases)))
+selshd <- SharedData$new(selecionados, ~Country, group = "Selecionados")
+yax <- list(type = "log", 
+           range = yrange,
+           zeroline = FALSE,
+           showline = FALSE, 
+           title = "Casos Confirmados (após 50º)"
+           )
+xax <- list(range = xrange,
+            zeroline = FALSE,
+            showline = FALSE,
+            title = "Dias corridos após 50º caso"
+            )
+fig <- plot_ly(data = selshd,  mode = 'lines', x = ~Dia, y = ~ConfirmedCases, 
+               color = ~Country, 
+               width = 2,
+               hoverinfo = 'text', 
+               text  = ~paste(Country, 
+                             '<br>Data:', DateRep,
+                             '<br>CasosConfirmados:', ConfirmedCases),  
+               showlegend = FALSE
+              )
+fig <- layout(fig, dragmode = "zoom", height = 500, width = 600, yaxis = yax, xaxis = xax)  %>%
+ highlight(on = "plotly_click", 
+            persistent = TRUE,  
+            opacityDim = getOption("opacityDim", 0.05), 
+            off="plotly_doubleclick",
+            selectize = TRUE 
+          
+            )
+fig
+
+```
+
+
+## Row 4 {data-height=600}
 
 ### Detalhamento 20 Países com mais casos
 
