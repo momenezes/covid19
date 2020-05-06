@@ -1674,31 +1674,58 @@ date,region,state,cases,deaths
 2020-03-31,Sul,Rio Grande do Sul,274,4
 2020-03-31,Sul,Santa Catarina,219,2
 2020-04-01,Centro-Oeste,Distrito Federal,355,3
+2020-04-01,Centro-Oeste,Distrito Federal,355,3
+2020-04-01,Centro-Oeste,Goiás,71,1
 2020-04-01,Centro-Oeste,Goiás,71,1
 2020-04-01,Centro-Oeste,Mato Grosso,27,0
+2020-04-01,Centro-Oeste,Mato Grosso,27,0
+2020-04-01,Centro-Oeste,Mato Grosso do Sul,51,1
 2020-04-01,Centro-Oeste,Mato Grosso do Sul,51,1
 2020-04-01,Nordeste,Alagoas,18,1
+2020-04-01,Nordeste,Alagoas,18,1
+2020-04-01,Nordeste,Bahia,246,2
 2020-04-01,Nordeste,Bahia,246,2
 2020-04-01,Nordeste,Ceará,444,8
+2020-04-01,Nordeste,Ceará,444,8
 2020-04-01,Nordeste,Maranhão,54,1
+2020-04-01,Nordeste,Maranhão,52,1
+2020-04-01,Nordeste,Paraíba,20,1
 2020-04-01,Nordeste,Paraíba,20,1
 2020-04-01,Nordeste,Pernambuco,95,8
+2020-04-01,Nordeste,Pernambuco,95,8
+2020-04-01,Nordeste,Piauí,18,4
 2020-04-01,Nordeste,Piauí,18,4
 2020-04-01,Nordeste,Rio Grande do Norte,92,2
+2020-04-01,Nordeste,Rio Grande do Norte,92,2
+2020-04-01,Nordeste,Sergipe,20,0
 2020-04-01,Nordeste,Sergipe,20,0
 2020-04-01,Norte,Acre,43,0
+2020-04-01,Norte,Acre,43,0
+2020-04-01,Norte,Amapá,11,0
 2020-04-01,Norte,Amapá,11,0
 2020-04-01,Norte,Amazonas,200,3
-2020-04-01,Norte,Pará,40,0
+2020-04-01,Norte,Amazonas,200,3
+2020-04-01,Norte,Pará,40,1
+2020-04-01,Norte,Pará,40,1
+2020-04-01,Norte,Rondônia,9,1
 2020-04-01,Norte,Rondônia,9,1
 2020-04-01,Norte,Roraima,22,0
+2020-04-01,Norte,Roraima,22,0
+2020-04-01,Norte,Tocantins,12,0
 2020-04-01,Norte,Tocantins,12,0
 2020-04-01,Sudeste,Espírito Santo,96,0
+2020-04-01,Sudeste,Espírito Santo,96,0
+2020-04-01,Sudeste,Minas Gerais,314,3
 2020-04-01,Sudeste,Minas Gerais,314,3
 2020-04-01,Sudeste,Rio de Janeiro,832,28
+2020-04-01,Sudeste,Rio de Janeiro,832,28
+2020-04-01,Sudeste,São Paulo,2981,164
 2020-04-01,Sudeste,São Paulo,2981,164
 2020-04-01,Sul,Paraná,224,3
+2020-04-01,Sul,Paraná,224,3
 2020-04-01,Sul,Rio Grande do Sul,306,4
+2020-04-01,Sul,Rio Grande do Sul,306,4
+2020-04-01,Sul,Santa Catarina,235,2
 2020-04-01,Sul,Santa Catarina,235,2
 2020-04-02,Centro-Oeste,Distrito Federal,370,4
 2020-04-02,Centro-Oeste,Goiás,73,1
@@ -2241,31 +2268,58 @@ date,region,state,cases,deaths
 2020-04-21,Sul,Rio Grande do Sul,904,27
 2020-04-21,Sul,Santa Catarina,1063,35
 2020-04-22,Centro-Oeste,Distrito Federal,946,25
+2020-04-22,Centro-Oeste,Distrito Federal,946,25
+2020-04-22,Centro-Oeste,Goiás,438,21
 2020-04-22,Centro-Oeste,Goiás,438,21
 2020-04-22,Centro-Oeste,Mato Grosso,183,6
+2020-04-22,Centro-Oeste,Mato Grosso,183,6
+2020-04-22,Centro-Oeste,Mato Grosso do Sul,175,6
 2020-04-22,Centro-Oeste,Mato Grosso do Sul,175,6
 2020-04-22,Nordeste,Alagoas,243,20
+2020-04-22,Nordeste,Alagoas,243,20
+2020-04-22,Nordeste,Bahia,1644,50
 2020-04-22,Nordeste,Bahia,1644,50
 2020-04-22,Nordeste,Ceará,3910,233
+2020-04-22,Nordeste,Ceará,3910,233
+2020-04-22,Nordeste,Maranhão,1604,66
 2020-04-22,Nordeste,Maranhão,1604,66
 2020-04-22,Nordeste,Paraíba,301,39
+2020-04-22,Nordeste,Paraíba,301,39
+2020-04-22,Nordeste,Pernambuco,3298,282
 2020-04-22,Nordeste,Pernambuco,3298,282
 2020-04-22,Nordeste,Piauí,206,15
+2020-04-22,Nordeste,Piauí,206,15
+2020-04-22,Nordeste,Rio Grande do Norte,646,29
 2020-04-22,Nordeste,Rio Grande do Norte,646,29
 2020-04-22,Nordeste,Sergipe,117,7
+2020-04-22,Nordeste,Sergipe,117,7
+2020-04-22,Norte,Acre,214,8
 2020-04-22,Norte,Acre,214,8
 2020-04-22,Norte,Amapá,479,14
+2020-04-22,Norte,Amapá,479,14
+2020-04-22,Norte,Amazonas,2479,207
 2020-04-22,Norte,Amazonas,2479,207
 2020-04-22,Norte,Pará,1195,43
+2020-04-22,Norte,Pará,1195,43
+2020-04-22,Norte,Rondônia,223,5
 2020-04-22,Norte,Rondônia,223,5
 2020-04-22,Norte,Roraima,280,3
+2020-04-22,Norte,Roraima,280,3
+2020-04-22,Norte,Tocantins,37,1
 2020-04-22,Norte,Tocantins,37,1
 2020-04-22,Sudeste,Espírito Santo,1313,34
+2020-04-22,Sudeste,Espírito Santo,1313,34
+2020-04-22,Sudeste,Minas Gerais,1283,47
 2020-04-22,Sudeste,Minas Gerais,1283,47
 2020-04-22,Sudeste,Rio de Janeiro,5552,490
+2020-04-22,Sudeste,Rio de Janeiro,5552,490
+2020-04-22,Sudeste,São Paulo,15914,1134
 2020-04-22,Sudeste,São Paulo,15914,1134
 2020-04-22,Sul,Paraná,1063,57
+2020-04-22,Sul,Paraná,1063,57
 2020-04-22,Sul,Rio Grande do Sul,923,27
+2020-04-22,Sul,Rio Grande do Sul,923,27
+2020-04-22,Sul,Santa Catarina,1091,37
 2020-04-22,Sul,Santa Catarina,1091,37
 2020-04-23,Centro-Oeste,Distrito Federal,963,25
 2020-04-23,Centro-Oeste,Goiás,453,23
@@ -2509,28 +2563,28 @@ date,region,state,cases,deaths
 2020-05-01,Sudeste,São Paulo,30374,2511
 2020-05-01,Sul,Paraná,1447,89
 2020-05-01,Sul,Rio Grande do Sul,1529,58
-2020-05-01,Sul,Santa Catarina,2394,48
+2020-05-01,Sul,Santa Catarina,2104,48
 2020-05-02,Centro-Oeste,Distrito Federal,1566,31
 2020-05-02,Centro-Oeste,Goiás,825,30
 2020-05-02,Centro-Oeste,Mato Grosso,331,12
 2020-05-02,Centro-Oeste,Mato Grosso do Sul,266,9
 2020-05-02,Nordeste,Alagoas,1372,58
-2020-05-02,Nordeste,Bahia,3315,123
-2020-05-02,Nordeste,Ceará,8309,638
+2020-05-02,Nordeste,Bahia,3267,123
+2020-05-02,Nordeste,Ceará,8231,614
 2020-05-02,Nordeste,Maranhão,3805,224
 2020-05-02,Nordeste,Paraíba,1034,74
 2020-05-02,Nordeste,Pernambuco,8145,628
 2020-05-02,Nordeste,Piauí,665,26
 2020-05-02,Nordeste,Rio Grande do Norte,1366,59
 2020-05-02,Nordeste,Sergipe,601,14
-2020-05-02,Norte,Acre,553,22
+2020-05-02,Norte,Acre,553,21
 2020-05-02,Norte,Amapá,1187,40
 2020-05-02,Norte,Amazonas,6062,501
 2020-05-02,Norte,Pará,3460,273
 2020-05-02,Norte,Rondônia,653,23
 2020-05-02,Norte,Roraima,668,9
 2020-05-02,Norte,Tocantins,191,4
-2020-05-02,Sudeste,Espírito Santo,2985,103
+2020-05-02,Sudeste,Espírito Santo,2948,102
 2020-05-02,Sudeste,Minas Gerais,2023,88
 2020-05-02,Sudeste,Rio de Janeiro,10546,971
 2020-05-02,Sudeste,São Paulo,31174,2586
@@ -2565,56 +2619,56 @@ date,region,state,cases,deaths
 2020-05-03,Sul,Rio Grande do Sul,1666,65
 2020-05-03,Sul,Santa Catarina,2346,52
 2020-05-04,Centro-Oeste,Distrito Federal,1768,33
-2020-05-04,Centro-Oeste,Distrito Federal,1768,33
-2020-05-04,Centro-Oeste,Goiás,861,30
 2020-05-04,Centro-Oeste,Goiás,861,30
 2020-05-04,Centro-Oeste,Mato Grosso,344,13
-2020-05-04,Centro-Oeste,Mato Grosso,344,13
-2020-05-04,Centro-Oeste,Mato Grosso do Sul,274,10
 2020-05-04,Centro-Oeste,Mato Grosso do Sul,274,10
 2020-05-04,Nordeste,Alagoas,1538,72
-2020-05-04,Nordeste,Alagoas,1538,72
-2020-05-04,Nordeste,Bahia,3708,134
 2020-05-04,Nordeste,Bahia,3734,141
-2020-05-04,Nordeste,Ceará,8501,691
 2020-05-04,Nordeste,Ceará,11040,712
 2020-05-04,Nordeste,Maranhão,4227,249
-2020-05-04,Nordeste,Maranhão,4227,249
-2020-05-04,Nordeste,Paraíba,1219,79
 2020-05-04,Nordeste,Paraíba,1219,79
 2020-05-04,Nordeste,Pernambuco,8863,691
-2020-05-04,Nordeste,Pernambuco,8863,691
-2020-05-04,Nordeste,Piauí,784,28
 2020-05-04,Nordeste,Piauí,784,28
 2020-05-04,Nordeste,Rio Grande do Norte,1421,62
-2020-05-04,Nordeste,Rio Grande do Norte,1421,62
-2020-05-04,Nordeste,Sergipe,772,17
 2020-05-04,Nordeste,Sergipe,772,17
 2020-05-04,Norte,Acre,733,28
-2020-05-04,Norte,Acre,733,28
 2020-05-04,Norte,Amapá,1733,49
-2020-05-04,Norte,Amapá,1733,49
-2020-05-04,Norte,Amazonas,7313,585
 2020-05-04,Norte,Amazonas,7242,584
 2020-05-04,Norte,Pará,4125,330
-2020-05-04,Norte,Pará,4125,330
-2020-05-04,Norte,Rondônia,756,25
 2020-05-04,Norte,Rondônia,756,25
 2020-05-04,Norte,Roraima,806,11
-2020-05-04,Norte,Roraima,806,11
 2020-05-04,Norte,Tocantins,267,6
-2020-05-04,Norte,Tocantins,267,6
-2020-05-04,Sudeste,Espírito Santo,3162,116
 2020-05-04,Sudeste,Espírito Santo,3226,122
 2020-05-04,Sudeste,Minas Gerais,2347,90
-2020-05-04,Sudeste,Minas Gerais,2347,90
-2020-05-04,Sudeste,Rio de Janeiro,11721,1065
 2020-05-04,Sudeste,Rio de Janeiro,11721,1065
 2020-05-04,Sudeste,São Paulo,32187,2654
-2020-05-04,Sudeste,São Paulo,32187,2654
-2020-05-04,Sul,Paraná,1562,94
 2020-05-04,Sul,Paraná,1562,94
 2020-05-04,Sul,Rio Grande do Sul,1711,74
-2020-05-04,Sul,Rio Grande do Sul,1711,74
 2020-05-04,Sul,Santa Catarina,2519,52
-2020-05-04,Sul,Santa Catarina,2519,52
+2020-05-05,Centro-Oeste,Distrito Federal,1818,33
+2020-05-05,Centro-Oeste,Goiás,922,38
+2020-05-05,Centro-Oeste,Mato Grosso,365,13
+2020-05-05,Centro-Oeste,Mato Grosso do Sul,283,10
+2020-05-05,Nordeste,Alagoas,1606,80
+2020-05-05,Nordeste,Bahia,4040,146
+2020-05-05,Nordeste,Ceará,11470,795
+2020-05-05,Nordeste,Maranhão,4530,271
+2020-05-05,Nordeste,Paraíba,1361,85
+2020-05-05,Nordeste,Pernambuco,9325,749
+2020-05-05,Nordeste,Piauí,875,29
+2020-05-05,Nordeste,Rio Grande do Norte,1536,68
+2020-05-05,Nordeste,Sergipe,898,21
+2020-05-05,Norte,Acre,817,29
+2020-05-05,Norte,Amapá,1931,55
+2020-05-05,Norte,Amazonas,8109,649
+2020-05-05,Norte,Pará,4472,369
+2020-05-05,Norte,Rondônia,861,29
+2020-05-05,Norte,Roraima,869,11
+2020-05-05,Norte,Tocantins,303,7
+2020-05-05,Sudeste,Espírito Santo,3402,133
+2020-05-05,Sudeste,Minas Gerais,2452,94
+2020-05-05,Sudeste,Rio de Janeiro,12391,1123
+2020-05-05,Sudeste,São Paulo,34053,2851
+2020-05-05,Sul,Paraná,1588,99
+2020-05-05,Sul,Rio Grande do Sul,1815,79
+2020-05-05,Sul,Santa Catarina,2623,55
