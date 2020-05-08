@@ -1,0 +1,849 @@
+---
+title: "Boletim Diário"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+    theme: bootstrap
+    fig_mobile: true
+    fig_retina: 3
+
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, knitr.kable.NA = '')
+```
+
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(forcats)
+library(ggpubr)
+library(knitr)
+library(stringi)
+library(RColorBrewer)
+library(ggthemes)
+library(plotly)
+library(data.table)
+library(scales)
+library(kableExtra)
+library(DT)
+library(formattable)
+library(reactable)
+library(highcharter)
+library(crosstalk)
+```
+
+
+```{r}
+theme_set(theme_clean())
+```
+
+
+
+
+
+
+```{r}
+brpopestados <- read_csv("./data/estimativa_populacao_Estados_TCU_2019_20200116.csv")
+```
+
+
+```{r}
+siglasestados <- c("AC","AL", "AP", "AM", "BA","CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA","PB", "PR", "PE","PI","RJ","RN", "RS", "RO", "RR", "SC",  "SP", "SE", "TO")
+```
+```{r}
+nomesestados <- c("Acre", "Alagoas", "Amapá", "Amazonas", "Bahia","Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul",   "Rondônia",  "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins"  )
+```
+
+```{r}
+estadoscode <- data.frame(Estado = nomesestados, Code = siglasestados)
+```
+
+
+```{r}
+casosfull_brio <- read_csv("./data/caso_full.csv")
+```
+
+```{r}
+casosfull_brio <- left_join(casosfull_brio, estadoscode, by = c("state"="Code"))
+```
+
+```{r}
+brpopestados <- read_csv("./data/estimativa_populacao_Estados_TCU_2019_20200116.csv")
+```
+
+
+```{r}
+casosfull_brio <- left_join(casosfull_brio, brpopestados, by = "Estado")
+```
+
+```{r}
+casosfull_brio <- casosfull_brio %>% select(-is_repeated, -city_ibge_code, -estimated_population_2019)
+```
+
+
+```{r}
+ultimadata <- max(casosfull_brio$date)
+```
+
+```{r}
+casosfull_brio %>% 
+  arrange(date) %>%
+  filter(place_type == "state") %>%
+  group_by(Estado) %>% 
+  filter(is_last == "TRUE") %>%
+  summarise(TotEstado = last(last_available_confirmed), MortesEstado = last(last_available_deaths)) %>%
+  summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado), Letalidade = sprintf("%s%%", round(sum(MortesEstado)/sum(TotEstado)*100,2))) -> briototais
+
+```
+
+Resumo Brasil  {data-orientation=rows data-icon="fa-bar-chart"}
+=====================================
+
+###  Dados do Brasil a partir do Projeto Brasil.io `r format(ultimadata, '%d-%m-%Y')` {data-height=10}
+
+## Row 1 {data-height=110}
+
+
+### Total de Casos
+
+```{r}
+valueBox(briototais$`Casos Confirmados`, icon = "fa-heartbeat", color="rgb(100,100,100)")
+```
+
+### Total de Mortes
+
+```{r}
+valueBox(briototais$`Total Mortes`, icon = "fa-sad-tear", color="rgb(200,100,100)")
+```
+
+### Letalidade
+
+```{r}
+valueBox(briototais$Letalidade, icon = "fa-percentage",color="rgb(26,110,204)")
+```
+    
+
+## Row 2 {data-height=400}  
+
+### Casos por Estado
+
+```{r}
+casosfull_brio %>% 
+  arrange(date) %>%
+  filter(place_type == "state") %>%
+  group_by(Estado) %>% 
+  filter(is_last == "TRUE") %>%
+  summarise(Casos = last(last_available_confirmed), Mortes = last(last_available_deaths)) -> totestados
+#totestados %<>% mutate(Estado = factor(Estado, ordered=T)) 
+#totestados$Estado <- reorder(totestados$Estado, totestados$Casos)
+totestados <- arrange(totestados, desc(Casos))
+```
+
+
+
+
+```{r}
+totestadostidy <- totestados %>%  gather(key = "Tipo", value = "Valor", 2:3)
+totestshd <- SharedData$new(totestadostidy, key = ~Tipo)
+```
+
+```{r eval = FALSE}
+barsC <- plot_ly(totestados, color = I("tomato"), x = ~Estado, y = ~Casos, type= 'bar') #%>% add_bars()
+barsM <- plot_ly(totestados, color = I("darkgrey"), x = ~Estado, y = ~Mortes, type = 'bar')# %>% add_bars()
+subplot(barsC, barsM, shareX = FALSE, shareY = FALSE, titleX = TRUE, titleY = TRUE) %>%
+  layout(
+    title = "Click and drag on scatterplot",
+    barmode = "overlay",
+    showlegend = FALSE,
+    margin = 7
+    
+  ) %>%
+  highlight("plotly_hover")
+```
+
+
+
+
+
+```{r}
+totestados %>% 
+  ggplot() + 
+  geom_bar(aes(x = reorder(Estado,Casos), y = Casos, text = Casos), stat = "identity", fill = "tomato")+ 
+  #geom_text(aes(x = Estado, y = Casos, label = paste0(Estado, ': ', Casos))) +
+  labs(x = "", y = "") + 
+  theme( panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        strip.background = element_blank()) +
+  coord_flip() -> g
+ggplotly(g, tooltip="text")
+  
+
+```
+
+
+
+### Mortes por Estado
+
+
+```{r}
+totestados %>%
+  ggplot() + 
+  geom_bar(aes(x = reorder(Estado,Casos), y = Mortes, text = Mortes), stat = "identity", fill = "tomato") +
+  labs(x = "", y = "Mortes") + 
+  theme( panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        strip.background = element_blank()) +
+  coord_flip() -> h
+j <- ggplotly(h, tooltip = "text")
+j
+```
+
+
+## Row 3 {data-height=500}
+
+### {data-width=700}
+
+```{r }
+# nao consigo fazer o grafico com os Estados ordenados pelo numero de Casos
+highchart() %>% 
+  # Data
+  hc_add_series(totestados, "bar", hcaes(Estado,Casos), name = "Casos") %>%
+  # Optiosn for each type of series
+  hc_plotOptions(
+    series = list(
+      showInLegend = FALSE,
+      pointFormat = "{point.y}%"
+      
+    ),
+    column = list(
+      colorByPoint = TRUE
+    )
+  ) %>%
+  # Axis
+  hc_yAxis(
+    title = list(text = "Casos Confirmados"),
+    labels = list(format = "{value}")
+  ) %>% 
+  hc_xAxis( type = 'category')  -> hcCasos
+
+highchart() %>% 
+  # Data
+  hc_add_series(totestados, "bar", hcaes(x = Estado, y = Mortes),name="Mortes") %>%
+  # Optiosn for each type of series
+  hc_plotOptions(
+    series = list(
+      showInLegend = FALSE,
+      pointFormat = "{point.y}%"
+      
+    ),
+    column = list(
+      colorByPoint = TRUE
+    )
+  ) %>%
+  # Axis
+  hc_yAxis(
+    title = list(text = "Mortes"),
+    labels = list(format = "{value}")
+  ) %>% 
+  hc_xAxis( type = 'category') -> hcMortes
+
+hw_grid(hcCasos, hcMortes)
+
+
+#totestados %>%
+#  hchart('bar', hcaes(x = 'Estado', y = 'Casos')) %>%
+#  hc_tooltip(pointFormat = '{point.x:}
+#                            
+#
+#                            {point.y: .0f} ')
+```
+
+## Row 4 {data-height=500, .no-mobile}
+
+### {data-width=700}
+
+```{r}
+library(echarts4r)
+library(echarts4r.assets)
+```
+
+
+
+
+```{r}
+totestados %>%
+  e_charts(x = Estado, elementId = "casos") %>%
+  e_bar(Casos, legend = FALSE, name = "Casos") %>% 
+  e_labels(position = "right") %>% 
+  e_tooltip(
+    trigger = "item",
+    axisPointer = list(
+      type = "line"
+    )
+  )  %>% 
+  e_title("Casos Confirmados") %>% 
+  e_flip_coords() %>% 
+  e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
+      interval = 0L
+    )) %>% 
+  e_x_axis(show = FALSE) %>% 
+  e_toolbox_feature(
+    feature = "saveAsImage",
+    title = "Save as image"
+  ) -> echrtCasos
+
+
+totestados %>%
+  e_charts(x = Estado) %>%
+  e_bar(Mortes, legend = FALSE, name = "Mortes") %>% 
+  e_labels(position = "right") %>% 
+  e_tooltip(
+    trigger = "item",
+    axisPointer = list(
+      type = "line"
+    )
+  ) %>% 
+  e_title("Mortes") %>% 
+  e_flip_coords() %>% 
+  e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
+      interval = 0L
+    )) %>% 
+  e_x_axis(show = FALSE) %>% 
+   e_connect("casos") %>%
+  e_toolbox_feature(
+    feature = "saveAsImage",
+    title = "Save as image"
+  ) -> echrtMortes
+
+e_arrange(echrtCasos, echrtMortes, rows = 1, cols = 2)
+
+```
+
+
+## Row 4 {data-height=700, .mobile}
+
+### {data-width=500}
+
+```{r}
+library(echarts4r)
+library(echarts4r.assets)
+```
+
+
+
+
+```{r}
+totestados %>%
+  e_charts(x = Estado, elementId = "casosM") %>%
+  e_bar(Casos, legend = FALSE, name = "Casos") %>% 
+  e_labels(position = "right") %>% 
+  e_tooltip(
+    trigger = "item",
+    axisPointer = list(
+      type = "line"
+    )
+  )  %>% 
+  e_title("Casos Confirmados") %>% 
+  e_flip_coords() %>% 
+  e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
+      interval = 0L
+    )) %>% 
+  e_x_axis(show = FALSE) %>% 
+  e_toolbox_feature(
+    feature = "saveAsImage",
+    title = "Save as image"
+  ) -> echrtCasosM
+
+
+totestados %>%
+  e_charts(x = Estado) %>%
+  e_bar(Mortes, legend = FALSE, name = "Mortes") %>% 
+  e_labels(position = "right") %>% 
+  e_tooltip(
+    trigger = "item",
+    axisPointer = list(
+      type = "line"
+    )
+  ) %>% 
+  e_title("Mortes") %>% 
+  e_flip_coords() %>% 
+  e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
+      interval = 0L
+    )) %>% 
+  e_x_axis(show = FALSE) %>% 
+   e_connect("casosM") %>%
+  e_toolbox_feature(
+    feature = "saveAsImage",
+    title = "Save as image"
+  ) -> echrtMortesM
+
+e_arrange(echrtCasosM, echrtMortesM, rows = 2, cols = 1)
+
+```
+
+
+## Row 5 {data-height=700}  
+
+### Detalhamento Por Estado
+
+```{r}
+casosfull_brio <- casosfull_brio %>%
+  filter(place_type == "city") %>%
+  group_by(Estado, date) %>%
+  mutate(ConfirmedCases = sum(last_available_confirmed), Deaths = sum(last_available_deaths)) %>% ungroup() %>% ungroup()
+```
+
+
+```{r}
+casosfull_brio <- casosfull_brio %>%
+  filter(place_type == "city") %>%
+  group_by(Estado, city) %>%
+  mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
+         ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
+         NovCasos = if_else((ConfirmedCases - lag(ConfirmedCases)) > 0, ConfirmedCases - lag(ConfirmedCases), 0),
+         NovMortes = if_else((Deaths - lag(Deaths)) > 0, Deaths - lag(Deaths), 0) 
+        ) %>% ungroup() %>% ungroup()
+```
+
+```{r eval = FALSE}
+casosfull_brio %>% 
+  filter(place_type == "city") %>% 
+   filter(city == "São Paulo") %>%
+  arrange(last_available_date) %>% select(city, date, ConfirmedCases, ProgRateCases, ProgRateDeaths, NovCasos, NovMortes)
+```
+
+
+```{r }
+casosfull_brio %>% 
+  filter(place_type == "city") %>% 
+  group_by(Estado) %>% 
+  filter(is_last == "TRUE") %>% 
+  arrange(desc(last_available_date)) %>%
+  summarise(Casos = sum(last_available_confirmed),
+            Mortes = sum(last_available_deaths), 
+            `Letalidade %` = round(Mortes/Casos*100,1),
+            Casos1M = round(Casos/last(População)*1e6,0), 
+            Mortes1M = round(Mortes/last(População)*1e6,0),
+            CasosDia = last(NovCasos),
+            `NovosCasos %` = round(last(ProgRateCases)*100,2), 
+            MortesDia = last(NovMortes),
+            `NovasMortes %` = round(last(ProgRateDeaths)*100,2), 
+            ) -> tabelaBR
+
+```
+
+
+
+```{r eval = FALSE}
+formattable(tabelaBR, list(
+  Casos = color_tile("white", "orange"),
+  Mortes = color_tile("white", "grey")
+  ))
+```
+
+
+```{r}
+reactable(tabelaBR, defaultPageSize = 27, bordered = TRUE, striped = TRUE, 
+          highlight = TRUE, compact=TRUE, 
+          columns = list(Casos = colDef(align = "right"),
+                         Mortes = colDef(align = "right"),
+                         `Letalidade %`= colDef(align = "right"),
+                         Casos1M = colDef(align = "right"),
+                         Mortes1M = colDef(align = "right"),
+                         CasosDia = colDef(align= "right"),
+                         `NovosCasos %` = colDef(align = "right"),
+                         MortesDia = colDef(align= "right"),
+                         `NovasMortes %` = colDef(align = "right")),
+          defaultSorted = list(Casos = "desc"))
+```
+
+
+## Row 4 {data-height=60}
+
+
+<a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a>
+
+
+
+
+
+
+Resumo Mundo   {data-orientation=rows data-icon="fa-bar-chart"}
+=====================================
+
+###  Dados da John Hopkins University `r format(ultimadata, '%d-%m-%Y')`  {data-height=10}
+
+## Row 1 {data-height=110}
+
+```{r}
+jhucovid19 <- read_csv("./data/jhucovid19_last.csv")
+```
+
+
+```{r}
+Fonte = "Fonte: CSSE at Johns Hopkins University"
+```
+
+```{r}
+ultimadata <- max(jhucovid19$DateRep)
+```
+
+
+```{r}
+ jhucovid19 %>% 
+  group_by(Country) %>% 
+  summarise(CasosPais = last(ConfirmedCases), MortosPais = last(Deaths), RecuperadosPais = last(Recovered)) %>% 
+  summarise(Casos = sum(CasosPais), Mortos = sum(MortosPais), Recuperados = sum(RecuperadosPais)) -> jhutotal
+```
+
+
+
+### Total de Casos
+
+```{r}
+valueBox(jhutotal$Casos, icon = "fa-heartbeat", color="rgb(100,100,100)")
+```
+
+### Mortes
+
+```{r}
+valueBox(jhutotal$Mortos, icon = "fa-sad-tear", color="rgb(200,100,100)")
+```
+
+### Recuperados
+
+```{r}
+valueBox(jhutotal$Recuperados, icon = "fa-heart", color = "rgb(26,210,204)")
+```
+
+### Letalidade
+
+```{r}
+valueBox(sprintf("%s%%", round(jhutotal$Mortos/jhutotal$Casos*100,2)), icon = "fa-percentage",color="rgb(26,110,204)")
+```
+
+Row 2 {data-height=600}
+----------------------------------------------------------------------------
+
+### {data-width=300}
+
+```{r}
+jhucovid19 <- group_by(jhucovid19, Country) %>% 
+  arrange(DateRep) %>%
+  mutate(NewDeaths = Deaths - lag(Deaths), 
+         NewCases = ConfirmedCases - lag(ConfirmedCases),
+         NewCases = if_else(is.na(NewCases), 0, if_else(NewCases < 0, 0, NewCases)),
+         NewDeaths = if_else(is.na(NewDeaths), 0, if_else(NewDeaths < 0, 0, NewDeaths))
+         ) %>%
+  ungroup()
+```
+
+
+```{r}
+CasosRemovidos <- filter(jhucovid19, is.na(Continent))
+numNAsCont <- CasosRemovidos %>% count() %>% as.numeric()
+numCasosSemCont <- CasosRemovidos %>% group_by(Country) %>% summarise(Casos = sum(ConfirmedCases)) %>% summarise(CasosTot = sum(Casos)) %>% select(CasosTot) %>% as.numeric()
+```
+
+
+```{r}
+jhucovid19 <- filter(jhucovid19, !is.na(Continent))
+```
+
+```{r}
+nma = 5
+```
+
+
+```{r}
+jhucovid19 %<>% 
+  group_by(Country) %>% 
+  filter(ConfirmedCases >= 1) %>% 
+  arrange(DateRep) %>%
+  mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
+         ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
+         ProgRateDeaths = ProgRateDeaths + 1,
+         ProgRateCases = ProgRateCases + 1
+         ) 
+setDT(jhucovid19)
+setkey(jhucovid19,DateRep,Country)
+jhucovid19[,NewCasesMA:=as.numeric(frollmean(NewCases,n=nma, align='right',hasNA=TRUE)), by=Country]
+jhucovid19[,ProgRateCasesMA:=as.numeric(frollmean(ProgRateCases,n=nma, align='right',hasNA=TRUE)), by=Country]
+jhucovid19 <- as_tibble(jhucovid19)
+
+```
+
+```{r}
+# populacao mundial - https://population.un.org/wpp/Download/Standard/CSV/
+# filtrei apenas 2019 e 2020, peguei os últimos valores de cada ano por pais (Location)
+# mantive valores por sexo e também densidade populacional
+worldpop <- read_csv("./data/populacao20192020.csv")
+```
+
+
+```{r}
+worldpop <- worldpop %>% filter(Year == 2020)
+```
+
+```{r}
+# juntando dados da população de cada país
+jhucovid19 <- left_join(jhucovid19,select(worldpop,-Country,-Continent), by = "Code")
+```
+
+
+```{r}
+rm(top20)
+```
+
+
+```{r}
+group_by(jhucovid19, Country) %>% 
+  summarise(ConfirmedCases = last(ConfirmedCases), Deaths = last(Deaths), Recuperados = last(Recovered)) %>% 
+  arrange(desc(ConfirmedCases)) -> listaNumCasos
+top20 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(20, ConfirmedCases) %>% select(Country) %>% unlist()
+```
+
+
+```{r out.height="380"}
+jhucovid19 %>%
+  group_by(Continent, Country) %>% 
+  filter(Continent != "Outro") %>%
+  summarise(Cases = last(ConfirmedCases), Deaths = last(Deaths), Recovered = last(Recovered)) %>% 
+  summarise(Casos = sum(Cases), Mortes = sum(Deaths), Recuperados = sum(Recovered)) %>% #reactable()
+  gather(key = "Tipo", value = "Valor", 2:4) %>% 
+  ggplot() + geom_bar(aes(x = Continent, y = Valor, fill = Tipo, text = Valor), stat = "identity", position = "dodge") +
+  labs(y = "", x = "", fill ="") + labs_pubr() + 
+  theme( panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        strip.background = element_blank()) + scale_fill_manual(values=c("#dd3333", "#555555", "#11cc03")) + #scale_fill_brewer(palette = "Set1") +
+  coord_flip() -> g
+f <- ggplotly(g, tooltip = "text", dynamicTicks = T) %>% plotly::layout(dragmode = "zoom") %>%
+  highlight(on = "plotly_click", off = "plotly_doubleclick", color = "blue") #%>% 
+#  layout(xaxis=list(spikethickness=4, spikecolor="white"))
+f
+```
+
+
+
+```{r}
+txprogtops <- filter(jhucovid19, Country %in% top20)
+```
+
+```{r eval=FALSE}
+txprogtops %>%
+  select(Country,DateRep,ConfirmedCases, NewCases, ProgRateCases) %>%
+  mutate(DateRep = as.Date(DateRep)) %>%
+  filter(DateRep >= ymd("2020-03-01"), ConfirmedCases > 1000) %>%
+  ggplot() +  
+  #geom_point(aes(color = Country)) + 
+  geom_point(aes(x = log10(ConfirmedCases), y = log10(NewCases), color = as.factor(Country), text = glue::glue('{Country} ,\n ',
+                                                   'Casos: {ConfirmedCases},\n ',
+                                                   'Novos Casos: {NewCases}')), se = FALSE) +
+  #labs(color="", x = "", y = "Taxa de Evolução", title = "Taxa de Evolução") + 
+ # guides(shape = "none") + 
+  #scale_color_brewer(palette = "Set1") +
+  #scale_x_date(date_labels = "%b %d", date_breaks = "7 days") +
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "none") -> gtx
+
+gtxly <- ggplotly(gtx, tooltip = "text")
+gtxly
+```
+
+### {data-width=400}
+
+
+```{r grmediamovel,  eval = FALSE, out.height="380"}
+key <- highlight_key(jhucovid19)
+jhucovid19 %>% 
+  filter(ConfirmedCases >= 100 ) %>% 
+ # mutate(Dia = row_number()) %>%
+  filter(Country %in% top20) %>%
+  select(Country,ConfirmedCases,NewCasesMA,Continent, DateRep) -> selecionados
+selshd <- SharedData$new(selecionados, ~Country, group = "Selecionados")
+#bscols(widths = c(1,NA,NA),
+#  list(
+#    filter_checkbox("Continent", "Continente", selshd, ~Continent, inline = TRUE)
+    #filter_slider("hp", "Horsepower", shared_mtcars, ~hp, width = "100%"),
+    #filter_select("auto", "Automatic", shared_mtcars, ~ifelse(am == 0, "Yes", "No"))
+#  ))
+  ggplot(selshd, aes(x = ConfirmedCases, y = NewCasesMA)) +
+    geom_line(aes(color = Country, text = paste0(Country,"\n",
+                                                 DateRep,"\n",
+                                                 "Casos: ", ConfirmedCases,"\n",
+                                                 "Novos Casos: ", round(NewCasesMA,0)), group = Country), size = 1) + 
+    labs(x = "Casos Confirmados (log10)", y = "Novos Casos (log10)", title = "Casos Confirmados > 100",  color ="")  + 
+    scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+              labels = trans_format("log10", math_format(10^.x))) +  #expand_limits(y = 5) +
+scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+              labels = trans_format("log10", math_format(10^.x))) +  #expand_limits(x = 5) +
+  theme(legend.position =  "none", axis.text.y = element_blank()) + labs_pubr() +
+    scale_color_discrete(l = 40,c = 150) -> gth
+ggplotly(gth, tooltip = "text") %>%
+plotly::layout(dragmode = "zoom", height = 340, width = 550, xaxis = list(showticklabels = FALSE), yaxis = list(showticklabels = FALSE)) %>%
+  highlight(on = "plotly_click", 
+            persistent = TRUE,  
+            opacityDim = getOption("opacityDim", 0.05), 
+            off="plotly_doubleclick",
+            selectize = TRUE, 
+            margin = 100
+            )
+  
+  #, off = "plotly_doubleclick", color = "black"
+   
+```
+
+
+```{r  out.height="450"}
+
+key <- highlight_key(jhucovid19)
+jhucovid19 %>% 
+  filter(ConfirmedCases >= 50 ) %>% 
+  group_by(Country) %>% 
+  mutate(Dia = row_number()) %>%
+  filter(Country %in% top20) %>%
+  select(Country,ConfirmedCases,NewCasesMA,Continent, DateRep, Dia) %>% ungroup() -> selecionados
+xrange <- c(log10(30), 1.1*max(log10(selecionados$ConfirmedCases)))
+yrange <- c(log10(30), 1.05*max(log10(selecionados$NewCasesMA)))
+selshd <- SharedData$new(selecionados, ~Country, group = "Selecionados (Shift+Click Vários)")
+yax <- list(type = "log", 
+           range = yrange,
+           zeroline = FALSE,
+           showline = FALSE, 
+           title = "Novos Casos (média móvel 5)"
+           )
+xax <- list(type = "log",
+            range = xrange,
+            zeroline = FALSE,
+            showline = FALSE,
+            title = "Total Casos Confirmados após 50º caso"
+            )
+fig <- plot_ly(data = selshd,  mode = 'lines', x = ~ConfirmedCases, y = ~NewCasesMA, 
+               color = ~Country, 
+               width = 4,
+               hoverinfo = 'text', 
+               text  = ~paste(Country, 
+                             '<br>Data:', DateRep,
+                             '<br>CasosConfirmados:', ConfirmedCases,
+                             '<br>NovosCasosMA:', NewCasesMA),  
+               showlegend = FALSE, colorscale = "Jet"
+              )
+fig <- layout(fig, dragmode = "zoom", height = 450, width = 600, yaxis = yax, xaxis = xax)  %>%
+ highlight(on = "plotly_click", 
+            persistent = TRUE,  
+            opacityDim = getOption("opacityDim", 0.05), 
+            off="plotly_doubleclick",
+            selectize = TRUE, 
+            margin = 100
+            )
+fig
+
+```
+
+
+
+Row {data-height=660}
+------------------------------------------------------------------------------------------
+
+### {data-width=500}
+
+
+```{r out.height="500" }
+
+key <- highlight_key(jhucovid19)
+jhucovid19 %>% 
+  filter(ConfirmedCases >= 50 ) %>% 
+  group_by(Country) %>% 
+  mutate(Dia = row_number()) %>%
+  filter(Country %in% top20) %>%
+  select(Country,ConfirmedCases,NewCasesMA,Continent, DateRep, Dia) %>% ungroup() -> selecionados
+xrange <- c(-2, 1.1*max(selecionados$Dia))
+yrange <- c(log10(30), 1.05*max(log10(selecionados$ConfirmedCases)))
+selshd <- SharedData$new(selecionados, ~Country, group = "Selecionados (Shift+Click Vários)")
+yax <- list(type = "log", 
+           range = yrange,
+           zeroline = FALSE,
+           showline = FALSE, 
+           title = "Casos Confirmados (após 50º)",
+           automargin = TRUE
+           )
+xax <- list(range = xrange,
+            zeroline = FALSE,
+            showline = FALSE,
+            automargin = TRUE,
+            title = "Dias corridos após 50º caso"
+            )
+fig <- plot_ly(data = selshd,  mode = 'lines', x = ~Dia, y = ~ConfirmedCases, 
+               color = ~Country, 
+               width = 2,
+               hoverinfo = 'text', 
+               text  = ~paste(Country, 
+                             '<br>Data:', DateRep,
+                             '<br>CasosConfirmados:', ConfirmedCases),  
+               showlegend = FALSE
+              )
+fig <- layout(fig, dragmode = "zoom", height = 480, width = 500, yaxis = yax, xaxis = xax, responsive = TRUE)  %>%
+ highlight(on = "plotly_click", 
+            persistent = FALSE,  
+            opacityDim = getOption("opacityDim", 0.05), 
+            off="plotly_doubleclick",
+            selectize = TRUE
+           
+            )
+fig
+
+```
+
+
+
+Row 4 {data-height=600}
+-----------------------------------------------------------------------
+
+### Detalhamento 20 Países com mais casos
+
+
+
+
+
+```{r}
+filter(jhucovid19, Country %in% top20) %>% 
+  group_by(Country) %>% 
+  summarise(Casos = last(ConfirmedCases), 
+            Mortes = last(Deaths), 
+            `Letalidade %`= round(Mortes/Casos*100,2), 
+            Recuperados = last(Recovered), 
+            `NovosCasos %` = round((last(ProgRateCases) -1)*100,2), 
+            `NovasMortes %` = round((last(ProgRateDeaths) -1)*100,2), 
+            Casos1M = round(Casos/last(PopTotal)*1e3,0),
+            Mortes1M = round(Mortes/last(PopTotal)*1e3,0),
+            NDias1Caso = sprintf("%s", ultimadata - min(DateRep))) %>% 
+  mutate(NDias1Caso = case_when(Country == "United States" ~ sprintf("%s", ultimadata - ymd("2020-01-20")),
+                                Country == "China" ~ sprintf("%s", ultimadata - ymd("2019-11-17")),
+                                TRUE ~ NDias1Caso)) %>% 
+  arrange(desc(Casos)) %>%
+  reactable(defaultPageSize = 20, bordered = TRUE, striped = TRUE, 
+          highlight = TRUE, compact=TRUE, 
+          columns = list(Casos = colDef(align = "right"),
+                         Mortes = colDef(align = "right"),
+                         `Letalidade %` = colDef(align = "right"),
+                         Recuperados = colDef(align = "right"),
+                         `NovosCasos %` = colDef(align = "right"),
+                         `NovasMortes %` = colDef(align = "right"),
+                         Casos1M = colDef(align = "right"),
+                         Mortes1M = colDef(align = "right"),
+                         NDias1Caso = colDef(align= "right")
+                         ),
+          defaultSorted = list(Casos = "desc"))
+#  datatable(rownames = F, autoHideNavigation = T, options = list(pageLength = 11, paging = FALSE, searching = FALSE)) 
+```
+
+
+
+## Row 4 {data-height=60}
+
+<a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a>
+
+
+
