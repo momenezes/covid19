@@ -33,7 +33,9 @@ library(kableExtra)
 library(DT)
 library(plotly)
 library(formattable)
+library(reactable)
 library(gganimate)
+library(sparkline)
 ```
 
 
@@ -141,7 +143,7 @@ str(worldpop, give.attr = FALSE)
 jhucovid19 <- left_join(jhucovid19,select(worldpop,-Country,-Continent), by = "Code")
 ```
 
-## Países com mais casos (top 10 e Brasil) em `r format(ultimadata, '%d-%m-%Y')`  {#Top10BR}
+## 20 Países com mais casos em `r format(ultimadata, '%d-%m-%Y')`  {#Top10BR}
 
 
 ```{r}
@@ -155,31 +157,82 @@ group_by(jhucovid19, Country) %>%
   arrange(desc(ConfirmedCases)) -> listaNumCasos
 top5 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(5, ConfirmedCases) %>% select(Country) %>% unlist()
 top10 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(10, ConfirmedCases) %>% select(Country) 
+top20 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(20, ConfirmedCases) %>% select(Country) 
 ```
 
 ```{r}
 top10 <- bind_rows(top10, data.frame(Country = "Brazil")) %>% unique() %>% unlist()
+top20 <- bind_rows(top20, data.frame(Country = "Brazil")) %>% unique() %>% unlist()
 ```
 
 
 
 ```{r}
-filter(jhucovid19, Country %in% top10) %>% 
-  group_by(Country) %>% 
-  summarise(Casos = last(ConfirmedCases), 
-            Mortes = last(Deaths), 
-            Letal = sprintf("%s%%",round(Mortes/Casos*100,2)), 
+filter(jhucovid19, Country %in% top20) %>% 
+  group_by(Country) -> jhutop10Country
+  jhutop10Country %>%
+  summarise(TotCasos = last(ConfirmedCases), 
+            TotMortes = last(Deaths), 
+            `Letal.%` = round(TotMortes/TotCasos*100,2), 
             Recup = last(Recovered), 
-            `%NovosCa` = sprintf("%s%%", round((last(ProgRateCases) -1)*100,2)), 
-            `%NovasMo` = sprintf("%s%%", round((last(ProgRateDeaths) -1)*100,2)), 
-            Casos1M = round(Casos/last(PopTotal)*1e3,0),
-            Mortes1M = round(Mortes/last(PopTotal)*1e3,0),
-            NDias1Ca = sprintf("%s", ultimadata - min(DateRep))) %>% 
+            `%NovosCa` = round((last(ProgRateCases) -1)*100,2), 
+            `%NovasMo` = round((last(ProgRateDeaths) -1)*100,2), 
+            Casos1M = round(TotCasos/last(PopTotal)*1e3,0),
+            Mortes1M = round(TotMortes/last(PopTotal)*1e3,0),
+            NDias1Ca = sprintf("%s", ultimadata - min(DateRep)),
+            ConfirmedCases = list(ConfirmedCases),
+            Deaths = list(Deaths),
+            NewCases = list(NewCases),
+            NewDeaths = list(NewDeaths)) %>% 
   mutate(NDias1Ca = case_when(Country == "United States" ~ sprintf("%s", ultimadata - ymd("2020-01-20")),
                                 Country == "China" ~ sprintf("%s", ultimadata - ymd("2019-11-17")),
                                 TRUE ~ NDias1Ca)) %>% 
-  arrange(desc(Casos)) %>%
-  datatable(rownames = F, autoHideNavigation = T, options = list(pageLength = 11, paging = FALSE, searching = FALSE)) 
+  arrange(desc(TotCasos)) -> tabelaWorld
+  #datatable(rownames = F, autoHideNavigation = T, options = list(pageLength = 11, paging = FALSE, searching = FALSE)) 
+```
+
+
+
+```{r eval = FALSE}
+# soh tabela
+reactable(select(tabelaWorld,Country, TotCasos,TotMortes,`Letal.%`,Recup, `%NovosCa`, `%NovasMo`,Casos1M,Mortes1M,NDias1Ca), 
+          defaultPageSize = 20, bordered = TRUE, striped = TRUE, 
+          highlight = TRUE, compact=FALSE, 
+          columns = list(TotCasos = colDef(align = "right"),
+                         TotMortes = colDef(align = "right"),
+                         `Letal.%`= colDef(align = "right"),
+                          Recup = colDef(align = "right"),
+                         `%NovosCa` = colDef(align = "right"),
+                         `%NovasMo` = colDef(align = "right"),
+                         Casos1M = colDef(align = "right"),
+                         Mortes1M = colDef(align = "right"),
+                         NDias1Ca = colDef(align= "right")
+                         ),
+          defaultSorted = list(TotCasos = "desc"))
+```
+
+
+
+```{r}
+tabgrafWorld <- select(tabelaWorld,Pais=Country,TotCasos,Casos=ConfirmedCases,TotMortes,Mortes=Deaths,`Letal.%`,`%NovosCa`,NovosCasos=NewCases,`%NovasMo`,NovasMortes=NewDeaths)
+reactable(tabgrafWorld,
+          defaultPageSize = 20, bordered = TRUE, striped = TRUE, 
+          highlight = TRUE, fullWidth = TRUE, 
+          columns = list(
+                         Casos = colDef(cell = function(value, index) {
+                                        sparkline(tabgrafWorld$Casos[[index]])
+                         }),
+                         Mortes = colDef(cell = function(value, index) {
+                                        sparkline(tabgrafWorld$Mortes[[index]])
+                         }),
+                         NovosCasos = colDef(cell= function(value, index) {
+                           sparkline(tabgrafWorld$NovosCasos[[index]])
+                         }),
+                         NovasMortes = colDef(cell= function(value, index) {
+                           sparkline(tabgrafWorld$NovasMortes[[index]])
+                         })
+                         ),
+          defaultSorted = list(TotCasos = "desc"))
 ```
 
 <!--
@@ -342,13 +395,13 @@ casosfull_brio %>%
   arrange(desc(last_available_date)) %>%
   summarise(Casos = sum(last_available_confirmed),
             Mortes = sum(last_available_deaths), 
-            Letal = sprintf("%s%%",round(Mortes/Casos*100,1)),
+            `Letal.%` = round(Mortes/Casos*100,1),
             Casos1M = round(Casos/last(População)*1e6,0), 
             Mortes1M = round(Mortes/last(População)*1e6,0),
             CasosDia = last(NovCasos),
-            `%NovosCa` = sprintf("%s%%", round(last(ProgRateCases)*100,2)), 
+            `%NovosCa` = round(last(ProgRateCases)*100,2), 
             MortesDia = last(NovMortes),
-            `%NovasMo` = sprintf("%s%%", round(last(ProgRateDeaths)*100,2)), 
+            `%NovasMo` = round(last(ProgRateDeaths)*100,2), 
             ) %>% 
   datatable(rownames = F, autoHideNavigation = T,  options = list( searching = FALSE, className = 'compact', columnDefs = list(list(className = 'dt-right compact', targets = 1:8)))) 
 
