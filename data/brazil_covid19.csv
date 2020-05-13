@@ -1,1185 +1,69 @@
 date,region,state,cases,deaths
-2020-01-30,Centro-Oeste,Distrito Federal,0,0
-2020-01-30,Centro-Oeste,Goiás,0,0
-2020-01-30,Centro-Oeste,Mato Grosso,0,0
-2020-01-30,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-01-30,Nordeste,Alagoas,0,0
-2020-01-30,Nordeste,Bahia,0,0
-2020-01-30,Nordeste,Ceará,0,0
-2020-01-30,Nordeste,Maranhão,0,0
-2020-01-30,Nordeste,Paraíba,0,0
-2020-01-30,Nordeste,Pernambuco,0,0
-2020-01-30,Nordeste,Piauí,0,0
-2020-01-30,Nordeste,Rio Grande do Norte,0,0
-2020-01-30,Nordeste,Sergipe,0,0
-2020-01-30,Norte,Acre,0,0
-2020-01-30,Norte,Amapá,0,0
-2020-01-30,Norte,Amazonas,0,0
-2020-01-30,Norte,Pará,0,0
-2020-01-30,Norte,Rondônia,0,0
-2020-01-30,Norte,Roraima,0,0
-2020-01-30,Norte,Tocantins,0,0
-2020-01-30,Sudeste,Espírito Santo,0,0
-2020-01-30,Sudeste,Minas Gerais,0,0
-2020-01-30,Sudeste,Rio de Janeiro,0,0
-2020-01-30,Sudeste,São Paulo,0,0
-2020-01-30,Sul,Paraná,0,0
-2020-01-30,Sul,Rio Grande do Sul,0,0
-2020-01-30,Sul,Santa Catarina,0,0
-2020-01-31,Centro-Oeste,Distrito Federal,0,0
-2020-01-31,Centro-Oeste,Goiás,0,0
-2020-01-31,Centro-Oeste,Mato Grosso,0,0
-2020-01-31,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-01-31,Nordeste,Alagoas,0,0
-2020-01-31,Nordeste,Bahia,0,0
-2020-01-31,Nordeste,Ceará,0,0
-2020-01-31,Nordeste,Maranhão,0,0
-2020-01-31,Nordeste,Paraíba,0,0
-2020-01-31,Nordeste,Pernambuco,0,0
-2020-01-31,Nordeste,Piauí,0,0
-2020-01-31,Nordeste,Rio Grande do Norte,0,0
-2020-01-31,Nordeste,Sergipe,0,0
-2020-01-31,Norte,Acre,0,0
-2020-01-31,Norte,Amapá,0,0
-2020-01-31,Norte,Amazonas,0,0
-2020-01-31,Norte,Pará,0,0
-2020-01-31,Norte,Rondônia,0,0
-2020-01-31,Norte,Roraima,0,0
-2020-01-31,Norte,Tocantins,0,0
-2020-01-31,Sudeste,Espírito Santo,0,0
-2020-01-31,Sudeste,Minas Gerais,0,0
-2020-01-31,Sudeste,Rio de Janeiro,0,0
-2020-01-31,Sudeste,São Paulo,0,0
-2020-01-31,Sul,Paraná,0,0
-2020-01-31,Sul,Rio Grande do Sul,0,0
-2020-01-31,Sul,Santa Catarina,0,0
-2020-02-01,Centro-Oeste,Distrito Federal,0,0
-2020-02-01,Centro-Oeste,Goiás,0,0
-2020-02-01,Centro-Oeste,Mato Grosso,0,0
-2020-02-01,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-01,Nordeste,Alagoas,0,0
-2020-02-01,Nordeste,Bahia,0,0
-2020-02-01,Nordeste,Ceará,0,0
-2020-02-01,Nordeste,Maranhão,0,0
-2020-02-01,Nordeste,Paraíba,0,0
-2020-02-01,Nordeste,Pernambuco,0,0
-2020-02-01,Nordeste,Piauí,0,0
-2020-02-01,Nordeste,Rio Grande do Norte,0,0
-2020-02-01,Nordeste,Sergipe,0,0
-2020-02-01,Norte,Acre,0,0
-2020-02-01,Norte,Amapá,0,0
-2020-02-01,Norte,Amazonas,0,0
-2020-02-01,Norte,Pará,0,0
-2020-02-01,Norte,Rondônia,0,0
-2020-02-01,Norte,Roraima,0,0
-2020-02-01,Norte,Tocantins,0,0
-2020-02-01,Sudeste,Espírito Santo,0,0
-2020-02-01,Sudeste,Minas Gerais,0,0
-2020-02-01,Sudeste,Rio de Janeiro,0,0
-2020-02-01,Sudeste,São Paulo,0,0
-2020-02-01,Sul,Paraná,0,0
-2020-02-01,Sul,Rio Grande do Sul,0,0
-2020-02-01,Sul,Santa Catarina,0,0
-2020-02-02,Centro-Oeste,Distrito Federal,0,0
-2020-02-02,Centro-Oeste,Goiás,0,0
-2020-02-02,Centro-Oeste,Mato Grosso,0,0
-2020-02-02,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-02,Nordeste,Alagoas,0,0
-2020-02-02,Nordeste,Bahia,0,0
-2020-02-02,Nordeste,Ceará,0,0
-2020-02-02,Nordeste,Maranhão,0,0
-2020-02-02,Nordeste,Paraíba,0,0
-2020-02-02,Nordeste,Pernambuco,0,0
-2020-02-02,Nordeste,Piauí,0,0
-2020-02-02,Nordeste,Rio Grande do Norte,0,0
-2020-02-02,Nordeste,Sergipe,0,0
-2020-02-02,Norte,Acre,0,0
-2020-02-02,Norte,Amapá,0,0
-2020-02-02,Norte,Amazonas,0,0
-2020-02-02,Norte,Pará,0,0
-2020-02-02,Norte,Rondônia,0,0
-2020-02-02,Norte,Roraima,0,0
-2020-02-02,Norte,Tocantins,0,0
-2020-02-02,Sudeste,Espírito Santo,0,0
-2020-02-02,Sudeste,Minas Gerais,0,0
-2020-02-02,Sudeste,Rio de Janeiro,0,0
-2020-02-02,Sudeste,São Paulo,0,0
-2020-02-02,Sul,Paraná,0,0
-2020-02-02,Sul,Rio Grande do Sul,0,0
-2020-02-02,Sul,Santa Catarina,0,0
-2020-02-03,Centro-Oeste,Distrito Federal,0,0
-2020-02-03,Centro-Oeste,Goiás,0,0
-2020-02-03,Centro-Oeste,Mato Grosso,0,0
-2020-02-03,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-03,Nordeste,Alagoas,0,0
-2020-02-03,Nordeste,Bahia,0,0
-2020-02-03,Nordeste,Ceará,0,0
-2020-02-03,Nordeste,Maranhão,0,0
-2020-02-03,Nordeste,Paraíba,0,0
-2020-02-03,Nordeste,Pernambuco,0,0
-2020-02-03,Nordeste,Piauí,0,0
-2020-02-03,Nordeste,Rio Grande do Norte,0,0
-2020-02-03,Nordeste,Sergipe,0,0
-2020-02-03,Norte,Acre,0,0
-2020-02-03,Norte,Amapá,0,0
-2020-02-03,Norte,Amazonas,0,0
-2020-02-03,Norte,Pará,0,0
-2020-02-03,Norte,Rondônia,0,0
-2020-02-03,Norte,Roraima,0,0
-2020-02-03,Norte,Tocantins,0,0
-2020-02-03,Sudeste,Espírito Santo,0,0
-2020-02-03,Sudeste,Minas Gerais,0,0
-2020-02-03,Sudeste,Rio de Janeiro,0,0
-2020-02-03,Sudeste,São Paulo,0,0
-2020-02-03,Sul,Paraná,0,0
-2020-02-03,Sul,Rio Grande do Sul,0,0
-2020-02-03,Sul,Santa Catarina,0,0
-2020-02-04,Centro-Oeste,Distrito Federal,0,0
-2020-02-04,Centro-Oeste,Goiás,0,0
-2020-02-04,Centro-Oeste,Mato Grosso,0,0
-2020-02-04,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-04,Nordeste,Alagoas,0,0
-2020-02-04,Nordeste,Bahia,0,0
-2020-02-04,Nordeste,Ceará,0,0
-2020-02-04,Nordeste,Maranhão,0,0
-2020-02-04,Nordeste,Paraíba,0,0
-2020-02-04,Nordeste,Pernambuco,0,0
-2020-02-04,Nordeste,Piauí,0,0
-2020-02-04,Nordeste,Rio Grande do Norte,0,0
-2020-02-04,Nordeste,Sergipe,0,0
-2020-02-04,Norte,Acre,0,0
-2020-02-04,Norte,Amapá,0,0
-2020-02-04,Norte,Amazonas,0,0
-2020-02-04,Norte,Pará,0,0
-2020-02-04,Norte,Rondônia,0,0
-2020-02-04,Norte,Roraima,0,0
-2020-02-04,Norte,Tocantins,0,0
-2020-02-04,Sudeste,Espírito Santo,0,0
-2020-02-04,Sudeste,Minas Gerais,0,0
-2020-02-04,Sudeste,Rio de Janeiro,0,0
-2020-02-04,Sudeste,São Paulo,0,0
-2020-02-04,Sul,Paraná,0,0
-2020-02-04,Sul,Rio Grande do Sul,0,0
-2020-02-04,Sul,Santa Catarina,0,0
-2020-02-05,Centro-Oeste,Distrito Federal,0,0
-2020-02-05,Centro-Oeste,Goiás,0,0
-2020-02-05,Centro-Oeste,Mato Grosso,0,0
-2020-02-05,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-05,Nordeste,Alagoas,0,0
-2020-02-05,Nordeste,Bahia,0,0
-2020-02-05,Nordeste,Ceará,0,0
-2020-02-05,Nordeste,Maranhão,0,0
-2020-02-05,Nordeste,Paraíba,0,0
-2020-02-05,Nordeste,Pernambuco,0,0
-2020-02-05,Nordeste,Piauí,0,0
-2020-02-05,Nordeste,Rio Grande do Norte,0,0
-2020-02-05,Nordeste,Sergipe,0,0
-2020-02-05,Norte,Acre,0,0
-2020-02-05,Norte,Amapá,0,0
-2020-02-05,Norte,Amazonas,0,0
-2020-02-05,Norte,Pará,0,0
-2020-02-05,Norte,Rondônia,0,0
-2020-02-05,Norte,Roraima,0,0
-2020-02-05,Norte,Tocantins,0,0
-2020-02-05,Sudeste,Espírito Santo,0,0
-2020-02-05,Sudeste,Minas Gerais,0,0
-2020-02-05,Sudeste,Rio de Janeiro,0,0
-2020-02-05,Sudeste,São Paulo,0,0
-2020-02-05,Sul,Paraná,0,0
-2020-02-05,Sul,Rio Grande do Sul,0,0
-2020-02-05,Sul,Santa Catarina,0,0
-2020-02-06,Centro-Oeste,Distrito Federal,0,0
-2020-02-06,Centro-Oeste,Goiás,0,0
-2020-02-06,Centro-Oeste,Mato Grosso,0,0
-2020-02-06,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-06,Nordeste,Alagoas,0,0
-2020-02-06,Nordeste,Bahia,0,0
-2020-02-06,Nordeste,Ceará,0,0
-2020-02-06,Nordeste,Maranhão,0,0
-2020-02-06,Nordeste,Paraíba,0,0
-2020-02-06,Nordeste,Pernambuco,0,0
-2020-02-06,Nordeste,Piauí,0,0
-2020-02-06,Nordeste,Rio Grande do Norte,0,0
-2020-02-06,Nordeste,Sergipe,0,0
-2020-02-06,Norte,Acre,0,0
-2020-02-06,Norte,Amapá,0,0
-2020-02-06,Norte,Amazonas,0,0
-2020-02-06,Norte,Pará,0,0
-2020-02-06,Norte,Rondônia,0,0
-2020-02-06,Norte,Roraima,0,0
-2020-02-06,Norte,Tocantins,0,0
-2020-02-06,Sudeste,Espírito Santo,0,0
-2020-02-06,Sudeste,Minas Gerais,0,0
-2020-02-06,Sudeste,Rio de Janeiro,0,0
-2020-02-06,Sudeste,São Paulo,0,0
-2020-02-06,Sul,Paraná,0,0
-2020-02-06,Sul,Rio Grande do Sul,0,0
-2020-02-06,Sul,Santa Catarina,0,0
-2020-02-07,Centro-Oeste,Distrito Federal,0,0
-2020-02-07,Centro-Oeste,Goiás,0,0
-2020-02-07,Centro-Oeste,Mato Grosso,0,0
-2020-02-07,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-07,Nordeste,Alagoas,0,0
-2020-02-07,Nordeste,Bahia,0,0
-2020-02-07,Nordeste,Ceará,0,0
-2020-02-07,Nordeste,Maranhão,0,0
-2020-02-07,Nordeste,Paraíba,0,0
-2020-02-07,Nordeste,Pernambuco,0,0
-2020-02-07,Nordeste,Piauí,0,0
-2020-02-07,Nordeste,Rio Grande do Norte,0,0
-2020-02-07,Nordeste,Sergipe,0,0
-2020-02-07,Norte,Acre,0,0
-2020-02-07,Norte,Amapá,0,0
-2020-02-07,Norte,Amazonas,0,0
-2020-02-07,Norte,Pará,0,0
-2020-02-07,Norte,Rondônia,0,0
-2020-02-07,Norte,Roraima,0,0
-2020-02-07,Norte,Tocantins,0,0
-2020-02-07,Sudeste,Espírito Santo,0,0
-2020-02-07,Sudeste,Minas Gerais,0,0
-2020-02-07,Sudeste,Rio de Janeiro,0,0
-2020-02-07,Sudeste,São Paulo,0,0
-2020-02-07,Sul,Paraná,0,0
-2020-02-07,Sul,Rio Grande do Sul,0,0
-2020-02-07,Sul,Santa Catarina,0,0
-2020-02-08,Centro-Oeste,Distrito Federal,0,0
-2020-02-08,Centro-Oeste,Goiás,0,0
-2020-02-08,Centro-Oeste,Mato Grosso,0,0
-2020-02-08,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-08,Nordeste,Alagoas,0,0
-2020-02-08,Nordeste,Bahia,0,0
-2020-02-08,Nordeste,Ceará,0,0
-2020-02-08,Nordeste,Maranhão,0,0
-2020-02-08,Nordeste,Paraíba,0,0
-2020-02-08,Nordeste,Pernambuco,0,0
-2020-02-08,Nordeste,Piauí,0,0
-2020-02-08,Nordeste,Rio Grande do Norte,0,0
-2020-02-08,Nordeste,Sergipe,0,0
-2020-02-08,Norte,Acre,0,0
-2020-02-08,Norte,Amapá,0,0
-2020-02-08,Norte,Amazonas,0,0
-2020-02-08,Norte,Pará,0,0
-2020-02-08,Norte,Rondônia,0,0
-2020-02-08,Norte,Roraima,0,0
-2020-02-08,Norte,Tocantins,0,0
-2020-02-08,Sudeste,Espírito Santo,0,0
-2020-02-08,Sudeste,Minas Gerais,0,0
-2020-02-08,Sudeste,Rio de Janeiro,0,0
-2020-02-08,Sudeste,São Paulo,0,0
-2020-02-08,Sul,Paraná,0,0
-2020-02-08,Sul,Rio Grande do Sul,0,0
-2020-02-08,Sul,Santa Catarina,0,0
-2020-02-09,Centro-Oeste,Distrito Federal,0,0
-2020-02-09,Centro-Oeste,Goiás,0,0
-2020-02-09,Centro-Oeste,Mato Grosso,0,0
-2020-02-09,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-09,Nordeste,Alagoas,0,0
-2020-02-09,Nordeste,Bahia,0,0
-2020-02-09,Nordeste,Ceará,0,0
-2020-02-09,Nordeste,Maranhão,0,0
-2020-02-09,Nordeste,Paraíba,0,0
-2020-02-09,Nordeste,Pernambuco,0,0
-2020-02-09,Nordeste,Piauí,0,0
-2020-02-09,Nordeste,Rio Grande do Norte,0,0
-2020-02-09,Nordeste,Sergipe,0,0
-2020-02-09,Norte,Acre,0,0
-2020-02-09,Norte,Amapá,0,0
-2020-02-09,Norte,Amazonas,0,0
-2020-02-09,Norte,Pará,0,0
-2020-02-09,Norte,Rondônia,0,0
-2020-02-09,Norte,Roraima,0,0
-2020-02-09,Norte,Tocantins,0,0
-2020-02-09,Sudeste,Espírito Santo,0,0
-2020-02-09,Sudeste,Minas Gerais,0,0
-2020-02-09,Sudeste,Rio de Janeiro,0,0
-2020-02-09,Sudeste,São Paulo,0,0
-2020-02-09,Sul,Paraná,0,0
-2020-02-09,Sul,Rio Grande do Sul,0,0
-2020-02-09,Sul,Santa Catarina,0,0
-2020-02-10,Centro-Oeste,Distrito Federal,0,0
-2020-02-10,Centro-Oeste,Goiás,0,0
-2020-02-10,Centro-Oeste,Mato Grosso,0,0
-2020-02-10,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-10,Nordeste,Alagoas,0,0
-2020-02-10,Nordeste,Bahia,0,0
-2020-02-10,Nordeste,Ceará,0,0
-2020-02-10,Nordeste,Maranhão,0,0
-2020-02-10,Nordeste,Paraíba,0,0
-2020-02-10,Nordeste,Pernambuco,0,0
-2020-02-10,Nordeste,Piauí,0,0
-2020-02-10,Nordeste,Rio Grande do Norte,0,0
-2020-02-10,Nordeste,Sergipe,0,0
-2020-02-10,Norte,Acre,0,0
-2020-02-10,Norte,Amapá,0,0
-2020-02-10,Norte,Amazonas,0,0
-2020-02-10,Norte,Pará,0,0
-2020-02-10,Norte,Rondônia,0,0
-2020-02-10,Norte,Roraima,0,0
-2020-02-10,Norte,Tocantins,0,0
-2020-02-10,Sudeste,Espírito Santo,0,0
-2020-02-10,Sudeste,Minas Gerais,0,0
-2020-02-10,Sudeste,Rio de Janeiro,0,0
-2020-02-10,Sudeste,São Paulo,0,0
-2020-02-10,Sul,Paraná,0,0
-2020-02-10,Sul,Rio Grande do Sul,0,0
-2020-02-10,Sul,Santa Catarina,0,0
-2020-02-11,Centro-Oeste,Distrito Federal,0,0
-2020-02-11,Centro-Oeste,Goiás,0,0
-2020-02-11,Centro-Oeste,Mato Grosso,0,0
-2020-02-11,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-11,Nordeste,Alagoas,0,0
-2020-02-11,Nordeste,Bahia,0,0
-2020-02-11,Nordeste,Ceará,0,0
-2020-02-11,Nordeste,Maranhão,0,0
-2020-02-11,Nordeste,Paraíba,0,0
-2020-02-11,Nordeste,Pernambuco,0,0
-2020-02-11,Nordeste,Piauí,0,0
-2020-02-11,Nordeste,Rio Grande do Norte,0,0
-2020-02-11,Nordeste,Sergipe,0,0
-2020-02-11,Norte,Acre,0,0
-2020-02-11,Norte,Amapá,0,0
-2020-02-11,Norte,Amazonas,0,0
-2020-02-11,Norte,Pará,0,0
-2020-02-11,Norte,Rondônia,0,0
-2020-02-11,Norte,Roraima,0,0
-2020-02-11,Norte,Tocantins,0,0
-2020-02-11,Sudeste,Espírito Santo,0,0
-2020-02-11,Sudeste,Minas Gerais,0,0
-2020-02-11,Sudeste,Rio de Janeiro,0,0
-2020-02-11,Sudeste,São Paulo,0,0
-2020-02-11,Sul,Paraná,0,0
-2020-02-11,Sul,Rio Grande do Sul,0,0
-2020-02-11,Sul,Santa Catarina,0,0
-2020-02-12,Centro-Oeste,Distrito Federal,0,0
-2020-02-12,Centro-Oeste,Goiás,0,0
-2020-02-12,Centro-Oeste,Mato Grosso,0,0
-2020-02-12,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-12,Nordeste,Alagoas,0,0
-2020-02-12,Nordeste,Bahia,0,0
-2020-02-12,Nordeste,Ceará,0,0
-2020-02-12,Nordeste,Maranhão,0,0
-2020-02-12,Nordeste,Paraíba,0,0
-2020-02-12,Nordeste,Pernambuco,0,0
-2020-02-12,Nordeste,Piauí,0,0
-2020-02-12,Nordeste,Rio Grande do Norte,0,0
-2020-02-12,Nordeste,Sergipe,0,0
-2020-02-12,Norte,Acre,0,0
-2020-02-12,Norte,Amapá,0,0
-2020-02-12,Norte,Amazonas,0,0
-2020-02-12,Norte,Pará,0,0
-2020-02-12,Norte,Rondônia,0,0
-2020-02-12,Norte,Roraima,0,0
-2020-02-12,Norte,Tocantins,0,0
-2020-02-12,Sudeste,Espírito Santo,0,0
-2020-02-12,Sudeste,Minas Gerais,0,0
-2020-02-12,Sudeste,Rio de Janeiro,0,0
-2020-02-12,Sudeste,São Paulo,0,0
-2020-02-12,Sul,Paraná,0,0
-2020-02-12,Sul,Rio Grande do Sul,0,0
-2020-02-12,Sul,Santa Catarina,0,0
-2020-02-13,Centro-Oeste,Distrito Federal,0,0
-2020-02-13,Centro-Oeste,Goiás,0,0
-2020-02-13,Centro-Oeste,Mato Grosso,0,0
-2020-02-13,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-13,Nordeste,Alagoas,0,0
-2020-02-13,Nordeste,Bahia,0,0
-2020-02-13,Nordeste,Ceará,0,0
-2020-02-13,Nordeste,Maranhão,0,0
-2020-02-13,Nordeste,Paraíba,0,0
-2020-02-13,Nordeste,Pernambuco,0,0
-2020-02-13,Nordeste,Piauí,0,0
-2020-02-13,Nordeste,Rio Grande do Norte,0,0
-2020-02-13,Nordeste,Sergipe,0,0
-2020-02-13,Norte,Acre,0,0
-2020-02-13,Norte,Amapá,0,0
-2020-02-13,Norte,Amazonas,0,0
-2020-02-13,Norte,Pará,0,0
-2020-02-13,Norte,Rondônia,0,0
-2020-02-13,Norte,Roraima,0,0
-2020-02-13,Norte,Tocantins,0,0
-2020-02-13,Sudeste,Espírito Santo,0,0
-2020-02-13,Sudeste,Minas Gerais,0,0
-2020-02-13,Sudeste,Rio de Janeiro,0,0
-2020-02-13,Sudeste,São Paulo,0,0
-2020-02-13,Sul,Paraná,0,0
-2020-02-13,Sul,Rio Grande do Sul,0,0
-2020-02-13,Sul,Santa Catarina,0,0
-2020-02-14,Centro-Oeste,Distrito Federal,0,0
-2020-02-14,Centro-Oeste,Goiás,0,0
-2020-02-14,Centro-Oeste,Mato Grosso,0,0
-2020-02-14,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-14,Nordeste,Alagoas,0,0
-2020-02-14,Nordeste,Bahia,0,0
-2020-02-14,Nordeste,Ceará,0,0
-2020-02-14,Nordeste,Maranhão,0,0
-2020-02-14,Nordeste,Paraíba,0,0
-2020-02-14,Nordeste,Pernambuco,0,0
-2020-02-14,Nordeste,Piauí,0,0
-2020-02-14,Nordeste,Rio Grande do Norte,0,0
-2020-02-14,Nordeste,Sergipe,0,0
-2020-02-14,Norte,Acre,0,0
-2020-02-14,Norte,Amapá,0,0
-2020-02-14,Norte,Amazonas,0,0
-2020-02-14,Norte,Pará,0,0
-2020-02-14,Norte,Rondônia,0,0
-2020-02-14,Norte,Roraima,0,0
-2020-02-14,Norte,Tocantins,0,0
-2020-02-14,Sudeste,Espírito Santo,0,0
-2020-02-14,Sudeste,Minas Gerais,0,0
-2020-02-14,Sudeste,Rio de Janeiro,0,0
-2020-02-14,Sudeste,São Paulo,0,0
-2020-02-14,Sul,Paraná,0,0
-2020-02-14,Sul,Rio Grande do Sul,0,0
-2020-02-14,Sul,Santa Catarina,0,0
-2020-02-15,Centro-Oeste,Distrito Federal,0,0
-2020-02-15,Centro-Oeste,Goiás,0,0
-2020-02-15,Centro-Oeste,Mato Grosso,0,0
-2020-02-15,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-15,Nordeste,Alagoas,0,0
-2020-02-15,Nordeste,Bahia,0,0
-2020-02-15,Nordeste,Ceará,0,0
-2020-02-15,Nordeste,Maranhão,0,0
-2020-02-15,Nordeste,Paraíba,0,0
-2020-02-15,Nordeste,Pernambuco,0,0
-2020-02-15,Nordeste,Piauí,0,0
-2020-02-15,Nordeste,Rio Grande do Norte,0,0
-2020-02-15,Nordeste,Sergipe,0,0
-2020-02-15,Norte,Acre,0,0
-2020-02-15,Norte,Amapá,0,0
-2020-02-15,Norte,Amazonas,0,0
-2020-02-15,Norte,Pará,0,0
-2020-02-15,Norte,Rondônia,0,0
-2020-02-15,Norte,Roraima,0,0
-2020-02-15,Norte,Tocantins,0,0
-2020-02-15,Sudeste,Espírito Santo,0,0
-2020-02-15,Sudeste,Minas Gerais,0,0
-2020-02-15,Sudeste,Rio de Janeiro,0,0
-2020-02-15,Sudeste,São Paulo,0,0
-2020-02-15,Sul,Paraná,0,0
-2020-02-15,Sul,Rio Grande do Sul,0,0
-2020-02-15,Sul,Santa Catarina,0,0
-2020-02-16,Centro-Oeste,Distrito Federal,0,0
-2020-02-16,Centro-Oeste,Goiás,0,0
-2020-02-16,Centro-Oeste,Mato Grosso,0,0
-2020-02-16,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-16,Nordeste,Alagoas,0,0
-2020-02-16,Nordeste,Bahia,0,0
-2020-02-16,Nordeste,Ceará,0,0
-2020-02-16,Nordeste,Maranhão,0,0
-2020-02-16,Nordeste,Paraíba,0,0
-2020-02-16,Nordeste,Pernambuco,0,0
-2020-02-16,Nordeste,Piauí,0,0
-2020-02-16,Nordeste,Rio Grande do Norte,0,0
-2020-02-16,Nordeste,Sergipe,0,0
-2020-02-16,Norte,Acre,0,0
-2020-02-16,Norte,Amapá,0,0
-2020-02-16,Norte,Amazonas,0,0
-2020-02-16,Norte,Pará,0,0
-2020-02-16,Norte,Rondônia,0,0
-2020-02-16,Norte,Roraima,0,0
-2020-02-16,Norte,Tocantins,0,0
-2020-02-16,Sudeste,Espírito Santo,0,0
-2020-02-16,Sudeste,Minas Gerais,0,0
-2020-02-16,Sudeste,Rio de Janeiro,0,0
-2020-02-16,Sudeste,São Paulo,0,0
-2020-02-16,Sul,Paraná,0,0
-2020-02-16,Sul,Rio Grande do Sul,0,0
-2020-02-16,Sul,Santa Catarina,0,0
-2020-02-17,Centro-Oeste,Distrito Federal,0,0
-2020-02-17,Centro-Oeste,Goiás,0,0
-2020-02-17,Centro-Oeste,Mato Grosso,0,0
-2020-02-17,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-17,Nordeste,Alagoas,0,0
-2020-02-17,Nordeste,Bahia,0,0
-2020-02-17,Nordeste,Ceará,0,0
-2020-02-17,Nordeste,Maranhão,0,0
-2020-02-17,Nordeste,Paraíba,0,0
-2020-02-17,Nordeste,Pernambuco,0,0
-2020-02-17,Nordeste,Piauí,0,0
-2020-02-17,Nordeste,Rio Grande do Norte,0,0
-2020-02-17,Nordeste,Sergipe,0,0
-2020-02-17,Norte,Acre,0,0
-2020-02-17,Norte,Amapá,0,0
-2020-02-17,Norte,Amazonas,0,0
-2020-02-17,Norte,Pará,0,0
-2020-02-17,Norte,Rondônia,0,0
-2020-02-17,Norte,Roraima,0,0
-2020-02-17,Norte,Tocantins,0,0
-2020-02-17,Sudeste,Espírito Santo,0,0
-2020-02-17,Sudeste,Minas Gerais,0,0
-2020-02-17,Sudeste,Rio de Janeiro,0,0
-2020-02-17,Sudeste,São Paulo,0,0
-2020-02-17,Sul,Paraná,0,0
-2020-02-17,Sul,Rio Grande do Sul,0,0
-2020-02-17,Sul,Santa Catarina,0,0
-2020-02-18,Centro-Oeste,Distrito Federal,0,0
-2020-02-18,Centro-Oeste,Goiás,0,0
-2020-02-18,Centro-Oeste,Mato Grosso,0,0
-2020-02-18,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-18,Nordeste,Alagoas,0,0
-2020-02-18,Nordeste,Bahia,0,0
-2020-02-18,Nordeste,Ceará,0,0
-2020-02-18,Nordeste,Maranhão,0,0
-2020-02-18,Nordeste,Paraíba,0,0
-2020-02-18,Nordeste,Pernambuco,0,0
-2020-02-18,Nordeste,Piauí,0,0
-2020-02-18,Nordeste,Rio Grande do Norte,0,0
-2020-02-18,Nordeste,Sergipe,0,0
-2020-02-18,Norte,Acre,0,0
-2020-02-18,Norte,Amapá,0,0
-2020-02-18,Norte,Amazonas,0,0
-2020-02-18,Norte,Pará,0,0
-2020-02-18,Norte,Rondônia,0,0
-2020-02-18,Norte,Roraima,0,0
-2020-02-18,Norte,Tocantins,0,0
-2020-02-18,Sudeste,Espírito Santo,0,0
-2020-02-18,Sudeste,Minas Gerais,0,0
-2020-02-18,Sudeste,Rio de Janeiro,0,0
-2020-02-18,Sudeste,São Paulo,0,0
-2020-02-18,Sul,Paraná,0,0
-2020-02-18,Sul,Rio Grande do Sul,0,0
-2020-02-18,Sul,Santa Catarina,0,0
-2020-02-19,Centro-Oeste,Distrito Federal,0,0
-2020-02-19,Centro-Oeste,Goiás,0,0
-2020-02-19,Centro-Oeste,Mato Grosso,0,0
-2020-02-19,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-19,Nordeste,Alagoas,0,0
-2020-02-19,Nordeste,Bahia,0,0
-2020-02-19,Nordeste,Ceará,0,0
-2020-02-19,Nordeste,Maranhão,0,0
-2020-02-19,Nordeste,Paraíba,0,0
-2020-02-19,Nordeste,Pernambuco,0,0
-2020-02-19,Nordeste,Piauí,0,0
-2020-02-19,Nordeste,Rio Grande do Norte,0,0
-2020-02-19,Nordeste,Sergipe,0,0
-2020-02-19,Norte,Acre,0,0
-2020-02-19,Norte,Amapá,0,0
-2020-02-19,Norte,Amazonas,0,0
-2020-02-19,Norte,Pará,0,0
-2020-02-19,Norte,Rondônia,0,0
-2020-02-19,Norte,Roraima,0,0
-2020-02-19,Norte,Tocantins,0,0
-2020-02-19,Sudeste,Espírito Santo,0,0
-2020-02-19,Sudeste,Minas Gerais,0,0
-2020-02-19,Sudeste,Rio de Janeiro,0,0
-2020-02-19,Sudeste,São Paulo,0,0
-2020-02-19,Sul,Paraná,0,0
-2020-02-19,Sul,Rio Grande do Sul,0,0
-2020-02-19,Sul,Santa Catarina,0,0
-2020-02-20,Centro-Oeste,Distrito Federal,0,0
-2020-02-20,Centro-Oeste,Goiás,0,0
-2020-02-20,Centro-Oeste,Mato Grosso,0,0
-2020-02-20,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-20,Nordeste,Alagoas,0,0
-2020-02-20,Nordeste,Bahia,0,0
-2020-02-20,Nordeste,Ceará,0,0
-2020-02-20,Nordeste,Maranhão,0,0
-2020-02-20,Nordeste,Paraíba,0,0
-2020-02-20,Nordeste,Pernambuco,0,0
-2020-02-20,Nordeste,Piauí,0,0
-2020-02-20,Nordeste,Rio Grande do Norte,0,0
-2020-02-20,Nordeste,Sergipe,0,0
-2020-02-20,Norte,Acre,0,0
-2020-02-20,Norte,Amapá,0,0
-2020-02-20,Norte,Amazonas,0,0
-2020-02-20,Norte,Pará,0,0
-2020-02-20,Norte,Rondônia,0,0
-2020-02-20,Norte,Roraima,0,0
-2020-02-20,Norte,Tocantins,0,0
-2020-02-20,Sudeste,Espírito Santo,0,0
-2020-02-20,Sudeste,Minas Gerais,0,0
-2020-02-20,Sudeste,Rio de Janeiro,0,0
-2020-02-20,Sudeste,São Paulo,0,0
-2020-02-20,Sul,Paraná,0,0
-2020-02-20,Sul,Rio Grande do Sul,0,0
-2020-02-20,Sul,Santa Catarina,0,0
-2020-02-21,Centro-Oeste,Distrito Federal,0,0
-2020-02-21,Centro-Oeste,Goiás,0,0
-2020-02-21,Centro-Oeste,Mato Grosso,0,0
-2020-02-21,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-21,Nordeste,Alagoas,0,0
-2020-02-21,Nordeste,Bahia,0,0
-2020-02-21,Nordeste,Ceará,0,0
-2020-02-21,Nordeste,Maranhão,0,0
-2020-02-21,Nordeste,Paraíba,0,0
-2020-02-21,Nordeste,Pernambuco,0,0
-2020-02-21,Nordeste,Piauí,0,0
-2020-02-21,Nordeste,Rio Grande do Norte,0,0
-2020-02-21,Nordeste,Sergipe,0,0
-2020-02-21,Norte,Acre,0,0
-2020-02-21,Norte,Amapá,0,0
-2020-02-21,Norte,Amazonas,0,0
-2020-02-21,Norte,Pará,0,0
-2020-02-21,Norte,Rondônia,0,0
-2020-02-21,Norte,Roraima,0,0
-2020-02-21,Norte,Tocantins,0,0
-2020-02-21,Sudeste,Espírito Santo,0,0
-2020-02-21,Sudeste,Minas Gerais,0,0
-2020-02-21,Sudeste,Rio de Janeiro,0,0
-2020-02-21,Sudeste,São Paulo,0,0
-2020-02-21,Sul,Paraná,0,0
-2020-02-21,Sul,Rio Grande do Sul,0,0
-2020-02-21,Sul,Santa Catarina,0,0
-2020-02-22,Centro-Oeste,Distrito Federal,0,0
-2020-02-22,Centro-Oeste,Goiás,0,0
-2020-02-22,Centro-Oeste,Mato Grosso,0,0
-2020-02-22,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-22,Nordeste,Alagoas,0,0
-2020-02-22,Nordeste,Bahia,0,0
-2020-02-22,Nordeste,Ceará,0,0
-2020-02-22,Nordeste,Maranhão,0,0
-2020-02-22,Nordeste,Paraíba,0,0
-2020-02-22,Nordeste,Pernambuco,0,0
-2020-02-22,Nordeste,Piauí,0,0
-2020-02-22,Nordeste,Rio Grande do Norte,0,0
-2020-02-22,Nordeste,Sergipe,0,0
-2020-02-22,Norte,Acre,0,0
-2020-02-22,Norte,Amapá,0,0
-2020-02-22,Norte,Amazonas,0,0
-2020-02-22,Norte,Pará,0,0
-2020-02-22,Norte,Rondônia,0,0
-2020-02-22,Norte,Roraima,0,0
-2020-02-22,Norte,Tocantins,0,0
-2020-02-22,Sudeste,Espírito Santo,0,0
-2020-02-22,Sudeste,Minas Gerais,0,0
-2020-02-22,Sudeste,Rio de Janeiro,0,0
-2020-02-22,Sudeste,São Paulo,0,0
-2020-02-22,Sul,Paraná,0,0
-2020-02-22,Sul,Rio Grande do Sul,0,0
-2020-02-22,Sul,Santa Catarina,0,0
-2020-02-23,Centro-Oeste,Distrito Federal,0,0
-2020-02-23,Centro-Oeste,Goiás,0,0
-2020-02-23,Centro-Oeste,Mato Grosso,0,0
-2020-02-23,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-23,Nordeste,Alagoas,0,0
-2020-02-23,Nordeste,Bahia,0,0
-2020-02-23,Nordeste,Ceará,0,0
-2020-02-23,Nordeste,Maranhão,0,0
-2020-02-23,Nordeste,Paraíba,0,0
-2020-02-23,Nordeste,Pernambuco,0,0
-2020-02-23,Nordeste,Piauí,0,0
-2020-02-23,Nordeste,Rio Grande do Norte,0,0
-2020-02-23,Nordeste,Sergipe,0,0
-2020-02-23,Norte,Acre,0,0
-2020-02-23,Norte,Amapá,0,0
-2020-02-23,Norte,Amazonas,0,0
-2020-02-23,Norte,Pará,0,0
-2020-02-23,Norte,Rondônia,0,0
-2020-02-23,Norte,Roraima,0,0
-2020-02-23,Norte,Tocantins,0,0
-2020-02-23,Sudeste,Espírito Santo,0,0
-2020-02-23,Sudeste,Minas Gerais,0,0
-2020-02-23,Sudeste,Rio de Janeiro,0,0
-2020-02-23,Sudeste,São Paulo,0,0
-2020-02-23,Sul,Paraná,0,0
-2020-02-23,Sul,Rio Grande do Sul,0,0
-2020-02-23,Sul,Santa Catarina,0,0
-2020-02-24,Centro-Oeste,Distrito Federal,0,0
-2020-02-24,Centro-Oeste,Goiás,0,0
-2020-02-24,Centro-Oeste,Mato Grosso,0,0
-2020-02-24,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-24,Nordeste,Alagoas,0,0
-2020-02-24,Nordeste,Bahia,0,0
-2020-02-24,Nordeste,Ceará,0,0
-2020-02-24,Nordeste,Maranhão,0,0
-2020-02-24,Nordeste,Paraíba,0,0
-2020-02-24,Nordeste,Pernambuco,0,0
-2020-02-24,Nordeste,Piauí,0,0
-2020-02-24,Nordeste,Rio Grande do Norte,0,0
-2020-02-24,Nordeste,Sergipe,0,0
-2020-02-24,Norte,Acre,0,0
-2020-02-24,Norte,Amapá,0,0
-2020-02-24,Norte,Amazonas,0,0
-2020-02-24,Norte,Pará,0,0
-2020-02-24,Norte,Rondônia,0,0
-2020-02-24,Norte,Roraima,0,0
-2020-02-24,Norte,Tocantins,0,0
-2020-02-24,Sudeste,Espírito Santo,0,0
-2020-02-24,Sudeste,Minas Gerais,0,0
-2020-02-24,Sudeste,Rio de Janeiro,0,0
-2020-02-24,Sudeste,São Paulo,0,0
-2020-02-24,Sul,Paraná,0,0
-2020-02-24,Sul,Rio Grande do Sul,0,0
-2020-02-24,Sul,Santa Catarina,0,0
-2020-02-25,Centro-Oeste,Distrito Federal,0,0
-2020-02-25,Centro-Oeste,Goiás,0,0
-2020-02-25,Centro-Oeste,Mato Grosso,0,0
-2020-02-25,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-25,Nordeste,Alagoas,0,0
-2020-02-25,Nordeste,Bahia,0,0
-2020-02-25,Nordeste,Ceará,0,0
-2020-02-25,Nordeste,Maranhão,0,0
-2020-02-25,Nordeste,Paraíba,0,0
-2020-02-25,Nordeste,Pernambuco,0,0
-2020-02-25,Nordeste,Piauí,0,0
-2020-02-25,Nordeste,Rio Grande do Norte,0,0
-2020-02-25,Nordeste,Sergipe,0,0
-2020-02-25,Norte,Acre,0,0
-2020-02-25,Norte,Amapá,0,0
-2020-02-25,Norte,Amazonas,0,0
-2020-02-25,Norte,Pará,0,0
-2020-02-25,Norte,Rondônia,0,0
-2020-02-25,Norte,Roraima,0,0
-2020-02-25,Norte,Tocantins,0,0
-2020-02-25,Sudeste,Espírito Santo,0,0
-2020-02-25,Sudeste,Minas Gerais,0,0
-2020-02-25,Sudeste,Rio de Janeiro,0,0
-2020-02-25,Sudeste,São Paulo,0,0
-2020-02-25,Sul,Paraná,0,0
-2020-02-25,Sul,Rio Grande do Sul,0,0
-2020-02-25,Sul,Santa Catarina,0,0
-2020-02-26,Centro-Oeste,Distrito Federal,0,0
-2020-02-26,Centro-Oeste,Goiás,0,0
-2020-02-26,Centro-Oeste,Mato Grosso,0,0
-2020-02-26,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-26,Nordeste,Alagoas,0,0
-2020-02-26,Nordeste,Bahia,0,0
-2020-02-26,Nordeste,Ceará,0,0
-2020-02-26,Nordeste,Maranhão,0,0
-2020-02-26,Nordeste,Paraíba,0,0
-2020-02-26,Nordeste,Pernambuco,0,0
-2020-02-26,Nordeste,Piauí,0,0
-2020-02-26,Nordeste,Rio Grande do Norte,0,0
-2020-02-26,Nordeste,Sergipe,0,0
-2020-02-26,Norte,Acre,0,0
-2020-02-26,Norte,Amapá,0,0
-2020-02-26,Norte,Amazonas,0,0
-2020-02-26,Norte,Pará,0,0
-2020-02-26,Norte,Rondônia,0,0
-2020-02-26,Norte,Roraima,0,0
-2020-02-26,Norte,Tocantins,0,0
-2020-02-26,Sudeste,Espírito Santo,0,0
-2020-02-26,Sudeste,Minas Gerais,0,0
-2020-02-26,Sudeste,Rio de Janeiro,0,0
 2020-02-26,Sudeste,São Paulo,1,0
-2020-02-26,Sul,Paraná,0,0
-2020-02-26,Sul,Rio Grande do Sul,0,0
-2020-02-26,Sul,Santa Catarina,0,0
-2020-02-27,Centro-Oeste,Distrito Federal,0,0
-2020-02-27,Centro-Oeste,Goiás,0,0
-2020-02-27,Centro-Oeste,Mato Grosso,0,0
-2020-02-27,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-27,Nordeste,Alagoas,0,0
-2020-02-27,Nordeste,Bahia,0,0
-2020-02-27,Nordeste,Ceará,0,0
-2020-02-27,Nordeste,Maranhão,0,0
-2020-02-27,Nordeste,Paraíba,0,0
-2020-02-27,Nordeste,Pernambuco,0,0
-2020-02-27,Nordeste,Piauí,0,0
-2020-02-27,Nordeste,Rio Grande do Norte,0,0
-2020-02-27,Nordeste,Sergipe,0,0
-2020-02-27,Norte,Acre,0,0
-2020-02-27,Norte,Amapá,0,0
-2020-02-27,Norte,Amazonas,0,0
-2020-02-27,Norte,Pará,0,0
-2020-02-27,Norte,Rondônia,0,0
-2020-02-27,Norte,Roraima,0,0
-2020-02-27,Norte,Tocantins,0,0
-2020-02-27,Sudeste,Espírito Santo,0,0
-2020-02-27,Sudeste,Minas Gerais,0,0
-2020-02-27,Sudeste,Rio de Janeiro,0,0
 2020-02-27,Sudeste,São Paulo,1,0
-2020-02-27,Sul,Paraná,0,0
-2020-02-27,Sul,Rio Grande do Sul,0,0
-2020-02-27,Sul,Santa Catarina,0,0
-2020-02-28,Centro-Oeste,Distrito Federal,0,0
-2020-02-28,Centro-Oeste,Goiás,0,0
-2020-02-28,Centro-Oeste,Mato Grosso,0,0
-2020-02-28,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-28,Nordeste,Alagoas,0,0
-2020-02-28,Nordeste,Bahia,0,0
-2020-02-28,Nordeste,Ceará,0,0
-2020-02-28,Nordeste,Maranhão,0,0
-2020-02-28,Nordeste,Paraíba,0,0
-2020-02-28,Nordeste,Pernambuco,0,0
-2020-02-28,Nordeste,Piauí,0,0
-2020-02-28,Nordeste,Rio Grande do Norte,0,0
-2020-02-28,Nordeste,Sergipe,0,0
-2020-02-28,Norte,Acre,0,0
-2020-02-28,Norte,Amapá,0,0
-2020-02-28,Norte,Amazonas,0,0
-2020-02-28,Norte,Pará,0,0
-2020-02-28,Norte,Rondônia,0,0
-2020-02-28,Norte,Roraima,0,0
-2020-02-28,Norte,Tocantins,0,0
-2020-02-28,Sudeste,Espírito Santo,0,0
-2020-02-28,Sudeste,Minas Gerais,0,0
-2020-02-28,Sudeste,Rio de Janeiro,0,0
 2020-02-28,Sudeste,São Paulo,1,0
-2020-02-28,Sul,Paraná,0,0
-2020-02-28,Sul,Rio Grande do Sul,0,0
-2020-02-28,Sul,Santa Catarina,0,0
-2020-02-29,Centro-Oeste,Distrito Federal,0,0
-2020-02-29,Centro-Oeste,Goiás,0,0
-2020-02-29,Centro-Oeste,Mato Grosso,0,0
-2020-02-29,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-02-29,Nordeste,Alagoas,0,0
-2020-02-29,Nordeste,Bahia,0,0
-2020-02-29,Nordeste,Ceará,0,0
-2020-02-29,Nordeste,Maranhão,0,0
-2020-02-29,Nordeste,Paraíba,0,0
-2020-02-29,Nordeste,Pernambuco,0,0
-2020-02-29,Nordeste,Piauí,0,0
-2020-02-29,Nordeste,Rio Grande do Norte,0,0
-2020-02-29,Nordeste,Sergipe,0,0
-2020-02-29,Norte,Acre,0,0
-2020-02-29,Norte,Amapá,0,0
-2020-02-29,Norte,Amazonas,0,0
-2020-02-29,Norte,Pará,0,0
-2020-02-29,Norte,Rondônia,0,0
-2020-02-29,Norte,Roraima,0,0
-2020-02-29,Norte,Tocantins,0,0
-2020-02-29,Sudeste,Espírito Santo,0,0
-2020-02-29,Sudeste,Minas Gerais,0,0
-2020-02-29,Sudeste,Rio de Janeiro,0,0
 2020-02-29,Sudeste,São Paulo,2,0
-2020-02-29,Sul,Paraná,0,0
-2020-02-29,Sul,Rio Grande do Sul,0,0
-2020-02-29,Sul,Santa Catarina,0,0
-2020-03-01,Centro-Oeste,Distrito Federal,0,0
-2020-03-01,Centro-Oeste,Goiás,0,0
-2020-03-01,Centro-Oeste,Mato Grosso,0,0
-2020-03-01,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-03-01,Nordeste,Alagoas,0,0
-2020-03-01,Nordeste,Bahia,0,0
-2020-03-01,Nordeste,Ceará,0,0
-2020-03-01,Nordeste,Maranhão,0,0
-2020-03-01,Nordeste,Paraíba,0,0
-2020-03-01,Nordeste,Pernambuco,0,0
-2020-03-01,Nordeste,Piauí,0,0
-2020-03-01,Nordeste,Rio Grande do Norte,0,0
-2020-03-01,Nordeste,Sergipe,0,0
-2020-03-01,Norte,Acre,0,0
-2020-03-01,Norte,Amapá,0,0
-2020-03-01,Norte,Amazonas,0,0
-2020-03-01,Norte,Pará,0,0
-2020-03-01,Norte,Rondônia,0,0
-2020-03-01,Norte,Roraima,0,0
-2020-03-01,Norte,Tocantins,0,0
-2020-03-01,Sudeste,Espírito Santo,0,0
-2020-03-01,Sudeste,Minas Gerais,0,0
-2020-03-01,Sudeste,Rio de Janeiro,0,0
 2020-03-01,Sudeste,São Paulo,2,0
-2020-03-01,Sul,Paraná,0,0
-2020-03-01,Sul,Rio Grande do Sul,0,0
-2020-03-01,Sul,Santa Catarina,0,0
-2020-03-02,Centro-Oeste,Distrito Federal,0,0
-2020-03-02,Centro-Oeste,Goiás,0,0
-2020-03-02,Centro-Oeste,Mato Grosso,0,0
-2020-03-02,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-03-02,Nordeste,Alagoas,0,0
-2020-03-02,Nordeste,Bahia,0,0
-2020-03-02,Nordeste,Ceará,0,0
-2020-03-02,Nordeste,Maranhão,0,0
-2020-03-02,Nordeste,Paraíba,0,0
-2020-03-02,Nordeste,Pernambuco,0,0
-2020-03-02,Nordeste,Piauí,0,0
-2020-03-02,Nordeste,Rio Grande do Norte,0,0
-2020-03-02,Nordeste,Sergipe,0,0
-2020-03-02,Norte,Acre,0,0
-2020-03-02,Norte,Amapá,0,0
-2020-03-02,Norte,Amazonas,0,0
-2020-03-02,Norte,Pará,0,0
-2020-03-02,Norte,Rondônia,0,0
-2020-03-02,Norte,Roraima,0,0
-2020-03-02,Norte,Tocantins,0,0
-2020-03-02,Sudeste,Espírito Santo,0,0
-2020-03-02,Sudeste,Minas Gerais,0,0
-2020-03-02,Sudeste,Rio de Janeiro,0,0
 2020-03-02,Sudeste,São Paulo,2,0
-2020-03-02,Sul,Paraná,0,0
-2020-03-02,Sul,Rio Grande do Sul,0,0
-2020-03-02,Sul,Santa Catarina,0,0
-2020-03-03,Centro-Oeste,Distrito Federal,0,0
-2020-03-03,Centro-Oeste,Goiás,0,0
-2020-03-03,Centro-Oeste,Mato Grosso,0,0
-2020-03-03,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-03-03,Nordeste,Alagoas,0,0
-2020-03-03,Nordeste,Bahia,0,0
-2020-03-03,Nordeste,Ceará,0,0
-2020-03-03,Nordeste,Maranhão,0,0
-2020-03-03,Nordeste,Paraíba,0,0
-2020-03-03,Nordeste,Pernambuco,0,0
-2020-03-03,Nordeste,Piauí,0,0
-2020-03-03,Nordeste,Rio Grande do Norte,0,0
-2020-03-03,Nordeste,Sergipe,0,0
-2020-03-03,Norte,Acre,0,0
-2020-03-03,Norte,Amapá,0,0
-2020-03-03,Norte,Amazonas,0,0
-2020-03-03,Norte,Pará,0,0
-2020-03-03,Norte,Rondônia,0,0
-2020-03-03,Norte,Roraima,0,0
-2020-03-03,Norte,Tocantins,0,0
-2020-03-03,Sudeste,Espírito Santo,0,0
-2020-03-03,Sudeste,Minas Gerais,0,0
-2020-03-03,Sudeste,Rio de Janeiro,0,0
 2020-03-03,Sudeste,São Paulo,2,0
-2020-03-03,Sul,Paraná,0,0
-2020-03-03,Sul,Rio Grande do Sul,0,0
-2020-03-03,Sul,Santa Catarina,0,0
-2020-03-04,Centro-Oeste,Distrito Federal,0,0
-2020-03-04,Centro-Oeste,Goiás,0,0
-2020-03-04,Centro-Oeste,Mato Grosso,0,0
-2020-03-04,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-03-04,Nordeste,Alagoas,0,0
-2020-03-04,Nordeste,Bahia,0,0
-2020-03-04,Nordeste,Ceará,0,0
-2020-03-04,Nordeste,Maranhão,0,0
-2020-03-04,Nordeste,Paraíba,0,0
-2020-03-04,Nordeste,Pernambuco,0,0
-2020-03-04,Nordeste,Piauí,0,0
-2020-03-04,Nordeste,Rio Grande do Norte,0,0
-2020-03-04,Nordeste,Sergipe,0,0
-2020-03-04,Norte,Acre,0,0
-2020-03-04,Norte,Amapá,0,0
-2020-03-04,Norte,Amazonas,0,0
-2020-03-04,Norte,Pará,0,0
-2020-03-04,Norte,Rondônia,0,0
-2020-03-04,Norte,Roraima,0,0
-2020-03-04,Norte,Tocantins,0,0
-2020-03-04,Sudeste,Espírito Santo,0,0
-2020-03-04,Sudeste,Minas Gerais,0,0
-2020-03-04,Sudeste,Rio de Janeiro,0,0
 2020-03-04,Sudeste,São Paulo,3,0
-2020-03-04,Sul,Paraná,0,0
-2020-03-04,Sul,Rio Grande do Sul,0,0
-2020-03-04,Sul,Santa Catarina,0,0
-2020-03-05,Centro-Oeste,Distrito Federal,0,0
-2020-03-05,Centro-Oeste,Goiás,0,0
-2020-03-05,Centro-Oeste,Mato Grosso,0,0
-2020-03-05,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-03-05,Nordeste,Alagoas,0,0
-2020-03-05,Nordeste,Bahia,0,0
-2020-03-05,Nordeste,Ceará,0,0
-2020-03-05,Nordeste,Maranhão,0,0
-2020-03-05,Nordeste,Paraíba,0,0
-2020-03-05,Nordeste,Pernambuco,0,0
-2020-03-05,Nordeste,Piauí,0,0
-2020-03-05,Nordeste,Rio Grande do Norte,0,0
-2020-03-05,Nordeste,Sergipe,0,0
-2020-03-05,Norte,Acre,0,0
-2020-03-05,Norte,Amapá,0,0
-2020-03-05,Norte,Amazonas,0,0
-2020-03-05,Norte,Pará,0,0
-2020-03-05,Norte,Rondônia,0,0
-2020-03-05,Norte,Roraima,0,0
-2020-03-05,Norte,Tocantins,0,0
-2020-03-05,Sudeste,Espírito Santo,0,0
-2020-03-05,Sudeste,Minas Gerais,0,0
 2020-03-05,Sudeste,Rio de Janeiro,1,0
 2020-03-05,Sudeste,São Paulo,6,0
-2020-03-05,Sul,Paraná,0,0
-2020-03-05,Sul,Rio Grande do Sul,0,0
-2020-03-05,Sul,Santa Catarina,0,0
-2020-03-06,Centro-Oeste,Distrito Federal,0,0
-2020-03-06,Centro-Oeste,Goiás,0,0
-2020-03-06,Centro-Oeste,Mato Grosso,0,0
-2020-03-06,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-03-06,Nordeste,Alagoas,0,0
 2020-03-06,Nordeste,Bahia,1,0
-2020-03-06,Nordeste,Ceará,0,0
-2020-03-06,Nordeste,Maranhão,0,0
-2020-03-06,Nordeste,Paraíba,0,0
-2020-03-06,Nordeste,Pernambuco,0,0
-2020-03-06,Nordeste,Piauí,0,0
-2020-03-06,Nordeste,Rio Grande do Norte,0,0
-2020-03-06,Nordeste,Sergipe,0,0
-2020-03-06,Norte,Acre,0,0
-2020-03-06,Norte,Amapá,0,0
-2020-03-06,Norte,Amazonas,0,0
-2020-03-06,Norte,Pará,0,0
-2020-03-06,Norte,Rondônia,0,0
-2020-03-06,Norte,Roraima,0,0
-2020-03-06,Norte,Tocantins,0,0
 2020-03-06,Sudeste,Espírito Santo,1,0
-2020-03-06,Sudeste,Minas Gerais,0,0
 2020-03-06,Sudeste,Rio de Janeiro,1,0
 2020-03-06,Sudeste,São Paulo,10,0
-2020-03-06,Sul,Paraná,0,0
-2020-03-06,Sul,Rio Grande do Sul,0,0
-2020-03-06,Sul,Santa Catarina,0,0
 2020-03-07,Centro-Oeste,Distrito Federal,1,0
-2020-03-07,Centro-Oeste,Goiás,0,0
-2020-03-07,Centro-Oeste,Mato Grosso,0,0
-2020-03-07,Centro-Oeste,Mato Grosso do Sul,0,0
-2020-03-07,Nordeste,Alagoas,0,0
 2020-03-07,Nordeste,Bahia,2,0
-2020-03-07,Nordeste,Ceará,0,0
-2020-03-07,Nordeste,Maranhão,0,0
-2020-03-07,Nordeste,Paraíba,0,0
-2020-03-07,Nordeste,Pernambuco,0,0
-2020-03-07,Nordeste,Piauí,0,0
-2020-03-07,Nordeste,Rio Grande do Norte,0,0
-2020-03-07,Nordeste,Sergipe,0,0
-2020-03-07,Norte,Acre,0,0
-2020-03-07,Norte,Amapá,0,0
-2020-03-07,Norte,Amazonas,0,0
-2020-03-07,Norte,Pará,0,0
-2020-03-07,Norte,Rondônia,0,0
-2020-03-07,Norte,Roraima,0,0
-2020-03-07,Norte,Tocantins,0,0
 2020-03-07,Sudeste,Espírito Santo,1,0
-2020-03-07,Sudeste,Minas Gerais,0,0
 2020-03-07,Sudeste,Rio de Janeiro,2,0
 2020-03-07,Sudeste,São Paulo,13,0
-2020-03-07,Sul,Paraná,0,0
-2020-03-07,Sul,Rio Grande do Sul,0,0
-2020-03-07,Sul,Santa Catarina,0,0
 2020-03-08,Centro-Oeste,Distrito Federal,1,0
-2020-03-08,Centro-Oeste,Goiás,0,0
-2020-03-08,Centro-Oeste,Mato Grosso,0,0
-2020-03-08,Centro-Oeste,Mato Grosso do Sul,0,0
 2020-03-08,Nordeste,Alagoas,1,0
 2020-03-08,Nordeste,Bahia,2,0
-2020-03-08,Nordeste,Ceará,0,0
-2020-03-08,Nordeste,Maranhão,0,0
-2020-03-08,Nordeste,Paraíba,0,0
-2020-03-08,Nordeste,Pernambuco,0,0
-2020-03-08,Nordeste,Piauí,0,0
-2020-03-08,Nordeste,Rio Grande do Norte,0,0
-2020-03-08,Nordeste,Sergipe,0,0
-2020-03-08,Norte,Acre,0,0
-2020-03-08,Norte,Amapá,0,0
-2020-03-08,Norte,Amazonas,0,0
-2020-03-08,Norte,Pará,0,0
-2020-03-08,Norte,Rondônia,0,0
-2020-03-08,Norte,Roraima,0,0
-2020-03-08,Norte,Tocantins,0,0
 2020-03-08,Sudeste,Espírito Santo,1,0
 2020-03-08,Sudeste,Minas Gerais,1,0
 2020-03-08,Sudeste,Rio de Janeiro,3,0
 2020-03-08,Sudeste,São Paulo,16,0
-2020-03-08,Sul,Paraná,0,0
-2020-03-08,Sul,Rio Grande do Sul,0,0
-2020-03-08,Sul,Santa Catarina,0,0
 2020-03-09,Centro-Oeste,Distrito Federal,1,0
-2020-03-09,Centro-Oeste,Goiás,0,0
-2020-03-09,Centro-Oeste,Mato Grosso,0,0
-2020-03-09,Centro-Oeste,Mato Grosso do Sul,0,0
 2020-03-09,Nordeste,Alagoas,1,0
 2020-03-09,Nordeste,Bahia,2,0
-2020-03-09,Nordeste,Ceará,0,0
-2020-03-09,Nordeste,Maranhão,0,0
-2020-03-09,Nordeste,Paraíba,0,0
-2020-03-09,Nordeste,Pernambuco,0,0
-2020-03-09,Nordeste,Piauí,0,0
-2020-03-09,Nordeste,Rio Grande do Norte,0,0
-2020-03-09,Nordeste,Sergipe,0,0
-2020-03-09,Norte,Acre,0,0
-2020-03-09,Norte,Amapá,0,0
-2020-03-09,Norte,Amazonas,0,0
-2020-03-09,Norte,Pará,0,0
-2020-03-09,Norte,Rondônia,0,0
-2020-03-09,Norte,Roraima,0,0
-2020-03-09,Norte,Tocantins,0,0
 2020-03-09,Sudeste,Espírito Santo,1,0
 2020-03-09,Sudeste,Minas Gerais,1,0
 2020-03-09,Sudeste,Rio de Janeiro,3,0
 2020-03-09,Sudeste,São Paulo,16,0
-2020-03-09,Sul,Paraná,0,0
-2020-03-09,Sul,Rio Grande do Sul,0,0
-2020-03-09,Sul,Santa Catarina,0,0
 2020-03-10,Centro-Oeste,Distrito Federal,1,0
-2020-03-10,Centro-Oeste,Goiás,0,0
-2020-03-10,Centro-Oeste,Mato Grosso,0,0
-2020-03-10,Centro-Oeste,Mato Grosso do Sul,0,0
 2020-03-10,Nordeste,Alagoas,1,0
 2020-03-10,Nordeste,Bahia,2,0
-2020-03-10,Nordeste,Ceará,0,0
-2020-03-10,Nordeste,Maranhão,0,0
-2020-03-10,Nordeste,Paraíba,0,0
-2020-03-10,Nordeste,Pernambuco,0,0
-2020-03-10,Nordeste,Piauí,0,0
-2020-03-10,Nordeste,Rio Grande do Norte,0,0
-2020-03-10,Nordeste,Sergipe,0,0
-2020-03-10,Norte,Acre,0,0
-2020-03-10,Norte,Amapá,0,0
-2020-03-10,Norte,Amazonas,0,0
-2020-03-10,Norte,Pará,0,0
-2020-03-10,Norte,Rondônia,0,0
-2020-03-10,Norte,Roraima,0,0
-2020-03-10,Norte,Tocantins,0,0
 2020-03-10,Sudeste,Espírito Santo,1,0
 2020-03-10,Sudeste,Minas Gerais,1,0
 2020-03-10,Sudeste,Rio de Janeiro,8,0
 2020-03-10,Sudeste,São Paulo,19,0
-2020-03-10,Sul,Paraná,0,0
 2020-03-10,Sul,Rio Grande do Sul,1,0
-2020-03-10,Sul,Santa Catarina,0,0
 2020-03-11,Centro-Oeste,Distrito Federal,2,0
-2020-03-11,Centro-Oeste,Goiás,0,0
-2020-03-11,Centro-Oeste,Mato Grosso,0,0
-2020-03-11,Centro-Oeste,Mato Grosso do Sul,0,0
 2020-03-11,Nordeste,Alagoas,1,0
 2020-03-11,Nordeste,Bahia,2,0
-2020-03-11,Nordeste,Ceará,0,0
-2020-03-11,Nordeste,Maranhão,0,0
-2020-03-11,Nordeste,Paraíba,0,0
-2020-03-11,Nordeste,Pernambuco,0,0
-2020-03-11,Nordeste,Piauí,0,0
-2020-03-11,Nordeste,Rio Grande do Norte,0,0
-2020-03-11,Nordeste,Sergipe,0,0
-2020-03-11,Norte,Acre,0,0
-2020-03-11,Norte,Amapá,0,0
-2020-03-11,Norte,Amazonas,0,0
-2020-03-11,Norte,Pará,0,0
-2020-03-11,Norte,Rondônia,0,0
-2020-03-11,Norte,Roraima,0,0
-2020-03-11,Norte,Tocantins,0,0
 2020-03-11,Sudeste,Espírito Santo,1,0
 2020-03-11,Sudeste,Minas Gerais,1,0
 2020-03-11,Sudeste,Rio de Janeiro,13,0
 2020-03-11,Sudeste,São Paulo,30,0
-2020-03-11,Sul,Paraná,0,0
 2020-03-11,Sul,Rio Grande do Sul,2,0
-2020-03-11,Sul,Santa Catarina,0,0
 2020-03-12,Centro-Oeste,Distrito Federal,2,0
-2020-03-12,Centro-Oeste,Goiás,0,0
-2020-03-12,Centro-Oeste,Mato Grosso,0,0
-2020-03-12,Centro-Oeste,Mato Grosso do Sul,0,0
 2020-03-12,Nordeste,Alagoas,1,0
 2020-03-12,Nordeste,Bahia,2,0
-2020-03-12,Nordeste,Ceará,0,0
-2020-03-12,Nordeste,Maranhão,0,0
-2020-03-12,Nordeste,Paraíba,0,0
 2020-03-12,Nordeste,Pernambuco,2,0
-2020-03-12,Nordeste,Piauí,0,0
-2020-03-12,Nordeste,Rio Grande do Norte,0,0
-2020-03-12,Nordeste,Sergipe,0,0
-2020-03-12,Norte,Acre,0,0
-2020-03-12,Norte,Amapá,0,0
-2020-03-12,Norte,Amazonas,0,0
-2020-03-12,Norte,Pará,0,0
-2020-03-12,Norte,Rondônia,0,0
-2020-03-12,Norte,Roraima,0,0
-2020-03-12,Norte,Tocantins,0,0
 2020-03-12,Sudeste,Espírito Santo,1,0
 2020-03-12,Sudeste,Minas Gerais,1,0
 2020-03-12,Sudeste,Rio de Janeiro,16,0
 2020-03-12,Sudeste,São Paulo,42,0
 2020-03-12,Sul,Paraná,6,0
 2020-03-12,Sul,Rio Grande do Sul,4,0
-2020-03-12,Sul,Santa Catarina,0,0
 2020-03-13,Centro-Oeste,Distrito Federal,2,0
 2020-03-13,Centro-Oeste,Goiás,3,0
-2020-03-13,Centro-Oeste,Mato Grosso,0,0
-2020-03-13,Centro-Oeste,Mato Grosso do Sul,0,0
 2020-03-13,Nordeste,Alagoas,1,0
 2020-03-13,Nordeste,Bahia,2,0
-2020-03-13,Nordeste,Ceará,0,0
-2020-03-13,Nordeste,Maranhão,0,0
-2020-03-13,Nordeste,Paraíba,0,0
 2020-03-13,Nordeste,Pernambuco,2,0
-2020-03-13,Nordeste,Piauí,0,0
 2020-03-13,Nordeste,Rio Grande do Norte,1,0
-2020-03-13,Nordeste,Sergipe,0,0
-2020-03-13,Norte,Acre,0,0
-2020-03-13,Norte,Amapá,0,0
-2020-03-13,Norte,Amazonas,0,0
-2020-03-13,Norte,Pará,0,0
-2020-03-13,Norte,Rondônia,0,0
-2020-03-13,Norte,Roraima,0,0
-2020-03-13,Norte,Tocantins,0,0
 2020-03-13,Sudeste,Espírito Santo,1,0
 2020-03-13,Sudeste,Minas Gerais,2,0
 2020-03-13,Sudeste,Rio de Janeiro,16,0
@@ -1189,24 +73,10 @@ date,region,state,cases,deaths
 2020-03-13,Sul,Santa Catarina,2,0
 2020-03-14,Centro-Oeste,Distrito Federal,6,0
 2020-03-14,Centro-Oeste,Goiás,3,0
-2020-03-14,Centro-Oeste,Mato Grosso,0,0
-2020-03-14,Centro-Oeste,Mato Grosso do Sul,0,0
 2020-03-14,Nordeste,Alagoas,1,0
 2020-03-14,Nordeste,Bahia,2,0
-2020-03-14,Nordeste,Ceará,0,0
-2020-03-14,Nordeste,Maranhão,0,0
-2020-03-14,Nordeste,Paraíba,0,0
 2020-03-14,Nordeste,Pernambuco,2,0
-2020-03-14,Nordeste,Piauí,0,0
 2020-03-14,Nordeste,Rio Grande do Norte,1,0
-2020-03-14,Nordeste,Sergipe,0,0
-2020-03-14,Norte,Acre,0,0
-2020-03-14,Norte,Amapá,0,0
-2020-03-14,Norte,Amazonas,0,0
-2020-03-14,Norte,Pará,0,0
-2020-03-14,Norte,Rondônia,0,0
-2020-03-14,Norte,Roraima,0,0
-2020-03-14,Norte,Tocantins,0,0
 2020-03-14,Sudeste,Espírito Santo,1,0
 2020-03-14,Sudeste,Minas Gerais,2,0
 2020-03-14,Sudeste,Rio de Janeiro,22,0
@@ -1216,24 +86,12 @@ date,region,state,cases,deaths
 2020-03-14,Sul,Santa Catarina,4,0
 2020-03-15,Centro-Oeste,Distrito Federal,8,0
 2020-03-15,Centro-Oeste,Goiás,3,0
-2020-03-15,Centro-Oeste,Mato Grosso,0,0
-2020-03-15,Centro-Oeste,Mato Grosso do Sul,0,0
 2020-03-15,Nordeste,Alagoas,1,0
 2020-03-15,Nordeste,Bahia,2,0
-2020-03-15,Nordeste,Ceará,0,0
-2020-03-15,Nordeste,Maranhão,0,0
-2020-03-15,Nordeste,Paraíba,0,0
 2020-03-15,Nordeste,Pernambuco,2,0
-2020-03-15,Nordeste,Piauí,0,0
 2020-03-15,Nordeste,Rio Grande do Norte,1,0
 2020-03-15,Nordeste,Sergipe,1,0
-2020-03-15,Norte,Acre,0,0
-2020-03-15,Norte,Amapá,0,0
 2020-03-15,Norte,Amazonas,1,0
-2020-03-15,Norte,Pará,0,0
-2020-03-15,Norte,Rondônia,0,0
-2020-03-15,Norte,Roraima,0,0
-2020-03-15,Norte,Tocantins,0,0
 2020-03-15,Sudeste,Espírito Santo,1,0
 2020-03-15,Sudeste,Minas Gerais,2,0
 2020-03-15,Sudeste,Rio de Janeiro,24,0
@@ -1243,24 +101,13 @@ date,region,state,cases,deaths
 2020-03-15,Sul,Santa Catarina,6,0
 2020-03-16,Centro-Oeste,Distrito Federal,13,0
 2020-03-16,Centro-Oeste,Goiás,3,0
-2020-03-16,Centro-Oeste,Mato Grosso,0,0
 2020-03-16,Centro-Oeste,Mato Grosso do Sul,2,0
 2020-03-16,Nordeste,Alagoas,1,0
 2020-03-16,Nordeste,Bahia,2,0
-2020-03-16,Nordeste,Ceará,0,0
-2020-03-16,Nordeste,Maranhão,0,0
-2020-03-16,Nordeste,Paraíba,0,0
 2020-03-16,Nordeste,Pernambuco,2,0
-2020-03-16,Nordeste,Piauí,0,0
 2020-03-16,Nordeste,Rio Grande do Norte,1,0
 2020-03-16,Nordeste,Sergipe,1,0
-2020-03-16,Norte,Acre,0,0
-2020-03-16,Norte,Amapá,0,0
 2020-03-16,Norte,Amazonas,1,0
-2020-03-16,Norte,Pará,0,0
-2020-03-16,Norte,Rondônia,0,0
-2020-03-16,Norte,Roraima,0,0
-2020-03-16,Norte,Tocantins,0,0
 2020-03-16,Sudeste,Espírito Santo,1,0
 2020-03-16,Sudeste,Minas Gerais,5,0
 2020-03-16,Sudeste,Rio de Janeiro,31,0
@@ -1270,24 +117,14 @@ date,region,state,cases,deaths
 2020-03-16,Sul,Santa Catarina,7,0
 2020-03-17,Centro-Oeste,Distrito Federal,22,0
 2020-03-17,Centro-Oeste,Goiás,6,0
-2020-03-17,Centro-Oeste,Mato Grosso,0,0
 2020-03-17,Centro-Oeste,Mato Grosso do Sul,4,0
 2020-03-17,Nordeste,Alagoas,1,0
 2020-03-17,Nordeste,Bahia,3,0
 2020-03-17,Nordeste,Ceará,5,0
-2020-03-17,Nordeste,Maranhão,0,0
-2020-03-17,Nordeste,Paraíba,0,0
 2020-03-17,Nordeste,Pernambuco,16,0
-2020-03-17,Nordeste,Piauí,0,0
 2020-03-17,Nordeste,Rio Grande do Norte,1,0
 2020-03-17,Nordeste,Sergipe,4,0
-2020-03-17,Norte,Acre,0,0
-2020-03-17,Norte,Amapá,0,0
 2020-03-17,Norte,Amazonas,1,0
-2020-03-17,Norte,Pará,0,0
-2020-03-17,Norte,Rondônia,0,0
-2020-03-17,Norte,Roraima,0,0
-2020-03-17,Norte,Tocantins,0,0
 2020-03-17,Sudeste,Espírito Santo,1,0
 2020-03-17,Sudeste,Minas Gerais,7,0
 2020-03-17,Sudeste,Rio de Janeiro,33,0
@@ -1297,24 +134,14 @@ date,region,state,cases,deaths
 2020-03-17,Sul,Santa Catarina,7,0
 2020-03-18,Centro-Oeste,Distrito Federal,26,0
 2020-03-18,Centro-Oeste,Goiás,8,0
-2020-03-18,Centro-Oeste,Mato Grosso,0,0
 2020-03-18,Centro-Oeste,Mato Grosso do Sul,7,0
 2020-03-18,Nordeste,Alagoas,1,0
 2020-03-18,Nordeste,Bahia,3,0
 2020-03-18,Nordeste,Ceará,9,0
-2020-03-18,Nordeste,Maranhão,0,0
-2020-03-18,Nordeste,Paraíba,0,0
 2020-03-18,Nordeste,Pernambuco,16,0
-2020-03-18,Nordeste,Piauí,0,0
 2020-03-18,Nordeste,Rio Grande do Norte,1,0
 2020-03-18,Nordeste,Sergipe,5,0
-2020-03-18,Norte,Acre,0,0
-2020-03-18,Norte,Amapá,0,0
 2020-03-18,Norte,Amazonas,1,0
-2020-03-18,Norte,Pará,0,0
-2020-03-18,Norte,Rondônia,0,0
-2020-03-18,Norte,Roraima,0,0
-2020-03-18,Norte,Tocantins,0,0
 2020-03-18,Sudeste,Espírito Santo,9,0
 2020-03-18,Sudeste,Minas Gerais,15,0
 2020-03-18,Sudeste,Rio de Janeiro,45,0
@@ -1324,23 +151,17 @@ date,region,state,cases,deaths
 2020-03-18,Sul,Santa Catarina,10,0
 2020-03-19,Centro-Oeste,Distrito Federal,42,0
 2020-03-19,Centro-Oeste,Goiás,12,0
-2020-03-19,Centro-Oeste,Mato Grosso,0,0
 2020-03-19,Centro-Oeste,Mato Grosso do Sul,7,0
 2020-03-19,Nordeste,Alagoas,4,0
 2020-03-19,Nordeste,Bahia,30,0
 2020-03-19,Nordeste,Ceará,20,0
-2020-03-19,Nordeste,Maranhão,0,0
 2020-03-19,Nordeste,Paraíba,1,0
 2020-03-19,Nordeste,Pernambuco,28,0
-2020-03-19,Nordeste,Piauí,0,0
 2020-03-19,Nordeste,Rio Grande do Norte,1,0
 2020-03-19,Nordeste,Sergipe,6,0
 2020-03-19,Norte,Acre,3,0
-2020-03-19,Norte,Amapá,0,0
 2020-03-19,Norte,Amazonas,3,0
 2020-03-19,Norte,Pará,1,0
-2020-03-19,Norte,Rondônia,0,0
-2020-03-19,Norte,Roraima,0,0
 2020-03-19,Norte,Tocantins,1,0
 2020-03-19,Sudeste,Espírito Santo,11,0
 2020-03-19,Sudeste,Minas Gerais,29,0
@@ -1356,7 +177,6 @@ date,region,state,cases,deaths
 2020-03-20,Nordeste,Alagoas,5,0
 2020-03-20,Nordeste,Bahia,33,0
 2020-03-20,Nordeste,Ceará,55,0
-2020-03-20,Nordeste,Maranhão,0,0
 2020-03-20,Nordeste,Paraíba,1,0
 2020-03-20,Nordeste,Pernambuco,30,0
 2020-03-20,Nordeste,Piauí,3,0
@@ -1367,7 +187,6 @@ date,region,state,cases,deaths
 2020-03-20,Norte,Amazonas,3,0
 2020-03-20,Norte,Pará,2,0
 2020-03-20,Norte,Rondônia,1,0
-2020-03-20,Norte,Roraima,0,0
 2020-03-20,Norte,Tocantins,1,0
 2020-03-20,Sudeste,Espírito Santo,13,0
 2020-03-20,Sudeste,Minas Gerais,35,0
@@ -1394,7 +213,6 @@ date,region,state,cases,deaths
 2020-03-21,Norte,Amazonas,11,0
 2020-03-21,Norte,Pará,2,0
 2020-03-21,Norte,Rondônia,1,0
-2020-03-21,Norte,Roraima,0,0
 2020-03-21,Norte,Tocantins,2,0
 2020-03-21,Sudeste,Espírito Santo,26,0
 2020-03-21,Sudeste,Minas Gerais,38,0
@@ -2619,7 +1437,7 @@ date,region,state,cases,deaths
 2020-05-05,Sul,Rio Grande do Sul,1815,79
 2020-05-05,Sul,Santa Catarina,2623,55
 2020-05-06,Centro-Oeste,Distrito Federal,1906,34
-2020-05-06,Centro-Oeste,Goiás,1024,45
+2020-05-06,Centro-Oeste,Goiás,1024,44
 2020-05-06,Centro-Oeste,Mato Grosso,379,13
 2020-05-06,Centro-Oeste,Mato Grosso do Sul,288,10
 2020-05-06,Nordeste,Alagoas,1703,89
@@ -2753,30 +1571,57 @@ date,region,state,cases,deaths
 2020-05-10,Sul,Paraná,1835,109
 2020-05-10,Sul,Rio Grande do Sul,2542,97
 2020-05-10,Sul,Santa Catarina,3429,65
-2020-05-11,Centro-Oeste,MS,385,11
-2020-05-11,Centro-Oeste,MT,541,19
-2020-05-11,Centro-Oeste,GO,1100,49
-2020-05-11,Centro-Oeste,DF,2783,44
-2020-05-11,Nordeste,Maranhão,8144,399
-2020-05-11,Nordeste,Piauí,1332,45
+2020-05-11,Centro-Oeste,Distrito Federal,2783,44
+2020-05-11,Centro-Oeste,Goiás,1100,49
+2020-05-11,Centro-Oeste,Mato Grosso,541,19
+2020-05-11,Centro-Oeste,Mato Grosso do Sul,385,11
+2020-05-11,Nordeste,Alagoas,2343,138
+2020-05-11,Nordeste,Bahia,5808,211
 2020-05-11,Nordeste,Ceará,17599,1189
-2020-05-11,Nordeste,Rio Grande do Norte,1989,92
+2020-05-11,Nordeste,Maranhão,8144,399
 2020-05-11,Nordeste,Paraíba,2525,139
 2020-05-11,Nordeste,Pernambuco,13768,1087
-2020-05-11,Nordeste,Alagoas,2343,138
+2020-05-11,Nordeste,Piauí,1332,45
+2020-05-11,Nordeste,Rio Grande do Norte,1989,92
 2020-05-11,Nordeste,Sergipe,1800,37
-2020-05-11,Nordeste,Bahia,5808,211
-2020-05-11,Norte,Rondônia,1396,47
 2020-05-11,Norte,Acre,1460,45
-2020-05-11,Norte,Amazonas,12919,1035
-2020-05-11,Norte,Roraima,1295,24
-2020-05-11,Norte,Pará,7563,708
 2020-05-11,Norte,Amapá,2671,73
+2020-05-11,Norte,Amazonas,12919,1035
+2020-05-11,Norte,Pará,7563,708
+2020-05-11,Norte,Rondônia,1396,47
+2020-05-11,Norte,Roraima,1295,24
 2020-05-11,Norte,Tocantins,747,12
-2020-05-11,Sudeste,Minas Gerais,3320,121
 2020-05-11,Sudeste,Espírito Santo,4819,196
+2020-05-11,Sudeste,Minas Gerais,3320,121
 2020-05-11,Sudeste,Rio de Janeiro,17939,1770
 2020-05-11,Sudeste,São Paulo,46131,3743
 2020-05-11,Sul,Paraná,1849,111
-2020-05-11,Sul,Santa Catarina,3529,69
 2020-05-11,Sul,Rio Grande do Sul,2576,105
+2020-05-11,Sul,Santa Catarina,3529,69
+2020-05-12,Centro-Oeste,Distrito Federal,2979,46
+2020-05-12,Centro-Oeste,Goiás,1115,52
+2020-05-12,Centro-Oeste,Mato Grosso,591,19
+2020-05-12,Centro-Oeste,Mato Grosso do Sul,405,12
+2020-05-12,Nordeste,Alagoas,2580,150
+2020-05-12,Nordeste,Bahia,6204,225
+2020-05-12,Nordeste,Ceará,18412,1280
+2020-05-12,Nordeste,Maranhão,8526,423
+2020-05-12,Nordeste,Paraíba,2777,154
+2020-05-12,Nordeste,Pernambuco,14309,1157
+2020-05-12,Nordeste,Piauí,1443,49
+2020-05-12,Nordeste,Rio Grande do Norte,2033,93
+2020-05-12,Nordeste,Sergipe,2032,37
+2020-05-12,Norte,Acre,1590,51
+2020-05-12,Norte,Amapá,2910,86
+2020-05-12,Norte,Amazonas,14168,1098
+2020-05-12,Norte,Pará,8616,864
+2020-05-12,Norte,Rondônia,1460,50
+2020-05-12,Norte,Roraima,1328,27
+2020-05-12,Norte,Tocantins,828,14
+2020-05-12,Sudeste,Espírito Santo,5087,212
+2020-05-12,Sudeste,Minas Gerais,3435,127
+2020-05-12,Sudeste,Rio de Janeiro,18486,1928
+2020-05-12,Sudeste,São Paulo,47719,3949
+2020-05-12,Sul,Paraná,1906,113
+2020-05-12,Sul,Rio Grande do Sul,2917,111
+2020-05-12,Sul,Santa Catarina,3733,73
