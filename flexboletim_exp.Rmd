@@ -140,6 +140,12 @@ casosfull_brio %>%
 #totestados %<>% mutate(Estado = factor(Estado, ordered=T)) 
 #totestados$Estado <- reorder(totestados$Estado, totestados$Casos)
 totestados <- arrange(totestados, desc(Casos))
+setorder(totestados, -Casos)
+```
+
+```{r eval = FALSE}
+totestados <- totestados %>% mutate(Estado = factor(Estado, ordered=T)) 
+totestados$Estado <- reorder(totestados$Estado, -totestados$Casos)
 ```
 
 
