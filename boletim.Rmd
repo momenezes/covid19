@@ -59,6 +59,12 @@ library(sparkline)
 .my-row:hover {
   background-color: #f5f8ff;
 }
+
+
+.sorted {
+  background: rgba(10, 10, 10, 0.06);
+}
+
 ```
 
 ```{r}
@@ -230,7 +236,17 @@ reactable(select(tabelaWorld,Country, TotCasos,TotMortes,`Letal.%`,Recup, `%Novo
                          Mortes1M = colDef(align = "right"),
                          NDias1Ca = colDef(align= "right")
                          ),
-          defaultSorted = list(TotCasos = "desc"))
+          defaultSorted = list(TotCasos = "desc"),
+          defaultColDef = colDef(
+                class = JS("function(rowInfo, colInfo, state) {
+                           // Highlight sorted columns
+                          for (var i = 0; i < state.sorted.length; i++) {
+                              if (state.sorted[i].id === colInfo.id) {
+                                 return 'sorted'
+                              }
+                          }
+                        }")
+     ))
 ```
 
 
@@ -254,7 +270,18 @@ reactable(tabgrafWorld,
                            sparkline(tabgrafWorld$NovasMortes[[index]])
                          })
                          ),
-          defaultSorted = list(TotCasos = "desc"))
+          defaultSorted = list(TotCasos = "desc"),
+          defaultColDef = colDef(
+                class = JS("function(rowInfo, colInfo, state) {
+                           // Highlight sorted columns
+                          for (var i = 0; i < state.sorted.length; i++) {
+                              if (state.sorted[i].id === colInfo.id) {
+                                 return 'sorted'
+                              }
+                          }
+                        }")
+                )
+)
 ```
 
 <!--
