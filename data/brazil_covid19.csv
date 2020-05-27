@@ -1491,6 +1491,7 @@ date,region,state,cases,deaths
 2020-05-07,Sul,Rio Grande do Sul,2129,90
 2020-05-07,Sul,Santa Catarina,3082,63
 2020-05-08,Centro-Oeste,Distrito Federal,2442,37
+2020-05-08,Centro-Oeste,Goiás,1053,47
 2020-05-08,Centro-Oeste,Goiás,1053,49
 2020-05-08,Centro-Oeste,Mato Grosso,457,14
 2020-05-08,Centro-Oeste,Mato Grosso do Sul,326,11
@@ -1887,6 +1888,7 @@ date,region,state,cases,deaths
 2020-05-22,Norte,Pará,21469,1937
 2020-05-22,Norte,Rondônia,2774,106
 2020-05-22,Norte,Roraima,2306,83
+2020-05-22,Norte,Roraima,2306,81
 2020-05-22,Norte,Tocantins,2205,49
 2020-05-22,Sudeste,Espírito Santo,9520,397
 2020-05-22,Sudeste,Minas Gerais,5995,201
@@ -1976,3 +1978,30 @@ date,region,state,cases,deaths
 2020-05-25,Sul,Paraná,3331,156
 2020-05-25,Sul,Rio Grande do Sul,6559,197
 2020-05-25,Sul,Santa Catarina,6875,109
+2020-05-26,Centro-Oeste,Distrito Federal,7210,124
+2020-05-26,Centro-Oeste,Goiás,2671,104
+2020-05-26,Centro-Oeste,Mato Grosso,1628,43
+2020-05-26,Centro-Oeste,Mato Grosso do Sul,1100,17
+2020-05-26,Nordeste,Alagoas,7058,354
+2020-05-26,Nordeste,Bahia,14566,495
+2020-05-26,Nordeste,Ceará,37021,2603
+2020-05-26,Nordeste,Maranhão,24278,817
+2020-05-26,Nordeste,Paraíba,8919,286
+2020-05-26,Nordeste,Pernambuco,28854,2328
+2020-05-26,Nordeste,Piauí,3720,119
+2020-05-26,Nordeste,Rio Grande do Norte,5472,220
+2020-05-26,Nordeste,Sergipe,5735,116
+2020-05-26,Norte,Acre,4781,105
+2020-05-26,Norte,Amapá,6967,173
+2020-05-26,Norte,Amazonas,31949,1852
+2020-05-26,Norte,Pará,28600,2469
+2020-05-26,Norte,Rondônia,3493,133
+2020-05-26,Norte,Roraima,2583,102
+2020-05-26,Norte,Tocantins,2858,64
+2020-05-26,Sudeste,Espírito Santo,10889,487
+2020-05-26,Sudeste,Minas Gerais,7516,234
+2020-05-26,Sudeste,Rio de Janeiro,40024,4361
+2020-05-26,Sudeste,São Paulo,86017,6423
+2020-05-26,Sul,Paraná,3512,159
+2020-05-26,Sul,Rio Grande do Sul,6785,203
+2020-05-26,Sul,Santa Catarina,7016,121
