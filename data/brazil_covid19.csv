@@ -1491,8 +1491,8 @@ date,region,state,cases,deaths
 2020-05-07,Sul,Rio Grande do Sul,2129,90
 2020-05-07,Sul,Santa Catarina,3082,63
 2020-05-08,Centro-Oeste,Distrito Federal,2442,37
-2020-05-08,Centro-Oeste,Goiás,1053,49
 2020-05-08,Centro-Oeste,Goiás,1053,47
+2020-05-08,Centro-Oeste,Goiás,1053,49
 2020-05-08,Centro-Oeste,Mato Grosso,457,14
 2020-05-08,Centro-Oeste,Mato Grosso do Sul,326,11
 2020-05-08,Nordeste,Alagoas,2033,108
@@ -2059,3 +2059,30 @@ date,region,state,cases,deaths
 2020-05-28,Sul,Paraná,3984,169
 2020-05-28,Sul,Rio Grande do Sul,8234,213
 2020-05-28,Sul,Santa Catarina,8000,131
+2020-05-29,Centro-Oeste,Distrito Federal,8722,154
+2020-05-29,Centro-Oeste,Goiás,3319,119
+2020-05-29,Centro-Oeste,Mato Grosso,2103,56
+2020-05-29,Centro-Oeste,Mato Grosso do Sul,1356,18
+2020-05-29,Nordeste,Alagoas,8618,406
+2020-05-29,Nordeste,Bahia,16917,609
+2020-05-29,Nordeste,Ceará,38395,2859
+2020-05-29,Nordeste,Maranhão,30482,911
+2020-05-29,Nordeste,Paraíba,12011,327
+2020-05-29,Nordeste,Pernambuco,32255,2669
+2020-05-29,Nordeste,Piauí,4503,146
+2020-05-29,Nordeste,Rio Grande do Norte,6463,268
+2020-05-29,Nordeste,Sergipe,6462,142
+2020-05-29,Norte,Acre,5841,135
+2020-05-29,Norte,Amapá,8469,207
+2020-05-29,Norte,Amazonas,38909,2011
+2020-05-29,Norte,Pará,36486,2827
+2020-05-29,Norte,Rondônia,4502,145
+2020-05-29,Norte,Roraima,3098,108
+2020-05-29,Norte,Tocantins,3611,70
+2020-05-29,Sudeste,Espírito Santo,12903,560
+2020-05-29,Sudeste,Minas Gerais,9232,257
+2020-05-29,Sudeste,Rio de Janeiro,47953,5079
+2020-05-29,Sudeste,São Paulo,101556,7275
+2020-05-29,Sul,Paraná,4236,173
+2020-05-29,Sul,Rio Grande do Sul,8234,213
+2020-05-29,Sul,Santa Catarina,8530,134
