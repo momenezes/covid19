@@ -321,9 +321,7 @@ reactable(tabelaBR, defaultPageSize = 27, bordered = TRUE, striped = TRUE,
 Resumo Mundo   {data-orientation=rows data-icon="fa-bar-chart"}
 =====================================
 
-###  Dados da John Hopkins University `r format(ultimadata, '%d-%m-%Y')`  {data-height=10}
 
-## Row 1 {data-height=110}
 
 ```{r}
 jhucovid19 <- read_csv("./data/jhucovid19_last.csv")
@@ -337,6 +335,11 @@ Fonte = "Fonte: CSSE at Johns Hopkins University"
 ```{r}
 ultimadata <- max(jhucovid19$DateRep)
 ```
+
+
+###  Dados da John Hopkins University `r format(ultimadata, '%d-%m-%Y')`  {data-height=10}
+
+## Row 1 {data-height=110}
 
 
 ```{r}
