@@ -1,7 +1,7 @@
 Country,DateRep,ConfirmedCases,Deaths,Recovered,Continent,Code
 Hong Kong SAR China,2020-01-22,0,0,0,Asia,HKG
 Japan,2020-01-22,2,0,0,Asia,JPN
-Macau SAR China,2020-01-22,1,0,0,Asia,MAC
+Macao SAR China,2020-01-22,1,0,0,Asia,MAC
 China,2020-01-22,547,17,28,Asia,CHN
 South Korea,2020-01-22,1,0,0,Asia,KOR
 Taiwan,2020-01-22,1,0,0,Asia,TWN
@@ -12,7 +12,7 @@ Brazil,2020-01-23,0,0,0,Americas,BRA
 Colombia,2020-01-23,0,0,0,Americas,COL
 Hong Kong SAR China,2020-01-23,2,0,0,Asia,HKG
 Japan,2020-01-23,1,0,0,Asia,JPN
-Macau SAR China,2020-01-23,2,0,0,Asia,MAC
+Macao SAR China,2020-01-23,2,0,0,Asia,MAC
 China,2020-01-23,639,18,30,Asia,CHN
 Malaysia,2020-01-23,0,0,0,Asia,MYS
 Mexico,2020-01-23,0,0,0,Americas,MEX
@@ -26,7 +26,7 @@ Vietnam,2020-01-23,2,0,0,Asia,VNM
 France,2020-01-24,2,0,0,Europe,FRA
 Hong Kong SAR China,2020-01-24,2,0,0,Asia,HKG
 Japan,2020-01-24,2,0,0,Asia,JPN
-Macau SAR China,2020-01-24,2,0,0,Asia,MAC
+Macao SAR China,2020-01-24,2,0,0,Asia,MAC
 China,2020-01-24,916,26,36,Asia,CHN
 Singapore,2020-01-24,3,0,0,Asia,SGP
 South Korea,2020-01-24,2,0,0,Asia,KOR
@@ -38,7 +38,7 @@ Australia,2020-01-25,4,0,0,Oceania,AUS
 France,2020-01-25,3,0,0,Europe,FRA
 Hong Kong SAR China,2020-01-25,5,0,0,Asia,HKG
 Japan,2020-01-25,2,0,0,Asia,JPN
-Macau SAR China,2020-01-25,2,0,0,Asia,MAC
+Macao SAR China,2020-01-25,2,0,0,Asia,MAC
 China,2020-01-25,1399,42,39,Asia,CHN
 Malaysia,2020-01-25,3,0,0,Asia,MYS
 Nepal,2020-01-25,1,0,0,Asia,NPL
@@ -53,7 +53,7 @@ Canada,2020-01-26,1,0,0,Americas,CAN
 France,2020-01-26,3,0,0,Europe,FRA
 Hong Kong SAR China,2020-01-26,8,0,0,Asia,HKG
 Japan,2020-01-26,4,0,1,Asia,JPN
-Macau SAR China,2020-01-26,5,0,0,Asia,MAC
+Macao SAR China,2020-01-26,5,0,0,Asia,MAC
 China,2020-01-26,2062,56,49,Asia,CHN
 Malaysia,2020-01-26,4,0,0,Asia,MYS
 Nepal,2020-01-26,1,0,0,Asia,NPL
@@ -70,7 +70,7 @@ France,2020-01-27,3,0,0,Europe,FRA
 Hong Kong SAR China,2020-01-27,8,0,0,Asia,HKG
 Côte d’Ivoire,2020-01-27,1,0,0,Africa,CIV
 Japan,2020-01-27,4,0,1,Asia,JPN
-Macau SAR China,2020-01-27,6,0,0,Asia,MAC
+Macao SAR China,2020-01-27,6,0,0,Asia,MAC
 China,2020-01-27,2863,82,58,Asia,CHN
 Malaysia,2020-01-27,4,0,0,Asia,MYS
 Nepal,2020-01-27,1,0,0,Asia,NPL
@@ -88,7 +88,7 @@ France,2020-01-28,4,0,0,Europe,FRA
 Germany,2020-01-28,4,0,0,Europe,DEU
 Hong Kong SAR China,2020-01-28,8,0,0,Asia,HKG
 Japan,2020-01-28,7,0,1,Asia,JPN
-Macau SAR China,2020-01-28,7,0,0,Asia,MAC
+Macao SAR China,2020-01-28,7,0,0,Asia,MAC
 China,2020-01-28,5494,131,101,Asia,CHN
 Malaysia,2020-01-28,4,0,0,Asia,MYS
 Nepal,2020-01-28,1,0,0,Asia,NPL
@@ -107,7 +107,7 @@ France,2020-01-29,5,0,0,Europe,FRA
 Germany,2020-01-29,4,0,0,Europe,DEU
 Hong Kong SAR China,2020-01-29,10,0,0,Asia,HKG
 Japan,2020-01-29,7,0,1,Asia,JPN
-Macau SAR China,2020-01-29,7,0,0,Asia,MAC
+Macao SAR China,2020-01-29,7,0,0,Asia,MAC
 China,2020-01-29,6070,133,120,Asia,CHN
 Malaysia,2020-01-29,7,0,0,Asia,MYS
 Nepal,2020-01-29,1,0,0,Asia,NPL
@@ -128,7 +128,7 @@ Germany,2020-01-30,4,0,0,Europe,DEU
 Hong Kong SAR China,2020-01-30,10,0,0,Asia,HKG
 India,2020-01-30,1,0,0,Asia,IND
 Japan,2020-01-30,11,0,1,Asia,JPN
-Macau SAR China,2020-01-30,7,0,0,Asia,MAC
+Macao SAR China,2020-01-30,7,0,0,Asia,MAC
 China,2020-01-30,8124,171,135,Asia,CHN
 Malaysia,2020-01-30,8,0,0,Asia,MYS
 Nepal,2020-01-30,1,0,0,Asia,NPL
@@ -151,7 +151,7 @@ Hong Kong SAR China,2020-01-31,12,0,0,Asia,HKG
 India,2020-01-31,1,0,0,Asia,IND
 Italy,2020-01-31,2,0,0,Europe,ITA
 Japan,2020-01-31,15,0,1,Asia,JPN
-Macau SAR China,2020-01-31,7,0,0,Asia,MAC
+Macao SAR China,2020-01-31,7,0,0,Asia,MAC
 China,2020-01-31,9783,213,214,Asia,CHN
 Malaysia,2020-01-31,8,0,0,Asia,MYS
 Nepal,2020-01-31,1,0,0,Asia,NPL
@@ -177,7 +177,7 @@ Hong Kong SAR China,2020-02-01,13,0,0,Asia,HKG
 India,2020-02-01,1,0,0,Asia,IND
 Italy,2020-02-01,2,0,0,Europe,ITA
 Japan,2020-02-01,20,0,1,Asia,JPN
-Macau SAR China,2020-02-01,7,0,0,Asia,MAC
+Macao SAR China,2020-02-01,7,0,0,Asia,MAC
 China,2020-02-01,11871,259,275,Asia,CHN
 Malaysia,2020-02-01,8,0,0,Asia,MYS
 Nepal,2020-02-01,1,0,0,Asia,NPL
@@ -204,7 +204,7 @@ Hong Kong SAR China,2020-02-02,15,0,0,Asia,HKG
 India,2020-02-02,2,0,0,Asia,IND
 Italy,2020-02-02,2,0,0,Europe,ITA
 Japan,2020-02-02,20,0,1,Asia,JPN
-Macau SAR China,2020-02-02,8,0,0,Asia,MAC
+Macao SAR China,2020-02-02,8,0,0,Asia,MAC
 China,2020-02-02,16607,361,463,Asia,CHN
 Malaysia,2020-02-02,8,0,0,Asia,MYS
 Nepal,2020-02-02,1,0,0,Asia,NPL
@@ -231,7 +231,7 @@ Hong Kong SAR China,2020-02-03,15,0,0,Asia,HKG
 India,2020-02-03,3,0,0,Asia,IND
 Italy,2020-02-03,2,0,0,Europe,ITA
 Japan,2020-02-03,20,0,1,Asia,JPN
-Macau SAR China,2020-02-03,8,0,0,Asia,MAC
+Macao SAR China,2020-02-03,8,0,0,Asia,MAC
 China,2020-02-03,19693,425,614,Asia,CHN
 Malaysia,2020-02-03,8,0,0,Asia,MYS
 Nepal,2020-02-03,1,0,0,Asia,NPL
@@ -259,7 +259,7 @@ Hong Kong SAR China,2020-02-04,17,1,0,Asia,HKG
 India,2020-02-04,3,0,0,Asia,IND
 Italy,2020-02-04,2,0,0,Europe,ITA
 Japan,2020-02-04,22,0,1,Asia,JPN
-Macau SAR China,2020-02-04,10,0,0,Asia,MAC
+Macao SAR China,2020-02-04,10,0,0,Asia,MAC
 China,2020-02-04,23680,490,843,Asia,CHN
 Malaysia,2020-02-04,10,0,0,Asia,MYS
 Nepal,2020-02-04,1,0,0,Asia,NPL
@@ -287,7 +287,7 @@ Hong Kong SAR China,2020-02-05,21,1,0,Asia,HKG
 India,2020-02-05,3,0,0,Asia,IND
 Italy,2020-02-05,2,0,0,Europe,ITA
 Japan,2020-02-05,22,0,1,Asia,JPN
-Macau SAR China,2020-02-05,10,0,0,Asia,MAC
+Macao SAR China,2020-02-05,10,0,0,Asia,MAC
 China,2020-02-05,27409,562,1115,Asia,CHN
 Malaysia,2020-02-05,12,0,0,Asia,MYS
 Nepal,2020-02-05,1,0,0,Asia,NPL
@@ -315,7 +315,7 @@ Hong Kong SAR China,2020-02-06,24,1,0,Asia,HKG
 India,2020-02-06,3,0,0,Asia,IND
 Italy,2020-02-06,2,0,0,Europe,ITA
 Japan,2020-02-06,45,0,1,Asia,JPN
-Macau SAR China,2020-02-06,10,0,1,Asia,MAC
+Macao SAR China,2020-02-06,10,0,1,Asia,MAC
 China,2020-02-06,30553,632,1476,Asia,CHN
 Malaysia,2020-02-06,12,0,0,Asia,MYS
 Nepal,2020-02-06,1,0,0,Asia,NPL
@@ -343,7 +343,7 @@ Hong Kong SAR China,2020-02-07,25,1,0,Asia,HKG
 India,2020-02-07,3,0,0,Asia,IND
 Italy,2020-02-07,3,0,0,Europe,ITA
 Japan,2020-02-07,25,0,1,Asia,JPN
-Macau SAR China,2020-02-07,10,0,1,Asia,MAC
+Macao SAR China,2020-02-07,10,0,1,Asia,MAC
 China,2020-02-07,34075,717,1998,Asia,CHN
 Malaysia,2020-02-07,12,0,1,Asia,MYS
 Nepal,2020-02-07,1,0,0,Asia,NPL
@@ -372,7 +372,7 @@ Hong Kong SAR China,2020-02-08,26,1,0,Asia,HKG
 India,2020-02-08,3,0,0,Asia,IND
 Italy,2020-02-08,3,0,0,Europe,ITA
 Japan,2020-02-08,25,0,1,Asia,JPN
-Macau SAR China,2020-02-08,10,0,1,Asia,MAC
+Macao SAR China,2020-02-08,10,0,1,Asia,MAC
 China,2020-02-08,36778,804,2595,Asia,CHN
 Malaysia,2020-02-08,16,0,1,Asia,MYS
 Nepal,2020-02-08,1,0,0,Asia,NPL
@@ -401,7 +401,7 @@ Hong Kong SAR China,2020-02-09,29,1,0,Asia,HKG
 India,2020-02-09,3,0,0,Asia,IND
 Italy,2020-02-09,3,0,0,Europe,ITA
 Japan,2020-02-09,26,0,1,Asia,JPN
-Macau SAR China,2020-02-09,10,0,1,Asia,MAC
+Macao SAR China,2020-02-09,10,0,1,Asia,MAC
 China,2020-02-09,39790,904,3218,Asia,CHN
 Malaysia,2020-02-09,16,0,1,Asia,MYS
 Nepal,2020-02-09,1,0,0,Asia,NPL
@@ -430,7 +430,7 @@ Hong Kong SAR China,2020-02-10,38,1,0,Asia,HKG
 India,2020-02-10,3,0,0,Asia,IND
 Italy,2020-02-10,3,0,0,Europe,ITA
 Japan,2020-02-10,26,0,4,Asia,JPN
-Macau SAR China,2020-02-10,10,0,1,Asia,MAC
+Macao SAR China,2020-02-10,10,0,1,Asia,MAC
 China,2020-02-10,42306,1011,3917,Asia,CHN
 Malaysia,2020-02-10,18,0,1,Asia,MYS
 Nepal,2020-02-10,1,0,0,Asia,NPL
@@ -459,7 +459,7 @@ Hong Kong SAR China,2020-02-11,49,1,0,Asia,HKG
 India,2020-02-11,3,0,0,Asia,IND
 Italy,2020-02-11,3,0,0,Europe,ITA
 Japan,2020-02-11,26,0,9,Asia,JPN
-Macau SAR China,2020-02-11,10,0,1,Asia,MAC
+Macao SAR China,2020-02-11,10,0,1,Asia,MAC
 China,2020-02-11,44327,1111,4635,Asia,CHN
 Malaysia,2020-02-11,18,0,3,Asia,MYS
 Nepal,2020-02-11,1,0,0,Asia,NPL
@@ -488,7 +488,7 @@ Hong Kong SAR China,2020-02-12,50,1,1,Asia,HKG
 India,2020-02-12,3,0,0,Asia,IND
 Italy,2020-02-12,3,0,0,Europe,ITA
 Japan,2020-02-12,28,0,9,Asia,JPN
-Macau SAR China,2020-02-12,10,0,2,Asia,MAC
+Macao SAR China,2020-02-12,10,0,2,Asia,MAC
 China,2020-02-12,44699,1116,5079,Asia,CHN
 Malaysia,2020-02-12,18,0,3,Asia,MYS
 Nepal,2020-02-12,1,0,1,Asia,NPL
@@ -517,7 +517,7 @@ Hong Kong SAR China,2020-02-13,53,1,1,Asia,HKG
 India,2020-02-13,3,0,0,Asia,IND
 Italy,2020-02-13,3,0,0,Europe,ITA
 Japan,2020-02-13,28,1,9,Asia,JPN
-Macau SAR China,2020-02-13,10,0,3,Asia,MAC
+Macao SAR China,2020-02-13,10,0,3,Asia,MAC
 China,2020-02-13,59832,1368,6213,Asia,CHN
 Malaysia,2020-02-13,19,0,3,Asia,MYS
 Nepal,2020-02-13,1,0,1,Asia,NPL
@@ -547,7 +547,7 @@ Hong Kong SAR China,2020-02-14,56,1,1,Asia,HKG
 India,2020-02-14,3,0,0,Asia,IND
 Italy,2020-02-14,3,0,0,Europe,ITA
 Japan,2020-02-14,29,1,9,Asia,JPN
-Macau SAR China,2020-02-14,10,0,3,Asia,MAC
+Macao SAR China,2020-02-14,10,0,3,Asia,MAC
 China,2020-02-14,66292,1520,7973,Asia,CHN
 Malaysia,2020-02-14,19,0,3,Asia,MYS
 Nepal,2020-02-14,1,0,1,Asia,NPL
@@ -577,7 +577,7 @@ Hong Kong SAR China,2020-02-15,56,1,1,Asia,HKG
 India,2020-02-15,3,0,0,Asia,IND
 Italy,2020-02-15,3,0,0,Europe,ITA
 Japan,2020-02-15,43,1,12,Asia,JPN
-Macau SAR China,2020-02-15,10,0,3,Asia,MAC
+Macao SAR China,2020-02-15,10,0,3,Asia,MAC
 China,2020-02-15,68347,1662,9294,Asia,CHN
 Malaysia,2020-02-15,22,0,7,Asia,MYS
 Nepal,2020-02-15,1,0,1,Asia,NPL
@@ -607,7 +607,7 @@ Hong Kong SAR China,2020-02-16,57,1,2,Asia,HKG
 India,2020-02-16,3,0,3,Asia,IND
 Italy,2020-02-16,3,0,0,Europe,ITA
 Japan,2020-02-16,59,1,12,Asia,JPN
-Macau SAR China,2020-02-16,10,0,5,Asia,MAC
+Macao SAR China,2020-02-16,10,0,5,Asia,MAC
 China,2020-02-16,70446,1765,10748,Asia,CHN
 Malaysia,2020-02-16,22,0,7,Asia,MYS
 Nepal,2020-02-16,1,0,1,Asia,NPL
@@ -637,7 +637,7 @@ Hong Kong SAR China,2020-02-17,60,1,2,Asia,HKG
 India,2020-02-17,3,0,3,Asia,IND
 Italy,2020-02-17,3,0,0,Europe,ITA
 Japan,2020-02-17,66,1,12,Asia,JPN
-Macau SAR China,2020-02-17,10,0,5,Asia,MAC
+Macao SAR China,2020-02-17,10,0,5,Asia,MAC
 China,2020-02-17,72364,1863,12455,Asia,CHN
 Malaysia,2020-02-17,22,0,7,Asia,MYS
 Nepal,2020-02-17,1,0,1,Asia,NPL
@@ -667,7 +667,7 @@ Hong Kong SAR China,2020-02-18,62,1,2,Asia,HKG
 India,2020-02-18,3,0,3,Asia,IND
 Italy,2020-02-18,3,0,0,Europe,ITA
 Japan,2020-02-18,74,1,13,Asia,JPN
-Macau SAR China,2020-02-18,10,0,5,Asia,MAC
+Macao SAR China,2020-02-18,10,0,5,Asia,MAC
 China,2020-02-18,74139,2002,14199,Asia,CHN
 Malaysia,2020-02-18,22,0,13,Asia,MYS
 Nepal,2020-02-18,1,0,1,Asia,NPL
@@ -698,7 +698,7 @@ India,2020-02-19,3,0,3,Asia,IND
 Iran,2020-02-19,2,2,0,Asia,IRN
 Italy,2020-02-19,3,0,0,Europe,ITA
 Japan,2020-02-19,84,1,18,Asia,JPN
-Macau SAR China,2020-02-19,10,0,5,Asia,MAC
+Macao SAR China,2020-02-19,10,0,5,Asia,MAC
 China,2020-02-19,74546,2114,15952,Asia,CHN
 Malaysia,2020-02-19,22,0,15,Asia,MYS
 Nepal,2020-02-19,1,0,1,Asia,NPL
@@ -729,7 +729,7 @@ India,2020-02-20,3,0,3,Asia,IND
 Iran,2020-02-20,5,2,0,Asia,IRN
 Italy,2020-02-20,3,0,0,Europe,ITA
 Japan,2020-02-20,94,1,18,Asia,JPN
-Macau SAR China,2020-02-20,10,0,6,Asia,MAC
+Macao SAR China,2020-02-20,10,0,6,Asia,MAC
 China,2020-02-20,74999,2236,18002,Asia,CHN
 Malaysia,2020-02-20,22,0,15,Asia,MYS
 Nepal,2020-02-20,1,0,1,Asia,NPL
@@ -762,7 +762,7 @@ Israel,2020-02-21,1,0,0,Asia,ISR
 Italy,2020-02-21,20,1,0,Europe,ITA
 Japan,2020-02-21,105,1,22,Asia,JPN
 Lebanon,2020-02-21,1,0,0,Asia,LBN
-Macau SAR China,2020-02-21,10,0,6,Asia,MAC
+Macao SAR China,2020-02-21,10,0,6,Asia,MAC
 China,2020-02-21,75472,2236,18693,Asia,CHN
 Malaysia,2020-02-21,22,0,15,Asia,MYS
 Nepal,2020-02-21,1,0,1,Asia,NPL
@@ -795,7 +795,7 @@ Israel,2020-02-22,1,0,0,Asia,ISR
 Italy,2020-02-22,62,2,1,Europe,ITA
 Japan,2020-02-22,122,1,22,Asia,JPN
 Lebanon,2020-02-22,1,0,0,Asia,LBN
-Macau SAR China,2020-02-22,10,0,6,Asia,MAC
+Macao SAR China,2020-02-22,10,0,6,Asia,MAC
 China,2020-02-22,76922,2441,22687,Asia,CHN
 Malaysia,2020-02-22,22,0,15,Asia,MYS
 Nepal,2020-02-22,1,0,1,Asia,NPL
@@ -829,7 +829,7 @@ Israel,2020-02-23,1,0,0,Asia,ISR
 Italy,2020-02-23,155,3,2,Europe,ITA
 Japan,2020-02-23,147,1,22,Asia,JPN
 Lebanon,2020-02-23,1,0,0,Asia,LBN
-Macau SAR China,2020-02-23,10,0,6,Asia,MAC
+Macao SAR China,2020-02-23,10,0,6,Asia,MAC
 China,2020-02-23,76938,2443,23170,Asia,CHN
 Malaysia,2020-02-23,22,0,15,Asia,MYS
 Nepal,2020-02-23,1,0,1,Asia,NPL
@@ -866,7 +866,7 @@ Italy,2020-02-24,229,7,1,Europe,ITA
 Japan,2020-02-24,159,1,22,Asia,JPN
 Kuwait,2020-02-24,1,0,0,Asia,KWT
 Lebanon,2020-02-24,1,0,0,Asia,LBN
-Macau SAR China,2020-02-24,10,0,6,Asia,MAC
+Macao SAR China,2020-02-24,10,0,6,Asia,MAC
 China,2020-02-24,77152,2593,24990,Asia,CHN
 Malaysia,2020-02-24,22,0,18,Asia,MYS
 Nepal,2020-02-24,1,0,1,Asia,NPL
@@ -907,7 +907,7 @@ Italy,2020-02-25,322,10,1,Europe,ITA
 Japan,2020-02-25,170,1,22,Asia,JPN
 Kuwait,2020-02-25,11,0,0,Asia,KWT
 Lebanon,2020-02-25,1,0,0,Asia,LBN
-Macau SAR China,2020-02-25,10,0,7,Asia,MAC
+Macao SAR China,2020-02-25,10,0,7,Asia,MAC
 China,2020-02-25,77660,2663,27650,Asia,CHN
 Malaysia,2020-02-25,22,0,18,Asia,MYS
 Nepal,2020-02-25,1,0,1,Asia,NPL
@@ -952,11 +952,11 @@ Italy,2020-02-26,453,12,3,Europe,ITA
 Japan,2020-02-26,189,2,22,Asia,JPN
 Kuwait,2020-02-26,26,0,0,Asia,KWT
 Lebanon,2020-02-26,2,0,0,Asia,LBN
-Macau SAR China,2020-02-26,10,0,7,Asia,MAC
+Macao SAR China,2020-02-26,10,0,7,Asia,MAC
 China,2020-02-26,78065,2715,30053,Asia,CHN
 Malaysia,2020-02-26,22,0,18,Asia,MYS
 Nepal,2020-02-26,1,0,1,Asia,NPL
-Macedonia,2020-02-26,1,0,0,Europe,MKD
+North Macedonia,2020-02-26,1,0,0,Europe,MKD
 Norway,2020-02-26,1,0,0,Europe,NOR
 Oman,2020-02-26,4,0,0,Asia,OMN
 Others,2020-02-26,705,4,10,Outro,NA
@@ -1003,12 +1003,12 @@ Italy,2020-02-27,655,17,45,Europe,ITA
 Japan,2020-02-27,214,4,22,Asia,JPN
 Kuwait,2020-02-27,43,0,0,Asia,KWT
 Lebanon,2020-02-27,2,0,0,Asia,LBN
-Macau SAR China,2020-02-27,10,0,8,Asia,MAC
+Macao SAR China,2020-02-27,10,0,8,Asia,MAC
 China,2020-02-27,78498,2744,32898,Asia,CHN
 Malaysia,2020-02-27,23,0,18,Asia,MYS
 Nepal,2020-02-27,1,0,1,Asia,NPL
 Netherlands,2020-02-27,1,0,0,Europe,NLD
-Macedonia,2020-02-27,1,0,0,Europe,MKD
+North Macedonia,2020-02-27,1,0,0,Europe,MKD
 Norway,2020-02-27,1,0,0,Europe,NOR
 Oman,2020-02-27,4,0,0,Asia,OMN
 Others,2020-02-27,705,4,10,Outro,NA
@@ -1060,7 +1060,7 @@ Japan,2020-02-28,228,4,22,Asia,JPN
 Kuwait,2020-02-28,45,0,0,Asia,KWT
 Lebanon,2020-02-28,2,0,0,Asia,LBN
 Lithuania,2020-02-28,1,0,0,Europe,LTU
-Macau SAR China,2020-02-28,10,0,8,Asia,MAC
+Macao SAR China,2020-02-28,10,0,8,Asia,MAC
 China,2020-02-28,78824,2788,36291,Asia,CHN
 Malaysia,2020-02-28,23,0,18,Asia,MYS
 Mexico,2020-02-28,1,0,0,Americas,MEX
@@ -1069,7 +1069,7 @@ Netherlands,2020-02-28,1,0,0,Europe,NLD
 New Zealand,2020-02-28,1,0,0,Oceania,NZL
 Nigeria,2020-02-28,1,0,0,Africa,NGA
 North Ireland,2020-02-28,1,0,0,Outro,NA
-Macedonia,2020-02-28,1,0,0,Europe,MKD
+North Macedonia,2020-02-28,1,0,0,Europe,MKD
 Norway,2020-02-28,6,0,0,Europe,NOR
 Oman,2020-02-28,4,0,0,Asia,OMN
 Others,2020-02-28,705,6,10,Outro,NA
@@ -1122,7 +1122,7 @@ Kuwait,2020-02-29,45,0,0,Asia,KWT
 Lebanon,2020-02-29,4,0,0,Asia,LBN
 Lithuania,2020-02-29,1,0,0,Europe,LTU
 Luxembourg,2020-02-29,1,0,0,Europe,LUX
-Macau SAR China,2020-02-29,10,0,8,Asia,MAC
+Macao SAR China,2020-02-29,10,0,8,Asia,MAC
 China,2020-02-29,79251,2835,39279,Asia,CHN
 Malaysia,2020-02-29,25,0,18,Asia,MYS
 Mexico,2020-02-29,4,0,0,Americas,MEX
@@ -1131,7 +1131,7 @@ Nepal,2020-02-29,1,0,1,Asia,NPL
 Netherlands,2020-02-29,6,0,0,Europe,NLD
 New Zealand,2020-02-29,1,0,0,Oceania,NZL
 Nigeria,2020-02-29,1,0,0,Africa,NGA
-Macedonia,2020-02-29,1,0,0,Europe,MKD
+North Macedonia,2020-02-29,1,0,0,Europe,MKD
 Norway,2020-02-29,15,0,0,Europe,NOR
 Oman,2020-02-29,6,0,1,Asia,OMN
 Others,2020-02-29,705,6,10,Outro,NA
@@ -1190,7 +1190,7 @@ Kuwait,2020-03-01,45,0,0,Asia,KWT
 Lebanon,2020-03-01,10,0,0,Asia,LBN
 Lithuania,2020-03-01,1,0,0,Europe,LTU
 Luxembourg,2020-03-01,1,0,0,Europe,LUX
-Macau SAR China,2020-03-01,10,0,8,Asia,MAC
+Macao SAR China,2020-03-01,10,0,8,Asia,MAC
 China,2020-03-01,79826,2870,42118,Asia,CHN
 Malaysia,2020-03-01,29,0,18,Asia,MYS
 Mexico,2020-03-01,5,0,0,Americas,MEX
@@ -1199,7 +1199,7 @@ Nepal,2020-03-01,1,0,1,Asia,NPL
 Netherlands,2020-03-01,10,0,0,Europe,NLD
 New Zealand,2020-03-01,1,0,0,Oceania,NZL
 Nigeria,2020-03-01,1,0,0,Africa,NGA
-Macedonia,2020-03-01,1,0,0,Europe,MKD
+North Macedonia,2020-03-01,1,0,0,Europe,MKD
 Norway,2020-03-01,19,0,0,Europe,NOR
 Oman,2020-03-01,6,0,1,Asia,OMN
 Others,2020-03-01,705,6,10,Outro,NA
@@ -1261,7 +1261,7 @@ Latvia,2020-03-02,1,0,0,Europe,LVA
 Lebanon,2020-03-02,13,0,0,Asia,LBN
 Lithuania,2020-03-02,1,0,0,Europe,LTU
 Luxembourg,2020-03-02,1,0,0,Europe,LUX
-Macau SAR China,2020-03-02,10,0,8,Asia,MAC
+Macao SAR China,2020-03-02,10,0,8,Asia,MAC
 China,2020-03-02,80026,2912,44810,Asia,CHN
 Malaysia,2020-03-02,29,0,18,Asia,MYS
 Mexico,2020-03-02,5,0,0,Americas,MEX
@@ -1271,7 +1271,7 @@ Nepal,2020-03-02,1,0,1,Asia,NPL
 Netherlands,2020-03-02,18,0,0,Europe,NLD
 New Zealand,2020-03-02,1,0,0,Oceania,NZL
 Nigeria,2020-03-02,1,0,0,Africa,NGA
-Macedonia,2020-03-02,1,0,0,Europe,MKD
+North Macedonia,2020-03-02,1,0,0,Europe,MKD
 Norway,2020-03-02,25,0,0,Europe,NOR
 Oman,2020-03-02,6,0,1,Asia,OMN
 Others,2020-03-02,705,6,10,Outro,NA
@@ -1339,7 +1339,7 @@ Latvia,2020-03-03,1,0,0,Europe,LVA
 Lebanon,2020-03-03,13,0,0,Asia,LBN
 Lithuania,2020-03-03,1,0,0,Europe,LTU
 Luxembourg,2020-03-03,1,0,0,Europe,LUX
-Macau SAR China,2020-03-03,10,0,9,Asia,MAC
+Macao SAR China,2020-03-03,10,0,9,Asia,MAC
 China,2020-03-03,80151,2945,47404,Asia,CHN
 Malaysia,2020-03-03,36,0,22,Asia,MYS
 Mexico,2020-03-03,5,0,1,Americas,MEX
@@ -1349,7 +1349,7 @@ Nepal,2020-03-03,1,0,1,Asia,NPL
 Netherlands,2020-03-03,24,0,0,Europe,NLD
 New Zealand,2020-03-03,1,0,0,Oceania,NZL
 Nigeria,2020-03-03,1,0,0,Africa,NGA
-Macedonia,2020-03-03,1,0,0,Europe,MKD
+North Macedonia,2020-03-03,1,0,0,Europe,MKD
 Norway,2020-03-03,32,0,0,Europe,NOR
 Oman,2020-03-03,12,0,2,Asia,OMN
 Others,2020-03-03,706,6,10,Outro,NA
@@ -1422,7 +1422,7 @@ Lebanon,2020-03-04,13,0,1,Asia,LBN
 Liechtenstein,2020-03-04,1,0,0,Europe,LIE
 Lithuania,2020-03-04,1,0,0,Europe,LTU
 Luxembourg,2020-03-04,1,0,0,Europe,LUX
-Macau SAR China,2020-03-04,10,0,9,Asia,MAC
+Macao SAR China,2020-03-04,10,0,9,Asia,MAC
 China,2020-03-04,80271,2981,49955,Asia,CHN
 Malaysia,2020-03-04,50,0,22,Asia,MYS
 Mexico,2020-03-04,5,0,1,Americas,MEX
@@ -1432,7 +1432,7 @@ Nepal,2020-03-04,1,0,1,Asia,NPL
 Netherlands,2020-03-04,38,0,0,Europe,NLD
 New Zealand,2020-03-04,3,0,0,Oceania,NZL
 Nigeria,2020-03-04,1,0,0,Africa,NGA
-Macedonia,2020-03-04,1,0,0,Europe,MKD
+North Macedonia,2020-03-04,1,0,0,Europe,MKD
 Norway,2020-03-04,56,0,0,Europe,NOR
 Oman,2020-03-04,15,0,2,Asia,OMN
 Others,2020-03-04,706,6,10,Outro,NA
@@ -1509,7 +1509,7 @@ Lebanon,2020-03-05,16,0,1,Asia,LBN
 Liechtenstein,2020-03-05,1,0,0,Europe,LIE
 Lithuania,2020-03-05,1,0,0,Europe,LTU
 Luxembourg,2020-03-05,1,0,0,Europe,LUX
-Macau SAR China,2020-03-05,10,0,9,Asia,MAC
+Macao SAR China,2020-03-05,10,0,9,Asia,MAC
 China,2020-03-05,80422,3013,52240,Asia,CHN
 Malaysia,2020-03-05,50,0,22,Asia,MYS
 Mexico,2020-03-05,5,0,1,Americas,MEX
@@ -1519,7 +1519,7 @@ Nepal,2020-03-05,1,0,1,Asia,NPL
 Netherlands,2020-03-05,82,0,0,Europe,NLD
 New Zealand,2020-03-05,3,0,0,Oceania,NZL
 Nigeria,2020-03-05,1,0,0,Africa,NGA
-Macedonia,2020-03-05,1,0,0,Europe,MKD
+North Macedonia,2020-03-05,1,0,0,Europe,MKD
 Norway,2020-03-05,87,0,0,Europe,NOR
 Oman,2020-03-05,16,0,2,Asia,OMN
 Others,2020-03-05,706,6,10,Outro,NA
@@ -1603,7 +1603,7 @@ Lebanon,2020-03-06,22,0,1,Asia,LBN
 Liechtenstein,2020-03-06,1,0,0,Europe,LIE
 Lithuania,2020-03-06,1,0,0,Europe,LTU
 Luxembourg,2020-03-06,2,0,0,Europe,LUX
-Macau SAR China,2020-03-06,10,0,10,Asia,MAC
+Macao SAR China,2020-03-06,10,0,10,Asia,MAC
 China,2020-03-06,80573,3042,53888,Asia,CHN
 Malaysia,2020-03-06,83,0,22,Asia,MYS
 Mexico,2020-03-06,6,0,1,Americas,MEX
@@ -1613,7 +1613,7 @@ Nepal,2020-03-06,1,0,1,Asia,NPL
 Netherlands,2020-03-06,128,1,0,Europe,NLD
 New Zealand,2020-03-06,4,0,0,Oceania,NZL
 Nigeria,2020-03-06,1,0,0,Africa,NGA
-Macedonia,2020-03-06,3,0,0,Europe,MKD
+North Macedonia,2020-03-06,3,0,0,Europe,MKD
 Norway,2020-03-06,108,0,0,Europe,NOR
 Oman,2020-03-06,16,0,2,Asia,OMN
 Others,2020-03-06,696,6,40,Outro,NA
@@ -1703,7 +1703,7 @@ Lebanon,2020-03-07,22,0,1,Asia,LBN
 Liechtenstein,2020-03-07,1,0,0,Europe,LIE
 Lithuania,2020-03-07,1,0,0,Europe,LTU
 Luxembourg,2020-03-07,2,0,0,Europe,LUX
-Macau SAR China,2020-03-07,10,0,10,Asia,MAC
+Macao SAR China,2020-03-07,10,0,10,Asia,MAC
 China,2020-03-07,80652,3070,55478,Asia,CHN
 Malaysia,2020-03-07,93,0,23,Asia,MYS
 Malta,2020-03-07,3,0,0,Europe,MLT
@@ -1715,7 +1715,7 @@ Nepal,2020-03-07,1,0,1,Asia,NPL
 Netherlands,2020-03-07,188,1,0,Europe,NLD
 New Zealand,2020-03-07,5,0,0,Oceania,NZL
 Nigeria,2020-03-07,1,0,0,Africa,NGA
-Macedonia,2020-03-07,3,0,0,Europe,MKD
+North Macedonia,2020-03-07,3,0,0,Europe,MKD
 Norway,2020-03-07,147,0,0,Europe,NOR
 Oman,2020-03-07,16,0,2,Asia,OMN
 Others,2020-03-07,696,6,40,Outro,NA
@@ -1807,7 +1807,7 @@ Lebanon,2020-03-08,32,0,1,Asia,LBN
 Liechtenstein,2020-03-08,1,0,0,Europe,LIE
 Lithuania,2020-03-08,1,0,0,Europe,LTU
 Luxembourg,2020-03-08,3,0,0,Europe,LUX
-Macau SAR China,2020-03-08,10,0,10,Asia,MAC
+Macao SAR China,2020-03-08,10,0,10,Asia,MAC
 China,2020-03-08,80699,3097,57320,Asia,CHN
 Malaysia,2020-03-08,99,0,24,Asia,MYS
 Maldives,2020-03-08,4,0,0,Asia,MDV
@@ -1821,7 +1821,7 @@ Nepal,2020-03-08,1,0,1,Asia,NPL
 Netherlands,2020-03-08,265,3,0,Europe,NLD
 New Zealand,2020-03-08,5,0,0,Oceania,NZL
 Nigeria,2020-03-08,1,0,0,Africa,NGA
-Macedonia,2020-03-08,3,0,0,Europe,MKD
+North Macedonia,2020-03-08,3,0,0,Europe,MKD
 Norway,2020-03-08,176,0,0,Europe,NOR
 Oman,2020-03-08,16,0,2,Asia,OMN
 Others,2020-03-08,696,6,40,Outro,NA
@@ -1918,7 +1918,7 @@ Lebanon,2020-03-09,32,0,1,Asia,LBN
 Liechtenstein,2020-03-09,1,0,0,Europe,LIE
 Lithuania,2020-03-09,1,0,0,Europe,LTU
 Luxembourg,2020-03-09,3,0,0,Europe,LUX
-Macau SAR China,2020-03-09,10,0,10,Asia,MAC
+Macao SAR China,2020-03-09,10,0,10,Asia,MAC
 China,2020-03-09,80735,3120,58735,Asia,CHN
 Malaysia,2020-03-09,117,0,24,Asia,MYS
 Maldives,2020-03-09,4,0,0,Asia,MDV
@@ -1932,7 +1932,7 @@ Nepal,2020-03-09,1,0,1,Asia,NPL
 Netherlands,2020-03-09,321,3,0,Europe,NLD
 New Zealand,2020-03-09,5,0,0,Oceania,NZL
 Nigeria,2020-03-09,2,0,0,Africa,NGA
-Macedonia,2020-03-09,3,0,0,Europe,MKD
+North Macedonia,2020-03-09,3,0,0,Europe,MKD
 Norway,2020-03-09,205,0,1,Europe,NOR
 Oman,2020-03-09,16,0,2,Asia,OMN
 Others,2020-03-09,696,6,40,Outro,NA
@@ -2032,7 +2032,7 @@ Lebanon,2020-03-10,41,1,1,Asia,LBN
 Liechtenstein,2020-03-10,1,0,0,Europe,LIE
 Lithuania,2020-03-10,1,0,0,Europe,LTU
 Luxembourg,2020-03-10,5,0,0,Europe,LUX
-Macau SAR China,2020-03-10,10,0,10,Asia,MAC
+Macao SAR China,2020-03-10,10,0,10,Asia,MAC
 China,2020-03-10,80757,3136,60106,Asia,CHN
 Malaysia,2020-03-10,129,0,24,Asia,MYS
 Maldives,2020-03-10,6,0,0,Asia,MDV
@@ -2046,7 +2046,7 @@ Nepal,2020-03-10,1,0,1,Asia,NPL
 Netherlands,2020-03-10,382,4,0,Europe,NLD
 New Zealand,2020-03-10,5,0,0,Oceania,NZL
 Nigeria,2020-03-10,2,0,0,Africa,NGA
-Macedonia,2020-03-10,7,0,0,Europe,MKD
+North Macedonia,2020-03-10,7,0,0,Europe,MKD
 Norway,2020-03-10,400,0,1,Europe,NOR
 Palestinian Territories,2020-03-10,25,0,0,Asia,PSE
 Oman,2020-03-10,18,0,9,Asia,OMN
@@ -2165,7 +2165,7 @@ Nepal,2020-03-11,1,0,1,Asia,NPL
 Netherlands,2020-03-11,503,5,0,Europe,NLD
 New Zealand,2020-03-11,5,0,0,Oceania,NZL
 Nigeria,2020-03-11,2,0,0,Africa,NGA
-Macedonia,2020-03-11,7,0,0,Europe,MKD
+North Macedonia,2020-03-11,7,0,0,Europe,MKD
 Norway,2020-03-11,598,0,1,Europe,NOR
 Palestinian Territories,2020-03-11,0,0,0,Asia,PSE
 Oman,2020-03-11,18,0,9,Asia,OMN
@@ -2283,7 +2283,7 @@ Nepal,2020-03-12,1,0,1,Asia,NPL
 Netherlands,2020-03-12,503,5,0,Europe,NLD
 New Zealand,2020-03-12,5,0,0,Oceania,NZL
 Nigeria,2020-03-12,2,0,0,Africa,NGA
-Macedonia,2020-03-12,7,0,0,Europe,MKD
+North Macedonia,2020-03-12,7,0,0,Europe,MKD
 Norway,2020-03-12,702,0,1,Europe,NOR
 Palestinian Territories,2020-03-12,0,0,0,Asia,PSE
 Oman,2020-03-12,18,0,9,Asia,OMN
@@ -2408,7 +2408,7 @@ Nepal,2020-03-13,1,0,1,Asia,NPL
 Netherlands,2020-03-13,804,10,0,Europe,NLD
 New Zealand,2020-03-13,5,0,0,Oceania,NZL
 Nigeria,2020-03-13,2,0,0,Africa,NGA
-Macedonia,2020-03-13,14,0,1,Europe,MKD
+North Macedonia,2020-03-13,14,0,1,Europe,MKD
 Norway,2020-03-13,996,0,1,Europe,NOR
 Oman,2020-03-13,19,0,9,Asia,OMN
 Pakistan,2020-03-13,28,0,2,Asia,PAK
@@ -2488,7 +2488,7 @@ Dominican Republic,2020-03-14,11,0,0,Americas,DOM
 Ecuador,2020-03-14,28,2,0,Americas,ECU
 Egypt,2020-03-14,109,2,27,Africa,EGY
 Estonia,2020-03-14,115,0,0,Europe,EST
-Swaziland,2020-03-14,1,0,0,Africa,SWZ
+Eswatini,2020-03-14,1,0,0,Africa,SWZ
 Ethiopia,2020-03-14,1,0,0,Africa,ETH
 Finland,2020-03-14,225,0,1,Europe,FIN
 France,2020-03-14,4480,91,12,Europe,FRA
@@ -2542,7 +2542,7 @@ Nepal,2020-03-14,1,0,1,Asia,NPL
 Netherlands,2020-03-14,959,12,2,Europe,NLD
 New Zealand,2020-03-14,6,0,0,Oceania,NZL
 Nigeria,2020-03-14,2,0,0,Africa,NGA
-Macedonia,2020-03-14,14,0,1,Europe,MKD
+North Macedonia,2020-03-14,14,0,1,Europe,MKD
 Norway,2020-03-14,1090,3,1,Europe,NOR
 Palestinian Territories,2020-03-14,0,0,0,Asia,PSE
 Oman,2020-03-14,19,0,9,Asia,OMN
@@ -2634,7 +2634,7 @@ Ecuador,2020-03-15,28,2,0,Americas,ECU
 Egypt,2020-03-15,110,2,21,Africa,EGY
 Equatorial Guinea,2020-03-15,1,0,0,Africa,GNQ
 Estonia,2020-03-15,171,0,1,Europe,EST
-Swaziland,2020-03-15,1,0,0,Africa,SWZ
+Eswatini,2020-03-15,1,0,0,Africa,SWZ
 Ethiopia,2020-03-15,1,0,0,Africa,ETH
 Finland,2020-03-15,244,0,10,Europe,FIN
 France,2020-03-15,4513,91,12,Europe,FRA
@@ -2688,7 +2688,7 @@ Nepal,2020-03-15,1,0,1,Asia,NPL
 Netherlands,2020-03-15,1135,20,2,Europe,NLD
 New Zealand,2020-03-15,8,0,0,Oceania,NZL
 Nigeria,2020-03-15,2,0,0,Africa,NGA
-Macedonia,2020-03-15,14,0,1,Europe,MKD
+North Macedonia,2020-03-15,14,0,1,Europe,MKD
 Norway,2020-03-15,1221,3,1,Europe,NOR
 Palestinian Territories,2020-03-15,0,0,0,Asia,PSE
 Oman,2020-03-15,22,0,9,Asia,OMN
@@ -2780,7 +2780,7 @@ Ecuador,2020-03-16,37,2,0,Americas,ECU
 Egypt,2020-03-16,150,2,27,Africa,EGY
 Equatorial Guinea,2020-03-16,1,0,0,Africa,GNQ
 Estonia,2020-03-16,205,0,1,Europe,EST
-Swaziland,2020-03-16,1,0,0,Africa,SWZ
+Eswatini,2020-03-16,1,0,0,Africa,SWZ
 Ethiopia,2020-03-16,5,0,0,Africa,ETH
 Finland,2020-03-16,277,0,10,Europe,FIN
 France,2020-03-16,6650,148,12,Europe,FRA
@@ -2839,7 +2839,7 @@ Nepal,2020-03-16,1,0,1,Asia,NPL
 Netherlands,2020-03-16,1414,24,2,Europe,NLD
 New Zealand,2020-03-16,8,0,0,Oceania,NZL
 Nigeria,2020-03-16,2,0,0,Africa,NGA
-Macedonia,2020-03-16,18,0,1,Europe,MKD
+North Macedonia,2020-03-16,18,0,1,Europe,MKD
 Norway,2020-03-16,1333,3,1,Europe,NOR
 Palestinian Territories,2020-03-16,0,0,0,Asia,PSE
 Oman,2020-03-16,22,0,9,Asia,OMN
@@ -2937,7 +2937,7 @@ Ecuador,2020-03-17,58,2,0,Americas,ECU
 Egypt,2020-03-17,196,4,32,Africa,EGY
 Equatorial Guinea,2020-03-17,1,0,0,Africa,GNQ
 Estonia,2020-03-17,225,0,1,Europe,EST
-Swaziland,2020-03-17,1,0,0,Africa,SWZ
+Eswatini,2020-03-17,1,0,0,Africa,SWZ
 Ethiopia,2020-03-17,5,0,0,Africa,ETH
 Finland,2020-03-17,321,0,10,Europe,FIN
 France,2020-03-17,7683,148,12,Europe,FRA
@@ -2997,7 +2997,7 @@ Nepal,2020-03-17,1,0,1,Asia,NPL
 Netherlands,2020-03-17,1708,43,2,Europe,NLD
 New Zealand,2020-03-17,12,0,0,Oceania,NZL
 Nigeria,2020-03-17,3,0,0,Africa,NGA
-Macedonia,2020-03-17,26,0,1,Europe,MKD
+North Macedonia,2020-03-17,26,0,1,Europe,MKD
 Norway,2020-03-17,1463,3,1,Europe,NOR
 Palestinian Territories,2020-03-17,0,0,0,Asia,PSE
 Oman,2020-03-17,24,0,9,Asia,OMN
@@ -3097,7 +3097,7 @@ Ecuador,2020-03-18,111,2,0,Americas,ECU
 Egypt,2020-03-18,196,6,32,Africa,EGY
 Equatorial Guinea,2020-03-18,4,0,0,Africa,GNQ
 Estonia,2020-03-18,258,0,1,Europe,EST
-Swaziland,2020-03-18,1,0,0,Africa,SWZ
+Eswatini,2020-03-18,1,0,0,Africa,SWZ
 Ethiopia,2020-03-18,6,0,0,Africa,ETH
 Finland,2020-03-18,336,0,10,Europe,FIN
 France,2020-03-18,9052,148,12,Europe,FRA
@@ -3160,7 +3160,7 @@ Nepal,2020-03-18,1,0,1,Asia,NPL
 Netherlands,2020-03-18,2056,58,2,Europe,NLD
 New Zealand,2020-03-18,20,0,0,Oceania,NZL
 Nigeria,2020-03-18,8,0,1,Africa,NGA
-Macedonia,2020-03-18,35,0,1,Europe,MKD
+North Macedonia,2020-03-18,35,0,1,Europe,MKD
 Norway,2020-03-18,1550,6,1,Europe,NOR
 Oman,2020-03-18,39,0,12,Asia,OMN
 Pakistan,2020-03-18,299,0,2,Asia,PAK
@@ -3263,7 +3263,7 @@ Egypt,2020-03-19,256,6,32,Africa,EGY
 El Salvador,2020-03-19,1,0,0,Americas,SLV
 Equatorial Guinea,2020-03-19,6,0,0,Africa,GNQ
 Estonia,2020-03-19,267,0,1,Europe,EST
-Swaziland,2020-03-19,1,0,0,Africa,SWZ
+Eswatini,2020-03-19,1,0,0,Africa,SWZ
 Ethiopia,2020-03-19,6,0,0,Africa,ETH
 Fiji,2020-03-19,1,0,0,Oceania,FJI
 Finland,2020-03-19,400,0,10,Europe,FIN
@@ -3328,7 +3328,7 @@ Netherlands,2020-03-19,2465,77,2,Europe,NLD
 New Zealand,2020-03-19,28,0,0,Oceania,NZL
 Nicaragua,2020-03-19,1,0,0,Americas,NIC
 Nigeria,2020-03-19,8,0,1,Africa,NGA
-Macedonia,2020-03-19,48,0,1,Europe,MKD
+North Macedonia,2020-03-19,48,0,1,Europe,MKD
 Norway,2020-03-19,1746,7,1,Europe,NOR
 Oman,2020-03-19,48,0,12,Asia,OMN
 Pakistan,2020-03-19,454,2,13,Asia,PAK
@@ -3432,7 +3432,7 @@ Egypt,2020-03-20,285,8,39,Africa,EGY
 El Salvador,2020-03-20,1,0,0,Americas,SLV
 Equatorial Guinea,2020-03-20,6,0,0,Africa,GNQ
 Estonia,2020-03-20,283,0,1,Europe,EST
-Swaziland,2020-03-20,1,0,0,Africa,SWZ
+Eswatini,2020-03-20,1,0,0,Africa,SWZ
 Ethiopia,2020-03-20,9,0,0,Africa,ETH
 Fiji,2020-03-20,1,0,0,Oceania,FJI
 Finland,2020-03-20,450,0,10,Europe,FIN
@@ -3500,7 +3500,7 @@ New Zealand,2020-03-20,39,0,0,Oceania,NZL
 Nicaragua,2020-03-20,1,0,0,Americas,NIC
 Niger,2020-03-20,1,0,0,Africa,NER
 Nigeria,2020-03-20,12,0,1,Africa,NGA
-Macedonia,2020-03-20,67,0,1,Europe,MKD
+North Macedonia,2020-03-20,67,0,1,Europe,MKD
 Norway,2020-03-20,1914,7,1,Europe,NOR
 Oman,2020-03-20,48,0,12,Asia,OMN
 Pakistan,2020-03-20,501,3,13,Asia,PAK
@@ -3609,7 +3609,7 @@ El Salvador,2020-03-21,3,0,0,Americas,SLV
 Equatorial Guinea,2020-03-21,6,0,0,Africa,GNQ
 Eritrea,2020-03-21,1,0,0,Africa,ERI
 Estonia,2020-03-21,306,0,1,Europe,EST
-Swaziland,2020-03-21,1,0,0,Africa,SWZ
+Eswatini,2020-03-21,1,0,0,Africa,SWZ
 Ethiopia,2020-03-21,9,0,0,Africa,ETH
 Fiji,2020-03-21,1,0,0,Oceania,FJI
 Finland,2020-03-21,523,1,10,Europe,FIN
@@ -3677,7 +3677,7 @@ New Zealand,2020-03-21,52,0,0,Oceania,NZL
 Nicaragua,2020-03-21,2,0,0,Americas,NIC
 Niger,2020-03-21,1,0,0,Africa,NER
 Nigeria,2020-03-21,22,0,1,Africa,NGA
-Macedonia,2020-03-21,85,0,1,Europe,MKD
+North Macedonia,2020-03-21,85,0,1,Europe,MKD
 Norway,2020-03-21,2118,7,1,Europe,NOR
 Oman,2020-03-21,52,0,12,Asia,OMN
 Pakistan,2020-03-21,730,3,13,Asia,PAK
@@ -3786,7 +3786,7 @@ El Salvador,2020-03-22,3,0,0,Americas,SLV
 Equatorial Guinea,2020-03-22,6,0,0,Africa,GNQ
 Eritrea,2020-03-22,1,0,0,Africa,ERI
 Estonia,2020-03-22,326,0,4,Europe,EST
-Swaziland,2020-03-22,4,0,0,Africa,SWZ
+Eswatini,2020-03-22,4,0,0,Africa,SWZ
 Ethiopia,2020-03-22,11,0,0,Africa,ETH
 Fiji,2020-03-22,2,0,0,Oceania,FJI
 Finland,2020-03-22,626,1,10,Europe,FIN
@@ -3847,7 +3847,7 @@ New Zealand,2020-03-22,102,0,0,Oceania,NZL
 Nicaragua,2020-03-22,2,0,0,Americas,NIC
 Niger,2020-03-22,2,0,0,Africa,NER
 Nigeria,2020-03-22,30,0,2,Africa,NGA
-Macedonia,2020-03-22,115,1,1,Europe,MKD
+North Macedonia,2020-03-22,115,1,1,Europe,MKD
 Norway,2020-03-22,2263,7,6,Europe,NOR
 Oman,2020-03-22,55,0,17,Asia,OMN
 Pakistan,2020-03-22,776,4,13,Asia,PAK
@@ -3954,7 +3954,7 @@ El Salvador,2020-03-23,3,0,0,Americas,SLV
 Equatorial Guinea,2020-03-23,9,0,0,Africa,GNQ
 Eritrea,2020-03-23,1,0,0,Africa,ERI
 Estonia,2020-03-23,352,0,4,Europe,EST
-Swaziland,2020-03-23,4,0,0,Africa,SWZ
+Eswatini,2020-03-23,4,0,0,Africa,SWZ
 Ethiopia,2020-03-23,11,0,0,Africa,ETH
 Fiji,2020-03-23,3,0,0,Oceania,FJI
 Finland,2020-03-23,700,1,10,Europe,FIN
@@ -4015,7 +4015,7 @@ New Zealand,2020-03-23,102,0,0,Oceania,NZL
 Nicaragua,2020-03-23,2,0,0,Americas,NIC
 Niger,2020-03-23,3,0,0,Africa,NER
 Nigeria,2020-03-23,40,1,2,Africa,NGA
-Macedonia,2020-03-23,136,2,1,Europe,MKD
+North Macedonia,2020-03-23,136,2,1,Europe,MKD
 Norway,2020-03-23,2621,10,6,Europe,NOR
 Oman,2020-03-23,66,0,17,Asia,OMN
 Pakistan,2020-03-23,875,6,13,Asia,PAK
@@ -4121,7 +4121,7 @@ El Salvador,2020-03-24,5,0,0,Americas,SLV
 Equatorial Guinea,2020-03-24,9,0,0,Africa,GNQ
 Eritrea,2020-03-24,1,0,0,Africa,ERI
 Estonia,2020-03-24,369,0,7,Europe,EST
-Swaziland,2020-03-24,4,0,0,Africa,SWZ
+Eswatini,2020-03-24,4,0,0,Africa,SWZ
 Ethiopia,2020-03-24,12,0,0,Africa,ETH
 Fiji,2020-03-24,4,0,0,Oceania,FJI
 Finland,2020-03-24,792,1,10,Europe,FIN
@@ -4184,7 +4184,7 @@ New Zealand,2020-03-24,155,0,12,Oceania,NZL
 Nicaragua,2020-03-24,2,0,0,Americas,NIC
 Niger,2020-03-24,3,0,0,Africa,NER
 Nigeria,2020-03-24,44,1,2,Africa,NGA
-Macedonia,2020-03-24,148,2,1,Europe,MKD
+North Macedonia,2020-03-24,148,2,1,Europe,MKD
 Norway,2020-03-24,2863,12,6,Europe,NOR
 Oman,2020-03-24,84,0,17,Asia,OMN
 Pakistan,2020-03-24,972,7,18,Asia,PAK
@@ -4291,7 +4291,7 @@ El Salvador,2020-03-25,9,0,0,Americas,SLV
 Equatorial Guinea,2020-03-25,9,0,0,Africa,GNQ
 Eritrea,2020-03-25,4,0,0,Africa,ERI
 Estonia,2020-03-25,404,1,8,Europe,EST
-Swaziland,2020-03-25,4,0,0,Africa,SWZ
+Eswatini,2020-03-25,4,0,0,Africa,SWZ
 Ethiopia,2020-03-25,12,0,0,Africa,ETH
 Fiji,2020-03-25,5,0,0,Oceania,FJI
 Finland,2020-03-25,880,3,10,Europe,FIN
@@ -4356,7 +4356,7 @@ New Zealand,2020-03-25,205,0,22,Oceania,NZL
 Nicaragua,2020-03-25,2,0,0,Americas,NIC
 Niger,2020-03-25,7,1,0,Africa,NER
 Nigeria,2020-03-25,51,1,2,Africa,NGA
-Macedonia,2020-03-25,177,3,1,Europe,MKD
+North Macedonia,2020-03-25,177,3,1,Europe,MKD
 Norway,2020-03-25,3084,14,6,Europe,NOR
 Oman,2020-03-25,99,0,17,Asia,OMN
 Pakistan,2020-03-25,1063,8,21,Asia,PAK
@@ -4464,7 +4464,7 @@ El Salvador,2020-03-26,13,0,0,Americas,SLV
 Equatorial Guinea,2020-03-26,12,0,0,Africa,GNQ
 Eritrea,2020-03-26,6,0,0,Africa,ERI
 Estonia,2020-03-26,538,1,8,Europe,EST
-Swaziland,2020-03-26,6,0,0,Africa,SWZ
+Eswatini,2020-03-26,6,0,0,Africa,SWZ
 Ethiopia,2020-03-26,12,0,0,Africa,ETH
 Fiji,2020-03-26,5,0,0,Oceania,FJI
 Finland,2020-03-26,958,5,10,Europe,FIN
@@ -4530,7 +4530,7 @@ New Zealand,2020-03-26,283,0,27,Oceania,NZL
 Nicaragua,2020-03-26,2,0,0,Americas,NIC
 Niger,2020-03-26,10,1,0,Africa,NER
 Nigeria,2020-03-26,65,1,2,Africa,NGA
-Macedonia,2020-03-26,201,3,3,Europe,MKD
+North Macedonia,2020-03-26,201,3,3,Europe,MKD
 Norway,2020-03-26,3369,14,6,Europe,NOR
 Oman,2020-03-26,109,0,23,Asia,OMN
 Pakistan,2020-03-26,1201,9,21,Asia,PAK
@@ -4640,7 +4640,7 @@ El Salvador,2020-03-27,13,0,0,Americas,SLV
 Equatorial Guinea,2020-03-27,12,0,0,Africa,GNQ
 Eritrea,2020-03-27,6,0,0,Africa,ERI
 Estonia,2020-03-27,575,1,11,Europe,EST
-Swaziland,2020-03-27,9,0,0,Africa,SWZ
+Eswatini,2020-03-27,9,0,0,Africa,SWZ
 Ethiopia,2020-03-27,16,0,0,Africa,ETH
 Fiji,2020-03-27,5,0,0,Oceania,FJI
 Finland,2020-03-27,1041,7,10,Europe,FIN
@@ -4706,7 +4706,7 @@ New Zealand,2020-03-27,368,0,37,Oceania,NZL
 Nicaragua,2020-03-27,2,1,0,Americas,NIC
 Niger,2020-03-27,10,1,0,Africa,NER
 Nigeria,2020-03-27,70,1,3,Africa,NGA
-Macedonia,2020-03-27,219,3,3,Europe,MKD
+North Macedonia,2020-03-27,219,3,3,Europe,MKD
 Norway,2020-03-27,3755,19,6,Europe,NOR
 Oman,2020-03-27,131,0,23,Asia,OMN
 Pakistan,2020-03-27,1373,11,23,Asia,PAK
@@ -4816,7 +4816,7 @@ El Salvador,2020-03-28,19,0,0,Americas,SLV
 Equatorial Guinea,2020-03-28,12,0,0,Africa,GNQ
 Eritrea,2020-03-28,6,0,0,Africa,ERI
 Estonia,2020-03-28,645,1,20,Europe,EST
-Swaziland,2020-03-28,9,0,0,Africa,SWZ
+Eswatini,2020-03-28,9,0,0,Africa,SWZ
 Ethiopia,2020-03-28,16,0,1,Africa,ETH
 Fiji,2020-03-28,5,0,0,Oceania,FJI
 Finland,2020-03-28,1167,9,10,Europe,FIN
@@ -4883,7 +4883,7 @@ New Zealand,2020-03-28,451,0,50,Oceania,NZL
 Nicaragua,2020-03-28,4,1,0,Americas,NIC
 Niger,2020-03-28,10,1,0,Africa,NER
 Nigeria,2020-03-28,89,1,3,Africa,NGA
-Macedonia,2020-03-28,241,4,3,Europe,MKD
+North Macedonia,2020-03-28,241,4,3,Europe,MKD
 Norway,2020-03-28,4015,23,7,Europe,NOR
 Oman,2020-03-28,152,0,23,Asia,OMN
 Pakistan,2020-03-28,1495,12,29,Asia,PAK
@@ -4993,7 +4993,7 @@ El Salvador,2020-03-29,24,0,0,Americas,SLV
 Equatorial Guinea,2020-03-29,12,0,0,Africa,GNQ
 Eritrea,2020-03-29,12,0,0,Africa,ERI
 Estonia,2020-03-29,679,3,20,Europe,EST
-Swaziland,2020-03-29,9,0,0,Africa,SWZ
+Eswatini,2020-03-29,9,0,0,Africa,SWZ
 Ethiopia,2020-03-29,21,0,1,Africa,ETH
 Fiji,2020-03-29,5,0,0,Oceania,FJI
 Finland,2020-03-29,1240,11,10,Europe,FIN
@@ -5060,7 +5060,7 @@ New Zealand,2020-03-29,514,1,56,Oceania,NZL
 Nicaragua,2020-03-29,4,1,0,Americas,NIC
 Niger,2020-03-29,18,1,0,Africa,NER
 Nigeria,2020-03-29,111,1,3,Africa,NGA
-Macedonia,2020-03-29,259,6,3,Europe,MKD
+North Macedonia,2020-03-29,259,6,3,Europe,MKD
 Norway,2020-03-29,4284,25,7,Europe,NOR
 Oman,2020-03-29,167,0,23,Asia,OMN
 Pakistan,2020-03-29,1597,14,29,Asia,PAK
@@ -5171,7 +5171,7 @@ El Salvador,2020-03-30,30,0,0,Americas,SLV
 Equatorial Guinea,2020-03-30,12,0,0,Africa,GNQ
 Eritrea,2020-03-30,12,0,0,Africa,ERI
 Estonia,2020-03-30,715,3,20,Europe,EST
-Swaziland,2020-03-30,9,0,0,Africa,SWZ
+Eswatini,2020-03-30,9,0,0,Africa,SWZ
 Ethiopia,2020-03-30,23,0,4,Africa,ETH
 Fiji,2020-03-30,5,0,0,Oceania,FJI
 Finland,2020-03-30,1352,13,10,Europe,FIN
@@ -5238,7 +5238,7 @@ New Zealand,2020-03-30,589,1,63,Oceania,NZL
 Nicaragua,2020-03-30,4,1,0,Americas,NIC
 Niger,2020-03-30,27,3,0,Africa,NER
 Nigeria,2020-03-30,131,2,8,Africa,NGA
-Macedonia,2020-03-30,285,7,12,Europe,MKD
+North Macedonia,2020-03-30,285,7,12,Europe,MKD
 Norway,2020-03-30,4445,32,12,Europe,NOR
 Oman,2020-03-30,179,0,29,Asia,OMN
 Pakistan,2020-03-30,1717,21,76,Asia,PAK
@@ -5350,7 +5350,7 @@ El Salvador,2020-03-31,32,1,0,Americas,SLV
 Equatorial Guinea,2020-03-31,12,0,1,Africa,GNQ
 Eritrea,2020-03-31,15,0,0,Africa,ERI
 Estonia,2020-03-31,745,4,26,Europe,EST
-Swaziland,2020-03-31,9,0,0,Africa,SWZ
+Eswatini,2020-03-31,9,0,0,Africa,SWZ
 Ethiopia,2020-03-31,26,0,2,Africa,ETH
 Fiji,2020-03-31,5,0,0,Oceania,FJI
 Finland,2020-03-31,1418,17,10,Europe,FIN
@@ -5417,7 +5417,7 @@ New Zealand,2020-03-31,647,1,74,Oceania,NZL
 Nicaragua,2020-03-31,5,1,0,Americas,NIC
 Niger,2020-03-31,27,3,0,Africa,NER
 Nigeria,2020-03-31,135,2,8,Africa,NGA
-Macedonia,2020-03-31,329,9,12,Europe,MKD
+North Macedonia,2020-03-31,329,9,12,Europe,MKD
 Norway,2020-03-31,4641,39,13,Europe,NOR
 Oman,2020-03-31,192,1,34,Asia,OMN
 Pakistan,2020-03-31,1938,26,76,Asia,PAK
@@ -5530,7 +5530,7 @@ El Salvador,2020-04-01,32,1,0,Americas,SLV
 Equatorial Guinea,2020-04-01,15,0,1,Africa,GNQ
 Eritrea,2020-04-01,15,0,0,Africa,ERI
 Estonia,2020-04-01,779,5,33,Europe,EST
-Swaziland,2020-04-01,9,0,0,Africa,SWZ
+Eswatini,2020-04-01,9,0,0,Africa,SWZ
 Ethiopia,2020-04-01,29,0,2,Africa,ETH
 Fiji,2020-04-01,5,0,0,Oceania,FJI
 Finland,2020-04-01,1446,17,10,Europe,FIN
@@ -5597,7 +5597,7 @@ New Zealand,2020-04-01,708,1,83,Oceania,NZL
 Nicaragua,2020-04-01,5,1,0,Americas,NIC
 Niger,2020-04-01,74,5,0,Africa,NER
 Nigeria,2020-04-01,174,2,9,Africa,NGA
-Macedonia,2020-04-01,354,11,17,Europe,MKD
+North Macedonia,2020-04-01,354,11,17,Europe,MKD
 Norway,2020-04-01,4863,44,13,Europe,NOR
 Oman,2020-04-01,210,1,34,Asia,OMN
 Pakistan,2020-04-01,2118,27,94,Asia,PAK
@@ -5710,7 +5710,7 @@ El Salvador,2020-04-02,41,2,0,Americas,SLV
 Equatorial Guinea,2020-04-02,15,0,1,Africa,GNQ
 Eritrea,2020-04-02,22,0,0,Africa,ERI
 Estonia,2020-04-02,858,11,45,Europe,EST
-Swaziland,2020-04-02,9,0,0,Africa,SWZ
+Eswatini,2020-04-02,9,0,0,Africa,SWZ
 Ethiopia,2020-04-02,29,0,3,Africa,ETH
 Fiji,2020-04-02,7,0,0,Oceania,FJI
 Finland,2020-04-02,1518,19,300,Europe,FIN
@@ -5778,7 +5778,7 @@ New Zealand,2020-04-02,797,1,92,Oceania,NZL
 Nicaragua,2020-04-02,5,1,0,Americas,NIC
 Niger,2020-04-02,98,5,0,Africa,NER
 Nigeria,2020-04-02,184,2,20,Africa,NGA
-Macedonia,2020-04-02,384,11,17,Europe,MKD
+North Macedonia,2020-04-02,384,11,17,Europe,MKD
 Norway,2020-04-02,5147,50,32,Europe,NOR
 Oman,2020-04-02,231,1,57,Asia,OMN
 Pakistan,2020-04-02,2421,34,125,Asia,PAK
@@ -5891,7 +5891,7 @@ El Salvador,2020-04-03,46,2,0,Americas,SLV
 Equatorial Guinea,2020-04-03,16,0,1,Africa,GNQ
 Eritrea,2020-04-03,22,0,0,Africa,ERI
 Estonia,2020-04-03,961,12,48,Europe,EST
-Swaziland,2020-04-03,9,0,0,Africa,SWZ
+Eswatini,2020-04-03,9,0,0,Africa,SWZ
 Ethiopia,2020-04-03,35,0,3,Africa,ETH
 Fiji,2020-04-03,7,0,0,Oceania,FJI
 Finland,2020-04-03,1615,20,300,Europe,FIN
@@ -5959,7 +5959,7 @@ New Zealand,2020-04-03,868,1,103,Oceania,NZL
 Nicaragua,2020-04-03,5,1,0,Americas,NIC
 Niger,2020-04-03,120,5,0,Africa,NER
 Nigeria,2020-04-03,210,4,25,Africa,NGA
-Macedonia,2020-04-03,430,12,20,Europe,MKD
+North Macedonia,2020-04-03,430,12,20,Europe,MKD
 Norway,2020-04-03,5370,59,32,Europe,NOR
 Oman,2020-04-03,252,1,57,Asia,OMN
 Pakistan,2020-04-03,2686,40,126,Asia,PAK
@@ -6072,7 +6072,7 @@ El Salvador,2020-04-04,56,3,2,Americas,SLV
 Equatorial Guinea,2020-04-04,16,0,1,Africa,GNQ
 Eritrea,2020-04-04,29,0,0,Africa,ERI
 Estonia,2020-04-04,1039,13,59,Europe,EST
-Swaziland,2020-04-04,9,0,0,Africa,SWZ
+Eswatini,2020-04-04,9,0,0,Africa,SWZ
 Ethiopia,2020-04-04,38,0,4,Africa,ETH
 Fiji,2020-04-04,12,0,0,Oceania,FJI
 Finland,2020-04-04,1882,25,300,Europe,FIN
@@ -6140,7 +6140,7 @@ New Zealand,2020-04-04,950,1,127,Oceania,NZL
 Nicaragua,2020-04-04,5,1,0,Americas,NIC
 Niger,2020-04-04,144,8,0,Africa,NER
 Nigeria,2020-04-04,214,4,25,Africa,NGA
-Macedonia,2020-04-04,483,17,20,Europe,MKD
+North Macedonia,2020-04-04,483,17,20,Europe,MKD
 Norway,2020-04-04,5550,62,32,Europe,NOR
 Oman,2020-04-04,277,2,61,Asia,OMN
 Pakistan,2020-04-04,2818,41,131,Asia,PAK
@@ -6253,7 +6253,7 @@ El Salvador,2020-04-05,62,3,2,Americas,SLV
 Equatorial Guinea,2020-04-05,16,0,1,Africa,GNQ
 Eritrea,2020-04-05,29,0,0,Africa,ERI
 Estonia,2020-04-05,1097,15,62,Europe,EST
-Swaziland,2020-04-05,9,0,0,Africa,SWZ
+Eswatini,2020-04-05,9,0,0,Africa,SWZ
 Ethiopia,2020-04-05,43,2,4,Africa,ETH
 Fiji,2020-04-05,12,0,0,Oceania,FJI
 Finland,2020-04-05,1927,28,300,Europe,FIN
@@ -6321,7 +6321,7 @@ New Zealand,2020-04-05,1039,1,156,Oceania,NZL
 Nicaragua,2020-04-05,6,1,0,Americas,NIC
 Niger,2020-04-05,184,10,13,Africa,NER
 Nigeria,2020-04-05,232,5,33,Africa,NGA
-Macedonia,2020-04-05,555,18,23,Europe,MKD
+North Macedonia,2020-04-05,555,18,23,Europe,MKD
 Norway,2020-04-05,5687,71,32,Europe,NOR
 Oman,2020-04-05,298,2,61,Asia,OMN
 Pakistan,2020-04-05,3157,47,211,Asia,PAK
@@ -6436,7 +6436,7 @@ El Salvador,2020-04-06,69,4,5,Americas,SLV
 Equatorial Guinea,2020-04-06,16,0,3,Africa,GNQ
 Eritrea,2020-04-06,31,0,0,Africa,ERI
 Estonia,2020-04-06,1108,19,62,Europe,EST
-Swaziland,2020-04-06,10,0,4,Africa,SWZ
+Eswatini,2020-04-06,10,0,4,Africa,SWZ
 Ethiopia,2020-04-06,44,2,4,Africa,ETH
 Fiji,2020-04-06,14,0,0,Oceania,FJI
 Finland,2020-04-06,2176,27,300,Europe,FIN
@@ -6504,7 +6504,7 @@ New Zealand,2020-04-06,1106,1,176,Oceania,NZL
 Nicaragua,2020-04-06,6,1,0,Americas,NIC
 Niger,2020-04-06,253,10,26,Africa,NER
 Nigeria,2020-04-06,238,5,35,Africa,NGA
-Macedonia,2020-04-06,570,23,30,Europe,MKD
+North Macedonia,2020-04-06,570,23,30,Europe,MKD
 Norway,2020-04-06,5865,76,32,Europe,NOR
 Oman,2020-04-06,331,2,61,Asia,OMN
 Pakistan,2020-04-06,3766,53,259,Asia,PAK
@@ -6620,7 +6620,7 @@ El Salvador,2020-04-07,78,4,5,Americas,SLV
 Equatorial Guinea,2020-04-07,16,0,3,Africa,GNQ
 Eritrea,2020-04-07,31,0,0,Africa,ERI
 Estonia,2020-04-07,1149,21,69,Europe,EST
-Swaziland,2020-04-07,10,0,4,Africa,SWZ
+Eswatini,2020-04-07,10,0,4,Africa,SWZ
 Ethiopia,2020-04-07,52,2,4,Africa,ETH
 Fiji,2020-04-07,15,0,0,Oceania,FJI
 Finland,2020-04-07,2308,34,300,Europe,FIN
@@ -6688,7 +6688,7 @@ New Zealand,2020-04-07,1160,1,241,Oceania,NZL
 Nicaragua,2020-04-07,6,1,0,Americas,NIC
 Niger,2020-04-07,278,11,26,Africa,NER
 Nigeria,2020-04-07,254,6,44,Africa,NGA
-Macedonia,2020-04-07,599,26,30,Europe,MKD
+North Macedonia,2020-04-07,599,26,30,Europe,MKD
 Norway,2020-04-07,6086,89,32,Europe,NOR
 Oman,2020-04-07,371,2,67,Asia,OMN
 Pakistan,2020-04-07,4035,57,429,Asia,PAK
@@ -6804,7 +6804,7 @@ El Salvador,2020-04-08,93,5,9,Americas,SLV
 Equatorial Guinea,2020-04-08,18,0,3,Africa,GNQ
 Eritrea,2020-04-08,33,0,0,Africa,ERI
 Estonia,2020-04-08,1185,24,72,Europe,EST
-Swaziland,2020-04-08,12,0,7,Africa,SWZ
+Eswatini,2020-04-08,12,0,7,Africa,SWZ
 Ethiopia,2020-04-08,55,2,4,Africa,ETH
 Fiji,2020-04-08,15,0,0,Oceania,FJI
 Finland,2020-04-08,2487,40,300,Europe,FIN
@@ -6872,7 +6872,7 @@ New Zealand,2020-04-08,1210,1,282,Oceania,NZL
 Nicaragua,2020-04-08,6,1,0,Americas,NIC
 Niger,2020-04-08,342,11,28,Africa,NER
 Nigeria,2020-04-08,276,6,44,Africa,NGA
-Macedonia,2020-04-08,617,29,35,Europe,MKD
+North Macedonia,2020-04-08,617,29,35,Europe,MKD
 Norway,2020-04-08,6086,101,32,Europe,NOR
 Oman,2020-04-08,419,2,72,Asia,OMN
 Pakistan,2020-04-08,4263,61,467,Asia,PAK
@@ -6988,7 +6988,7 @@ El Salvador,2020-04-09,103,6,14,Americas,SLV
 Equatorial Guinea,2020-04-09,18,0,3,Africa,GNQ
 Eritrea,2020-04-09,33,0,0,Africa,ERI
 Estonia,2020-04-09,1207,24,83,Europe,EST
-Swaziland,2020-04-09,12,0,7,Africa,SWZ
+Eswatini,2020-04-09,12,0,7,Africa,SWZ
 Ethiopia,2020-04-09,56,2,4,Africa,ETH
 Fiji,2020-04-09,15,0,0,Oceania,FJI
 Finland,2020-04-09,2605,42,300,Europe,FIN
@@ -7056,7 +7056,7 @@ New Zealand,2020-04-09,1239,1,317,Oceania,NZL
 Nicaragua,2020-04-09,7,1,0,Americas,NIC
 Niger,2020-04-09,410,11,40,Africa,NER
 Nigeria,2020-04-09,288,7,51,Africa,NGA
-Macedonia,2020-04-09,663,30,37,Europe,MKD
+North Macedonia,2020-04-09,663,30,37,Europe,MKD
 Norway,2020-04-09,6211,108,32,Europe,NOR
 Oman,2020-04-09,457,3,109,Asia,OMN
 Pakistan,2020-04-09,4489,65,572,Asia,PAK
@@ -7172,7 +7172,7 @@ El Salvador,2020-04-10,117,6,15,Americas,SLV
 Equatorial Guinea,2020-04-10,18,0,3,Africa,GNQ
 Eritrea,2020-04-10,34,0,0,Africa,ERI
 Estonia,2020-04-10,1258,24,93,Europe,EST
-Swaziland,2020-04-10,12,0,7,Africa,SWZ
+Eswatini,2020-04-10,12,0,7,Africa,SWZ
 Ethiopia,2020-04-10,65,3,4,Africa,ETH
 Fiji,2020-04-10,16,0,0,Oceania,FJI
 Finland,2020-04-10,2769,48,300,Europe,FIN
@@ -7240,7 +7240,7 @@ New Zealand,2020-04-10,1283,2,373,Oceania,NZL
 Nicaragua,2020-04-10,7,1,0,Americas,NIC
 Niger,2020-04-10,438,11,41,Africa,NER
 Nigeria,2020-04-10,305,7,58,Africa,NGA
-Macedonia,2020-04-10,711,32,41,Europe,MKD
+North Macedonia,2020-04-10,711,32,41,Europe,MKD
 Norway,2020-04-10,6314,113,32,Europe,NOR
 Oman,2020-04-10,484,3,109,Asia,OMN
 Pakistan,2020-04-10,4695,66,727,Asia,PAK
@@ -7357,7 +7357,7 @@ El Salvador,2020-04-11,118,6,19,Americas,SLV
 Equatorial Guinea,2020-04-11,18,0,3,Africa,GNQ
 Eritrea,2020-04-11,34,0,0,Africa,ERI
 Estonia,2020-04-11,1304,24,93,Europe,EST
-Swaziland,2020-04-11,12,0,7,Africa,SWZ
+Eswatini,2020-04-11,12,0,7,Africa,SWZ
 Ethiopia,2020-04-11,69,3,10,Africa,ETH
 Fiji,2020-04-11,16,0,0,Oceania,FJI
 Finland,2020-04-11,2905,49,300,Europe,FIN
@@ -7425,7 +7425,7 @@ New Zealand,2020-04-11,1312,4,422,Oceania,NZL
 Nicaragua,2020-04-11,8,1,0,Americas,NIC
 Niger,2020-04-11,491,11,41,Africa,NER
 Nigeria,2020-04-11,318,10,70,Africa,NGA
-Macedonia,2020-04-11,760,34,41,Europe,MKD
+North Macedonia,2020-04-11,760,34,41,Europe,MKD
 Norway,2020-04-11,6409,119,32,Europe,NOR
 Oman,2020-04-11,546,3,109,Asia,OMN
 Pakistan,2020-04-11,5011,86,762,Asia,PAK
@@ -7542,7 +7542,7 @@ El Salvador,2020-04-12,125,6,21,Americas,SLV
 Equatorial Guinea,2020-04-12,21,0,3,Africa,GNQ
 Eritrea,2020-04-12,34,0,0,Africa,ERI
 Estonia,2020-04-12,1309,25,98,Europe,EST
-Swaziland,2020-04-12,14,0,7,Africa,SWZ
+Eswatini,2020-04-12,14,0,7,Africa,SWZ
 Ethiopia,2020-04-12,71,3,10,Africa,ETH
 Fiji,2020-04-12,16,0,0,Oceania,FJI
 Finland,2020-04-12,2974,56,300,Europe,FIN
@@ -7610,7 +7610,7 @@ New Zealand,2020-04-12,1330,4,471,Oceania,NZL
 Nicaragua,2020-04-12,9,1,4,Americas,NIC
 Niger,2020-04-12,529,12,75,Africa,NER
 Nigeria,2020-04-12,323,10,85,Africa,NGA
-Macedonia,2020-04-12,828,34,41,Europe,MKD
+North Macedonia,2020-04-12,828,34,41,Europe,MKD
 Norway,2020-04-12,6525,128,32,Europe,NOR
 Oman,2020-04-12,599,4,109,Asia,OMN
 Pakistan,2020-04-12,5230,91,1028,Asia,PAK
@@ -7727,7 +7727,7 @@ El Salvador,2020-04-13,137,6,22,Americas,SLV
 Equatorial Guinea,2020-04-13,21,0,4,Africa,GNQ
 Eritrea,2020-04-13,34,0,0,Africa,ERI
 Estonia,2020-04-13,1332,28,102,Europe,EST
-Swaziland,2020-04-13,15,0,7,Africa,SWZ
+Eswatini,2020-04-13,15,0,7,Africa,SWZ
 Ethiopia,2020-04-13,74,3,14,Africa,ETH
 Fiji,2020-04-13,16,0,0,Oceania,FJI
 Finland,2020-04-13,3064,59,300,Europe,FIN
@@ -7795,7 +7795,7 @@ New Zealand,2020-04-13,1349,5,546,Oceania,NZL
 Nicaragua,2020-04-13,9,1,4,Americas,NIC
 Niger,2020-04-13,529,12,75,Africa,NER
 Nigeria,2020-04-13,343,10,91,Africa,NGA
-Macedonia,2020-04-13,854,38,44,Europe,MKD
+North Macedonia,2020-04-13,854,38,44,Europe,MKD
 Norway,2020-04-13,6603,134,32,Europe,NOR
 Oman,2020-04-13,727,4,124,Asia,OMN
 Pakistan,2020-04-13,5496,93,1095,Asia,PAK
@@ -7912,7 +7912,7 @@ El Salvador,2020-04-14,149,6,25,Americas,SLV
 Equatorial Guinea,2020-04-14,41,0,4,Africa,GNQ
 Eritrea,2020-04-14,34,0,0,Africa,ERI
 Estonia,2020-04-14,1373,31,115,Europe,EST
-Swaziland,2020-04-14,15,0,8,Africa,SWZ
+Eswatini,2020-04-14,15,0,8,Africa,SWZ
 Ethiopia,2020-04-14,82,3,14,Africa,ETH
 Fiji,2020-04-14,16,0,0,Oceania,FJI
 Finland,2020-04-14,3161,64,300,Europe,FIN
@@ -7980,7 +7980,7 @@ New Zealand,2020-04-14,1366,9,628,Oceania,NZL
 Nicaragua,2020-04-14,9,1,4,Americas,NIC
 Niger,2020-04-14,570,14,90,Africa,NER
 Nigeria,2020-04-14,373,11,99,Africa,NGA
-Macedonia,2020-04-14,908,44,86,Europe,MKD
+North Macedonia,2020-04-14,908,44,86,Europe,MKD
 Norway,2020-04-14,6623,139,32,Europe,NOR
 Oman,2020-04-14,813,4,130,Asia,OMN
 Pakistan,2020-04-14,5837,96,1378,Asia,PAK
@@ -8097,7 +8097,7 @@ El Salvador,2020-04-15,159,6,30,Americas,SLV
 Equatorial Guinea,2020-04-15,51,0,4,Africa,GNQ
 Eritrea,2020-04-15,35,0,0,Africa,ERI
 Estonia,2020-04-15,1400,35,117,Europe,EST
-Swaziland,2020-04-15,15,0,8,Africa,SWZ
+Eswatini,2020-04-15,15,0,8,Africa,SWZ
 Ethiopia,2020-04-15,85,3,15,Africa,ETH
 Fiji,2020-04-15,16,0,0,Oceania,FJI
 Finland,2020-04-15,3237,72,300,Europe,FIN
@@ -8165,7 +8165,7 @@ New Zealand,2020-04-15,1386,9,728,Oceania,NZL
 Nicaragua,2020-04-15,9,1,4,Americas,NIC
 Niger,2020-04-15,584,14,90,Africa,NER
 Nigeria,2020-04-15,407,12,128,Africa,NGA
-Macedonia,2020-04-15,974,45,98,Europe,MKD
+North Macedonia,2020-04-15,974,45,98,Europe,MKD
 Norway,2020-04-15,6740,150,32,Europe,NOR
 Oman,2020-04-15,910,4,131,Asia,OMN
 Pakistan,2020-04-15,6383,111,1446,Asia,PAK
@@ -8282,7 +8282,7 @@ El Salvador,2020-04-16,164,6,33,Americas,SLV
 Equatorial Guinea,2020-04-16,51,0,4,Africa,GNQ
 Eritrea,2020-04-16,35,0,0,Africa,ERI
 Estonia,2020-04-16,1434,36,133,Europe,EST
-Swaziland,2020-04-16,16,1,8,Africa,SWZ
+Eswatini,2020-04-16,16,1,8,Africa,SWZ
 Ethiopia,2020-04-16,92,3,15,Africa,ETH
 Fiji,2020-04-16,17,0,0,Oceania,FJI
 Finland,2020-04-16,3369,75,1700,Europe,FIN
@@ -8350,7 +8350,7 @@ New Zealand,2020-04-16,1401,9,770,Oceania,NZL
 Nicaragua,2020-04-16,9,1,4,Americas,NIC
 Niger,2020-04-16,584,14,90,Africa,NER
 Nigeria,2020-04-16,442,13,152,Africa,NGA
-Macedonia,2020-04-16,1081,46,121,Europe,MKD
+North Macedonia,2020-04-16,1081,46,121,Europe,MKD
 Norway,2020-04-16,6896,152,32,Europe,NOR
 Oman,2020-04-16,1019,4,176,Asia,OMN
 Pakistan,2020-04-16,6919,128,1645,Asia,PAK
@@ -8467,7 +8467,7 @@ El Salvador,2020-04-17,177,7,38,Americas,SLV
 Equatorial Guinea,2020-04-17,79,0,4,Africa,GNQ
 Eritrea,2020-04-17,35,0,0,Africa,ERI
 Estonia,2020-04-17,1459,38,145,Europe,EST
-Swaziland,2020-04-17,16,1,8,Africa,SWZ
+Eswatini,2020-04-17,16,1,8,Africa,SWZ
 Ethiopia,2020-04-17,96,3,15,Africa,ETH
 Fiji,2020-04-17,17,0,0,Oceania,FJI
 Finland,2020-04-17,3489,82,1700,Europe,FIN
@@ -8535,7 +8535,7 @@ New Zealand,2020-04-17,1409,11,816,Oceania,NZL
 Nicaragua,2020-04-17,9,1,4,Americas,NIC
 Niger,2020-04-17,627,18,110,Africa,NER
 Nigeria,2020-04-17,493,17,159,Africa,NGA
-Macedonia,2020-04-17,1117,49,139,Europe,MKD
+North Macedonia,2020-04-17,1117,49,139,Europe,MKD
 Norway,2020-04-17,6937,161,32,Europe,NOR
 Oman,2020-04-17,1069,6,176,Asia,OMN
 Pakistan,2020-04-17,7025,135,1765,Asia,PAK
@@ -8652,7 +8652,7 @@ El Salvador,2020-04-18,190,7,43,Americas,SLV
 Equatorial Guinea,2020-04-18,79,0,4,Africa,GNQ
 Eritrea,2020-04-18,39,0,3,Africa,ERI
 Estonia,2020-04-18,1512,38,162,Europe,EST
-Swaziland,2020-04-18,22,1,8,Africa,SWZ
+Eswatini,2020-04-18,22,1,8,Africa,SWZ
 Ethiopia,2020-04-18,105,3,16,Africa,ETH
 Fiji,2020-04-18,17,0,0,Oceania,FJI
 Finland,2020-04-18,3681,90,1700,Europe,FIN
@@ -8720,7 +8720,7 @@ New Zealand,2020-04-18,1422,11,867,Oceania,NZL
 Nicaragua,2020-04-18,9,2,6,Americas,NIC
 Niger,2020-04-18,639,19,113,Africa,NER
 Nigeria,2020-04-18,542,19,166,Africa,NGA
-Macedonia,2020-04-18,1170,49,164,Europe,MKD
+North Macedonia,2020-04-18,1170,49,164,Europe,MKD
 Norway,2020-04-18,7036,164,32,Europe,NOR
 Oman,2020-04-18,1180,6,176,Asia,OMN
 Pakistan,2020-04-18,7638,143,1832,Asia,PAK
@@ -8837,7 +8837,7 @@ El Salvador,2020-04-19,201,7,44,Americas,SLV
 Equatorial Guinea,2020-04-19,79,0,4,Africa,GNQ
 Eritrea,2020-04-19,39,0,3,Africa,ERI
 Estonia,2020-04-19,1528,40,164,Europe,EST
-Swaziland,2020-04-19,22,1,8,Africa,SWZ
+Eswatini,2020-04-19,22,1,8,Africa,SWZ
 Ethiopia,2020-04-19,108,3,16,Africa,ETH
 Fiji,2020-04-19,17,0,0,Oceania,FJI
 Finland,2020-04-19,3783,94,1700,Europe,FIN
@@ -8905,7 +8905,7 @@ New Zealand,2020-04-19,1431,12,912,Oceania,NZL
 Nicaragua,2020-04-19,10,2,6,Americas,NIC
 Niger,2020-04-19,648,20,117,Africa,NER
 Nigeria,2020-04-19,627,21,170,Africa,NGA
-Macedonia,2020-04-19,1207,51,179,Europe,MKD
+North Macedonia,2020-04-19,1207,51,179,Europe,MKD
 Norway,2020-04-19,7078,165,32,Europe,NOR
 Oman,2020-04-19,1266,7,233,Asia,OMN
 Pakistan,2020-04-19,8348,168,1868,Asia,PAK
@@ -9022,7 +9022,7 @@ El Salvador,2020-04-20,218,7,46,Americas,SLV
 Equatorial Guinea,2020-04-20,79,0,7,Africa,GNQ
 Eritrea,2020-04-20,39,0,3,Africa,ERI
 Estonia,2020-04-20,1535,40,165,Europe,EST
-Swaziland,2020-04-20,24,1,8,Africa,SWZ
+Eswatini,2020-04-20,24,1,8,Africa,SWZ
 Ethiopia,2020-04-20,111,3,16,Africa,ETH
 Fiji,2020-04-20,18,0,3,Oceania,FJI
 Finland,2020-04-20,3868,98,2000,Europe,FIN
@@ -9090,7 +9090,7 @@ New Zealand,2020-04-20,1440,12,974,Oceania,NZL
 Nicaragua,2020-04-20,10,2,6,Americas,NIC
 Niger,2020-04-20,648,20,117,Africa,NER
 Nigeria,2020-04-20,665,22,188,Africa,NGA
-Macedonia,2020-04-20,1225,54,200,Europe,MKD
+North Macedonia,2020-04-20,1225,54,200,Europe,MKD
 Norway,2020-04-20,7156,181,32,Europe,NOR
 Oman,2020-04-20,1410,7,238,Asia,OMN
 Pakistan,2020-04-20,8418,176,1970,Asia,PAK
@@ -9207,7 +9207,7 @@ El Salvador,2020-04-21,225,7,48,Americas,SLV
 Equatorial Guinea,2020-04-21,83,0,7,Africa,GNQ
 Eritrea,2020-04-21,39,0,6,Africa,ERI
 Estonia,2020-04-21,1552,43,169,Europe,EST
-Swaziland,2020-04-21,31,1,8,Africa,SWZ
+Eswatini,2020-04-21,31,1,8,Africa,SWZ
 Ethiopia,2020-04-21,114,3,16,Africa,ETH
 Fiji,2020-04-21,18,0,3,Oceania,FJI
 Finland,2020-04-21,4014,141,2000,Europe,FIN
@@ -9275,7 +9275,7 @@ New Zealand,2020-04-21,1445,13,1006,Oceania,NZL
 Nicaragua,2020-04-21,10,2,7,Americas,NIC
 Niger,2020-04-21,657,20,127,Africa,NER
 Nigeria,2020-04-21,665,22,188,Africa,NGA
-Macedonia,2020-04-21,1231,55,224,Europe,MKD
+North Macedonia,2020-04-21,1231,55,224,Europe,MKD
 Norway,2020-04-21,7191,182,32,Europe,NOR
 Oman,2020-04-21,1508,8,238,Asia,OMN
 Pakistan,2020-04-21,9565,201,2073,Asia,PAK
@@ -9392,7 +9392,7 @@ El Salvador,2020-04-22,237,7,63,Americas,SLV
 Equatorial Guinea,2020-04-22,84,1,7,Africa,GNQ
 Eritrea,2020-04-22,39,0,6,Africa,ERI
 Estonia,2020-04-22,1559,44,184,Europe,EST
-Swaziland,2020-04-22,31,1,8,Africa,SWZ
+Eswatini,2020-04-22,31,1,8,Africa,SWZ
 Ethiopia,2020-04-22,116,3,21,Africa,ETH
 Fiji,2020-04-22,18,0,8,Oceania,FJI
 Finland,2020-04-22,4129,149,2000,Europe,FIN
@@ -9460,7 +9460,7 @@ New Zealand,2020-04-22,1451,14,1036,Oceania,NZL
 Nicaragua,2020-04-22,10,2,7,Americas,NIC
 Niger,2020-04-22,662,22,193,Africa,NER
 Nigeria,2020-04-22,873,28,197,Africa,NGA
-Macedonia,2020-04-22,1259,56,272,Europe,MKD
+North Macedonia,2020-04-22,1259,56,272,Europe,MKD
 Norway,2020-04-22,7338,187,32,Europe,NOR
 Oman,2020-04-22,1614,8,238,Asia,OMN
 Pakistan,2020-04-22,10076,212,2156,Asia,PAK
@@ -9577,7 +9577,7 @@ El Salvador,2020-04-23,250,8,67,Americas,SLV
 Equatorial Guinea,2020-04-23,84,1,7,Africa,GNQ
 Eritrea,2020-04-23,39,0,6,Africa,ERI
 Estonia,2020-04-23,1592,45,192,Europe,EST
-Swaziland,2020-04-23,31,1,8,Africa,SWZ
+Eswatini,2020-04-23,31,1,8,Africa,SWZ
 Ethiopia,2020-04-23,116,3,21,Africa,ETH
 Fiji,2020-04-23,18,0,8,Oceania,FJI
 Finland,2020-04-23,4284,172,2000,Europe,FIN
@@ -9645,7 +9645,7 @@ New Zealand,2020-04-23,1456,17,1095,Oceania,NZL
 Nicaragua,2020-04-23,11,3,7,Americas,NIC
 Niger,2020-04-23,671,24,256,Africa,NER
 Nigeria,2020-04-23,981,31,197,Africa,NGA
-Macedonia,2020-04-23,1300,56,301,Europe,MKD
+North Macedonia,2020-04-23,1300,56,301,Europe,MKD
 Norway,2020-04-23,7401,194,32,Europe,NOR
 Oman,2020-04-23,1716,9,307,Asia,OMN
 Pakistan,2020-04-23,11155,237,2527,Asia,PAK
@@ -9762,7 +9762,7 @@ El Salvador,2020-04-24,274,8,75,Americas,SLV
 Equatorial Guinea,2020-04-24,214,1,7,Africa,GNQ
 Eritrea,2020-04-24,39,0,11,Africa,ERI
 Estonia,2020-04-24,1605,46,206,Europe,EST
-Swaziland,2020-04-24,36,1,10,Africa,SWZ
+Eswatini,2020-04-24,36,1,10,Africa,SWZ
 Ethiopia,2020-04-24,117,3,25,Africa,ETH
 Fiji,2020-04-24,18,0,10,Oceania,FJI
 Finland,2020-04-24,4395,177,2500,Europe,FIN
@@ -9830,7 +9830,7 @@ New Zealand,2020-04-24,1461,18,1118,Oceania,NZL
 Nicaragua,2020-04-24,11,3,7,Americas,NIC
 Niger,2020-04-24,681,24,289,Africa,NER
 Nigeria,2020-04-24,1095,32,208,Africa,NGA
-Macedonia,2020-04-24,1326,57,337,Europe,MKD
+North Macedonia,2020-04-24,1326,57,337,Europe,MKD
 Norway,2020-04-24,7463,199,32,Europe,NOR
 Oman,2020-04-24,1790,10,325,Asia,OMN
 Pakistan,2020-04-24,11940,253,2755,Asia,PAK
@@ -9947,7 +9947,7 @@ El Salvador,2020-04-25,274,8,75,Americas,SLV
 Equatorial Guinea,2020-04-25,258,1,7,Africa,GNQ
 Eritrea,2020-04-25,39,0,13,Africa,ERI
 Estonia,2020-04-25,1635,46,228,Europe,EST
-Swaziland,2020-04-25,56,1,10,Africa,SWZ
+Eswatini,2020-04-25,56,1,10,Africa,SWZ
 Ethiopia,2020-04-25,122,3,29,Africa,ETH
 Fiji,2020-04-25,18,0,10,Oceania,FJI
 Finland,2020-04-25,4475,186,2500,Europe,FIN
@@ -10015,7 +10015,7 @@ New Zealand,2020-04-25,1470,18,1142,Oceania,NZL
 Nicaragua,2020-04-25,12,3,7,Americas,NIC
 Niger,2020-04-25,684,27,325,Africa,NER
 Nigeria,2020-04-25,1182,35,222,Africa,NGA
-Macedonia,2020-04-25,1367,59,374,Europe,MKD
+North Macedonia,2020-04-25,1367,59,374,Europe,MKD
 Norway,2020-04-25,7499,201,32,Europe,NOR
 Oman,2020-04-25,1905,10,329,Asia,OMN
 Pakistan,2020-04-25,12723,269,2866,Asia,PAK
@@ -10132,7 +10132,7 @@ El Salvador,2020-04-26,298,8,83,Americas,SLV
 Equatorial Guinea,2020-04-26,258,1,8,Africa,GNQ
 Eritrea,2020-04-26,39,0,13,Africa,ERI
 Estonia,2020-04-26,1643,49,233,Europe,EST
-Swaziland,2020-04-26,59,1,10,Africa,SWZ
+Eswatini,2020-04-26,59,1,10,Africa,SWZ
 Ethiopia,2020-04-26,123,3,41,Africa,ETH
 Fiji,2020-04-26,18,0,12,Oceania,FJI
 Finland,2020-04-26,4576,190,2500,Europe,FIN
@@ -10200,7 +10200,7 @@ New Zealand,2020-04-26,1469,19,1180,Oceania,NZL
 Nicaragua,2020-04-26,13,3,7,Americas,NIC
 Niger,2020-04-26,696,29,350,Africa,NER
 Nigeria,2020-04-26,1273,40,239,Africa,NGA
-Macedonia,2020-04-26,1386,61,500,Europe,MKD
+North Macedonia,2020-04-26,1386,61,500,Europe,MKD
 Norway,2020-04-26,7527,201,32,Europe,NOR
 Oman,2020-04-26,1998,10,333,Asia,OMN
 Pakistan,2020-04-26,13328,281,2936,Asia,PAK
@@ -10317,7 +10317,7 @@ El Salvador,2020-04-27,323,8,89,Americas,SLV
 Equatorial Guinea,2020-04-27,258,1,9,Africa,GNQ
 Eritrea,2020-04-27,39,0,13,Africa,ERI
 Estonia,2020-04-27,1647,50,233,Europe,EST
-Swaziland,2020-04-27,65,1,10,Africa,SWZ
+Eswatini,2020-04-27,65,1,10,Africa,SWZ
 Ethiopia,2020-04-27,124,3,50,Africa,ETH
 Fiji,2020-04-27,18,0,12,Oceania,FJI
 Finland,2020-04-27,4695,193,2500,Europe,FIN
@@ -10385,7 +10385,7 @@ New Zealand,2020-04-27,1472,19,1214,Oceania,NZL
 Nicaragua,2020-04-27,13,3,7,Americas,NIC
 Niger,2020-04-27,701,29,385,Africa,NER
 Nigeria,2020-04-27,1337,40,255,Africa,NGA
-Macedonia,2020-04-27,1399,65,553,Europe,MKD
+North Macedonia,2020-04-27,1399,65,553,Europe,MKD
 Norway,2020-04-27,7599,205,32,Europe,NOR
 Oman,2020-04-27,2049,10,364,Asia,OMN
 Pakistan,2020-04-27,13915,292,3029,Asia,PAK
@@ -10502,7 +10502,7 @@ El Salvador,2020-04-28,345,8,97,Americas,SLV
 Equatorial Guinea,2020-04-28,315,1,9,Africa,GNQ
 Eritrea,2020-04-28,39,0,19,Africa,ERI
 Estonia,2020-04-28,1660,50,240,Europe,EST
-Swaziland,2020-04-28,71,1,10,Africa,SWZ
+Eswatini,2020-04-28,71,1,10,Africa,SWZ
 Ethiopia,2020-04-28,126,3,50,Africa,ETH
 Fiji,2020-04-28,18,0,12,Oceania,FJI
 Finland,2020-04-28,4740,199,2800,Europe,FIN
@@ -10570,7 +10570,7 @@ New Zealand,2020-04-28,1474,19,1229,Oceania,NZL
 Nicaragua,2020-04-28,13,3,7,Americas,NIC
 Niger,2020-04-28,709,31,403,Africa,NER
 Nigeria,2020-04-28,1532,44,255,Africa,NGA
-Macedonia,2020-04-28,1421,71,589,Europe,MKD
+North Macedonia,2020-04-28,1421,71,589,Europe,MKD
 Norway,2020-04-28,7660,206,32,Europe,NOR
 Oman,2020-04-28,2131,10,364,Asia,OMN
 Pakistan,2020-04-28,14612,312,3233,Asia,PAK
@@ -10687,7 +10687,7 @@ El Salvador,2020-04-29,377,9,106,Americas,SLV
 Equatorial Guinea,2020-04-29,315,1,9,Africa,GNQ
 Eritrea,2020-04-29,39,0,19,Africa,ERI
 Estonia,2020-04-29,1666,50,236,Europe,EST
-Swaziland,2020-04-29,91,1,10,Africa,SWZ
+Eswatini,2020-04-29,91,1,10,Africa,SWZ
 Ethiopia,2020-04-29,130,3,58,Africa,ETH
 Fiji,2020-04-29,18,0,12,Oceania,FJI
 Finland,2020-04-29,4906,206,2800,Europe,FIN
@@ -10755,7 +10755,7 @@ New Zealand,2020-04-29,1476,19,1241,Oceania,NZL
 Nicaragua,2020-04-29,13,3,7,Americas,NIC
 Niger,2020-04-29,713,32,435,Africa,NER
 Nigeria,2020-04-29,1728,51,307,Africa,NGA
-Macedonia,2020-04-29,1442,73,627,Europe,MKD
+North Macedonia,2020-04-29,1442,73,627,Europe,MKD
 Norway,2020-04-29,7710,207,32,Europe,NOR
 Oman,2020-04-29,2274,10,364,Asia,OMN
 Pakistan,2020-04-29,15525,343,3425,Asia,PAK
@@ -10873,7 +10873,7 @@ El Salvador,2020-04-30,395,10,119,Americas,SLV
 Equatorial Guinea,2020-04-30,315,1,9,Africa,GNQ
 Eritrea,2020-04-30,39,0,26,Africa,ERI
 Estonia,2020-04-30,1689,52,249,Europe,EST
-Swaziland,2020-04-30,100,1,12,Africa,SWZ
+Eswatini,2020-04-30,100,1,12,Africa,SWZ
 Ethiopia,2020-04-30,131,3,59,Africa,ETH
 Fiji,2020-04-30,18,0,12,Oceania,FJI
 Finland,2020-04-30,4995,211,3000,Europe,FIN
@@ -10941,7 +10941,7 @@ New Zealand,2020-04-30,1479,19,1252,Oceania,NZL
 Nicaragua,2020-04-30,14,3,7,Americas,NIC
 Niger,2020-04-30,719,32,452,Africa,NER
 Nigeria,2020-04-30,1932,58,319,Africa,NGA
-Macedonia,2020-04-30,1465,77,738,Europe,MKD
+North Macedonia,2020-04-30,1465,77,738,Europe,MKD
 Norway,2020-04-30,7738,210,32,Europe,NOR
 Oman,2020-04-30,2348,11,495,Asia,OMN
 Pakistan,2020-04-30,16817,385,4315,Asia,PAK
@@ -11060,7 +11060,7 @@ El Salvador,2020-05-01,424,10,124,Americas,SLV
 Equatorial Guinea,2020-05-01,315,1,9,Africa,GNQ
 Eritrea,2020-05-01,39,0,26,Africa,ERI
 Estonia,2020-05-01,1694,52,253,Europe,EST
-Swaziland,2020-05-01,106,1,12,Africa,SWZ
+Eswatini,2020-05-01,106,1,12,Africa,SWZ
 Ethiopia,2020-05-01,133,3,66,Africa,ETH
 Fiji,2020-05-01,18,0,12,Oceania,FJI
 Finland,2020-05-01,5051,218,3000,Europe,FIN
@@ -11128,7 +11128,7 @@ New Zealand,2020-05-01,1485,20,1263,Oceania,NZL
 Nicaragua,2020-05-01,14,3,7,Americas,NIC
 Niger,2020-05-01,728,33,478,Africa,NER
 Nigeria,2020-05-01,2170,68,351,Africa,NGA
-Macedonia,2020-05-01,1494,81,807,Europe,MKD
+North Macedonia,2020-05-01,1494,81,807,Europe,MKD
 Norway,2020-05-01,7783,210,32,Europe,NOR
 Oman,2020-05-01,2447,11,495,Asia,OMN
 Pakistan,2020-05-01,18114,417,4715,Asia,PAK
@@ -11247,7 +11247,7 @@ El Salvador,2020-05-02,446,11,141,Americas,SLV
 Equatorial Guinea,2020-05-02,315,1,9,Africa,GNQ
 Eritrea,2020-05-02,39,0,26,Africa,ERI
 Estonia,2020-05-02,1699,53,256,Europe,EST
-Swaziland,2020-05-02,108,1,12,Africa,SWZ
+Eswatini,2020-05-02,108,1,12,Africa,SWZ
 Ethiopia,2020-05-02,133,3,69,Africa,ETH
 Fiji,2020-05-02,18,0,14,Oceania,FJI
 Finland,2020-05-02,5176,220,3000,Europe,FIN
@@ -11315,7 +11315,7 @@ New Zealand,2020-05-02,1487,20,1266,Oceania,NZL
 Nicaragua,2020-05-02,14,3,7,Americas,NIC
 Niger,2020-05-02,736,35,507,Africa,NER
 Nigeria,2020-05-02,2388,85,351,Africa,NGA
-Macedonia,2020-05-02,1506,82,852,Europe,MKD
+North Macedonia,2020-05-02,1506,82,852,Europe,MKD
 Norway,2020-05-02,7809,211,32,Europe,NOR
 Oman,2020-05-02,2483,12,750,Asia,OMN
 Pakistan,2020-05-02,19103,440,4817,Asia,PAK
@@ -11434,7 +11434,7 @@ El Salvador,2020-05-03,490,11,154,Americas,SLV
 Equatorial Guinea,2020-05-03,315,1,9,Africa,GNQ
 Eritrea,2020-05-03,39,0,26,Africa,ERI
 Estonia,2020-05-03,1700,55,259,Europe,EST
-Swaziland,2020-05-03,112,1,12,Africa,SWZ
+Eswatini,2020-05-03,112,1,12,Africa,SWZ
 Ethiopia,2020-05-03,135,3,75,Africa,ETH
 Fiji,2020-05-03,18,0,14,Oceania,FJI
 Finland,2020-05-03,5254,230,3000,Europe,FIN
@@ -11502,7 +11502,7 @@ New Zealand,2020-05-03,1487,20,1276,Oceania,NZL
 Nicaragua,2020-05-03,15,5,7,Americas,NIC
 Niger,2020-05-03,750,36,518,Africa,NER
 Nigeria,2020-05-03,2558,87,400,Africa,NGA
-Macedonia,2020-05-03,1511,84,945,Europe,MKD
+North Macedonia,2020-05-03,1511,84,945,Europe,MKD
 Norway,2020-05-03,7847,211,32,Europe,NOR
 Oman,2020-05-03,2568,12,750,Asia,OMN
 Pakistan,2020-05-03,20084,457,5114,Asia,PAK
@@ -11621,7 +11621,7 @@ El Salvador,2020-05-04,555,13,180,Americas,SLV
 Equatorial Guinea,2020-05-04,315,3,13,Africa,GNQ
 Eritrea,2020-05-04,39,0,26,Africa,ERI
 Estonia,2020-05-04,1703,55,259,Europe,EST
-Swaziland,2020-05-04,116,1,12,Africa,SWZ
+Eswatini,2020-05-04,116,1,12,Africa,SWZ
 Ethiopia,2020-05-04,140,3,75,Africa,ETH
 Fiji,2020-05-04,18,0,14,Oceania,FJI
 Finland,2020-05-04,5327,240,3500,Europe,FIN
@@ -11689,7 +11689,7 @@ New Zealand,2020-05-04,1486,20,1302,Oceania,NZL
 Nicaragua,2020-05-04,15,5,7,Americas,NIC
 Niger,2020-05-04,755,37,534,Africa,NER
 Nigeria,2020-05-04,2802,93,417,Africa,NGA
-Macedonia,2020-05-04,1518,85,992,Europe,MKD
+North Macedonia,2020-05-04,1518,85,992,Europe,MKD
 Norway,2020-05-04,7904,214,32,Europe,NOR
 Oman,2020-05-04,2637,12,816,Asia,OMN
 Pakistan,2020-05-04,20941,476,5635,Asia,PAK
@@ -11808,7 +11808,7 @@ El Salvador,2020-05-05,587,14,205,Americas,SLV
 Equatorial Guinea,2020-05-05,315,3,13,Africa,GNQ
 Eritrea,2020-05-05,39,0,30,Africa,ERI
 Estonia,2020-05-05,1711,55,261,Europe,EST
-Swaziland,2020-05-05,119,1,12,Africa,SWZ
+Eswatini,2020-05-05,119,1,12,Africa,SWZ
 Ethiopia,2020-05-05,145,4,91,Africa,ETH
 Fiji,2020-05-05,18,0,14,Oceania,FJI
 Finland,2020-05-05,5412,246,3500,Europe,FIN
@@ -11876,7 +11876,7 @@ New Zealand,2020-05-05,1488,21,1316,Oceania,NZL
 Nicaragua,2020-05-05,16,5,7,Americas,NIC
 Niger,2020-05-05,763,38,543,Africa,NER
 Nigeria,2020-05-05,2950,98,481,Africa,NGA
-Macedonia,2020-05-05,1526,86,1013,Europe,MKD
+North Macedonia,2020-05-05,1526,86,1013,Europe,MKD
 Norway,2020-05-05,7955,215,32,Europe,NOR
 Oman,2020-05-05,2735,13,858,Asia,OMN
 Pakistan,2020-05-05,22049,514,5801,Asia,PAK
@@ -11995,7 +11995,7 @@ El Salvador,2020-05-06,633,15,219,Americas,SLV
 Equatorial Guinea,2020-05-06,439,4,13,Africa,GNQ
 Eritrea,2020-05-06,39,0,30,Africa,ERI
 Estonia,2020-05-06,1713,55,264,Europe,EST
-Swaziland,2020-05-06,123,2,12,Africa,SWZ
+Eswatini,2020-05-06,123,2,12,Africa,SWZ
 Ethiopia,2020-05-06,162,4,93,Africa,ETH
 Fiji,2020-05-06,18,0,14,Oceania,FJI
 Finland,2020-05-06,5573,252,3500,Europe,FIN
@@ -12063,7 +12063,7 @@ New Zealand,2020-05-06,1489,21,1332,Oceania,NZL
 Nicaragua,2020-05-06,16,5,7,Americas,NIC
 Niger,2020-05-06,770,38,561,Africa,NER
 Nigeria,2020-05-06,3145,103,534,Africa,NGA
-Macedonia,2020-05-06,1539,88,1057,Europe,MKD
+North Macedonia,2020-05-06,1539,88,1057,Europe,MKD
 Norway,2020-05-06,7996,216,32,Europe,NOR
 Oman,2020-05-06,2903,13,888,Asia,OMN
 Pakistan,2020-05-06,24073,564,6464,Asia,PAK
@@ -12182,7 +12182,7 @@ El Salvador,2020-05-07,695,15,252,Americas,SLV
 Equatorial Guinea,2020-05-07,439,4,13,Africa,GNQ
 Eritrea,2020-05-07,39,0,30,Africa,ERI
 Estonia,2020-05-07,1720,56,273,Europe,EST
-Swaziland,2020-05-07,153,2,12,Africa,SWZ
+Eswatini,2020-05-07,153,2,12,Africa,SWZ
 Ethiopia,2020-05-07,191,4,93,Africa,ETH
 Fiji,2020-05-07,18,0,14,Oceania,FJI
 Finland,2020-05-07,5673,255,3500,Europe,FIN
@@ -12250,7 +12250,7 @@ New Zealand,2020-05-07,1490,21,1347,Oceania,NZL
 Nicaragua,2020-05-07,16,5,7,Americas,NIC
 Niger,2020-05-07,781,42,586,Africa,NER
 Nigeria,2020-05-07,3526,107,601,Africa,NGA
-Macedonia,2020-05-07,1572,89,1079,Europe,MKD
+North Macedonia,2020-05-07,1572,89,1079,Europe,MKD
 Norway,2020-05-07,8034,217,32,Europe,NOR
 Oman,2020-05-07,2958,15,980,Asia,OMN
 Pakistan,2020-05-07,24644,585,6464,Asia,PAK
@@ -12369,7 +12369,7 @@ El Salvador,2020-05-08,742,16,257,Americas,SLV
 Equatorial Guinea,2020-05-08,439,4,13,Africa,GNQ
 Eritrea,2020-05-08,39,0,37,Africa,ERI
 Estonia,2020-05-08,1725,56,704,Europe,EST
-Swaziland,2020-05-08,159,2,12,Africa,SWZ
+Eswatini,2020-05-08,159,2,12,Africa,SWZ
 Ethiopia,2020-05-08,194,4,95,Africa,ETH
 Fiji,2020-05-08,18,0,14,Oceania,FJI
 Finland,2020-05-08,5738,260,4000,Europe,FIN
@@ -12437,7 +12437,7 @@ New Zealand,2020-05-08,1492,21,1368,Oceania,NZL
 Nicaragua,2020-05-08,16,5,7,Americas,NIC
 Niger,2020-05-08,795,44,600,Africa,NER
 Nigeria,2020-05-08,3912,117,679,Africa,NGA
-Macedonia,2020-05-08,1586,90,1099,Europe,MKD
+North Macedonia,2020-05-08,1586,90,1099,Europe,MKD
 Norway,2020-05-08,8070,218,32,Europe,NOR
 Oman,2020-05-08,3112,16,1025,Asia,OMN
 Pakistan,2020-05-08,26435,599,7530,Asia,PAK
@@ -12556,7 +12556,7 @@ El Salvador,2020-05-09,784,17,276,Americas,SLV
 Equatorial Guinea,2020-05-09,439,4,13,Africa,GNQ
 Eritrea,2020-05-09,39,0,37,Africa,ERI
 Estonia,2020-05-09,1733,60,747,Europe,EST
-Swaziland,2020-05-09,163,2,14,Africa,SWZ
+Eswatini,2020-05-09,163,2,14,Africa,SWZ
 Ethiopia,2020-05-09,210,5,97,Africa,ETH
 Fiji,2020-05-09,18,0,14,Oceania,FJI
 Finland,2020-05-09,5880,265,4000,Europe,FIN
@@ -12624,7 +12624,7 @@ New Zealand,2020-05-09,1494,21,1371,Oceania,NZL
 Nicaragua,2020-05-09,16,5,7,Americas,NIC
 Niger,2020-05-09,815,45,617,Africa,NER
 Nigeria,2020-05-09,4151,128,745,Africa,NGA
-Macedonia,2020-05-09,1622,91,1112,Europe,MKD
+North Macedonia,2020-05-09,1622,91,1112,Europe,MKD
 Norway,2020-05-09,8099,219,32,Europe,NOR
 Oman,2020-05-09,3224,17,1068,Asia,OMN
 Pakistan,2020-05-09,28736,636,7809,Asia,PAK
@@ -12743,7 +12743,7 @@ El Salvador,2020-05-10,889,17,293,Americas,SLV
 Equatorial Guinea,2020-05-10,439,4,13,Africa,GNQ
 Eritrea,2020-05-10,39,0,37,Africa,ERI
 Estonia,2020-05-10,1739,60,750,Europe,EST
-Swaziland,2020-05-10,172,2,27,Africa,SWZ
+Eswatini,2020-05-10,172,2,27,Africa,SWZ
 Ethiopia,2020-05-10,239,5,99,Africa,ETH
 Fiji,2020-05-10,18,0,14,Oceania,FJI
 Finland,2020-05-10,5962,267,4000,Europe,FIN
@@ -12811,7 +12811,7 @@ New Zealand,2020-05-10,1497,21,1386,Oceania,NZL
 Nicaragua,2020-05-10,16,5,7,Americas,NIC
 Niger,2020-05-10,821,46,624,Africa,NER
 Nigeria,2020-05-10,4399,143,778,Africa,NGA
-Macedonia,2020-05-10,1642,91,1136,Europe,MKD
+North Macedonia,2020-05-10,1642,91,1136,Europe,MKD
 Norway,2020-05-10,8105,219,32,Europe,NOR
 Oman,2020-05-10,3399,17,1117,Asia,OMN
 Pakistan,2020-05-10,30334,659,8063,Asia,PAK
@@ -12930,7 +12930,7 @@ El Salvador,2020-05-11,958,18,325,Americas,SLV
 Equatorial Guinea,2020-05-11,439,4,13,Africa,GNQ
 Eritrea,2020-05-11,39,0,38,Africa,ERI
 Estonia,2020-05-11,1741,61,751,Europe,EST
-Swaziland,2020-05-11,175,2,28,Africa,SWZ
+Eswatini,2020-05-11,175,2,28,Africa,SWZ
 Ethiopia,2020-05-11,250,5,105,Africa,ETH
 Fiji,2020-05-11,18,0,14,Oceania,FJI
 Finland,2020-05-11,5984,271,4000,Europe,FIN
@@ -12998,7 +12998,7 @@ New Zealand,2020-05-11,1497,21,1398,Oceania,NZL
 Nicaragua,2020-05-11,16,5,7,Americas,NIC
 Niger,2020-05-11,832,46,637,Africa,NER
 Nigeria,2020-05-11,4641,150,902,Africa,NGA
-Macedonia,2020-05-11,1664,91,1200,Europe,MKD
+North Macedonia,2020-05-11,1664,91,1200,Europe,MKD
 Norway,2020-05-11,8132,224,32,Europe,NOR
 Oman,2020-05-11,3573,17,1250,Asia,OMN
 Pakistan,2020-05-11,32081,706,8555,Asia,PAK
@@ -13117,7 +13117,7 @@ El Salvador,2020-05-12,998,20,349,Americas,SLV
 Equatorial Guinea,2020-05-12,439,4,13,Africa,GNQ
 Eritrea,2020-05-12,39,0,38,Africa,ERI
 Estonia,2020-05-12,1746,61,777,Europe,EST
-Swaziland,2020-05-12,184,2,28,Africa,SWZ
+Eswatini,2020-05-12,184,2,28,Africa,SWZ
 Ethiopia,2020-05-12,261,5,106,Africa,ETH
 Fiji,2020-05-12,18,0,14,Oceania,FJI
 Finland,2020-05-12,6003,275,4300,Europe,FIN
@@ -13185,7 +13185,7 @@ New Zealand,2020-05-12,1497,21,1402,Oceania,NZL
 Nicaragua,2020-05-12,25,8,7,Americas,NIC
 Niger,2020-05-12,854,47,648,Africa,NER
 Nigeria,2020-05-12,4787,158,959,Africa,NGA
-Macedonia,2020-05-12,1674,92,1205,Europe,MKD
+North Macedonia,2020-05-12,1674,92,1205,Europe,MKD
 Norway,2020-05-12,8157,228,32,Europe,NOR
 Oman,2020-05-12,3721,17,1250,Asia,OMN
 Pakistan,2020-05-12,34336,737,8812,Asia,PAK
@@ -13304,7 +13304,7 @@ El Salvador,2020-05-13,1037,20,374,Americas,SLV
 Equatorial Guinea,2020-05-13,522,6,13,Africa,GNQ
 Eritrea,2020-05-13,39,0,38,Africa,ERI
 Estonia,2020-05-13,1751,61,777,Europe,EST
-Swaziland,2020-05-13,187,2,48,Africa,SWZ
+Eswatini,2020-05-13,187,2,48,Africa,SWZ
 Ethiopia,2020-05-13,263,5,108,Africa,ETH
 Fiji,2020-05-13,18,0,14,Oceania,FJI
 Finland,2020-05-13,6054,284,4300,Europe,FIN
@@ -13373,7 +13373,7 @@ New Zealand,2020-05-13,1497,21,1411,Oceania,NZL
 Nicaragua,2020-05-13,25,8,7,Americas,NIC
 Niger,2020-05-13,860,49,658,Africa,NER
 Nigeria,2020-05-13,4971,164,1070,Africa,NGA
-Macedonia,2020-05-13,1694,95,1229,Europe,MKD
+North Macedonia,2020-05-13,1694,95,1229,Europe,MKD
 Norway,2020-05-13,8175,229,32,Europe,NOR
 Oman,2020-05-13,4019,17,1289,Asia,OMN
 Pakistan,2020-05-13,35298,761,8899,Asia,PAK
@@ -13492,7 +13492,7 @@ El Salvador,2020-05-14,1112,23,405,Americas,SLV
 Equatorial Guinea,2020-05-14,583,7,13,Africa,GNQ
 Eritrea,2020-05-14,39,0,38,Africa,ERI
 Estonia,2020-05-14,1758,62,909,Europe,EST
-Swaziland,2020-05-14,187,2,51,Africa,SWZ
+Eswatini,2020-05-14,187,2,51,Africa,SWZ
 Ethiopia,2020-05-14,272,5,108,Africa,ETH
 Fiji,2020-05-14,18,0,14,Oceania,FJI
 Finland,2020-05-14,6145,287,4300,Europe,FIN
@@ -13561,7 +13561,7 @@ New Zealand,2020-05-14,1498,21,1421,Oceania,NZL
 Nicaragua,2020-05-14,25,8,7,Americas,NIC
 Niger,2020-05-14,876,50,677,Africa,NER
 Nigeria,2020-05-14,5162,167,1180,Africa,NGA
-Macedonia,2020-05-14,1723,95,1235,Europe,MKD
+North Macedonia,2020-05-14,1723,95,1235,Europe,MKD
 Norway,2020-05-14,8196,232,32,Europe,NOR
 Oman,2020-05-14,4341,18,1303,Asia,OMN
 Pakistan,2020-05-14,35788,770,9695,Asia,PAK
@@ -13680,7 +13680,7 @@ El Salvador,2020-05-15,1210,25,417,Americas,SLV
 Equatorial Guinea,2020-05-15,594,7,22,Africa,GNQ
 Eritrea,2020-05-15,39,0,39,Africa,ERI
 Estonia,2020-05-15,1766,63,923,Europe,EST
-Swaziland,2020-05-15,190,2,66,Africa,SWZ
+Eswatini,2020-05-15,190,2,66,Africa,SWZ
 Ethiopia,2020-05-15,287,5,112,Africa,ETH
 Fiji,2020-05-15,18,0,15,Oceania,FJI
 Finland,2020-05-15,6228,293,5000,Europe,FIN
@@ -13749,7 +13749,7 @@ New Zealand,2020-05-15,1498,21,1428,Oceania,NZL
 Nicaragua,2020-05-15,25,8,7,Americas,NIC
 Niger,2020-05-15,885,51,684,Africa,NER
 Nigeria,2020-05-15,5450,171,1320,Africa,NGA
-Macedonia,2020-05-15,1740,97,1251,Europe,MKD
+North Macedonia,2020-05-15,1740,97,1251,Europe,MKD
 Norway,2020-05-15,8219,232,32,Europe,NOR
 Oman,2020-05-15,4625,20,1350,Asia,OMN
 Pakistan,2020-05-15,38799,834,10880,Asia,PAK
@@ -13868,7 +13868,7 @@ El Salvador,2020-05-16,1265,26,441,Americas,SLV
 Equatorial Guinea,2020-05-16,594,7,22,Africa,GNQ
 Eritrea,2020-05-16,39,0,39,Africa,ERI
 Estonia,2020-05-16,1770,63,934,Europe,EST
-Swaziland,2020-05-16,202,2,72,Africa,SWZ
+Eswatini,2020-05-16,202,2,72,Africa,SWZ
 Ethiopia,2020-05-16,306,5,113,Africa,ETH
 Fiji,2020-05-16,18,0,15,Oceania,FJI
 Finland,2020-05-16,6286,297,5000,Europe,FIN
@@ -13937,7 +13937,7 @@ New Zealand,2020-05-16,1499,21,1433,Oceania,NZL
 Nicaragua,2020-05-16,25,8,7,Americas,NIC
 Niger,2020-05-16,889,51,689,Africa,NER
 Nigeria,2020-05-16,5621,176,1472,Africa,NGA
-Macedonia,2020-05-16,1762,98,1267,Europe,MKD
+North Macedonia,2020-05-16,1762,98,1267,Europe,MKD
 Norway,2020-05-16,8237,232,32,Europe,NOR
 Oman,2020-05-16,5029,21,1436,Asia,OMN
 Pakistan,2020-05-16,38799,834,10880,Asia,PAK
@@ -14056,7 +14056,7 @@ El Salvador,2020-05-17,1338,30,464,Americas,SLV
 Equatorial Guinea,2020-05-17,594,7,22,Africa,GNQ
 Eritrea,2020-05-17,39,0,39,Africa,ERI
 Estonia,2020-05-17,1774,63,938,Europe,EST
-Swaziland,2020-05-17,203,2,73,Africa,SWZ
+Eswatini,2020-05-17,203,2,73,Africa,SWZ
 Ethiopia,2020-05-17,317,5,113,Africa,ETH
 Fiji,2020-05-17,18,0,15,Oceania,FJI
 Finland,2020-05-17,6347,298,5000,Europe,FIN
@@ -14125,7 +14125,7 @@ New Zealand,2020-05-17,1499,21,1433,Oceania,NZL
 Nicaragua,2020-05-17,25,8,7,Americas,NIC
 Niger,2020-05-17,904,54,698,Africa,NER
 Nigeria,2020-05-17,5959,182,1594,Africa,NGA
-Macedonia,2020-05-17,1792,101,1293,Europe,MKD
+North Macedonia,2020-05-17,1792,101,1293,Europe,MKD
 Norway,2020-05-17,8249,232,32,Europe,NOR
 Oman,2020-05-17,5186,22,1465,Asia,OMN
 Pakistan,2020-05-17,40151,873,11341,Asia,PAK
@@ -14244,7 +14244,7 @@ El Salvador,2020-05-18,1413,30,474,Americas,SLV
 Equatorial Guinea,2020-05-18,719,7,22,Africa,GNQ
 Eritrea,2020-05-18,39,0,39,Africa,ERI
 Estonia,2020-05-18,1784,64,938,Europe,EST
-Swaziland,2020-05-18,205,2,78,Africa,SWZ
+Eswatini,2020-05-18,205,2,78,Africa,SWZ
 Ethiopia,2020-05-18,352,5,116,Africa,ETH
 Fiji,2020-05-18,18,0,15,Oceania,FJI
 Finland,2020-05-18,6380,300,5000,Europe,FIN
@@ -14313,7 +14313,7 @@ New Zealand,2020-05-18,1499,21,1433,Oceania,NZL
 Nicaragua,2020-05-18,25,8,7,Americas,NIC
 Niger,2020-05-18,909,55,714,Africa,NER
 Nigeria,2020-05-18,6175,191,1644,Africa,NGA
-Macedonia,2020-05-18,1817,104,1301,Europe,MKD
+North Macedonia,2020-05-18,1817,104,1301,Europe,MKD
 Norway,2020-05-18,8257,233,32,Europe,NOR
 Oman,2020-05-18,5379,25,1496,Asia,OMN
 Pakistan,2020-05-18,42125,903,11922,Asia,PAK
@@ -14432,7 +14432,7 @@ El Salvador,2020-05-19,1498,30,502,Americas,SLV
 Equatorial Guinea,2020-05-19,825,7,22,Africa,GNQ
 Eritrea,2020-05-19,39,0,39,Africa,ERI
 Estonia,2020-05-19,1791,64,938,Europe,EST
-Swaziland,2020-05-19,208,2,87,Africa,SWZ
+Eswatini,2020-05-19,208,2,87,Africa,SWZ
 Ethiopia,2020-05-19,365,5,120,Africa,ETH
 Fiji,2020-05-19,18,0,15,Oceania,FJI
 Finland,2020-05-19,6399,301,5000,Europe,FIN
@@ -14501,7 +14501,7 @@ New Zealand,2020-05-19,1503,21,1447,Oceania,NZL
 Nicaragua,2020-05-19,254,17,199,Americas,NIC
 Niger,2020-05-19,914,55,734,Africa,NER
 Nigeria,2020-05-19,6401,192,1734,Africa,NGA
-Macedonia,2020-05-19,1839,106,1351,Europe,MKD
+North Macedonia,2020-05-19,1839,106,1351,Europe,MKD
 Norway,2020-05-19,8267,233,32,Europe,NOR
 Oman,2020-05-19,5671,27,1574,Asia,OMN
 Pakistan,2020-05-19,43966,939,12489,Asia,PAK
@@ -14620,7 +14620,7 @@ El Salvador,2020-05-20,1571,31,537,Americas,SLV
 Equatorial Guinea,2020-05-20,890,7,22,Africa,GNQ
 Eritrea,2020-05-20,39,0,39,Africa,ERI
 Estonia,2020-05-20,1794,64,956,Europe,EST
-Swaziland,2020-05-20,217,2,97,Africa,SWZ
+Eswatini,2020-05-20,217,2,97,Africa,SWZ
 Ethiopia,2020-05-20,389,5,122,Africa,ETH
 Fiji,2020-05-20,18,0,15,Oceania,FJI
 Finland,2020-05-20,6443,304,4800,Europe,FIN
@@ -14689,7 +14689,7 @@ New Zealand,2020-05-20,1503,21,1452,Oceania,NZL
 Nicaragua,2020-05-20,254,17,199,Americas,NIC
 Niger,2020-05-20,920,58,738,Africa,NER
 Nigeria,2020-05-20,6677,200,1840,Africa,NGA
-Macedonia,2020-05-20,1858,110,1367,Europe,MKD
+North Macedonia,2020-05-20,1858,110,1367,Europe,MKD
 Norway,2020-05-20,8281,234,32,Europe,NOR
 Oman,2020-05-20,6043,30,1661,Asia,OMN
 Pakistan,2020-05-20,45898,985,13101,Asia,PAK
@@ -14808,7 +14808,7 @@ El Salvador,2020-05-21,1640,33,544,Americas,SLV
 Equatorial Guinea,2020-05-21,903,10,22,Africa,GNQ
 Eritrea,2020-05-21,39,0,39,Africa,ERI
 Estonia,2020-05-21,1800,64,1488,Europe,EST
-Swaziland,2020-05-21,220,2,112,Africa,SWZ
+Eswatini,2020-05-21,220,2,112,Africa,SWZ
 Ethiopia,2020-05-21,399,5,123,Africa,ETH
 Fiji,2020-05-21,18,0,15,Oceania,FJI
 Finland,2020-05-21,6493,306,4800,Europe,FIN
@@ -14877,7 +14877,7 @@ New Zealand,2020-05-21,1504,21,1455,Oceania,NZL
 Nicaragua,2020-05-21,279,17,199,Americas,NIC
 Niger,2020-05-21,924,60,753,Africa,NER
 Nigeria,2020-05-21,7016,211,1907,Africa,NGA
-Macedonia,2020-05-21,1898,111,1378,Europe,MKD
+North Macedonia,2020-05-21,1898,111,1378,Europe,MKD
 Norway,2020-05-21,8309,235,32,Europe,NOR
 Oman,2020-05-21,6370,31,1821,Asia,OMN
 Pakistan,2020-05-21,48091,1017,14155,Asia,PAK
@@ -14996,7 +14996,7 @@ El Salvador,2020-05-22,1725,33,570,Americas,SLV
 Equatorial Guinea,2020-05-22,960,11,165,Africa,GNQ
 Eritrea,2020-05-22,39,0,39,Africa,ERI
 Estonia,2020-05-22,1807,64,1508,Europe,EST
-Swaziland,2020-05-22,225,2,119,Africa,SWZ
+Eswatini,2020-05-22,225,2,119,Africa,SWZ
 Ethiopia,2020-05-22,433,5,128,Africa,ETH
 Fiji,2020-05-22,18,0,15,Oceania,FJI
 Finland,2020-05-22,6537,306,4800,Europe,FIN
@@ -15065,7 +15065,7 @@ New Zealand,2020-05-22,1504,21,1455,Oceania,NZL
 Nicaragua,2020-05-22,279,17,199,Americas,NIC
 Niger,2020-05-22,937,60,764,Africa,NER
 Nigeria,2020-05-22,7261,221,2007,Africa,NGA
-Macedonia,2020-05-22,1921,112,1387,Europe,MKD
+North Macedonia,2020-05-22,1921,112,1387,Europe,MKD
 Norway,2020-05-22,8332,235,7727,Europe,NOR
 Oman,2020-05-22,6794,34,1821,Asia,OMN
 Pakistan,2020-05-22,50694,1067,15201,Asia,PAK
@@ -15184,7 +15184,7 @@ El Salvador,2020-05-23,1819,33,570,Americas,SLV
 Equatorial Guinea,2020-05-23,960,11,165,Africa,GNQ
 Eritrea,2020-05-23,39,0,39,Africa,ERI
 Estonia,2020-05-23,1821,64,1526,Europe,EST
-Swaziland,2020-05-23,238,2,119,Africa,SWZ
+Eswatini,2020-05-23,238,2,119,Africa,SWZ
 Ethiopia,2020-05-23,494,5,151,Africa,ETH
 Fiji,2020-05-23,18,0,15,Oceania,FJI
 Finland,2020-05-23,6568,306,4800,Europe,FIN
@@ -15253,7 +15253,7 @@ New Zealand,2020-05-23,1504,21,1456,Oceania,NZL
 Nicaragua,2020-05-23,279,17,199,Americas,NIC
 Niger,2020-05-23,943,61,775,Africa,NER
 Nigeria,2020-05-23,7526,221,2174,Africa,NGA
-Macedonia,2020-05-23,1941,113,1411,Europe,MKD
+North Macedonia,2020-05-23,1941,113,1411,Europe,MKD
 Norway,2020-05-23,8346,235,7727,Europe,NOR
 Oman,2020-05-23,7257,36,1848,Asia,OMN
 Pakistan,2020-05-23,52437,1101,16653,Asia,PAK
@@ -15372,7 +15372,7 @@ El Salvador,2020-05-24,1915,35,633,Americas,SLV
 Equatorial Guinea,2020-05-24,960,11,165,Africa,GNQ
 Eritrea,2020-05-24,39,0,39,Africa,ERI
 Estonia,2020-05-24,1823,64,1532,Europe,EST
-Swaziland,2020-05-24,250,2,156,Africa,SWZ
+Eswatini,2020-05-24,250,2,156,Africa,SWZ
 Ethiopia,2020-05-24,582,5,152,Africa,ETH
 Fiji,2020-05-24,18,0,15,Oceania,FJI
 Finland,2020-05-24,6579,307,4800,Europe,FIN
@@ -15441,7 +15441,7 @@ New Zealand,2020-05-24,1504,21,1456,Oceania,NZL
 Nicaragua,2020-05-24,279,17,199,Americas,NIC
 Niger,2020-05-24,945,61,783,Africa,NER
 Nigeria,2020-05-24,7839,226,2263,Africa,NGA
-Macedonia,2020-05-24,1978,113,1422,Europe,MKD
+North Macedonia,2020-05-24,1978,113,1422,Europe,MKD
 Norway,2020-05-24,8352,235,7727,Europe,NOR
 Oman,2020-05-24,7770,37,1933,Asia,OMN
 Pakistan,2020-05-24,54601,1133,17198,Asia,PAK
@@ -15560,7 +15560,7 @@ El Salvador,2020-05-25,1983,35,772,Americas,SLV
 Equatorial Guinea,2020-05-25,1043,12,165,Africa,GNQ
 Eritrea,2020-05-25,39,0,39,Africa,ERI
 Estonia,2020-05-25,1824,65,1538,Europe,EST
-Swaziland,2020-05-25,256,2,158,Africa,SWZ
+Eswatini,2020-05-25,256,2,158,Africa,SWZ
 Ethiopia,2020-05-25,655,5,159,Africa,ETH
 Fiji,2020-05-25,18,0,15,Oceania,FJI
 Finland,2020-05-25,6599,308,5100,Europe,FIN
@@ -15629,7 +15629,7 @@ New Zealand,2020-05-25,1504,21,1461,Oceania,NZL
 Nicaragua,2020-05-25,279,17,199,Americas,NIC
 Niger,2020-05-25,951,62,786,Africa,NER
 Nigeria,2020-05-25,8068,233,2311,Africa,NGA
-Macedonia,2020-05-25,1999,113,1439,Europe,MKD
+North Macedonia,2020-05-25,1999,113,1439,Europe,MKD
 Norway,2020-05-25,8364,235,7727,Europe,NOR
 Oman,2020-05-25,7770,37,1933,Asia,OMN
 Pakistan,2020-05-25,56349,1167,17482,Asia,PAK
@@ -15748,7 +15748,7 @@ El Salvador,2020-05-26,2042,36,787,Americas,SLV
 Equatorial Guinea,2020-05-26,1043,12,165,Africa,GNQ
 Eritrea,2020-05-26,39,0,39,Africa,ERI
 Estonia,2020-05-26,1834,65,1552,Europe,EST
-Swaziland,2020-05-26,261,2,164,Africa,SWZ
+Eswatini,2020-05-26,261,2,164,Africa,SWZ
 Ethiopia,2020-05-26,701,6,167,Africa,ETH
 Fiji,2020-05-26,18,0,15,Oceania,FJI
 Finland,2020-05-26,6628,312,5100,Europe,FIN
@@ -15817,7 +15817,7 @@ New Zealand,2020-05-26,1504,21,1462,Oceania,NZL
 Nicaragua,2020-05-26,759,35,370,Americas,NIC
 Niger,2020-05-26,952,63,796,Africa,NER
 Nigeria,2020-05-26,8344,249,2385,Africa,NGA
-Macedonia,2020-05-26,2014,116,1453,Europe,MKD
+North Macedonia,2020-05-26,2014,116,1453,Europe,MKD
 Norway,2020-05-26,8383,235,7727,Europe,NOR
 Oman,2020-05-26,8118,37,2067,Asia,OMN
 Pakistan,2020-05-26,57705,1197,18314,Asia,PAK
@@ -15936,7 +15936,7 @@ El Salvador,2020-05-27,2109,39,891,Americas,SLV
 Equatorial Guinea,2020-05-27,1043,12,165,Africa,GNQ
 Eritrea,2020-05-27,39,0,39,Africa,ERI
 Estonia,2020-05-27,1840,66,1561,Europe,EST
-Swaziland,2020-05-27,272,2,168,Africa,SWZ
+Eswatini,2020-05-27,272,2,168,Africa,SWZ
 Ethiopia,2020-05-27,731,6,181,Africa,ETH
 Fiji,2020-05-27,18,0,15,Oceania,FJI
 Finland,2020-05-27,6692,313,5100,Europe,FIN
@@ -16005,7 +16005,7 @@ New Zealand,2020-05-27,1504,22,1474,Oceania,NZL
 Nicaragua,2020-05-27,759,35,370,Americas,NIC
 Niger,2020-05-27,952,63,796,Africa,NER
 Nigeria,2020-05-27,8733,254,2501,Africa,NGA
-Macedonia,2020-05-27,2039,119,1470,Europe,MKD
+North Macedonia,2020-05-27,2039,119,1470,Europe,MKD
 Norway,2020-05-27,8401,235,7727,Europe,NOR
 Oman,2020-05-27,8373,39,2177,Asia,OMN
 Pakistan,2020-05-27,59151,1225,19142,Asia,PAK
@@ -16124,7 +16124,7 @@ El Salvador,2020-05-28,2194,39,1002,Americas,SLV
 Equatorial Guinea,2020-05-28,1043,12,165,Africa,GNQ
 Eritrea,2020-05-28,39,0,39,Africa,ERI
 Estonia,2020-05-28,1851,66,1574,Europe,EST
-Swaziland,2020-05-28,279,2,168,Africa,SWZ
+Eswatini,2020-05-28,279,2,168,Africa,SWZ
 Ethiopia,2020-05-28,831,7,191,Africa,ETH
 Fiji,2020-05-28,18,0,15,Oceania,FJI
 Finland,2020-05-28,6743,313,5500,Europe,FIN
@@ -16193,7 +16193,7 @@ New Zealand,2020-05-28,1504,22,1481,Oceania,NZL
 Nicaragua,2020-05-28,759,35,370,Americas,NIC
 Niger,2020-05-28,955,64,803,Africa,NER
 Nigeria,2020-05-28,8915,259,2592,Africa,NGA
-Macedonia,2020-05-28,2077,121,1486,Europe,MKD
+North Macedonia,2020-05-28,2077,121,1486,Europe,MKD
 Norway,2020-05-28,8411,236,7727,Europe,NOR
 Oman,2020-05-28,9009,40,2177,Asia,OMN
 Pakistan,2020-05-28,61227,1260,20231,Asia,PAK
@@ -16312,7 +16312,7 @@ El Salvador,2020-05-29,2278,42,1015,Americas,SLV
 Equatorial Guinea,2020-05-29,1306,12,200,Africa,GNQ
 Eritrea,2020-05-29,39,0,39,Africa,ERI
 Estonia,2020-05-29,1859,67,1610,Europe,EST
-Swaziland,2020-05-29,279,2,168,Africa,SWZ
+Eswatini,2020-05-29,279,2,168,Africa,SWZ
 Ethiopia,2020-05-29,968,8,197,Africa,ETH
 Fiji,2020-05-29,18,0,15,Oceania,FJI
 Finland,2020-05-29,6776,314,5500,Europe,FIN
@@ -16381,7 +16381,7 @@ New Zealand,2020-05-29,1504,22,1481,Oceania,NZL
 Nicaragua,2020-05-29,759,35,370,Americas,NIC
 Niger,2020-05-29,955,64,813,Africa,NER
 Nigeria,2020-05-29,9302,261,2697,Africa,NGA
-Macedonia,2020-05-29,2129,126,1516,Europe,MKD
+North Macedonia,2020-05-29,2129,126,1516,Europe,MKD
 Norway,2020-05-29,8422,236,7727,Europe,NOR
 Oman,2020-05-29,9820,40,2396,Asia,OMN
 Pakistan,2020-05-29,64028,1317,22305,Asia,PAK
@@ -16500,7 +16500,7 @@ El Salvador,2020-05-30,2395,46,1031,Americas,SLV
 Equatorial Guinea,2020-05-30,1306,12,200,Africa,GNQ
 Eritrea,2020-05-30,39,0,39,Africa,ERI
 Estonia,2020-05-30,1865,67,1622,Europe,EST
-Swaziland,2020-05-30,283,2,168,Africa,SWZ
+Eswatini,2020-05-30,283,2,168,Africa,SWZ
 Ethiopia,2020-05-30,1063,8,208,Africa,ETH
 Fiji,2020-05-30,18,0,15,Oceania,FJI
 Finland,2020-05-30,6826,316,5500,Europe,FIN
@@ -16569,7 +16569,7 @@ New Zealand,2020-05-30,1504,22,1481,Oceania,NZL
 Nicaragua,2020-05-30,759,35,370,Americas,NIC
 Niger,2020-05-30,956,64,818,Africa,NER
 Nigeria,2020-05-30,9855,273,2856,Africa,NGA
-Macedonia,2020-05-30,2164,131,1535,Europe,MKD
+North Macedonia,2020-05-30,2164,131,1535,Europe,MKD
 Norway,2020-05-30,8437,236,7727,Europe,NOR
 Oman,2020-05-30,10423,42,2396,Asia,OMN
 Pakistan,2020-05-30,66457,1395,24131,Asia,PAK
@@ -16688,7 +16688,7 @@ El Salvador,2020-05-31,2517,46,1040,Americas,SLV
 Equatorial Guinea,2020-05-31,1306,12,200,Africa,GNQ
 Eritrea,2020-05-31,39,0,39,Africa,ERI
 Estonia,2020-05-31,1869,68,1624,Europe,EST
-Swaziland,2020-05-31,285,2,189,Africa,SWZ
+Eswatini,2020-05-31,285,2,189,Africa,SWZ
 Ethiopia,2020-05-31,1172,11,209,Africa,ETH
 Fiji,2020-05-31,18,0,15,Oceania,FJI
 Finland,2020-05-31,6859,320,5500,Europe,FIN
@@ -16757,7 +16757,7 @@ New Zealand,2020-05-31,1504,22,1481,Oceania,NZL
 Nicaragua,2020-05-31,759,35,370,Americas,NIC
 Niger,2020-05-31,958,64,839,Africa,NER
 Nigeria,2020-05-31,10162,287,3007,Africa,NGA
-Macedonia,2020-05-31,2226,133,1552,Europe,MKD
+North Macedonia,2020-05-31,2226,133,1552,Europe,MKD
 Norway,2020-05-31,8440,236,7727,Europe,NOR
 Oman,2020-05-31,11437,49,2682,Asia,OMN
 Pakistan,2020-05-31,69496,1483,25271,Asia,PAK
@@ -16876,7 +16876,7 @@ El Salvador,2020-06-01,2582,46,1063,Americas,SLV
 Equatorial Guinea,2020-06-01,1306,12,200,Africa,GNQ
 Eritrea,2020-06-01,39,0,39,Africa,ERI
 Estonia,2020-06-01,1870,68,1625,Europe,EST
-Swaziland,2020-06-01,293,3,194,Africa,SWZ
+Eswatini,2020-06-01,293,3,194,Africa,SWZ
 Ethiopia,2020-06-01,1257,12,217,Africa,ETH
 Fiji,2020-06-01,18,0,15,Oceania,FJI
 Finland,2020-06-01,6885,318,5500,Europe,FIN
@@ -16945,7 +16945,7 @@ New Zealand,2020-06-01,1504,22,1481,Oceania,NZL
 Nicaragua,2020-06-01,759,35,370,Americas,NIC
 Niger,2020-06-01,958,65,844,Africa,NER
 Nigeria,2020-06-01,10578,299,3122,Africa,NGA
-Macedonia,2020-06-01,2315,140,1569,Europe,MKD
+North Macedonia,2020-06-01,2315,140,1569,Europe,MKD
 Norway,2020-06-01,8446,236,7727,Europe,NOR
 Oman,2020-06-01,12223,50,2682,Asia,OMN
 Pakistan,2020-06-01,72460,1543,26083,Asia,PAK
@@ -17006,3 +17006,191 @@ Western Sahara,2020-06-01,9,1,6,Africa,ESH
 Yemen,2020-06-01,354,84,14,Asia,YEM
 Zambia,2020-06-01,1089,7,912,Africa,ZMB
 Zimbabwe,2020-06-01,203,4,29,Africa,ZWE
+Afghanistan,2020-06-02,16509,270,1450,Asia,AFG
+Albania,2020-06-02,1164,33,891,Europe,ALB
+Algeria,2020-06-02,9626,667,6067,Africa,DZA
+Andorra,2020-06-02,844,51,733,Europe,AND
+Angola,2020-06-02,86,4,18,Africa,AGO
+Antigua & Barbuda,2020-06-02,26,3,20,Americas,ATG
+Argentina,2020-06-02,18319,569,5709,Americas,ARG
+Armenia,2020-06-02,10009,158,3427,Asia,ARM
+Australia,2020-06-02,7229,102,6636,Oceania,AUS
+Austria,2020-06-02,16759,669,15629,Europe,AUT
+Azerbaijan,2020-06-02,5935,71,3564,Asia,AZE
+Bahamas,2020-06-02,102,11,49,Americas,BHS
+Bahrain,2020-06-02,12311,19,7407,Asia,BHR
+Bangladesh,2020-06-02,52445,709,11120,Asia,BGD
+Barbados,2020-06-02,92,7,76,Americas,BRB
+Belarus,2020-06-02,44255,243,19195,Europe,BLR
+Belgium,2020-06-02,58615,9505,15934,Europe,BEL
+Belize,2020-06-02,18,2,16,Americas,BLZ
+Benin,2020-06-02,244,3,148,Africa,BEN
+Bhutan,2020-06-02,47,0,9,Asia,BTN
+Bolivia,2020-06-02,10991,376,1298,Americas,BOL
+Bosnia & Herzegovina,2020-06-02,2535,157,1910,Europe,BIH
+Botswana,2020-06-02,40,1,23,Africa,BWA
+Brazil,2020-06-02,555383,31199,223638,Americas,BRA
+Brunei,2020-06-02,141,2,138,Asia,BRN
+Bulgaria,2020-06-02,2538,144,1123,Europe,BGR
+Burkina Faso,2020-06-02,881,53,720,Africa,BFA
+Myanmar (Burma),2020-06-02,232,6,143,Asia,MMR
+Burundi,2020-06-02,63,1,33,Africa,BDI
+Cape Verde,2020-06-02,466,5,237,Africa,CPV
+Cambodia,2020-06-02,125,0,123,Asia,KHM
+Cameroon,2020-06-02,6585,200,3676,Africa,CMR
+Canada,2020-06-02,93960,7477,50725,Americas,CAN
+Central African Republic,2020-06-02,1069,4,23,Africa,CAF
+Chad,2020-06-02,803,66,562,Africa,TCD
+Chile,2020-06-02,108686,1188,21325,Americas,CHL
+China,2020-06-02,84161,4638,79400,Asia,CHN
+Colombia,2020-06-02,30593,1014,9689,Americas,COL
+Comoros,2020-06-02,132,2,27,Africa,COM
+Congo - Brazzaville,2020-06-02,611,20,179,Africa,COG
+Congo - Kinshasa,2020-06-02,3326,72,482,Africa,COD
+Costa Rica,2020-06-02,1105,10,682,Americas,CRI
+Côte d’Ivoire,2020-06-02,3024,33,1501,Africa,CIV
+Croatia,2020-06-02,2246,103,2088,Europe,HRV
+Cuba,2020-06-02,2092,83,1827,Americas,CUB
+Cyprus,2020-06-02,952,17,790,Asia,CYP
+Czechia,2020-06-02,9364,323,6686,Europe,CZE
+Denmark,2020-06-02,11934,580,10687,Europe,DNK
+Diamond Princess,2020-06-02,712,13,651,Outro,NA
+Djibouti,2020-06-02,3779,25,1607,Africa,DJI
+Dominica,2020-06-02,18,0,16,Americas,DMA
+Dominican Republic,2020-06-02,17752,515,11075,Americas,DOM
+Ecuador,2020-06-02,40414,3438,20019,Americas,ECU
+Egypt,2020-06-02,27536,1052,6827,Africa,EGY
+El Salvador,2020-06-02,2653,49,1160,Americas,SLV
+Equatorial Guinea,2020-06-02,1306,12,200,Africa,GNQ
+Eritrea,2020-06-02,39,0,39,Africa,ERI
+Estonia,2020-06-02,1870,68,1632,Europe,EST
+Eswatini,2020-06-02,294,3,198,Africa,SWZ
+Ethiopia,2020-06-02,1344,14,231,Africa,ETH
+Fiji,2020-06-02,18,0,15,Oceania,FJI
+Finland,2020-06-02,6887,320,5500,Europe,FIN
+France,2020-06-02,188450,28943,68930,Europe,FRA
+Gabon,2020-06-02,2803,20,779,Africa,GAB
+Gambia,2020-06-02,25,1,20,Africa,GMB
+Georgia,2020-06-02,796,13,634,Asia,GEO
+Germany,2020-06-02,183879,8563,166609,Europe,DEU
+Ghana,2020-06-02,8297,38,2986,Africa,GHA
+Greece,2020-06-02,2937,179,1374,Europe,GRC
+Grenada,2020-06-02,23,0,18,Americas,GRD
+Guatemala,2020-06-02,5586,123,824,Americas,GTM
+Guinea,2020-06-02,3886,23,2267,Africa,GIN
+Guinea-Bissau,2020-06-02,1339,8,53,Africa,GNB
+Guyana,2020-06-02,153,12,70,Americas,GUY
+Haiti,2020-06-02,2226,45,24,Americas,HTI
+Vatican City,2020-06-02,12,0,2,Europe,VAT
+Honduras,2020-06-02,5527,225,563,Americas,HND
+Hungary,2020-06-02,3921,532,2160,Europe,HUN
+Iceland,2020-06-02,1806,10,1794,Europe,ISL
+India,2020-06-02,207191,5829,100285,Asia,IND
+Indonesia,2020-06-02,27549,1663,7935,Asia,IDN
+Iran,2020-06-02,157562,7942,123077,Asia,IRN
+Iraq,2020-06-02,7387,235,3508,Asia,IRQ
+Ireland,2020-06-02,25066,1658,22089,Europe,IRL
+Israel,2020-06-02,17285,290,14940,Asia,ISR
+Italy,2020-06-02,233515,33530,160092,Europe,ITA
+Jamaica,2020-06-02,590,9,356,Americas,JAM
+Japan,2020-06-02,16837,902,14585,Asia,JPN
+Jordan,2020-06-02,755,9,549,Asia,JOR
+Kazakhstan,2020-06-02,11571,44,5941,Asia,KAZ
+Kenya,2020-06-02,2093,71,499,Africa,KEN
+South Korea,2020-06-02,11590,273,10467,Asia,KOR
+Kosovo,2020-06-02,1064,30,829,Outro,NA
+Kuwait,2020-06-02,28649,226,14281,Asia,KWT
+Kyrgyzstan,2020-06-02,1845,17,1219,Asia,KGZ
+Laos,2020-06-02,19,0,16,Asia,LAO
+Latvia,2020-06-02,1071,24,760,Europe,LVA
+Lebanon,2020-06-02,1242,27,719,Asia,LBN
+Lesotho,2020-06-02,2,0,1,Africa,LSO
+Liberia,2020-06-02,311,28,167,Africa,LBR
+Libya,2020-06-02,182,5,52,Africa,LBY
+Liechtenstein,2020-06-02,82,1,55,Europe,LIE
+Lithuania,2020-06-02,1682,71,1249,Europe,LTU
+Luxembourg,2020-06-02,4020,110,3848,Europe,LUX
+Madagascar,2020-06-02,845,6,185,Africa,MDG
+Malawi,2020-06-02,358,4,42,Africa,MWI
+Malaysia,2020-06-02,7877,115,6470,Asia,MYS
+Maldives,2020-06-02,1841,7,608,Asia,MDV
+Mali,2020-06-02,1351,78,769,Africa,MLI
+Malta,2020-06-02,620,9,554,Europe,MLT
+Mauritania,2020-06-02,668,31,55,Africa,MRT
+Mauritius,2020-06-02,335,10,322,Africa,MUS
+Mexico,2020-06-02,97326,10637,69749,Americas,MEX
+Moldova,2020-06-02,8548,307,4738,Europe,MDA
+Monaco,2020-06-02,99,4,90,Europe,MCO
+Mongolia,2020-06-02,185,0,44,Asia,MNG
+Montenegro,2020-06-02,324,9,315,Europe,MNE
+Morocco,2020-06-02,7866,206,6410,Africa,MAR
+Mozambique,2020-06-02,307,2,98,Africa,MOZ
+MS Zaandam,2020-06-02,9,2,0,Outro,NA
+Namibia,2020-06-02,25,0,16,Africa,NAM
+Nepal,2020-06-02,2099,8,266,Asia,NPL
+Netherlands,2020-06-02,46852,5986,180,Europe,NLD
+New Zealand,2020-06-02,1504,22,1481,Oceania,NZL
+Nicaragua,2020-06-02,1118,46,370,Americas,NIC
+Niger,2020-06-02,960,65,848,Africa,NER
+Nigeria,2020-06-02,10819,314,3240,Africa,NGA
+North Macedonia,2020-06-02,2391,141,1595,Europe,MKD
+Norway,2020-06-02,8455,237,7727,Europe,NOR
+Oman,2020-06-02,12799,59,2812,Asia,OMN
+Pakistan,2020-06-02,76398,1621,27110,Asia,PAK
+Panama,2020-06-02,14095,352,9514,Americas,PAN
+Papua New Guinea,2020-06-02,8,0,8,Oceania,PNG
+Paraguay,2020-06-02,1013,11,498,Americas,PRY
+Peru,2020-06-02,170039,4634,69257,Americas,PER
+Philippines,2020-06-02,18997,966,4063,Asia,PHL
+Poland,2020-06-02,24395,1092,11726,Europe,POL
+Portugal,2020-06-02,32895,1436,19869,Europe,PRT
+Qatar,2020-06-02,60259,43,36036,Asia,QAT
+Romania,2020-06-02,19517,1288,13526,Europe,ROU
+Russia,2020-06-02,423186,5031,186602,Europe,RUS
+Rwanda,2020-06-02,384,2,269,Africa,RWA
+St. Kitts & Nevis,2020-06-02,15,0,15,Americas,KNA
+St. Lucia,2020-06-02,18,0,18,Americas,LCA
+St. Vincent & Grenadines,2020-06-02,26,0,15,Americas,VCT
+San Marino,2020-06-02,672,42,384,Europe,SMR
+São Tomé & Príncipe,2020-06-02,484,12,68,Africa,STP
+Saudi Arabia,2020-06-02,89011,549,65790,Asia,SAU
+Senegal,2020-06-02,3836,43,1954,Africa,SEN
+Serbia,2020-06-02,11454,245,6766,Europe,SRB
+Seychelles,2020-06-02,11,0,11,Africa,SYC
+Sierra Leone,2020-06-02,896,46,480,Africa,SLE
+Singapore,2020-06-02,35836,24,23175,Asia,SGP
+Slovakia,2020-06-02,1522,28,1372,Europe,SVK
+Slovenia,2020-06-02,1475,109,1358,Europe,SVN
+Somalia,2020-06-02,2089,79,361,Africa,SOM
+South Africa,2020-06-02,35812,755,18313,Africa,ZAF
+South Sudan,2020-06-02,994,10,6,Africa,SSD
+Spain,2020-06-02,239932,27127,150376,Europe,ESP
+Sri Lanka,2020-06-02,1683,11,823,Asia,LKA
+Sudan,2020-06-02,5310,307,1625,Africa,SDN
+Suriname,2020-06-02,54,1,9,Americas,SUR
+Sweden,2020-06-02,38589,4468,0,Europe,SWE
+Switzerland,2020-06-02,30874,1920,28500,Europe,CHE
+Syria,2020-06-02,123,6,50,Asia,SYR
+Taiwan,2020-06-02,443,7,427,Asia,TWN
+Tajikistan,2020-06-02,4100,47,2217,Asia,TJK
+Tanzania,2020-06-02,509,21,183,Africa,TZA
+Thailand,2020-06-02,3083,58,2966,Asia,THA
+Timor-Leste,2020-06-02,24,0,24,Asia,TLS
+Togo,2020-06-02,445,13,230,Africa,TGO
+Trinidad & Tobago,2020-06-02,117,8,108,Americas,TTO
+Tunisia,2020-06-02,1086,48,965,Africa,TUN
+Turkey,2020-06-02,165555,4585,129921,Asia,TUR
+Uganda,2020-06-02,489,0,82,Africa,UGA
+Ukraine,2020-06-02,24895,733,10461,Europe,UKR
+United Arab Emirates,2020-06-02,35788,269,18726,Asia,ARE
+United Kingdom,2020-06-02,279392,39452,1224,Europe,GBR
+Uruguay,2020-06-02,826,23,691,Americas,URY
+United States,2020-06-02,1831821,106180,463868,Americas,USA
+Uzbekistan,2020-06-02,3760,15,2908,Asia,UZB
+Venezuela,2020-06-02,1819,18,334,Americas,VEN
+Vietnam,2020-06-02,328,0,298,Asia,VNM
+Palestinian Territories,2020-06-02,451,3,372,Asia,PSE
+Western Sahara,2020-06-02,9,1,6,Africa,ESH
+Yemen,2020-06-02,399,87,15,Asia,YEM
+Zambia,2020-06-02,1089,7,912,Africa,ZMB
+Zimbabwe,2020-06-02,206,4,29,Africa,ZWE
