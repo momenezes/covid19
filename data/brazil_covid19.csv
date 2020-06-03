@@ -2122,7 +2122,7 @@ date,region,state,cases,deaths
 2020-05-31,Nordeste,Paraíba,13162,360
 2020-05-31,Nordeste,Pernambuco,34450,2807
 2020-05-31,Nordeste,Piauí,4931,161
-2020-05-31,Nordeste,Rio Grande do Norte,8051,305
+2020-05-31,Nordeste,Rio Grande do Norte,7402,305
 2020-05-31,Nordeste,Sergipe,6999,158
 2020-05-31,Norte,Acre,6219,148
 2020-05-31,Norte,Amapá,9602,222
@@ -2165,3 +2165,30 @@ date,region,state,cases,deaths
 2020-06-01,Sul,Paraná,4835,190
 2020-06-01,Sul,Rio Grande do Sul,9332,232
 2020-06-01,Sul,Santa Catarina,9498,146
+2020-06-02,Centro-Oeste,Distrito Federal,11256,177
+2020-06-02,Centro-Oeste,Goiás,4377,151
+2020-06-02,Centro-Oeste,Mato Grosso,2709,70
+2020-06-02,Centro-Oeste,Mato Grosso do Sul,1646,20
+2020-06-02,Nordeste,Alagoas,11559,482
+2020-06-02,Nordeste,Bahia,21430,736
+2020-06-02,Nordeste,Ceará,53073,3421
+2020-06-02,Nordeste,Maranhão,36625,997
+2020-06-02,Nordeste,Paraíba,14859,379
+2020-06-02,Nordeste,Pernambuco,35508,2933
+2020-06-02,Nordeste,Piauí,5506,180
+2020-06-02,Nordeste,Rio Grande do Norte,8233,341
+2020-06-02,Nordeste,Sergipe,7555,172
+2020-06-02,Norte,Acre,6465,165
+2020-06-02,Norte,Amapá,10511,237
+2020-06-02,Norte,Amazonas,43195,2102
+2020-06-02,Norte,Pará,41207,3040
+2020-06-02,Norte,Rondônia,5477,172
+2020-06-02,Norte,Roraima,3850,120
+2020-06-02,Norte,Tocantins,4483,79
+2020-06-02,Sudeste,Espírito Santo,15151,664
+2020-06-02,Sudeste,Minas Gerais,10939,289
+2020-06-02,Sudeste,Rio de Janeiro,56732,5686
+2020-06-02,Sudeste,São Paulo,118295,7994
+2020-06-02,Sul,Paraná,5163,199
+2020-06-02,Sul,Rio Grande do Sul,9919,245
+2020-06-02,Sul,Santa Catarina,9660,148
