@@ -20,6 +20,7 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,  tidy.opts = li
 
 ```{r warning=FALSE, message=FALSE}
 library(tidyverse)
+library(magrittr)
 library(lubridate)
 library(ggpubr)
 library(readxl)
@@ -304,12 +305,18 @@ zip::unzip("./data/corona-virus-brazil.zip", exdir = "./data")
 ```
 
 ## Base de Dados do Brasil a partir do Projeto Brasil.io
-
+https://data.brasil.io/dataset/covid19/caso_full.csv.gz
 
 ```{r}
 setwd("/datahome/mario/docs/analytics/covid19")
-curl::curl_download("https://data.brasil.io/dataset/covid19/caso_full.csv.gz", destfile = "./data/caso_full.csv.gz") 
-system("cd data;gunzip -f caso_full.csv.gz;cd ..")
+ tryCatch(expr = {
+       curl::curl_download("https://data.brasil.io/dataset/covid19/caso_full.csv.gz", destfile = "./data/caso_full.csv.gz") 
+       system("cd data;gunzip -f caso_full.csv.gz;cd ..")
+    }, 
+    error = function(e) {
+      print(e)
+    }
+    )
 ```
 
 ## Base de Dados População Mundial
