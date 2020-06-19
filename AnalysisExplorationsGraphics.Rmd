@@ -99,7 +99,9 @@ ultimadata <- max(covid19$DateRep)
 
 ```{r}
 covid19 %>% 
-  summarise(Casos = sum(Cases), Mortes = sum(Deaths), Letalidade = sprintf("%s%%", round(Mortes/Casos*100,2))) %>% 
+  summarise(Casos = sum(Cases, na.rm = T), 
+            Mortes = sum(Deaths, na.rm = T), 
+            Letalidade = sprintf("%s%%", round(Mortes/Casos*100,2))) %>%
   kable(align = "r")
 ```
 
@@ -107,7 +109,9 @@ covid19 %>%
 ```{r eval=FALSE}
 covid19 %>% 
   group_by(Continent) %>% 
-  summarise(Casos = as.integer(sum(Cases)), Mortes = as.integer(sum(Deaths)), Letalidade = round(Mortes/Casos*100,2)) %>% 
+  summarise(Casos = as.integer(sum(Cases, na.rm = T)), 
+            Mortes = as.integer(sum(Deaths, na.rm = T)), 
+            Letalidade = round(Mortes/Casos*100,2)) %>% 
   filter(!is.na(Continent)) %>%
   gather( key = "Tipo", value = "Valor", 2:3) %>%
   ggplot(aes(x = reorder(Continent,Valor), y = Valor, fill = Tipo)) + 
@@ -133,14 +137,14 @@ Brasil <- covid19 %>%
 
 Uma mostra dos últimos 20 dias da Itália.
 ```{r}
-Italia %>% select(-Country, -Continent, -popData2018) %>% top_n(20, DateRep) %>% 
+Italia %>% select(-Country, -Continent, -popData) %>% top_n(20, DateRep) %>% 
   mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>% datatable(rownames = F, autoHideNavigation = T , options = list(searching = FALSE))
   
 ```
 
 O mesmo para o Brasil, últimos 20 dias.
 ```{r}
-Brasil %>% select(-Country, -Continent, -popData2018) %>% top_n(20, DateRep) %>% 
+Brasil %>% select(-Country, -Continent, -popData) %>% top_n(20, DateRep) %>% 
    mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
   datatable(rownames = F, autoHideNavigation = T, options = list(searching = FALSE) )
 ```
@@ -223,7 +227,7 @@ covid19 <- filter(covid19, !is.na(Continent))
 ```{r continentsgg}
 filter(covid19, DateRep > "2020-02-01") %>% 
   group_by(Continent, DateRep) %>% 
-  summarise(numCasos = sum(Cases)) %>% 
+  summarise(numCasos = sum(Cases, na.rm = T)) %>% 
   mutate(DateRep = as.Date(DateRep)) %>%
   ggplot(aes(x = DateRep, y = numCasos)) + 
   geom_bar(aes(fill=Continent),stat="identity", position = "stack") + 
@@ -247,7 +251,7 @@ filter(covid19, Country != "China") %>% tail(20) %>% kable()
 filter(covid19, DateRep > "2020-02-01") %>%
   filter(Country != "China") %>%
   group_by(Continent, DateRep) %>% 
-  summarise(numCasos = sum(Cases)) %>%
+  summarise(numCasos = sum(Cases, na.rm = T)) %>%
   mutate(DateRep = as.Date(DateRep)) %>% 
   ggplot(aes(x = DateRep, y = numCasos)) + 
   geom_bar(aes(fill=Continent),stat="identity", position = "stack") + 
@@ -267,7 +271,7 @@ restomundo <- filter(covid19, Country != "China") %>% mutate(Country = "Resto do
 ```
 
 ```{r}
-restomundo <- group_by(restomundo, DateRep) %>% mutate(Cases = sum(Cases)) %>% ungroup()
+restomundo <- group_by(restomundo, DateRep) %>% mutate(Cases = sum(Cases, na.rm = T)) %>% ungroup()
 ```
 
 
@@ -308,7 +312,7 @@ filter(covid19, DateRep > "2020-02-01", Country == "Brazil") %>%
 ```{r}
 covid19 %>% 
   group_by(Country) %>% 
-  summarise(Casos = sum(Cases), Mortes = sum(Deaths)) %>% 
+  summarise(Casos = sum(Cases, na.rm = T), Mortes = sum(Deaths, na.rm = T)) %>% 
   arrange(desc(Casos)) %>% 
   filter(Casos > 500) %>% datatable(rownames = F, autoHideNavigation = T )
 #  kable(caption = "Países (com mais de 500 casos) ordenados por número de casos confirmados",col.names = c("País", "Casos","Mortes"), escape = F, align = "c") %>%
@@ -342,14 +346,14 @@ ultimadata <- max(jhucovid19$DateRep)
  jhucovid19 %>% 
   group_by(Country) %>% 
   summarise(CasosPais = last(ConfirmedCases), MortosPais = last(Deaths), RecuperadosPais = last(Recovered)) %>% 
-  summarise(`Casos Confirmados` = sum(CasosPais), Mortos = sum(MortosPais), Recuperados = sum(RecuperadosPais)) %>% kable()
+  summarise(`Casos Confirmados` = sum(CasosPais, na.rm = T), Mortos = sum(MortosPais, na.rm = T), Recuperados = sum(RecuperadosPais, na.rm = T)) %>% kable()
 ```
 
 
 ```{r}
 CasosRemovidos <- filter(jhucovid19, is.na(Continent))
 numNAsCont <- CasosRemovidos %>% count() %>% as.numeric()
-numCasosSemCont <- CasosRemovidos %>% group_by(Country) %>% summarise(Casos = sum(ConfirmedCases)) %>% summarise(CasosTot = sum(Casos)) %>% select(CasosTot) %>% as.numeric()
+numCasosSemCont <- CasosRemovidos %>% group_by(Country) %>% summarise(Casos = sum(ConfirmedCases, na.rm = T)) %>% summarise(CasosTot = sum(Casos, na.rm = T)) %>% select(CasosTot) %>% as.numeric()
 ```
 
 
@@ -366,7 +370,7 @@ ultimadata <- max(jhucovid19$DateRep)
 
 
 ```{r}
-filter(jhucovid19, Country == "France") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% 
+filter(jhucovid19, Country == "France") %>% select(-Country, -Continent, -Code) %>% top_n(10,DateRep) %>% 
    mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>% 
   datatable(rownames = F, autoHideNavigation = T, caption = "França", options = list(paging = FALSE, searching = FALSE))
 #  kable(caption = "França")
@@ -374,19 +378,19 @@ filter(jhucovid19, Country == "France") %>% select(-Country, -Continent) %>% top
 
 
 ```{r}
-filter(jhucovid19, Country == "Italy") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% 
+filter(jhucovid19, Country == "Italy") %>% select(-Country, -Continent, -Code) %>% top_n(10,DateRep) %>% 
    mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
   datatable(rownames = F, autoHideNavigation = T ,caption = "Itália", options = list(paging = FALSE, searching = FALSE))
 ```
 
 ```{r}
-filter(jhucovid19, Country == "Spain") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% 
+filter(jhucovid19, Country == "Spain") %>% select(-Country, -Continent, -Code) %>% top_n(10,DateRep) %>% 
    mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
   datatable(rownames = F, autoHideNavigation = T , caption = "Espanha", options = list(paging = FALSE, searching = FALSE))
 ```
 
 ```{r}
-filter(jhucovid19, Country == "Brazil") %>% select(-Country, -Continent) %>% top_n(10,DateRep) %>% 
+filter(jhucovid19, Country == "Brazil") %>% select(-Country, -Continent, -Code) %>% top_n(10,DateRep) %>% 
    mutate(DateRep = format(DateRep, "%d-%m-%Y")) %>%
   datatable(rownames = F, autoHideNavigation = T , caption = "Brasil", options = list(paging = FALSE, searching = FALSE))
 ```
