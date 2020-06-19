@@ -63,6 +63,7 @@ arqdest <- paste("COVID-19-geographic-distribution-worldwide-",hoje,".xlsx",sep=
 <!--
 https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-03-18.xls
 https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide.xlsx
+https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide.xlsx
 -->
 
 
@@ -92,10 +93,12 @@ A estrutura dos dados é:
 str(covid19prep)
 ```
 
+A partir de 18 de junho de 2020, o ECDC passou a incluir a coluna `popData2019` ao invés da `popData2018`. Como os dados são cumulativos, vou alterar o nome da coluna para **popData**.
+
 ```{r country}
 covid19prep <- rename(covid19prep, Country = `countriesAndTerritories`, DateRep = dateRep, 
                       Cases = cases, Deaths = deaths, Day = day, Month = month) %>% 
-  select(Country, DateRep, Cases, Deaths, countryterritoryCode, popData2018)
+  select(Country, DateRep, Cases, Deaths, countryterritoryCode, popData=starts_with("popData"))
 ```
 
 ```{r}
