@@ -97,7 +97,7 @@ Utilizando dados da John Hopkins University (JHU).
  jhucovid19 %>% 
   group_by(Country) %>% 
   summarise(CasosPais = last(ConfirmedCases), MortosPais = last(Deaths), RecuperadosPais = last(Recovered)) %>% 
-  summarise(`Casos Confirmados` = sum(CasosPais), Mortos = sum(MortosPais), Recuperados = sum(RecuperadosPais)) %>% kable()
+  summarise(`Casos Confirmados` = sum(CasosPais, na.rm = T), Mortos = sum(MortosPais, na.rm = T), Recuperados = sum(RecuperadosPais, na.rm = T)) %>% kable()
 ```
 
 
