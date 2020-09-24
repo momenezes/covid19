@@ -2,17 +2,14 @@
 title: "Boletim Diário"
 output: 
   flexdashboard::flex_dashboard:
+    orientation: columns
     vertical_layout: scroll
     theme: cosmo
 
 ---
 
 ```{r setup, include=FALSE}
-library(flexdashboard)
 knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, knitr.kable.NA = '')
-```
-
-```{r warning=FALSE, message=FALSE}
 library(tidyverse)
 library(magrittr)
 library(lubridate)
@@ -31,6 +28,7 @@ library(formattable)
 library(reactable)
 library(highcharter)
 library(crosstalk)
+library(flexdashboard)
 ```
 
 
@@ -124,9 +122,9 @@ valueBox(briototais$Letalidade, icon = "fa-percentage",color="rgb(26,110,204)")
 ```
     
 
-## Row 2 {data-height=400}  
+## Row 2 {data-height=500}  
 
-### Casos por Estado
+### Por Estado
 
 ```{r}
 casosfull_brio %>% 
@@ -135,8 +133,10 @@ casosfull_brio %>%
   group_by(Estado) %>% 
   filter(is_last == "TRUE") %>%
   summarise(Casos = last(last_available_confirmed), Mortes = last(last_available_deaths)) -> totestados
-totestados %<>% mutate(Estado = factor(Estado, ordered=T)) 
-totestados$Estado <- reorder(totestados$Estado, totestados$Casos)
+totestados <- arrange(totestados, desc(Casos))
+setorder(totestados, -Casos)
+#totestados %<>% mutate(Estado = factor(Estado, ordered=T)) 
+#totestados$Estado <- reorder(totestados$Estado, totestados$Casos)
   #gather(key = "Tipo", value = "Valor", 2:3) -> totestados
 ```
 
@@ -175,7 +175,7 @@ highchart() %>%
 ```
 
 
-```{r}
+```{r }
 totestadostidy <- totestados %>%  gather(key = "Tipo", value = "Valor", 2:3)
 totestshd <- SharedData$new(totestadostidy, key = ~Tipo)
 ```
@@ -198,7 +198,7 @@ subplot(barsC, barsM, shareX = FALSE, shareY = FALSE, titleX = TRUE, titleY = TR
 
 
 
-```{r}
+```{r eval = FALSE}
 totestados %>% 
   ggplot() + 
   geom_bar(aes(x = reorder(Estado,Casos), y = Casos, text = Casos), stat = "identity", fill = "tomato")+ 
@@ -215,10 +215,10 @@ ggplotly(g, tooltip="text")
 
 
 
-### Mortes por Estado
 
 
-```{r}
+
+```{r eval = FALSE}
 totestados %>%
   ggplot() + 
   geom_bar(aes(x = reorder(Estado,Casos), y = Mortes, text = Mortes), stat = "identity", fill = "tomato") +
@@ -230,6 +230,132 @@ totestados %>%
 j <- ggplotly(h, tooltip = "text")
 j
 ```
+
+
+
+```{r}
+library(echarts4r)
+#library(echarts4r.assets)
+```
+
+```{r}
+totestados <- left_join(totestados, estadoscode, by = "Estado")
+
+```
+
+
+```{r}
+totestados %>%
+  e_charts(x = Code, elementId = "casos") %>%
+  e_bar(Casos, legend = FALSE, name = "Casos") %>% 
+  e_labels(position = "right") %>% 
+  e_tooltip(
+    trigger = "item",
+    axisPointer = list(
+      type = "line"
+    )
+  )  %>% 
+  e_title("Casos Confirmados") %>% 
+  e_flip_coords() %>% 
+  e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
+      interval = 0L
+    ), inverse = TRUE) %>% 
+  e_x_axis(show = FALSE) %>% 
+  e_toolbox_feature(
+    feature = "saveAsImage",
+    title = "Save as image"
+  ) -> echrtCasos
+
+
+totestados %>%
+  e_charts(x = Code) %>%
+  e_bar(Mortes, legend = FALSE, name = "Mortes") %>% 
+  e_labels(position = "right") %>% 
+  e_tooltip(
+    trigger = "item",
+    axisPointer = list(
+      type = "line"
+    )
+  ) %>% 
+  e_title("Mortes") %>% 
+  e_flip_coords() %>% 
+  e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
+      interval = 0L
+    ), inverse = TRUE) %>% 
+  e_x_axis(show = FALSE) %>% 
+   e_connect("casos") %>%
+  e_toolbox_feature(
+    feature = "saveAsImage",
+    title = "Save as image"
+  ) -> echrtMortes
+
+e_arrange(echrtCasos, echrtMortes, rows = 1, cols = 2)
+
+```
+
+
+
+## Row 4 {data-height=700, .mobile}
+
+### {data-width=500}
+
+```{r}
+library(echarts4r)
+#library(echarts4r.assets)
+```
+
+
+
+
+```{r}
+totestados %>%
+  e_charts(x = Code, elementId = "casosM") %>%
+  e_bar(Casos, legend = FALSE, name = "Casos") %>% 
+  e_labels(position = "right") %>% 
+  e_tooltip(
+    trigger = "item",
+    axisPointer = list(
+      type = "line"
+    )
+  )  %>% 
+  e_title("Casos Confirmados") %>% 
+  e_flip_coords() %>% 
+  e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
+      interval = 0L
+    ), inverse = TRUE) %>% 
+  e_x_axis(show = FALSE) %>% 
+  e_toolbox_feature(
+    feature = "saveAsImage",
+    title = "Save as image"
+  ) -> echrtCasosM
+
+
+totestados %>%
+  e_charts(x = Code) %>%
+  e_bar(Mortes, legend = FALSE, name = "Mortes") %>% 
+  e_labels(position = "right") %>% 
+  e_tooltip(
+    trigger = "item",
+    axisPointer = list(
+      type = "line"
+    )
+  ) %>% 
+  e_title("Mortes") %>% 
+  e_flip_coords() %>% 
+  e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
+      interval = 0L
+    ), inverse = TRUE) %>% 
+  e_x_axis(show = FALSE) %>% 
+   e_connect("casosM") %>%
+  e_toolbox_feature(
+    feature = "saveAsImage",
+    title = "Save as image"
+  ) -> echrtMortesM
+
+e_arrange(echrtCasosM, echrtMortesM, rows = 2, cols = 1)
+
+```
+
 
 
 ## Row 3 {data-height=700}  
@@ -456,7 +582,7 @@ top20 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(20, Confirmed
 ```
 
 
-```{r out.height="380"}
+```{r eval = FALSE, out.height="380"}
 jhucovid19 %>%
   group_by(Continent, Country) %>% 
   filter(Continent != "Outro") %>%
