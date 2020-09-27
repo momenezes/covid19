@@ -293,7 +293,7 @@ e_arrange(echrtCasos, echrtMortes, rows = 1, cols = 2)
 
 ```
 
-
+<!--
 
 ## Row 4 {data-height=700, .mobile}
 
@@ -355,7 +355,7 @@ totestados %>%
 e_arrange(echrtCasosM, echrtMortesM, rows = 2, cols = 1)
 
 ```
-
+-->
 
 
 ## Row 3 {data-height=700}  
