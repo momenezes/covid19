@@ -11,16 +11,16 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-library(flexdashboard)
 knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, knitr.kable.NA = '')
 ```
 
 ```{r warning=FALSE, message=FALSE}
+
 library(tidyverse)
 library(lubridate)
 library(forcats)
 library(ggpubr)
-library(knitr)
+#library(knitr)
 library(stringi)
 library(RColorBrewer)
 library(ggthemes)
@@ -33,6 +33,7 @@ library(formattable)
 library(reactable)
 library(highcharter)
 library(crosstalk)
+library(flexdashboard)
 ```
 
 
@@ -125,10 +126,10 @@ valueBox(briototais$`Total Mortes`, icon = "fa-sad-tear", color="rgb(200,100,100
 valueBox(briototais$Letalidade, icon = "fa-percentage",color="rgb(26,110,204)")
 ```
     
-
+<!--
 ## Row 2 {data-height=400}  
+-->
 
-### Casos por Estado
 
 ```{r}
 casosfull_brio %>% 
@@ -174,7 +175,7 @@ subplot(barsC, barsM, shareX = FALSE, shareY = FALSE, titleX = TRUE, titleY = TR
 
 
 
-```{r}
+```{r eval = FALSE}
 totestados %>% 
   ggplot() + 
   geom_bar(aes(x = reorder(Estado,Casos), y = Casos, text = Casos), stat = "identity", fill = "tomato")+ 
@@ -184,7 +185,7 @@ totestados %>%
         panel.grid.minor.y = element_blank(),
         strip.background = element_blank()) +
   coord_flip() -> g
-ggplotly(g, tooltip="text")
+ggplotly(g) #, tooltip="text")
   
 
 ```
@@ -194,7 +195,7 @@ ggplotly(g, tooltip="text")
 ### Mortes por Estado
 
 
-```{r}
+```{r eval=FALSE}
 totestados %>%
   ggplot() + 
   geom_bar(aes(x = reorder(Estado,Casos), y = Mortes, text = Mortes), stat = "identity", fill = "tomato") +
@@ -203,14 +204,14 @@ totestados %>%
         panel.grid.minor.y = element_blank(),
         strip.background = element_blank()) +
   coord_flip() -> h
-j <- ggplotly(h, tooltip = "text")
+j <- ggplotly(h) #, tooltip = "text")
 j
 ```
 
 
 ## Row 3 {data-height=500}
 
-### {data-width=700}
+### Casos por Estado {data-width=700}
 
 ```{r }
 # nao consigo fazer o grafico com os Estados ordenados pelo numero de Casos
@@ -273,9 +274,8 @@ hw_grid(hcCasos, hcMortes)
 
 ```{r}
 library(echarts4r)
-library(echarts4r.assets)
+#library(echarts4r.assets)
 ```
-
 
 
 
@@ -294,7 +294,7 @@ totestados %>%
   e_flip_coords() %>% 
   e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
       interval = 0L
-    )) %>% 
+    ), inverse = TRUE) %>% 
   e_x_axis(show = FALSE) %>% 
   e_toolbox_feature(
     feature = "saveAsImage",
@@ -316,7 +316,7 @@ totestados %>%
   e_flip_coords() %>% 
   e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
       interval = 0L
-    )) %>% 
+    ), inverse = TRUE) %>% 
   e_x_axis(show = FALSE) %>% 
    e_connect("casos") %>%
   e_toolbox_feature(
@@ -329,13 +329,14 @@ e_arrange(echrtCasos, echrtMortes, rows = 1, cols = 2)
 ```
 
 
+<!--
 ## Row 4 {data-height=700, .mobile}
 
 ### {data-width=500}
 
 ```{r}
 library(echarts4r)
-library(echarts4r.assets)
+#library(echarts4r.assets)
 ```
 
 
@@ -356,7 +357,7 @@ totestados %>%
   e_flip_coords() %>% 
   e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
       interval = 0L
-    )) %>% 
+    ), inverse = TRUE) %>% 
   e_x_axis(show = FALSE) %>% 
   e_toolbox_feature(
     feature = "saveAsImage",
@@ -378,7 +379,7 @@ totestados %>%
   e_flip_coords() %>% 
   e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
       interval = 0L
-    )) %>% 
+    ), inverse = TRUE) %>% 
   e_x_axis(show = FALSE) %>% 
    e_connect("casosM") %>%
   e_toolbox_feature(
@@ -390,6 +391,7 @@ e_arrange(echrtCasosM, echrtMortesM, rows = 2, cols = 1)
 
 ```
 
+-->
 
 ## Row 5 {data-height=700}  
 
@@ -613,7 +615,7 @@ top20 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(20, Confirmed
 ```
 
 
-```{r out.height="380"}
+```{r }
 jhucovid19 %>%
   group_by(Continent, Country) %>% 
   filter(Continent != "Outro") %>%
@@ -626,10 +628,11 @@ jhucovid19 %>%
         panel.grid.minor.y = element_blank(),
         strip.background = element_blank()) + scale_fill_manual(values=c("#dd3333", "#555555", "#11cc03")) + #scale_fill_brewer(palette = "Set1") +
   coord_flip() -> g
-f <- ggplotly(g, tooltip = "text", dynamicTicks = T) %>% plotly::layout(dragmode = "zoom") %>%
-  highlight(on = "plotly_click", off = "plotly_doubleclick", color = "blue") #%>% 
+f <- ggplotly(g)
+#f <- ggplotly(g, tooltip = "text", dynamicTicks = T) %>% plotly::layout(dragmode = "zoom") %>%
+#  highlight(on = "plotly_click", off = "plotly_doubleclick", color = "blue") #%>% 
 #  layout(xaxis=list(spikethickness=4, spikecolor="white"))
-f
+#f
 ```
 
 
