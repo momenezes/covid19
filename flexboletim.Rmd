@@ -501,9 +501,10 @@ valueBox(jhutotal$Recuperados, icon = "fa-heart", color = "rgb(26,210,204)")
 valueBox(sprintf("%s%%", round(jhutotal$Mortos/jhutotal$Casos*100,2)), icon = "fa-percentage",color="rgb(26,110,204)")
 ```
 
-## Row 2 {data-height=550}
 
-### {data-width=200}
+
+
+## Row 2 {data-height=550}
 
 ```{r}
 jhucovid19 <- group_by(jhucovid19, Country) %>% 
@@ -627,7 +628,7 @@ gtxly <- ggplotly(gtx, tooltip = "text")
 gtxly
 ```
 
-### {data-width=400}
+
 
 
 ```{r grmediamovel, eval = FALSE,  out.height="380"}
@@ -669,6 +670,89 @@ plotly::layout(dragmode = "zoom", height = 340, width = 550, xaxis = list(showti
   #, off = "plotly_doubleclick", color = "black"
    
 ```
+
+
+```{r}
+tmp <- jhucovid19 %>%
+  group_by(Continent, Country) %>% 
+  filter(Continent != "Outro") %>%
+  summarise(Cases = last(ConfirmedCases), Deaths = last(Deaths), Recovered = last(Recovered)) %>% 
+  summarise(Casos = sum(Cases), Mortes = sum(Deaths), Recuperados = sum(Recovered)) %>% ungroup() #%>% #reactable()
+```
+
+
+```{r eval = FALSE}
+tmp
+```
+
+```{r eval = FALSE}
+hchart(tmp, "pie", hcaes(x = Continent, y = Casos))
+```
+
+```{r eval = FALSE}
+tmp %>% 
+ e_charts(Continent) %>% 
+  e_pie(Casos) %>% 
+  e_title("Pie chart")
+```
+
+### {data-width=500}
+
+
+```{r pizzacontinentsCasos, out.height="450"}
+tmp %>%
+  e_charts(Continent) %>%
+  e_pie(Casos, legend = FALSE, name = "Casos Confirmados") %>% 
+  e_labels(position = "right") %>% 
+  e_tooltip(
+    trigger = "item",
+    axisPointer = list(
+      type = "line"
+    )
+  )  %>% 
+  e_title("Casos Confirmados/Continente") %>% 
+  e_toolbox_feature(
+    feature = "saveAsImage",
+    title = "Save as image"
+  ) 
+
+
+#e_arrange(epieCasos, epieMortes, rows = 1, cols = 2)
+
+```
+
+
+### {data-width=500}
+
+```{r pizzacontinentsMortes, out.height="450"}
+tmp %>%
+  e_charts(Continent) %>%
+  e_pie(Mortes, legend = FALSE, name = "Mortes") %>% 
+  e_labels(position = "right") %>% 
+  e_tooltip(
+    trigger = "item",
+    axisPointer = list(
+      type = "line"
+    )
+  ) %>% 
+  e_title("Mortes/Continente") %>% 
+  #e_connect("casos") %>%
+  e_toolbox_feature(
+    feature = "saveAsImage",
+    title = "Save as image"
+  )
+```
+
+
+<!-- 
+### {data-width=100}
+
+O gráfico ao lado mostra um comportamento muito parecido de todos os países. Olhando o caso do Brasil, nossa curva parece indicar que ainda temos mais um pouco de _ladeira_ pra subir antes de começarmos a curva.
+-->
+
+## Row 3 {data-height=600}
+
+### {data-width=500}
 
 
 ```{r  out.height="450"}
@@ -717,12 +801,6 @@ fig
 
 ```
 
-### {data-width=100}
-
-O gráfico ao lado mostra um comportamento muito parecido de todos os países. Olhando o caso do Brasil, nossa curva parece indicar que ainda temos mais um pouco de _ladeira_ pra subir antes de começarmos a curva.
-
-
-## Row 3 {data-height=600}
 
 ### {data-width=500}
 
