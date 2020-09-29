@@ -363,16 +363,21 @@ e_arrange(echrtCasosM, echrtMortesM, rows = 2, cols = 1)
 ### Detalhamento Por Estado
 
 ```{r}
-casosfull_brio <- casosfull_brio %>%
-  filter(place_type == "city") %>%
-  group_by(Estado, date) %>%
+casosfull_brio_gr <- casosfull_brio %>% 
+  arrange(date) %>%
+  filter(place_type == "state") %>%
+  group_by(Estado, date) %>% 
+#  filter(is_last == "TRUE") %>%
+#casosfull_brio <- casosfull_brio %>%
+#  filter(place_type == "city") %>%
+#  group_by(Estado, date) %>%
   mutate(ConfirmedCases = sum(last_available_confirmed), Deaths = sum(last_available_deaths)) %>% ungroup() %>% ungroup()
 ```
 
 
 ```{r}
-casosfull_brio <- casosfull_brio %>%
-  filter(place_type == "city") %>%
+casosfull_brio_gr <- casosfull_brio_gr %>%
+  #filter(place_type == "city") %>%
   group_by(Estado, city) %>%
   mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
          ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
@@ -381,17 +386,10 @@ casosfull_brio <- casosfull_brio %>%
         ) %>% ungroup() %>% ungroup()
 ```
 
-```{r eval = FALSE}
-casosfull_brio %>% 
-  filter(place_type == "city") %>% 
-   filter(city == "São Paulo") %>%
-  arrange(last_available_date) %>% select(city, date, ConfirmedCases, ProgRateCases, ProgRateDeaths, NovCasos, NovMortes)
-```
-
 
 ```{r }
-casosfull_brio %>% 
-  filter(place_type == "city") %>% 
+casosfull_brio_gr %>% 
+  filter(place_type == "state") %>% 
   group_by(Estado) %>% 
   filter(is_last == "TRUE") %>% 
   arrange(desc(last_available_date)) %>%
