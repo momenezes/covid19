@@ -410,17 +410,23 @@ casosfull_brio %>%
 ## Dados por Estado: `r format(ultimadata, '%d-%m-%Y')`  {#BRestados}
 
 
+
 ```{r}
-casosfull_brio <- casosfull_brio %>%
-  filter(place_type == "city") %>%
-  group_by(Estado, date) %>%
+casosfull_brio_gr <- casosfull_brio %>% 
+  arrange(date) %>%
+  filter(place_type == "state") %>%
+  group_by(Estado, date) %>% 
+#  filter(is_last == "TRUE") %>%
+#casosfull_brio <- casosfull_brio %>%
+#  filter(place_type == "city") %>%
+#  group_by(Estado, date) %>%
   mutate(ConfirmedCases = sum(last_available_confirmed), Deaths = sum(last_available_deaths)) %>% ungroup() %>% ungroup()
 ```
 
 
 ```{r}
-casosfull_brio <- casosfull_brio %>%
-  filter(place_type == "city") %>%
+casosfull_brio_gr <- casosfull_brio_gr %>%
+  #filter(place_type == "city") %>%
   group_by(Estado, city) %>%
   mutate(ProgRateDeaths = (Deaths - lag(Deaths))/lag(Deaths), 
          ProgRateCases = (ConfirmedCases - lag(ConfirmedCases))/lag(ConfirmedCases),
@@ -429,56 +435,49 @@ casosfull_brio <- casosfull_brio %>%
         ) %>% ungroup() %>% ungroup()
 ```
 
-```{r eval = FALSE}
-casosfull_brio %>% 
-  filter(place_type == "city") %>% 
-   filter(city == "São Paulo") %>%
-  arrange(last_available_date) %>% select(city, date, ConfirmedCases, ProgRateCases, ProgRateDeaths, NovCasos, NovMortes)
-```
-
 
 ```{r }
-casosfull_brio %>% 
-  filter(place_type == "city") %>% 
+casosfull_brio_gr %>% 
+  filter(place_type == "state") %>% 
   group_by(Estado) %>% 
   filter(is_last == "TRUE") %>% 
   arrange(desc(last_available_date)) %>%
   summarise(Casos = sum(last_available_confirmed),
             Mortes = sum(last_available_deaths), 
-            `Letal.%` = round(Mortes/Casos*100,1),
+            `Letalidade %` = round(Mortes/Casos*100,1),
             Casos1M = round(Casos/last(População)*1e6,0), 
             Mortes1M = round(Mortes/last(População)*1e6,0),
             CasosDia = last(NovCasos),
-            `%NovosCa` = round(last(ProgRateCases)*100,2), 
+            `NovosCasos %` = round(last(ProgRateCases)*100,2), 
             MortesDia = last(NovMortes),
-            `%NovasMo` = round(last(ProgRateDeaths)*100,2), 
-            ) %>% 
-  datatable(rownames = F, autoHideNavigation = T,  options = list( searching = FALSE, className = 'compact', columnDefs = list(list(className = 'dt-right compact', targets = 1:8)))) 
+            `NovasMortes %` = round(last(ProgRateDeaths)*100,2), 
+            ) -> tabelaBR
 
 ```
 
 
-<!--
-## Dados por Estados, Região e Municípios: `r format(ultimadata, '%d-%m-%Y')` 
--->
+
+```{r eval = FALSE}
+formattable(tabelaBR, list(
+  Casos = color_tile("white", "orange"),
+  Mortes = color_tile("white", "grey")
+  ))
+```
+
 
 ```{r}
-casosfull_brio %>% 
-  group_by(Estado, city) %>% 
-  filter(is_last == "TRUE") %>% 
-  arrange(desc(last_available_date)) %>%
-  summarise(Casos = sum(last_available_confirmed),
-            Mortes = sum(last_available_deaths), 
-            Letal = sprintf("%s%%",round(Mortes/Casos*100,1)),
-            Casos1M = round(Casos/last(População)*1e6,0), 
-            Mortes1M = round(Mortes/last(População)*1e6,0),
-            CasosDia = last(NovCasos),
-            `%NovosCa` = sprintf("%s%%", round(last(ProgRateCases)*100,2)), 
-            MortesDia = last(NovMortes),
-            `%NovasMo` = sprintf("%s%%", round(last(ProgRateDeaths)*100,2)),
-            Regiao = Região,
-            ) %>% rename(Cidade = city) %>% arrange(Estado,Cidade) -> dynDT
-
+reactable(tabelaBR, defaultPageSize = 27, bordered = TRUE, striped = TRUE, 
+          highlight = TRUE, compact=TRUE, 
+          columns = list(Casos = colDef(align = "right"),
+                         Mortes = colDef(align = "right"),
+                         `Letalidade %`= colDef(align = "right"),
+                         Casos1M = colDef(align = "right"),
+                         Mortes1M = colDef(align = "right"),
+                         CasosDia = colDef(align= "right"),
+                         `NovosCasos %` = colDef(align = "right"),
+                         MortesDia = colDef(align= "right"),
+                         `NovasMortes %` = colDef(align = "right")),
+          defaultSorted = list(Casos = "desc"))
 ```
 
 
