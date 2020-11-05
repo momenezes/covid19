@@ -5,3 +5,4 @@
 *.zip
 *_cache/**
 *_files/**
+data/caso_full.csv
