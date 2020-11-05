@@ -6,3 +6,5 @@
 *_cache/**
 *_files/**
 data/caso_full.csv
+data/brazil_covid19_cities.csv
+data/WPP2019_TotalPopulationBySex.csv
