@@ -5,3 +5,6 @@
 *.zip
 *_cache/**
 *_files/**
+data/caso_full.csv
+data/brazil_**
+data/WPP2019_TotalPopulationBySex.csv
