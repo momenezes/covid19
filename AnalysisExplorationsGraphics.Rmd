@@ -1041,28 +1041,29 @@ Ela está disponível em `https://www.worldometers.info/coronavirus/`
 O problema é que não achei nenhum `csv` ou `xlsx` para baixar; então vou a solução é fazer um _web scraping_ e pegar os dados. Utilizando o pacote `rvest` e seguindo a dica [deste post](https://www.r-bloggers.com/using-rvest-to-scrape-an-html-table/) foi razoavelmente fácil. 
 
 
+**Após diversas mudanças na página do Worldometer, estou desistindo de manter estes _web scraping_ **
 
-```{r}
+```{r echo=FALSE, eval = FALSE}
 url <- "https://www.worldometers.info/coronavirus/"
 coronaworldometer <- url %>%
-  html() %>%
+  read_html() %>%
   html_nodes(xpath='//*[@id="main_table_countries_today"]') %>% 
   html_table()
 ```
-```{r}
+```{r echo=FALSE, eval = FALSE}
 womcovid19 <- coronaworldometer[[1]]
 ```
 
 Olhando a estrutura destes dados:
 
-```{r eval = FALSE}
+```{r eval = FALSE, echo = FALSE}
 str(womcovid19)
 ```
 
 Depois de pegar a tabela em html e colocar em um `data.frame`, algumas limpezas e transformações são necessárias: algumas colunas, como a `NewCases`, tem o símbolo `+`; os números vieram formatados como _strings_ com separador de milhar (`,`), e algumas outras coisas. Então, algumas manipulações serão feitas para acertar isso.
 
 
-```{r}
+```{r  echo=FALSE, eval = FALSE}
 head(womcovid19) %>% select(`Country,Other`,TotalCases,NewCases,TotalDeaths,NewDeaths) %>% kable() %>% kable_styling(c("striped"), full_width = F)
 ```
 
@@ -1072,7 +1073,7 @@ womcovid19 %>% top_n(20, `Country,Other`)
 ```
 
 
-```{r}
+```{r echo=FALSE, eval = FALSE}
 womcovid19 <- womcovid19 %>% 
   rename(Country = `Country,Other`, SeriousCritical = `Serious,Critical`) %>% 
   rename(Cases1M = contains("Cases/1M pop"), Deaths1M = contains("Deaths/1M pop")) %>% 
@@ -1095,7 +1096,7 @@ O Worldometer não contabiliza os casos do _Diamond Princess_ ou contabiliza jun
 
 O Worldometer também passou a apresentar totais de alguns continentes ou regiões; como não está padronizado, ou seja, não estão agrupando por continentes, que seria fácil remover na filtragem; ao invés disso, colocaram por exemplo, _North America_ e _South America_, mas não tem _Americas_. Depois do dia 09 ou 10 de abril, o Worldometer passou a incluir uma linha *World* na tabela. Assim, estou removendo de acordo com o que eles mudam no site.
 
-```{r}
+```{r echo=FALSE, eval = FALSE}
 womcovid19 %>%
   filter(Country == "World") %>%
   #filter(!Country %in% c("Europe", "Asia", "North America", "South America", "Africa", "Oceania", "Diamond Princess", "World")) %>%
@@ -1109,7 +1110,7 @@ womcovid19 %>%
 
 Conforme explicado acima, o Worldometer passou a incluir totalizações por continentes e regiões. Vou manter na listagem para facilitar a comparação dos valores.
 
-```{r}
+```{r echo=FALSE, eval = FALSE}
 womcovid19 %>% 
   select(Country, TotalCases, TotalDeaths, TotalRecovered) %>% 
   arrange(desc(TotalCases)) %>% filter(TotalCases >= 500) %>%
