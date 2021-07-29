@@ -563,7 +563,7 @@ Seguindo a ideia apresentada neste vídeo [Te Explico POR QUÉ estoy PREOCUPADO]
 A taxa de evolução representada aqui é dada por $$TxEv = \frac{NumCasos_i - NumCasos_{i-1}}{NumCasos_{i-1}} + 1$$ É uma maneira simples de representar o acréscimo proporcional de um dia para outro.
 
 ```{r}
-nma = 5
+nma = 7
 ```
 
 
