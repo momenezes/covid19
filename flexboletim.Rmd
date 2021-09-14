@@ -145,7 +145,59 @@ valueBox(sprintf("%s, (%s)", numero_int(briototais$`Novas Mortes`), briototais$N
 ```
 
 
-## Row 2 {data-height=500}  
+## Row 3 {data-height = 650}
+
+
+```{r}
+casosfull_brio %>% filter(place_type == "state") %>% group_by(date) %>% summarise(Casos = sum(new_confirmed, na.rm = T), Mortes = sum(new_deaths, na.rm = T)) %>% arrange(desc(date))  -> casosbr_diario
+setDT(casosbr_diario)
+casosbr_diario[, maCasos14 := frollmean(Casos,n = 14, align = "left", na.rm = T, hasNA = T)][, maCasos7 := frollmean(Casos, n = 7, align = "left", na.rm = T, hasNA = T)]
+casosbr_diario[, maMortes14 := frollmean(Mortes, n = 14, align = "left", na.rm = T, hasNA = T)]
+```
+
+
+### Casos Diários (Média Móvel 14 dias) {data-width=500}
+
+
+
+```{r}
+p <- plot_ly(casosbr_diario, hoverinfo = 'text', 
+               text  = ~paste('<br>Data:', date,
+                             '<br>Casos Dia:', numero_int(Casos),
+                             '<br>MA 14d:', numero_int(maCasos14)),  
+               showlegend = FALSE, colorscale = "Jet")
+p <- p %>% add_trace(x = casosbr_diario$date, y = casosbr_diario$Casos, type = "scatter", mode = "lines+markers", line = list(color = 'rgb(100, 100, 100)', width = 1), marker = list(color = 'rgb(150,150,150, .5)'), name = "Casos")
+p <- p %>% add_trace(x = casosbr_diario$date, y = casosbr_diario$maCasos14, type = "scatter", mode = "lines", line = list(color = 'rgb(235,12,24', width = 2), name = "MA 14d")
+yax <- list(title = "Casos Dia (média móvel 14 dias)",
+            separatethousands = TRUE,
+            exponentformat = "none"
+           )
+p <- layout(p, yaxis = yax)
+p
+```
+
+
+
+### Mortes Diárias (Média Móvel 14 dias) {data-width=500}
+
+
+```{r}
+p <- plot_ly(casosbr_diario, hoverinfo = 'text', 
+               text  = ~paste('<br>Data:', date,
+                             '<br>Mortes Dia:', numero_int(Mortes),
+                             '<br>MA 14d:', numero_int(maMortes14)),  
+               showlegend = FALSE, colorscale = "Jet")
+p <- p %>% add_trace(x = casosbr_diario$date, y = casosbr_diario$Mortes, type = "scatter", mode = "lines+markers", line = list(color = 'rgb(100, 100, 100)', width = 1), marker = list(color = 'rgb(90,90,90, .5)'), name = "Mortes")
+p <- p %>% add_trace(x = casosbr_diario$date, y = casosbr_diario$maMortes14, type = "scatter", mode = "lines", line = list(color = 'rgb(255,0,0', width = 2), name = "MA 14d")
+yax <- list(title = "Mortes Dia (média móvel 14 dias)",
+            separatethousands = TRUE,
+            exponentformat = "none"
+           )
+p <- layout(p, yaxis = yax)
+p
+```
+
+## Row 4 {data-height=500}  
 
 ### Por Estado
 
@@ -381,7 +433,7 @@ e_arrange(echrtCasosM, echrtMortesM, rows = 2, cols = 1)
 -->
 
 
-## Row 3 {data-height=700}  
+## Row 5 {data-height=700}  
 
 ### Detalhamento Por Estado
 
@@ -455,7 +507,7 @@ reactable(tabelaBR, defaultPageSize = 27, bordered = TRUE, striped = TRUE,
 ```
 
 
-## Row 4 {data-height=60}
+## Row 6 {data-height=60}
 
 
 <a href="https://momenezes.github.io/covid19/"><img src="./back.png" alt="HOME" width="60" style="vertical-align:middle">  <b>HOME  </b> </a>
