@@ -79,6 +79,10 @@ casosfull_brio <- left_join(casosfull_brio, brpopestados, by = "Estado")
 casosfull_brio <- casosfull_brio %>% select(-is_repeated, -city_ibge_code, -estimated_population_2019)
 ```
 
+```{r}
+numero_int <- scales::label_comma(accuracy = 1, big.mark = ".", decimal.mark = ",")
+```
+
 
 ```{r}
 ultimadata <- max(casosfull_brio$date)
@@ -90,8 +94,13 @@ casosfull_brio %>%
   filter(place_type == "state") %>%
   group_by(Estado) %>% 
   filter(is_last == "TRUE") %>%
-  summarise(TotEstado = last(last_available_confirmed), MortesEstado = last(last_available_deaths)) %>%
-  summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado), Letalidade = sprintf("%s%%", round(sum(MortesEstado)/sum(TotEstado)*100,2))) -> briototais
+  summarise(TotEstado = last(last_available_confirmed), MortesEstado = last(last_available_deaths),
+            NovosCasos = last(new_confirmed), NovasMortes = last(new_deaths)) %>%
+  summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado), 
+            Letalidade = sprintf("%s%%", round(sum(MortesEstado)/sum(TotEstado)*100,2)),
+            `Novos Casos` = sum(NovosCasos), `Novas Mortes` = sum(NovasMortes),
+             NCasosPerc = sprintf("%s%%", format(round(`Novos Casos`/sum(TotEstado)*100,2), decimal.mark = ",")),
+             NMortesPerc = sprintf("%s%%", format(round(`Novas Mortes`/sum(MortesEstado)*100,2), decimal.mark = ","))) -> briototais
 
 ```
 
@@ -106,13 +115,13 @@ Resumo Brasil  {data-orientation=rows data-icon="fa-bar-chart"}
 ### Total de Casos
 
 ```{r}
-valueBox(briototais$`Casos Confirmados`, icon = "fa-heartbeat", color="rgb(100,100,100)")
+valueBox(numero_int(briototais$`Casos Confirmados`), icon = "fa-heartbeat", color="rgb(100,100,100)")
 ```
 
 ### Total de Mortes
 
 ```{r}
-valueBox(briototais$`Total Mortes`, icon = "fa-sad-tear", color="rgb(200,100,100)")
+valueBox(numero_int(briototais$`Total Mortes`), icon = "fa-sad-tear", color="rgb(200,100,100)")
 ```
 
 ### Letalidade
@@ -121,6 +130,20 @@ valueBox(briototais$`Total Mortes`, icon = "fa-sad-tear", color="rgb(200,100,100
 valueBox(briototais$Letalidade, icon = "fa-percentage",color="rgb(26,110,204)")
 ```
     
+## Row 2 {data-height=110}
+
+### Novos Casos
+
+```{r}
+valueBox(sprintf("%s (%s)", numero_int(briototais$`Novos Casos`), briototais$NCasosPerc), icon = "fa-heartbeat", color="rgb(100,100,100)")
+```
+
+### Novas Mortes
+
+```{r}
+valueBox(sprintf("%s, (%s)", numero_int(briototais$`Novas Mortes`), briototais$NMortesPerc), icon = "fa-sad-tear", color="rgb(200,100,100)")
+```
+
 
 ## Row 2 {data-height=500}  
 
@@ -396,12 +419,12 @@ casosfull_brio_gr %>%
   summarise(Casos = sum(last_available_confirmed),
             Mortes = sum(last_available_deaths), 
             `Letalidade %` = round(Mortes/Casos*100,1),
-            Casos1M = round(Casos/last(População)*1e6,0), 
-            Mortes1M = round(Mortes/last(População)*1e6,0),
-            CasosDia = last(NovCasos),
-            `NovosCasos %` = round(last(ProgRateCases)*100,2), 
-            MortesDia = last(NovMortes),
-            `NovasMortes %` = round(last(ProgRateDeaths)*100,2), 
+            #Casos1M = round(Casos/last(População)*1e6,0), 
+            #Mortes1M = round(Mortes/last(População)*1e6,0),
+            `Novos Casos`  = last(NovCasos),
+            `Novos Casos %` = round(last(ProgRateCases)*100,2), 
+            `Novas Mortes`  = last(NovMortes),
+            `Novas Mortes %` = round(last(ProgRateDeaths)*100,2), 
             ) -> tabelaBR
 
 ```
@@ -422,12 +445,12 @@ reactable(tabelaBR, defaultPageSize = 27, bordered = TRUE, striped = TRUE,
           columns = list(Casos = colDef(align = "right"),
                          Mortes = colDef(align = "right"),
                          `Letalidade %`= colDef(align = "right"),
-                         Casos1M = colDef(align = "right"),
-                         Mortes1M = colDef(align = "right"),
-                         CasosDia = colDef(align= "right"),
-                         `NovosCasos %` = colDef(align = "right"),
-                         MortesDia = colDef(align= "right"),
-                         `NovasMortes %` = colDef(align = "right")),
+                         #Casos1M = colDef(align = "right"),
+                         #Mortes1M = colDef(align = "right"),
+                         `Novos Casos` = colDef(align= "right"),
+                         `Novos Casos %` = colDef(align = "right"),
+                         `Novas Mortes` = colDef(align= "right"),
+                         `Novas Mortes %` = colDef(align = "right")),
           defaultSorted = list(Casos = "desc"))
 ```
 
@@ -469,8 +492,13 @@ ultimadata <- max(jhucovid19$DateRep)
 ```{r}
  jhucovid19 %>% 
   group_by(Country) %>% 
-  summarise(CasosPais = last(ConfirmedCases), MortosPais = last(Deaths), RecuperadosPais = last(Recovered)) %>% 
-  summarise(Casos = sum(CasosPais), Mortos = sum(MortosPais), Recuperados = sum(RecuperadosPais)) -> jhutotal
+  summarise(CasosPais = last(ConfirmedCases), MortosPais = last(Deaths), 
+            CasosPaisOntem = last(lag(ConfirmedCases)), MortesPaisOntem = last(lag(Deaths))) %>% 
+  summarise(Casos = sum(CasosPais, na.rm = T), Mortes = sum(MortosPais, na.rm = T), 
+            `Novos Casos` = Casos - sum(CasosPaisOntem, na.rm = T),
+            `Novas Mortes` = Mortes - sum(MortesPaisOntem, na.rm = T),
+            `Novos Casos Perc` = sprintf("%s%%",format(round(`Novos Casos`/Casos*100,2), decimal.mark = ",")),
+            `Novas Mortes Perc` = sprintf("%s%%", format(round(`Novas Mortes`/Mortes*100,2),decimal.mark = ","))) -> jhutotal
 ```
 
 
@@ -478,28 +506,41 @@ ultimadata <- max(jhucovid19$DateRep)
 ### Total de Casos
 
 ```{r}
-valueBox(jhutotal$Casos, icon = "fa-heartbeat", color="rgb(100,100,100)")
+valueBox(numero_int(jhutotal$Casos), icon = "fa-heartbeat", color="rgb(100,100,100)")
 ```
 
 ### Mortes
 
 ```{r}
-valueBox(jhutotal$Mortos, icon = "fa-sad-tear", color="rgb(200,100,100)")
+valueBox(numero_int(jhutotal$Mortes), icon = "fa-sad-tear", color="rgb(200,100,100)")
 ```
 
-### Recuperados
+<!-- ### Recuperados -->
 
-```{r}
-valueBox(jhutotal$Recuperados, icon = "fa-heart", color = "rgb(26,210,204)")
-```
+<!-- ```{r} -->
+<!-- valueBox(jhutotal$Recuperados, icon = "fa-heart", color = "rgb(26,210,204)") -->
+<!-- ``` -->
 
 ### Letalidade
 
 ```{r}
-valueBox(sprintf("%s%%", round(jhutotal$Mortos/jhutotal$Casos*100,2)), icon = "fa-percentage",color="rgb(26,110,204)")
+valueBox(sprintf("%s%%", format(round(jhutotal$Mortes/jhutotal$Casos*100,2), decimal.mark = ",")), icon = "fa-percentage",color="rgb(26,110,204)")
+```
+
+## Row 2 {data-height=110}
+
+### Novos de Casos
+
+```{r}
+valueBox(sprintf("%s (%s)",numero_int(jhutotal$`Novos Casos`), jhutotal$`Novos Casos Perc`), icon = "fa-heartbeat", color="rgb(100,100,100)")
 ```
 
 
+### Novas Mortes
+
+```{r}
+valueBox(sprintf("%s (%s)", numero_int(jhutotal$`Novas Mortes`), jhutotal$`Novas Mortes Perc`), icon = "fa-sad-tear", color="rgb(200,100,100)")
+```
 
 
 ## Row 2 {data-height=550}
