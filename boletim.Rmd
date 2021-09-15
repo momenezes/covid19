@@ -229,7 +229,7 @@ filter(jhucovid19, Country %in% top50) %>%
   jhutop50Country %>%
   summarise(TotCasos = last(ConfirmedCases), 
             TotMortes = last(Deaths), 
-            `Letal.%` = round(TotMortes/TotCasos*100,2), 
+            `Letal.%` = numero_fp(round(TotMortes/TotCasos*100,2)), 
             Recup = last(Recovered), 
             `%NovosCa` = numero_fp(round((last(ProgRateCases) -1)*100,2)), 
             `%NovasMo` = numero_fp(round((last(ProgRateDeaths) -1)*100,2)), 
@@ -284,13 +284,13 @@ reactable(select(tabelaWorld,Country, TotCasos,TotMortes,`Letal.%`,Recup, `%Novo
 
 
 ```{r}
-tabgrafWorld <- select(tabelaWorld,Pais=Country, Casos = TotCasos, `Evol.C` = ConfirmedCasesL,
+tabgrafWorld <- select(tabelaWorld,Pais=Country, Casos = TotCasos, #`Evol.C` = ConfirmedCasesL,
                        `Novos C` = NewCasesT,  
-                       `NC (%)`=`%NovosCa`, `Evol.NC` = NewCasesL, 
-                       Mortes = TotMortes, `Evol.M` = DeathsL, 
+                       `Novos C (%)`=`%NovosCa`, `Evol.NC` = NewCasesL, 
+                       Mortes = TotMortes, #`Evol.M` = DeathsL, 
                        `Novas M` = NewDeathsT, 
-                       `NM (%)` = `%NovasMo` , `Evol.NM` = NewDeathsL, 
-                       `Let.(%)` = `Letal.%`)
+                       `Novas M (%)` = `%NovasMo` , `Evol.NM` = NewDeathsL, 
+                       `Letal.(%)` = `Letal.%`)
 reactable(tabgrafWorld,
           defaultPageSize = 50, bordered = TRUE, striped = TRUE, 
           highlight = TRUE, fullWidth = TRUE, 
@@ -299,15 +299,18 @@ reactable(tabgrafWorld,
                                         sparkline(tabgrafWorld$`Evol.C`[[index]])
                          }),
                          `Novos C` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Novos C (%)` = colDef(align = "right"),
+                         `Novas M (%)` = colDef(align = "right"),
+                         `Letal.(%)` = colDef(align = "right"),
                          `Novas M`  = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
                          Mortes = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
                          `Evol.M` = colDef(cell = function(value, index) {
                                         sparkline(tabgrafWorld$`Evol.M`[[index]])
                          }),
-                         `Evol.NC` = colDef(cell= function(value, index) {
+                         `Evol.NC` = colDef(align = "center", cell= function(value, index) {
                            sparkline(tabgrafWorld$`Evol.NC`[[index]])
                          }),
-                         `Evol.NM` = colDef(cell= function(value, index) {
+                         `Evol.NM` = colDef(align = "center", cell= function(value, index) {
                            sparkline(tabgrafWorld$`Evol.NM`[[index]])
                          })
                          ),
@@ -466,7 +469,7 @@ briototais.df <- data.frame(Casos = c(numero_int(briototais$`Casos Confirmados`)
                             Mortes = c(numero_int(briototais$`Total Mortes`), sprintf("%s (%s)", numero_int(briototais$`Novas Mortes`), briototais$NMortesPerc)), row.names = c("Total", "Diário"))
 ```
 ```{r}
-kable(briototais.df, format.args = list(big.mark = "."), align = "r")
+kable(briototais.df, format.args = list(big.mark = ".", decimal.mark = ","), align = "r")
 ```
 
 
@@ -507,24 +510,15 @@ casosfull_brio_gr %>%
   arrange(desc(last_available_date)) %>%
   summarise(Casos = sum(last_available_confirmed),
             Mortes = sum(last_available_deaths), 
-            `Letalidade %` = round(Mortes/Casos*100,1),
-            Casos1M = round(Casos/last(População)*1e6,0), 
-            Mortes1M = round(Mortes/last(População)*1e6,0),
-            CasosDia = last(NovCasos),
-            `NovosCasos %` = round(last(ProgRateCases)*100,2), 
-            MortesDia = last(NovMortes),
-            `NovasMortes %` = round(last(ProgRateDeaths)*100,2), 
+            `Letal. (%)` = numero_fp(round(Mortes/Casos*100,1)),
+            `Casos/1Mi` = round(Casos/last(População)*1e6,0), 
+            `Mortes/1Mi` = round(Mortes/last(População)*1e6,0),
+            `Novos C` = last(NovCasos),
+            `Novos C (%)` = numero_fp(round(last(ProgRateCases)*100,2)), 
+            `Novas M` = last(NovMortes),
+            `Novas M (%)` = numero_fp(round(last(ProgRateDeaths)*100,2)), 
             ) -> tabelaBR
 
-```
-
-
-
-```{r eval = FALSE}
-formattable(tabelaBR, list(
-  Casos = color_tile("white", "orange"),
-  Mortes = color_tile("white", "grey")
-  ))
 ```
 
 
@@ -533,13 +527,13 @@ reactable(tabelaBR, defaultPageSize = 27, bordered = TRUE, striped = TRUE,
           highlight = TRUE, compact=TRUE, 
           columns = list(Casos = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
                          Mortes = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
-                         `Letalidade %`= colDef(align = "right"),
-                         Casos1M = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
-                         Mortes1M = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
-                         CasosDia = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
-                         `NovosCasos %` = colDef(align = "right"),
-                         MortesDia = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
-                         `NovasMortes %` = colDef(align = "right")),
+                         `Letal. (%)`= colDef(align = "right"),
+                         `Casos/1Mi` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Mortes/1Mi` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Novos C` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Novos C (%)` = colDef(align = "right"),
+                         `Novas M` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Novas M (%)` = colDef(align = "right")),
           defaultSorted = list(Casos = "desc"))
 ```
 
