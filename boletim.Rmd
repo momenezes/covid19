@@ -198,7 +198,7 @@ str(worldpop, give.attr = FALSE)
 jhucovid19 <- left_join(jhucovid19,select(worldpop,-Country,-Continent), by = "Code")
 ```
 
-## 20 Países com mais casos em `r format(ultimadata, '%d-%m-%Y')`  {#Top10BR}
+## 50 Países com mais casos em `r format(ultimadata, '%d-%m-%Y')`  {#Top10BR}
 
 
 ```{r}
@@ -212,20 +212,20 @@ group_by(jhucovid19, Country) %>%
   arrange(desc(ConfirmedCases)) -> listaNumCasos
 top5 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(5, ConfirmedCases) %>% select(Country) %>% unlist()
 top10 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(10, ConfirmedCases) %>% select(Country) 
-top20 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(20, ConfirmedCases) %>% select(Country) 
+top50 <- listaNumCasos %>% arrange(desc(ConfirmedCases)) %>% top_n(50, ConfirmedCases) %>% select(Country) 
 ```
 
 ```{r}
 top10 <- bind_rows(top10, data.frame(Country = "Brazil")) %>% unique() %>% unlist()
-top20 <- bind_rows(top20, data.frame(Country = "Brazil")) %>% unique() %>% unlist()
+top50 <- bind_rows(top50, data.frame(Country = "Brazil")) %>% unique() %>% unlist()
 ```
 
 
 
 ```{r}
-filter(jhucovid19, Country %in% top20) %>% 
-  group_by(Country) -> jhutop10Country
-  jhutop10Country %>%
+filter(jhucovid19, Country %in% top50) %>% 
+  group_by(Country) -> jhutop50Country
+  jhutop50Country %>%
   summarise(TotCasos = last(ConfirmedCases), 
             TotMortes = last(Deaths), 
             `Letal.%` = round(TotMortes/TotCasos*100,2), 
@@ -235,10 +235,14 @@ filter(jhucovid19, Country %in% top20) %>%
             Casos1M = round(TotCasos/last(PopTotal)*1e3,0),
             Mortes1M = round(TotMortes/last(PopTotal)*1e3,0),
             NDias1Ca = sprintf("%s", ultimadata - min(DateRep)),
-            ConfirmedCases = list(ConfirmedCases),
-            Deaths = list(Deaths),
-            NewCases = list(NewCases),
-            NewDeaths = list(NewDeaths)) %>% 
+            ConfirmedCasesL = list(ConfirmedCases),
+            DeathsL = list(Deaths),
+            NewCasesL = list(NewCases),
+            NewDeathsL = list(NewDeaths),
+            CasosPaisOntem = last(lag(ConfirmedCases)), 
+            MortesPaisOntem = last(lag(Deaths)),
+            NewCasesT = TotCasos - CasosPaisOntem,
+            NewDeathsT = TotMortes - MortesPaisOntem) %>% 
   mutate(NDias1Ca = case_when(Country == "United States" ~ sprintf("%s", ultimadata - ymd("2020-01-20")),
                                 Country == "China" ~ sprintf("%s", ultimadata - ymd("2019-11-17")),
                                 TRUE ~ NDias1Ca)) %>% 
@@ -253,15 +257,15 @@ filter(jhucovid19, Country %in% top20) %>%
 reactable(select(tabelaWorld,Country, TotCasos,TotMortes,`Letal.%`,Recup, `%NovosCa`, `%NovasMo`,Casos1M,Mortes1M,NDias1Ca), 
           defaultPageSize = 20, bordered = TRUE, striped = TRUE, 
           highlight = TRUE, compact=FALSE, 
-          columns = list(TotCasos = colDef(align = "right"),
-                         TotMortes = colDef(align = "right"),
+          columns = list(TotCasos = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         TotMortes = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
                          `Letal.%`= colDef(align = "right"),
                           Recup = colDef(align = "right"),
                          `%NovosCa` = colDef(align = "right"),
                          `%NovasMo` = colDef(align = "right"),
-                         Casos1M = colDef(align = "right"),
-                         Mortes1M = colDef(align = "right"),
-                         NDias1Ca = colDef(align= "right")
+                         Casos1M = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         Mortes1M = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         NDias1Ca = colDef(format = colFormat(separators = TRUE, locales = "pt-BR"))
                          ),
           defaultSorted = list(TotCasos = "desc"),
           defaultColDef = colDef(
@@ -279,25 +283,33 @@ reactable(select(tabelaWorld,Country, TotCasos,TotMortes,`Letal.%`,Recup, `%Novo
 
 
 ```{r}
-tabgrafWorld <- select(tabelaWorld,Pais=Country,TotCasos,Casos=ConfirmedCases,TotMortes,Mortes=Deaths,`Letal.%`,`%NovosCa`,NovosCasos=NewCases,`%NovasMo`,NovasMortes=NewDeaths)
+tabgrafWorld <- select(tabelaWorld,Pais=Country, Casos = TotCasos, `Evol.C` = ConfirmedCasesL,
+                       `Novos C.` = NewCasesT,  
+                       `Var.NC (%)`=`%NovosCa`, `Evol.NC` = NewCasesL, 
+                       Mortes = TotMortes, `Evol.M` = DeathsL, 
+                       `Novas M.` = NewDeathsT, 
+                       `Var.NM (%)` = `%NovasMo` , `Evol.NM` = NewDeathsL, `Letal.%`)
 reactable(tabgrafWorld,
-          defaultPageSize = 20, bordered = TRUE, striped = TRUE, 
+          defaultPageSize = 50, bordered = TRUE, striped = TRUE, 
           highlight = TRUE, fullWidth = TRUE, 
-          columns = list(
-                         Casos = colDef(cell = function(value, index) {
-                                        sparkline(tabgrafWorld$Casos[[index]])
+          columns = list(Casos = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Evol.C` = colDef(cell = function(value, index) {
+                                        sparkline(tabgrafWorld$`Evol.C`[[index]])
                          }),
-                         Mortes = colDef(cell = function(value, index) {
-                                        sparkline(tabgrafWorld$Mortes[[index]])
+                         `Novos C.` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Novas M.`  = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         Mortes = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Evol.M` = colDef(cell = function(value, index) {
+                                        sparkline(tabgrafWorld$`Evol.M`[[index]])
                          }),
-                         NovosCasos = colDef(cell= function(value, index) {
-                           sparkline(tabgrafWorld$NovosCasos[[index]])
+                         `Evol.NC` = colDef(cell= function(value, index) {
+                           sparkline(tabgrafWorld$`Evol.NC`[[index]])
                          }),
-                         NovasMortes = colDef(cell= function(value, index) {
-                           sparkline(tabgrafWorld$NovasMortes[[index]])
+                         `Evol.NM` = colDef(cell= function(value, index) {
+                           sparkline(tabgrafWorld$`Evol.NM`[[index]])
                          })
                          ),
-          defaultSorted = list(TotCasos = "desc"),
+          defaultSorted = list(Casos = "desc"),
           defaultColDef = colDef(
                 class = JS("function(rowInfo, colInfo, state) {
                            // Highlight sorted columns
