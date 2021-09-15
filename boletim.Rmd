@@ -40,7 +40,7 @@ library(DT)
 library(plotly)
 library(formattable)
 library(reactable)
-library(gganimate)
+#library(gganimate)
 library(sparkline)
 ```
 
@@ -73,6 +73,10 @@ theme_set(theme_clean())
 ```
 
 
+```{r}
+numero_int <- scales::label_comma(accuracy = 1, big.mark = ".", decimal.mark = ",")
+```
+
 # Resumo dos Dados Mundiais da COVID-19 {#ResumoMundo}
 
 ```{r}
@@ -96,8 +100,30 @@ Utilizando dados da John Hopkins University (JHU).
 ```{r}
  jhucovid19 %>% 
   group_by(Country) %>% 
+  summarise(CasosPais = last(ConfirmedCases), MortosPais = last(Deaths), 
+            CasosPaisOntem = last(lag(ConfirmedCases)), MortesPaisOntem = last(lag(Deaths))) %>% 
+  summarise(Casos = sum(CasosPais, na.rm = T), Mortes = sum(MortosPais, na.rm = T), 
+            `Novos Casos` = Casos - sum(CasosPaisOntem, na.rm = T),
+            `Novas Mortes` = Mortes - sum(MortesPaisOntem, na.rm = T),
+            `N. Casos Perc` = sprintf("%s%%",format(round(`Novos Casos`/Casos*100,2), decimal.mark = ",")),
+            `N. Mortes Perc` = sprintf("%s%%", format(round(`Novas Mortes`/Mortes*100,2),decimal.mark = ","))) -> jhutotal
+```
+
+```{r}
+jhutotal.df <- data.frame(Casos = c(numero_int(jhutotal$Casos), sprintf("%s (%s)",numero_int(jhutotal$`Novos Casos`), jhutotal$`N. Casos Perc`)), Mortes = c(numero_int(jhutotal$Mortes), sprintf("%s (%s)", numero_int(jhutotal$`Novas Mortes`), jhutotal$`N. Mortes Perc`)), row.names = c("Total", "Diário"))
+```
+
+```{r}
+kable(jhutotal.df, format.args = list(big.mark = "."), align = "r")
+```
+
+
+
+```{r eval = FALSE}
+ jhucovid19 %>% 
+  group_by(Country) %>% 
   summarise(CasosPais = last(ConfirmedCases), MortosPais = last(Deaths), RecuperadosPais = last(Recovered)) %>% 
-  summarise(`Casos Confirmados` = sum(CasosPais, na.rm = T), Mortos = sum(MortosPais, na.rm = T), Recuperados = sum(RecuperadosPais, na.rm = T)) %>% kable()
+  summarise(`Casos` = numero_int(sum(CasosPais, na.rm = T)), Mortos = numero_int(sum(MortosPais, na.rm = T))) -> dadosmundo.df # %>% kable()
 ```
 
 
@@ -395,7 +421,7 @@ ultimadata <- max(casosfull_brio$date)
 
 ## Total de Casos do Brasil: `r format(ultimadata, '%d-%m-%Y')` 
  
-```{r}
+```{r eval = FALSE}
 casosfull_brio %>% 
   arrange(date) %>%
   filter(place_type == "state") %>%
@@ -404,6 +430,29 @@ casosfull_brio %>%
   summarise(TotEstado = last(last_available_confirmed), MortesEstado = last(last_available_deaths)) %>%
   summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado), `Letalidade`= sprintf("%s%%",round(sum(MortesEstado)/sum(TotEstado)*100,1))) -> briototais
   kable(briototais, align = "r") 
+```
+
+```{r}
+casosfull_brio %>% 
+  arrange(date) %>%
+  filter(place_type == "state") %>%
+  group_by(Estado) %>% 
+  filter(is_last == "TRUE") %>%
+  summarise(TotEstado = last(last_available_confirmed), MortesEstado = last(last_available_deaths),
+            NovosCasos = last(new_confirmed), NovasMortes = last(new_deaths)) %>%
+  summarise(`Casos Confirmados` = sum(TotEstado), `Total Mortes`= sum(MortesEstado), 
+            Letalidade = sprintf("%s%%", round(sum(MortesEstado)/sum(TotEstado)*100,2)),
+            `Novos Casos` = sum(NovosCasos), `Novas Mortes` = sum(NovasMortes),
+             NCasosPerc = sprintf("%s%%", format(round(`Novos Casos`/sum(TotEstado)*100,2), decimal.mark = ",")),
+             NMortesPerc = sprintf("%s%%", format(round(`Novas Mortes`/sum(MortesEstado)*100,2), decimal.mark = ","))) -> briototais
+```
+
+```{r}
+briototais.df <- data.frame(Casos = c(numero_int(briototais$`Casos Confirmados`), sprintf("%s (%s)", numero_int(briototais$`Novos Casos`), briototais$NCasosPerc)), 
+                            Mortes = c(numero_int(briototais$`Total Mortes`), sprintf("%s (%s)", numero_int(briototais$`Novas Mortes`), briototais$NMortesPerc)), row.names = c("Total", "Diário"))
+```
+```{r}
+kable(briototais.df, format.args = list(big.mark = "."), align = "r")
 ```
 
 
@@ -468,14 +517,14 @@ formattable(tabelaBR, list(
 ```{r}
 reactable(tabelaBR, defaultPageSize = 27, bordered = TRUE, striped = TRUE, 
           highlight = TRUE, compact=TRUE, 
-          columns = list(Casos = colDef(align = "right"),
-                         Mortes = colDef(align = "right"),
+          columns = list(Casos = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         Mortes = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
                          `Letalidade %`= colDef(align = "right"),
-                         Casos1M = colDef(align = "right"),
-                         Mortes1M = colDef(align = "right"),
-                         CasosDia = colDef(align= "right"),
+                         Casos1M = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         Mortes1M = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         CasosDia = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
                          `NovosCasos %` = colDef(align = "right"),
-                         MortesDia = colDef(align= "right"),
+                         MortesDia = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
                          `NovasMortes %` = colDef(align = "right")),
           defaultSorted = list(Casos = "desc"))
 ```
