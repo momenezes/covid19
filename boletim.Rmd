@@ -284,11 +284,12 @@ reactable(select(tabelaWorld,Country, TotCasos,TotMortes,`Letal.%`,Recup, `%Novo
 
 ```{r}
 tabgrafWorld <- select(tabelaWorld,Pais=Country, Casos = TotCasos, `Evol.C` = ConfirmedCasesL,
-                       `Novos C.` = NewCasesT,  
-                       `Var.NC (%)`=`%NovosCa`, `Evol.NC` = NewCasesL, 
+                       `Novos C` = NewCasesT,  
+                       `NC (%)`=`%NovosCa`, `Evol.NC` = NewCasesL, 
                        Mortes = TotMortes, `Evol.M` = DeathsL, 
-                       `Novas M.` = NewDeathsT, 
-                       `Var.NM (%)` = `%NovasMo` , `Evol.NM` = NewDeathsL, `Letal.%`)
+                       `Novas M` = NewDeathsT, 
+                       `NM (%)` = `%NovasMo` , `Evol.NM` = NewDeathsL, 
+                       `Let.(%)` = `Letal.%`)
 reactable(tabgrafWorld,
           defaultPageSize = 50, bordered = TRUE, striped = TRUE, 
           highlight = TRUE, fullWidth = TRUE, 
@@ -296,8 +297,8 @@ reactable(tabgrafWorld,
                          `Evol.C` = colDef(cell = function(value, index) {
                                         sparkline(tabgrafWorld$`Evol.C`[[index]])
                          }),
-                         `Novos C.` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
-                         `Novas M.`  = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Novos C` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Novas M`  = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
                          Mortes = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
                          `Evol.M` = colDef(cell = function(value, index) {
                                         sparkline(tabgrafWorld$`Evol.M`[[index]])
