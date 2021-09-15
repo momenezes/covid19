@@ -75,6 +75,7 @@ theme_set(theme_clean())
 
 ```{r}
 numero_int <- scales::label_comma(accuracy = 1, big.mark = ".", decimal.mark = ",")
+numero_fp <- scales::label_comma(accuracy = .01, big.mark = ".", decimal.mark = ",")
 ```
 
 # Resumo dos Dados Mundiais da COVID-19 {#ResumoMundo}
@@ -230,8 +231,8 @@ filter(jhucovid19, Country %in% top50) %>%
             TotMortes = last(Deaths), 
             `Letal.%` = round(TotMortes/TotCasos*100,2), 
             Recup = last(Recovered), 
-            `%NovosCa` = round((last(ProgRateCases) -1)*100,2), 
-            `%NovasMo` = round((last(ProgRateDeaths) -1)*100,2), 
+            `%NovosCa` = numero_fp(round((last(ProgRateCases) -1)*100,2)), 
+            `%NovasMo` = numero_fp(round((last(ProgRateDeaths) -1)*100,2)), 
             Casos1M = round(TotCasos/last(PopTotal)*1e3,0),
             Mortes1M = round(TotMortes/last(PopTotal)*1e3,0),
             NDias1Ca = sprintf("%s", ultimadata - min(DateRep)),
