@@ -29,6 +29,7 @@ library(reactable)
 library(highcharter)
 library(crosstalk)
 library(flexdashboard)
+library(sparkline)
 ```
 
 
@@ -215,39 +216,6 @@ setorder(totestados, -Casos)
   #gather(key = "Tipo", value = "Valor", 2:3) -> totestados
 ```
 
-```{r eval=FALSE}
-# nao consigo fazer o grafico com os Estados ordenados pelo numero de Casos
-highchart() %>% 
-  # Data
-  hc_add_series(totestados, "bar", hcaes(x = Estado, y = Casos), name = "Casos") %>%
-  # Optiosn for each type of series
-  hc_plotOptions(
-    series = list(
-      showInLegend = FALSE,
-      pointFormat = "{point.y}%"
-      
-    ),
-    column = list(
-      colorByPoint = TRUE
-    )
-  ) %>%
-  # Axis
-  hc_yAxis(
-    title = list(text = "Casos Confirmados"),
-    labels = list(format = "{value}")
-  ) %>% 
-  hc_xAxis(categories = totestados$Estado)
-
-
-
-
-#totestados %>%
-#  hchart('bar', hcaes(x = 'Estado', y = 'Casos')) %>%
-#  hc_tooltip(pointFormat = '{point.x:}
-#                            
-#
-#                            {point.y: .0f} ')
-```
 
 
 ```{r }
@@ -255,62 +223,9 @@ totestadostidy <- totestados %>%  gather(key = "Tipo", value = "Valor", 2:3)
 totestshd <- SharedData$new(totestadostidy, key = ~Tipo)
 ```
 
-```{r eval = FALSE}
-barsC <- plot_ly(totestados, color = I("tomato"), x = ~Estado, y = ~Casos, type= 'bar') #%>% add_bars()
-barsM <- plot_ly(totestados, color = I("darkgrey"), x = ~Estado, y = ~Mortes, type = 'bar')# %>% add_bars()
-subplot(barsC, barsM, shareX = FALSE, shareY = FALSE, titleX = TRUE, titleY = TRUE) %>%
-  layout(
-    title = "Click and drag on scatterplot",
-    barmode = "overlay",
-    showlegend = FALSE,
-    margin = 7
-    
-  ) %>%
-  highlight("plotly_hover")
-```
-
-
-
-
-
-```{r eval = FALSE}
-totestados %>% 
-  ggplot() + 
-  geom_bar(aes(x = reorder(Estado,Casos), y = Casos, text = Casos), stat = "identity", fill = "tomato")+ 
-  #geom_text(aes(x = Estado, y = Casos, label = paste0(Estado, ': ', Casos))) +
-  labs(x = "", y = "") + 
-  theme( panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank(),
-        strip.background = element_blank()) +
-  coord_flip() -> g
-ggplotly(g, tooltip="text")
-  
-
-```
-
-
-
-
-
-
-```{r eval = FALSE}
-totestados %>%
-  ggplot() + 
-  geom_bar(aes(x = reorder(Estado,Casos), y = Mortes, text = Mortes), stat = "identity", fill = "tomato") +
-  labs(x = "", y = "Mortes") + 
-  theme( panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank(),
-        strip.background = element_blank()) +
-  coord_flip() -> h
-j <- ggplotly(h, tooltip = "text")
-j
-```
-
-
 
 ```{r}
 library(echarts4r)
-#library(echarts4r.assets)
 ```
 
 ```{r}
@@ -368,70 +283,6 @@ e_arrange(echrtCasos, echrtMortes, rows = 1, cols = 2)
 
 ```
 
-<!--
-
-## Row 4 {data-height=700, .mobile}
-
-### {data-width=500}
-
-```{r}
-library(echarts4r)
-#library(echarts4r.assets)
-```
-
-
-
-
-```{r}
-totestados %>%
-  e_charts(x = Code, elementId = "casosM") %>%
-  e_bar(Casos, legend = FALSE, name = "Casos") %>% 
-  e_labels(position = "right") %>% 
-  e_tooltip(
-    trigger = "item",
-    axisPointer = list(
-      type = "line"
-    )
-  )  %>% 
-  e_title("Casos Confirmados") %>% 
-  e_flip_coords() %>% 
-  e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
-      interval = 0L
-    ), inverse = TRUE) %>% 
-  e_x_axis(show = FALSE) %>% 
-  e_toolbox_feature(
-    feature = "saveAsImage",
-    title = "Save as image"
-  ) -> echrtCasosM
-
-
-totestados %>%
-  e_charts(x = Code) %>%
-  e_bar(Mortes, legend = FALSE, name = "Mortes") %>% 
-  e_labels(position = "right") %>% 
-  e_tooltip(
-    trigger = "item",
-    axisPointer = list(
-      type = "line"
-    )
-  ) %>% 
-  e_title("Mortes") %>% 
-  e_flip_coords() %>% 
-  e_y_axis(splitLine = list(show = FALSE), axisLabel = list(
-      interval = 0L
-    ), inverse = TRUE) %>% 
-  e_x_axis(show = FALSE) %>% 
-   e_connect("casosM") %>%
-  e_toolbox_feature(
-    feature = "saveAsImage",
-    title = "Save as image"
-  ) -> echrtMortesM
-
-e_arrange(echrtCasosM, echrtMortesM, rows = 2, cols = 1)
-
-```
--->
-
 
 ## Row 5 {data-height=700}  
 
@@ -446,7 +297,7 @@ casosfull_brio_gr <- casosfull_brio %>%
 #casosfull_brio <- casosfull_brio %>%
 #  filter(place_type == "city") %>%
 #  group_by(Estado, date) %>%
-  mutate(ConfirmedCases = sum(last_available_confirmed), Deaths = sum(last_available_deaths)) %>% ungroup() %>% ungroup()
+  mutate(ConfirmedCases = sum(last_available_confirmed), Deaths = sum(last_available_deaths), ConfCasesL = list(new_confirmed)) %>% ungroup() %>% ungroup()
 ```
 
 
@@ -481,30 +332,43 @@ casosfull_brio_gr %>%
 
 ```
 
+```{r}
+casosfull_brio %>% filter(place_type == "state") %>% 
+  group_by(Estado) %>% arrange(date) %>%
+  summarise(NovosCasosL = list(new_confirmed), NovasMortesL = list(new_deaths)) -> casosbr_estado
+```
 
-
-```{r eval = FALSE}
-formattable(tabelaBR, list(
-  Casos = color_tile("white", "orange"),
-  Mortes = color_tile("white", "grey")
-  ))
+```{r}
+tabelaBR <- left_join(tabelaBR, casosbr_estado, by = "Estado")
 ```
 
 
 ```{r}
 reactable(tabelaBR, defaultPageSize = 27, bordered = TRUE, striped = TRUE, 
           highlight = TRUE, compact=TRUE, 
-          columns = list(Casos = colDef(align = "right"),
-                         Mortes = colDef(align = "right"),
-                         `Letalidade %`= colDef(align = "right"),
-                         #Casos1M = colDef(align = "right"),
-                         #Mortes1M = colDef(align = "right"),
-                         `Novos Casos` = colDef(align= "right"),
-                         `Novos Casos %` = colDef(align = "right"),
-                         `Novas Mortes` = colDef(align= "right"),
-                         `Novas Mortes %` = colDef(align = "right")),
+          columns = list(Casos = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         Mortes = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Letalidade %`= colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         #Casos1M = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         #Mortes1M = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Novos Casos` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Novos Casos %` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Novas Mortes` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Novas Mortes %` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         NovosCasosL = colDef(align = "center", cell= function(value, index) {
+                           sparkline(tabelaBR$NovosCasosL[[index]])
+                         }),
+                         NovasMortesL = colDef(align = "center", cell= function(value, index) {
+                           sparkline(tabelaBR$NovasMortesL[[index]])
+                         })
+                         ),
           defaultSorted = list(Casos = "desc"))
 ```
+
+
+
+  
+
 
 
 ## Row 6 {data-height=60}
@@ -955,7 +819,7 @@ filter(jhucovid19, Country %in% top20) %>%
   summarise(Casos = last(ConfirmedCases), 
             Mortes = last(Deaths), 
             `Letalidade %`= round(Mortes/Casos*100,2), 
-            Recuperados = last(Recovered), 
+            #Recuperados = last(Recovered), 
             `NovosCasos %` = round((last(ProgRateCases) -1)*100,2), 
             `NovasMortes %` = round((last(ProgRateDeaths) -1)*100,2), 
             Casos1M = round(Casos/last(PopTotal)*1e3,0),
@@ -967,15 +831,15 @@ filter(jhucovid19, Country %in% top20) %>%
   arrange(desc(Casos)) %>%
   reactable(defaultPageSize = 20, bordered = TRUE, striped = TRUE, 
           highlight = TRUE, compact=TRUE, 
-          columns = list(Casos = colDef(align = "right"),
-                         Mortes = colDef(align = "right"),
-                         `Letalidade %` = colDef(align = "right"),
-                         Recuperados = colDef(align = "right"),
-                         `NovosCasos %` = colDef(align = "right"),
-                         `NovasMortes %` = colDef(align = "right"),
-                         Casos1M = colDef(align = "right"),
-                         Mortes1M = colDef(align = "right"),
-                         NDias1Caso = colDef(align= "right")
+          columns = list(Casos = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         Mortes = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `Letalidade %` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         #Recuperados = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `NovosCasos %` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         `NovasMortes %` = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         Casos1M = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         Mortes1M = colDef(format = colFormat(separators = TRUE, locales = "pt-BR")),
+                         NDias1Caso = colDef(align = "right", format = colFormat(separators = TRUE, locales = "pt-BR"))
                          ),
           defaultSorted = list(Casos = "desc"))
 #  datatable(rownames = F, autoHideNavigation = T, options = list(pageLength = 11, paging = FALSE, searching = FALSE)) 
